@@ -1,12 +1,12 @@
-import styles from './App.module.scss';
-import Logo from './assets/images/hearus.svg?react';
+import { Reset } from 'styled-reset';
+import Router from './pages';
 
 function App() {
   return (
-    <div className={styles.logo}>
-      <Logo />
-      <p className={styles.title}>Hello, HEARUS!</p>
-    </div>
+    <>
+      <Reset />
+      <Router />
+    </>
   );
 }
 
