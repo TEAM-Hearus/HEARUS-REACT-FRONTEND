@@ -1,11 +1,11 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Landing from './Landing/Landing';
 import HomeLayout from '../components/HomeLayout/HomeLayout';
-import MyBoard from './MyBoard/MyBoard';
-import RecordNote from './RecordNote/RecordNote';
-import TestMake from './TestMake/TestMake';
-import TimeTable from './TimeTable/TimeTable';
-import DownLoad from './DownLoad/DownLoad';
+import MyBoard from './Main/MyBoard/MyBoard';
+import RecordNote from './Main/RecordNote/RecordNote';
+import TestMake from './Main/TestMake/TestMake';
+import TimeTable from './Main/TimeTable/TimeTable';
+import DownLoad from './Main/DownLoad/DownLoad';
 
 const router = createBrowserRouter([
   {
