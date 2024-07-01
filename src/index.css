@@ -43,3 +43,7 @@
   font-family: 'Pretendard-Thin';
   src: url('./assets/fonts/Pretendard-Thin.woff');
 }
+
+* {
+  box-sizing: border-box;
+}
