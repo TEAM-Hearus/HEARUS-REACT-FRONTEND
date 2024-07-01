@@ -1,0 +1,15 @@
+@import '../../../../styles/variables/colors.scss';
+@import '../../../../styles/variables/fonts.scss';
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  @include SemiBold;
+  font-size: 18px;
+  color: $light-gray_81;
+  text-decoration: none;
+  &.active {
+    color: $dark-orange_E5;
+  }
+}

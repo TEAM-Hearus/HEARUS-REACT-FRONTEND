@@ -1,0 +1,33 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/variables/fonts.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 250px;
+  padding: 20px;
+  padding-top: 20px;
+}
+.searchBar {
+  display: flex;
+  height: 36px;
+  padding: 10px;
+  padding-left: 35px;
+  background-color: $light-bg_F9;
+  border: none;
+  border-radius: 6px;
+  @include Regular;
+  color: $light-gray_81;
+}
+.searchIcon {
+  position: relative;
+  bottom: -46px;
+  left: 15px;
+}
+.linksContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 10px;
+}
