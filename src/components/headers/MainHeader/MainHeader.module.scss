@@ -1,0 +1,33 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/variables/fonts.scss';
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100dvw;
+  height: 80px;
+  padding: 20px 10px;
+  background-color: white;
+}
+
+.dropDownsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  height: 100%;
+  .dropDownBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    @include Regular;
+  }
+}
