@@ -5,7 +5,6 @@ import MyBoard from './Main/MyBoard/MyBoard';
 import RecordNote from './Main/RecordNote/RecordNote';
 import TestMake from './Main/TestMake/TestMake';
 import TimeTable from './Main/TimeTable/TimeTable';
-import DownLoad from './Main/DownLoad/DownLoad';
 
 const router = createBrowserRouter([
   {
@@ -31,10 +30,6 @@ const router = createBrowserRouter([
       {
         path: 'time-table',
         element: <TimeTable />,
-      },
-      {
-        path: 'down-load',
-        element: <DownLoad />,
       },
     ],
   },
