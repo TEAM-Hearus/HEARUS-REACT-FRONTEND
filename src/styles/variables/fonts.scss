@@ -1,19 +1,66 @@
-@mixin Regular {
+@mixin Semibold-Title-32 {
+  font-family: 'Pretendard-SemiBold';
+  font-size: 32pt;
+  letter-spacing: -0.025em;
+}
+
+@mixin Medium-Title-24 {
+  // 임의로 추가
   font-family: 'Pretendard-Medium';
-  font-size: 14px;
+  font-size: 24pt;
+  letter-spacing: -0.025em;
 }
 
-@mixin Medium {
+@mixin SemiBold-Body-18 {
+  font-family: 'Pretendard-SemiBold';
+  font-size: 18pt;
+  letter-spacing: -0.025em;
+}
+
+@mixin Medium-Body-18 {
+  font-family: 'Pretendard-Medium';
+  font-size: 18pt;
+  letter-spacing: -0.025em;
+}
+
+@mixin Regular-Body-18 {
   font-family: 'Pretendard-Regular';
-  font-size: 18px;
+  font-size: 18pt;
+  letter-spacing: -0.025em;
 }
 
-@mixin SemiBold {
+@mixin SemiBold-Body-16 {
   font-family: 'Pretendard-SemiBold';
-  font-size: 24px;
+  font-size: 16pt;
+  letter-spacing: -0.025em;
 }
 
-@mixin Title {
+@mixin Medium-Body-16 {
+  font-family: 'Pretendard-Medium';
+  font-size: 16pt;
+  letter-spacing: -0.025em;
+}
+
+@mixin Regular-Body-16 {
+  font-family: 'Pretendard-Regular';
+  font-size: 16pt;
+  letter-spacing: -0.025em;
+}
+
+@mixin SemiBold-Sub-14 {
   font-family: 'Pretendard-SemiBold';
-  font-size: 32px;
+  font-size: 14pt;
+  letter-spacing: -0.025em;
+}
+
+@mixin Medium-Sub-14 {
+  font-family: 'Pretendard-Medium';
+  font-size: 14pt;
+  letter-spacing: -0.025em;
+}
+
+@mixin Regular-Sub-14 {
+  font-family: 'Pretendard-Regular';
+  font-size: 14pt;
+  letter-spacing: -0.025em;
 }

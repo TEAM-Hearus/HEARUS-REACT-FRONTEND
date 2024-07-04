@@ -16,7 +16,7 @@ const MainNav = () => {
       <span className={styles.searchIcon}>
         <Search />
       </span>
-      <input className={styles.searchBar} placeholder="파일 검색" />
+      <input className={styles.searchBar} type="text" placeholder="파일 검색" />
       <section className={styles.linksContainer}>
         <TabLink
           to="/home"
