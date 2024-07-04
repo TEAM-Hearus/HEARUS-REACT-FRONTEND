@@ -16,8 +16,7 @@
   padding: 20px 30px;
   background-color: #6d6d6d;
   color: white;
-  @include SemiBold;
-  font-size: 18px;
+  @include SemiBold-Body-16;
   border: none;
   border-radius: 12px;
   cursor: pointer;

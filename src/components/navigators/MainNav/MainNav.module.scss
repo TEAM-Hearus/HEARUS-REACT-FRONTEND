@@ -5,25 +5,27 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 250px;
+  width: 240px;
   padding: 20px;
   padding-top: 20px;
 }
 .searchBar {
   display: flex;
-  height: 36px;
-  padding: 10px;
+  height: 40px;
+  padding: 20px;
   padding-left: 35px;
-  background-color: $light-bg_F9;
-  border: none;
-  border-radius: 6px;
-  @include Regular;
-  color: $light-gray_81;
+  border: solid 3px $light-bg_E5;
+  border-radius: 10px;
+  @include Medium-Sub-14;
+  &::placeholder {
+    color: $light-gray_81;
+  }
 }
 .searchIcon {
   position: relative;
-  bottom: -46px;
+  top: 50px;
   left: 15px;
+  width: min-content;
 }
 .linksContainer {
   display: flex;
