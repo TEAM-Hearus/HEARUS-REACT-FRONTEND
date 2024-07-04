@@ -18,7 +18,7 @@
 .modalContainer {
   display: flex;
   flex-direction: column;
-  width: 440px;
+  width: 500px;
   padding: 20px;
   background-color: white;
   border: none;
@@ -43,8 +43,7 @@
   align-items: center;
   gap: 6px;
   padding: 20px 0 35px 0;
-  @include Medium;
-  font-size: 24px;
+  @include Medium-Title-24;
 }
 .loginBtnsContainer {
   display: flex;
@@ -59,8 +58,7 @@
   padding: 20px;
   border: none;
   border-radius: 12px;
-  @include Medium;
-  font-size: 16px;
+  @include Medium-Body-16;
   img {
     position: absolute;
     left: 20px;
@@ -97,9 +95,8 @@
   margin-top: 50px;
   margin-bottom: 20px;
   p {
-    @include Medium;
+    @include Medium-Sub-14;
     color: $light-bg_89;
-    font-size: 14px;
   }
   .signupLink {
     display: flex;
@@ -109,7 +106,6 @@
     background: none;
     border: none;
     color: $brand-point;
-    @include SemiBold;
-    font-size: 14px;
+    @include SemiBold-Sub-14;
   }
 }

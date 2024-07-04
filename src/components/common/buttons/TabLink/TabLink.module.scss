@@ -5,11 +5,11 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  @include SemiBold;
-  font-size: 18px;
+  @include Medium-Body-16;
   color: $light-gray_81;
   text-decoration: none;
   &.active {
+    @include SemiBold-Body-16;
     color: $dark-orange_E5;
   }
 }
