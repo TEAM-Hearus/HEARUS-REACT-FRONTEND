@@ -6,16 +6,22 @@ interface IProps {
   activeIcon: React.ReactNode;
   inactiveIcon: React.ReactNode;
   children: React.ReactNode;
+  exact?: boolean;
 }
 
-const TabLink = ({ to, activeIcon, inactiveIcon, children }: IProps) => {
+const TabLink = ({
+  to,
+  activeIcon,
+  inactiveIcon,
+  children,
+  exact = false,
+}: IProps) => {
   const location = useLocation();
-  const isActive = location.pathname === to;
+  const isActive = exact
+    ? location.pathname === to
+    : location.pathname.startsWith(to);
   return (
-    <Link
-      to={to}
-      className={`${styles.navItem} ${isActive ? styles.active : ''}`}
-    >
+    <Link to={to} className={`${styles.navItem} ${isActive && styles.active}`}>
       {isActive ? activeIcon : inactiveIcon}
       <span>{children}</span>
     </Link>
