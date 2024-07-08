@@ -22,6 +22,7 @@ const MainNav = () => {
           to="/home"
           activeIcon={<MyBoardActive />}
           inactiveIcon={<MyBoardInactive />}
+          exact={true}
         >
           내 보드
         </TabLink>
