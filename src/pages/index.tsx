@@ -5,6 +5,8 @@ import MyBoard from './Main/MyBoard/MyBoard';
 import RecordNote from './Main/RecordNote/RecordNote';
 import TestMake from './Main/TestMake/TestMake';
 import TimeTable from './Main/TimeTable/TimeTable';
+import WeeklyTimeTable from './Main/TimeTable/WeeklyTimeTable/WeeklyTimeTable';
+import MonthlyTimeTable from './Main/TimeTable/MonthlyTimeTable/MonthlyTimeTable';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,16 @@ const router = createBrowserRouter([
       {
         path: 'time-table',
         element: <TimeTable />,
+        children: [
+          {
+            path: '',
+            element: <WeeklyTimeTable />,
+          },
+          {
+            path: 'monthly',
+            element: <MonthlyTimeTable />,
+          },
+        ],
       },
     ],
   },
