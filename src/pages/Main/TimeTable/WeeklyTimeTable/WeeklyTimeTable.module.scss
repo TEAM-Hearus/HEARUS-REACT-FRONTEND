@@ -23,7 +23,7 @@
 }
 .timeRow {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 10px;
   width: 100%;
   height: 80px;
@@ -41,8 +41,9 @@
 }
 .temp {
   position: absolute;
-  top: 50px;
   width: calc((100% - 30px) / 7);
-  height: 80px;
   background-color: aqua;
+  left: var(--schedule-left);
+  top: var(--schedule-top);
+  height: var(--schedule-height);
 }

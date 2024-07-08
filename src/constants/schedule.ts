@@ -1,9 +1,11 @@
+export type DayOfWeek = 'SUN' | 'MON' | 'TUE' | 'WED' | 'THU' | 'FRI' | 'SAT';
+
 export interface IScheduleElement {
   id: number;
   scheduleId: number;
   name: string;
   location: string;
-  dayOfWeek: string;
+  dayOfWeek: DayOfWeek;
   startTime: string;
   endTime: string;
 }
