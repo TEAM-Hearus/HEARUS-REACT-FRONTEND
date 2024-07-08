@@ -1,0 +1,32 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/variables/fonts.scss';
+
+.scheduleItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  width: calc((100% - 30px) / 7);
+  background-color: #d6dfff;
+  left: var(--schedule-left);
+  top: var(--schedule-top);
+  height: var(--schedule-height);
+  padding: 10px;
+  border: 1px solid #0028b6;
+  border-radius: 10px;
+  color: #0028b6;
+}
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.name {
+  @include Medium-Body-18;
+}
+.location {
+  @include Medium-Sub-14;
+}
+.time {
+  @include Medium-Sub-14;
+}

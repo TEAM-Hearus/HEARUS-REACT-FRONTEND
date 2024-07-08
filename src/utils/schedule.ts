@@ -1,11 +1,5 @@
 import { DayOfWeek } from '../constants/schedule';
 
-interface ISchedule {
-  dayOfWeek: DayOfWeek;
-  startTime: string;
-  endTime: string;
-}
-
 const DAYMAP: Record<DayOfWeek, number> = {
   SUN: 0,
   MON: 1,
@@ -16,11 +10,11 @@ const DAYMAP: Record<DayOfWeek, number> = {
   SAT: 6,
 };
 
-export const getScheduleStyle = ({
-  dayOfWeek,
-  startTime,
-  endTime,
-}: ISchedule) => {
+export const getScheduleStyle = (
+  dayOfWeek: DayOfWeek,
+  startTime: string,
+  endTime: string,
+) => {
   const startHour = Number(startTime.slice(11, 13));
   const startMinute = Number(startTime.slice(14, 16)) / 60;
   const endHour = Number(endTime.slice(11, 13));

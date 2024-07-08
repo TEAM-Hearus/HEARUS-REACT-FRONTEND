@@ -1,6 +1,5 @@
 import TimeTableItem from '../../../../components/common/TimeTableItem/TimeTableItem';
 import { TIMELIST, scheduleElements } from '../../../../constants/schedule';
-import { getScheduleStyle } from '../../../../utils/schedule';
 import styles from './WeeklyTimeTable.module.scss';
 
 const WeeklyTimeTable = () => {
@@ -21,13 +20,7 @@ const WeeklyTimeTable = () => {
         </div>
       ))}
       {scheduleElements.map((schedule) => (
-        <div
-          className={styles.temp}
-          key={schedule.id}
-          style={getScheduleStyle(schedule)}
-        >
-          {schedule.name}
-        </div>
+        <TimeTableItem key={schedule.id} {...schedule} />
       ))}
     </div>
   );
