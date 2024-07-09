@@ -1,9 +1,17 @@
+import { useQuery } from '@tanstack/react-query';
 import TimeTableItem from '../../../../components/common/TimeTableItem/TimeTableItem';
-import { TIMELIST, scheduleElements } from '../../../../constants/schedule';
+import { IScheduleElement, TIMELIST } from '../../../../constants/schedule';
 import styles from './WeeklyTimeTable.module.scss';
+import { getSchedule } from '../../../../apis/schedule';
+
+const name = '건국대학교 3-1학기'; // 임시 지정
 
 const WeeklyTimeTable = () => {
   const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
+  const { data } = useQuery<IScheduleElement[], Error>({
+    queryKey: ['schedule', name],
+    queryFn: () => getSchedule(name),
+  });
   return (
     <div className={styles.table}>
       <div className={styles.dayOfWeekRow}>
@@ -19,7 +27,7 @@ const WeeklyTimeTable = () => {
           <span className={styles.time}>{time}</span>
         </div>
       ))}
-      {scheduleElements.map((schedule) => (
+      {data?.map((schedule) => (
         <TimeTableItem key={schedule.id} {...schedule} />
       ))}
     </div>
