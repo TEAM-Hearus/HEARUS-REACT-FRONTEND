@@ -6,14 +6,14 @@ on:
   push:
     branches:
       - main
+env:
+  VITE_MOCK_API: ${{ secrets.VITE_MOCK_API }}
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - run: npm ci && npm run build
-      env:
-        VITE_MOCK_API: ${{ secrets.VITE_MOCK_API }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
