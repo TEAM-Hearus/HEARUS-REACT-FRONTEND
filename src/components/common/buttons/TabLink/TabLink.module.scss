@@ -5,11 +5,11 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  @include Medium-Body-16;
+  @include Medium_Body_16;
   color: $light-gray_81;
   text-decoration: none;
   &.active {
-    @include SemiBold-Body-16;
+    @include SemiBold_Body_16;
     color: $dark-orange_E5;
   }
 }
