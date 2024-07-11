@@ -1,0 +1,56 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/variables/fonts.scss';
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100dvw;
+  height: 70px;
+  background-color: white;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.titleContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.title {
+  @include Medium_Body_18;
+  color: $dark-font_5A;
+}
+.tagBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  background-color: white;
+  @include SemiBold_Sub_14;
+  color: $light-gray_81;
+  border: 1px solid $light-bg_E5;
+  border-radius: 8px;
+}
+.timerContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.timer {
+  @include Medium_Sub_14;
+  color: $dark-font_5A;
+}
+.quitBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333333;
+  border: none;
+  border-radius: 24px;
+  @include SemiBold_Body_16;
+  color: white;
+  cursor: pointer;
+}

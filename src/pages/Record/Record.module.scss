@@ -1,0 +1,20 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/variables/fonts.scss';
+
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100dvw;
+  min-height: 100dvh;
+  background-color: $light-bg_F2;
+}
+.captionContainer {
+  display: flex;
+  width: 60%;
+  padding: 50px;
+  margin-top: 100px;
+  background-color: white;
+  border: none;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
