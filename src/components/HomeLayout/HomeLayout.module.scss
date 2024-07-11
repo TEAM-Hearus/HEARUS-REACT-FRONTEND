@@ -3,6 +3,7 @@
 
 .mainContainer {
   display: flex;
-  margin-top: 80px;
   width: 100dvw;
+  min-height: 100dvh;
+  background-color: $light-bg_F9;
 }

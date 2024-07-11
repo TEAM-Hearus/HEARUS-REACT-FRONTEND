@@ -1,18 +1,23 @@
 import styles from './MainNav.module.scss';
 import Search from '../../../assets/images/search.svg?react';
-import MyBoardActive from '../../../assets/images/nav/my-board-active.svg?react';
-import MyBoardInactive from '../../../assets/images/nav/my-board-inactive.svg?react';
-import RecordScriptActive from '../../../assets/images/nav/record-script-active.svg?react';
-import RecordScriptInactive from '../../../assets/images/nav/record-script-inactive.svg?react';
-import TestMakeActive from '../../../assets/images/nav/test-make-active.svg?react';
-import TestMakeInactive from '../../../assets/images/nav/test-make-inactive.svg?react';
+import MyScriptActive from '../../../assets/images/nav/my-script-active.svg?react';
+import MyScriptInactive from '../../../assets/images/nav/my-script-inactive.svg?react';
 import TimeTableActive from '../../../assets/images/nav/time-table-active.svg?react';
 import TimeTableInactive from '../../../assets/images/nav/time-table-inactive.svg?react';
+import TestMakeActive from '../../../assets/images/nav/test-make-active.svg?react';
+import TestMakeInactive from '../../../assets/images/nav/test-make-inactive.svg?react';
+import TrashCanActive from '../../../assets/images/nav/trash-can-active.svg?react';
+import TrashCanInactive from '../../../assets/images/nav/trash-can-inactive.svg?react';
 import TabLink from '../../common/buttons/TabLink/TabLink';
 
 const MainNav = () => {
+  const USERNAME = 'UserName'; // 임시 지정
   return (
     <nav className={styles.container}>
+      <div className={styles.userProfile}>
+        <div className={styles.profileImage}></div>
+        <p className={styles.useName}>{USERNAME}</p>
+      </div>
       <span className={styles.searchIcon}>
         <Search />
       </span>
@@ -20,18 +25,18 @@ const MainNav = () => {
       <section className={styles.linksContainer}>
         <TabLink
           to="/home"
-          activeIcon={<MyBoardActive />}
-          inactiveIcon={<MyBoardInactive />}
+          activeIcon={<MyScriptActive />}
+          inactiveIcon={<MyScriptInactive />}
           exact={true}
         >
-          내 보드
+          내 스크립트
         </TabLink>
         <TabLink
-          to="/home/record-note"
-          activeIcon={<RecordScriptActive />}
-          inactiveIcon={<RecordScriptInactive />}
+          to="/home/time-table"
+          activeIcon={<TimeTableActive />}
+          inactiveIcon={<TimeTableInactive />}
         >
-          녹음 스크립트
+          시간표
         </TabLink>
         <TabLink
           to="/home/test-make"
@@ -41,11 +46,11 @@ const MainNav = () => {
           테스트 생성
         </TabLink>
         <TabLink
-          to="/home/time-table"
-          activeIcon={<TimeTableActive />}
-          inactiveIcon={<TimeTableInactive />}
+          to="/home/trash-can"
+          activeIcon={<TrashCanActive />}
+          inactiveIcon={<TrashCanInactive />}
         >
-          시간표
+          휴지통
         </TabLink>
       </section>
     </nav>
