@@ -3,18 +3,24 @@
 
 .container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   position: fixed;
   top: 0;
   width: 100dvw;
   height: 70px;
+  padding: 0 100px;
   background-color: white;
   z-index: 10;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  a {
+    display: flex;
+    width: 200px;
+  }
 }
 .titleContainer {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 10px;
 }
@@ -35,8 +41,10 @@
 }
 .timerContainer {
   display: flex;
+  justify-content: flex-end;
   align-items: center;
   gap: 10px;
+  width: 200px;
 }
 .timer {
   @include Medium_Sub_14;
