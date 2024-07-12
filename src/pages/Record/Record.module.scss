@@ -17,4 +17,6 @@
   border: none;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+  @include Regular_Body_18_200;
+  color: #333333;
 }

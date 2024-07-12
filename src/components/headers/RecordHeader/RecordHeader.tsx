@@ -4,11 +4,15 @@ import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { formatTime } from '../../../utils/record';
 
+interface IProps {
+  handleQuit: () => void;
+}
+
 const RECORD_TITLE = '새로운 녹음-240711';
 
-const RecordHeader = () => {
+const RecordHeader = ({ handleQuit }: IProps) => {
   const [seconds, setSeconds] = useState(0);
-  const intervalRef = useRef<number | null>(null);
+  const timerIntervalRef = useRef<number | null>(null);
 
   useEffect(() => {
     startTimer();
@@ -16,21 +20,22 @@ const RecordHeader = () => {
   }, []);
 
   const startTimer = () => {
-    if (intervalRef.current !== null) return;
-    intervalRef.current = setInterval(() => {
+    if (timerIntervalRef.current !== null) return;
+    timerIntervalRef.current = setInterval(() => {
       setSeconds((prev) => prev + 1);
     }, 1000);
   };
 
   const stopTimer = () => {
-    if (intervalRef.current === null) return;
-    clearInterval(intervalRef.current);
-    intervalRef.current = null;
+    if (timerIntervalRef.current === null) return;
+    clearInterval(timerIntervalRef.current);
+    timerIntervalRef.current = null;
   };
 
   const handleOnClickQuitBtn = () => {
     stopTimer();
     setSeconds(0);
+    handleQuit();
   };
 
   return (
