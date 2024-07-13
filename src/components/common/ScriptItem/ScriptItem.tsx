@@ -1,12 +1,12 @@
 import styles from './ScriptItem.module.scss';
 
 interface IScriptProps {
-  id: number;
+  //   id: number;
   title: string;
   content: string;
   date: string;
 }
-const ScriptItem = ({ id, title, content, date }: IScriptProps) => {
+const ScriptItem = ({ title, content, date }: IScriptProps) => {
   return (
     <div className={styles.postItContainer}>
       <div className={styles.title}>{title}</div>
