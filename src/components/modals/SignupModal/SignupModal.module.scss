@@ -43,7 +43,7 @@
   align-items: center;
   gap: 6px;
   padding: 20px 0 35px 0;
-  @include Medium-Title-24;
+  @include Medium_Title_24;
 }
 .loginBtnsContainer {
   display: flex;
@@ -58,7 +58,7 @@
   padding: 20px;
   border: none;
   border-radius: 12px;
-  @include Medium-Body-16;
+  @include Medium_Body_16;
   img {
     position: absolute;
     left: 20px;
@@ -95,7 +95,7 @@
   margin-top: 50px;
   margin-bottom: 20px;
   p {
-    @include Medium-Sub-14;
+    @include Medium_Sub_14;
     color: $light-bg_89;
   }
   .signupLink {
@@ -106,6 +106,6 @@
     background: none;
     border: none;
     color: $brand-point;
-    @include SemiBold-Sub-14;
+    @include SemiBold_Sub_14;
   }
 }

@@ -1,12 +1,12 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Landing from './Landing/Landing';
 import HomeLayout from '../components/HomeLayout/HomeLayout';
-import MyBoard from './Main/MyBoard/MyBoard';
-import RecordNote from './Main/RecordNote/RecordNote';
-import TestMake from './Main/TestMake/TestMake';
 import TimeTable from './Main/TimeTable/TimeTable';
+import TestMake from './Main/TestMake/TestMake';
 import WeeklyTimeTable from './Main/TimeTable/WeeklyTimeTable/WeeklyTimeTable';
 import MonthlyTimeTable from './Main/TimeTable/MonthlyTimeTable/MonthlyTimeTable';
+import MyScript from './Main/MyScript/MyScript';
+import TrashCan from './Main/TrashCan/TrashCan';
 
 const router = createBrowserRouter([
   {
@@ -19,15 +19,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <MyBoard />,
-      },
-      {
-        path: 'record-note',
-        element: <RecordNote />,
-      },
-      {
-        path: 'test-make',
-        element: <TestMake />,
+        element: <MyScript />,
       },
       {
         path: 'time-table',
@@ -42,6 +34,14 @@ const router = createBrowserRouter([
             element: <MonthlyTimeTable />,
           },
         ],
+      },
+      {
+        path: 'test-make',
+        element: <TestMake />,
+      },
+      {
+        path: 'trash-can',
+        element: <TrashCan />,
       },
     ],
   },
