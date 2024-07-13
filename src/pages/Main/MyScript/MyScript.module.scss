@@ -1,0 +1,39 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/variables/fonts.scss';
+
+.wholeContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 30px 40px;
+}
+.headerContainer {
+  @include Medium_Title_24;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.recentScripts {
+  color: $dark-font_5A;
+}
+
+.noneScriptContainer {
+  display: flex;
+  justify-content: center;
+  height: 80%;
+  align-items: center;
+  flex-direction: column;
+  color: $light-font_9E;
+}
+.noneScript {
+  @include SemiBold_Body_18;
+}
+.startingScript {
+  @include Medium_Sub_14;
+}
+.scriptContainer {
+  display: flex;
+  width: 100%;
+  height: auto;
+  flex-wrap: wrap;
+}
