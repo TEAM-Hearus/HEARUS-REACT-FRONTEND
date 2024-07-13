@@ -1,0 +1,39 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/variables/fonts.scss';
+
+.postItContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: $white_FF;
+  width: 240px;
+  height: 300px;
+  border-radius: 8px;
+  box-shadow: 0px 3px 4px 0px $box-shadow_00;
+  padding: 10px;
+  margin: 20px;
+}
+.title {
+  @include SemiBold_Body_16;
+  color: $dark-font_33;
+  padding: 10px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.content {
+  @include Regular_Sub_14;
+  color: $light-gray_81;
+  height: 200px;
+  padding: 3px 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 9;
+  -webkit-box-orient: vertical;
+  line-height: 22px;
+}
+.date {
+  @include Medium_Sub_14;
+  color: $light-gray_81;
+  padding: 10px;
+}
