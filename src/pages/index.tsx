@@ -7,6 +7,8 @@ import WeeklyTimeTable from './Main/TimeTable/WeeklyTimeTable/WeeklyTimeTable';
 import MonthlyTimeTable from './Main/TimeTable/MonthlyTimeTable/MonthlyTimeTable';
 import MyScript from './Main/MyScript/MyScript';
 import TrashCan from './Main/TrashCan/TrashCan';
+import PrivateRoute from './PrivateRoute';
+import Record from './Record/Record';
 
 const router = createBrowserRouter([
   {
@@ -15,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/home',
-    element: <HomeLayout />,
+    element: <PrivateRoute element={<HomeLayout />} />,
     children: [
       {
         path: '',
@@ -44,6 +46,10 @@ const router = createBrowserRouter([
         element: <TrashCan />,
       },
     ],
+  },
+  {
+    path: '/record',
+    element: <PrivateRoute element={<Record />} />,
   },
 ]);
 
