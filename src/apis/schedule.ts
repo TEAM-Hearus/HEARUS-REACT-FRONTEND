@@ -1,4 +1,4 @@
-import mockAPI_URL from '.';
+import { mockAPI_URL } from '.';
 import { IScheduleElement } from '../constants/schedule';
 
 interface IGetScheduleResponse {
