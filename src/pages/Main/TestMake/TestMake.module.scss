@@ -1,0 +1,133 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/variables/fonts.scss';
+
+.wholeContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  padding: 30px 40px;
+}
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title {
+  @include SemiBold_Title_28;
+  color: $dark-font_5A;
+}
+.testStartBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 24px;
+  background-color: $brand-point;
+  color: $white_FF;
+  @include SemiBold_Body_16;
+}
+.contentContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  flex-grow: 1;
+}
+.scriptsContainer {
+  display: flex;
+  height: 100%;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  background-color: $light-bg_F2;
+  border-radius: 8px;
+}
+.noScript {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-grow: 1;
+  height: 100%;
+  background-color: $light-bg_F2;
+  border-radius: 8px;
+}
+.noScriptText {
+  @include SemiBold_Body_18;
+  color: $light-font_9E;
+}
+.noScriptCaption {
+  @include Medium_Sub_14;
+  color: $light-font_9E;
+}
+.testOptionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 30px;
+  background-color: $white_FF;
+  border-radius: 8px;
+}
+.selectBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+.selectTitle {
+  @include SemiBold_Body_16;
+  color: $dark-font_5A;
+}
+.selectionBtnsContainer {
+  display: flex;
+  gap: 10px;
+}
+.qtypeBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  background-color: $white_FF;
+  border: 1px solid $light-bg_E5;
+  border-radius: 8px;
+  @include Medium_Body_16;
+  color: $light-gray_81;
+  &.active {
+    color: $dark-orange_E5;
+    border: 1px solid $dark-orange_E5;
+  }
+}
+.numInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px 12px 12px;
+  border: 1px solid $light-bg_E5;
+  border-radius: 8px;
+  @include Medium_Body_16;
+  color: $dark-orange_E5;
+}
+.inputCaption {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  @include Medium_Body_16;
+  color: $light-gray_81;
+}
+.checkBoxTitle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  @include SemiBold_Body_16;
+  color: $dark-font_5A;
+}
+// .timeLimitInput {
+//   display: none;
+// }
+// .timeLimitInput + label:before {
+//     width: 16px;
+//   height: 16px;
+//   border: 1px solid $brand-point;
+//   border-radius: 3px;
+// }

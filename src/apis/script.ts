@@ -20,7 +20,7 @@ export interface IScriptInList {
   problems: null;
 }
 
-export const getScripts = async (): Promise<IScriptInList[]> => {
+export const getAllScripts = async (): Promise<IScriptInList[]> => {
   try {
     const res = await fetch(`${API_URL}/api/v1/lecture/getAllLecture`, {
       headers: {
