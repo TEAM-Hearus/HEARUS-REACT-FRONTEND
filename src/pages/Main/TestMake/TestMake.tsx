@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import styles from './TestMake.module.scss';
 import { getAllScripts, IScriptInList } from '../../../apis/script';
+import QuestionTypeBtn from '../../../components/common/buttons/QuestionTypeBtn/QuestionTypeBtn';
 
 const TestMake = () => {
   const { data } = useQuery<IScriptInList[], Error>({
@@ -29,15 +30,15 @@ const TestMake = () => {
           <div className={styles.selectBox}>
             <p className={styles.selectTitle}>문제 유형</p>
             <div className={styles.selectionBtnsContainer}>
-              <button className={styles.qtypeBtn}>객관식</button>
-              <button className={styles.qtypeBtn}>단답형</button>
-              <button className={styles.qtypeBtn}>빈칸 뚫기</button>
-              <button className={styles.qtypeBtn}>OX 퀴즈</button>
+              <QuestionTypeBtn>객관식</QuestionTypeBtn>
+              <QuestionTypeBtn>단답형</QuestionTypeBtn>
+              <QuestionTypeBtn>빈칸 뚫기</QuestionTypeBtn>
+              <QuestionTypeBtn>OX 퀴즈</QuestionTypeBtn>
             </div>
           </div>
           <div className={styles.selectBox}>
             <p className={styles.selectTitle}>문제 개수</p>
-            <input className={styles.numInput} type="number" />
+            <input className={styles.numInput} type="number" min="0" />
             <span className={styles.inputCaption}>개</span>
           </div>
           <div className={styles.selectBox}>
@@ -51,7 +52,7 @@ const TestMake = () => {
                 시간 제한
               </label>
             </span>
-            <input className={styles.numInput} type="number" />
+            <input className={styles.numInput} type="number" min="0" />
             <span className={styles.inputCaption}>분</span>
           </div>
         </section>
