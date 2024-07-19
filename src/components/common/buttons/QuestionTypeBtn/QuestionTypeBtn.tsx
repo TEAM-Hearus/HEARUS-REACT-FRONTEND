@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { translateTypeToEnglish } from '../../../../utils/test';
 import styles from './QuestionTypeBtn.module.scss';
 import useQuestionTypeStore from '../../../../store/QuestionTypeStore';

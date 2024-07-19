@@ -30,10 +30,11 @@ const TestMake = () => {
           <div className={styles.selectBox}>
             <p className={styles.selectTitle}>문제 유형</p>
             <div className={styles.selectionBtnsContainer}>
-              <QuestionTypeBtn>객관식</QuestionTypeBtn>
-              <QuestionTypeBtn>단답형</QuestionTypeBtn>
-              <QuestionTypeBtn>빈칸 뚫기</QuestionTypeBtn>
-              <QuestionTypeBtn>OX 퀴즈</QuestionTypeBtn>
+              {['객관식', '단답형', '빈칸 뚫기', 'OX 퀴즈'].map(
+                (type, index) => (
+                  <QuestionTypeBtn key={index}>{type}</QuestionTypeBtn>
+                ),
+              )}
             </div>
           </div>
           <div className={styles.selectBox}>
