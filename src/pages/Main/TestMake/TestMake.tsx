@@ -41,10 +41,16 @@ const TestMake = () => {
             <span className={styles.inputCaption}>개</span>
           </div>
           <div className={styles.selectBox}>
-            <label className={styles.checkBoxTitle}>
-              <input className={styles.timeLimitInput} type="checkbox" />
-              시간 제한
-            </label>
+            <span className={styles.checkBoxContainer}>
+              <input
+                className={styles.timeLimitInput}
+                type="checkbox"
+                id="time"
+              />
+              <label className={styles.checkBoxTitle} htmlFor="time">
+                시간 제한
+              </label>
+            </span>
             <input className={styles.numInput} type="number" />
             <span className={styles.inputCaption}>분</span>
           </div>
