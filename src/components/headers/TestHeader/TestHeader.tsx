@@ -8,7 +8,7 @@ const TestHeader = () => {
   return (
     <header className={styles.container}>
       <span className={styles.linkContainer}>
-        <Link to="/home">
+        <Link to="/home/test-make">
           <Back />
         </Link>
       </span>
