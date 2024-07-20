@@ -21,15 +21,26 @@ const WeeklyTimeTable = () => {
           </div>
         ))}
       </div>
-      {TIMELIST.map((time) => (
-        <div className={styles.timeRow} key={time}>
-          <hr />
-          <span className={styles.time}>{time}</span>
-        </div>
-      ))}
-      {data?.map((schedule) => (
-        <TimeTableItem key={schedule.id} {...schedule} />
-      ))}
+      <div className={styles.tableBox}>
+        {TIMELIST.map((time, index) => (
+          <div className={styles.timeRow} key={index}>
+            <span className={styles.time}>{time}</span>
+            {daysOfWeek.map((day) => (
+              <div
+                className={`${styles.daytime} ${
+                  index === TIMELIST.length - 1 ? styles.lastCell : ''
+                }`}
+                key={day}
+              ></div>
+            ))}
+          </div>
+        ))}
+      </div>
+      <div className={styles.tableContainer}>
+        {data?.map((schedule) => (
+          <TimeTableItem key={schedule.id} {...schedule} />
+        ))}
+      </div>
     </div>
   );
 };

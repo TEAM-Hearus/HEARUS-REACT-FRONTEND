@@ -18,8 +18,9 @@
   display: flex;
   gap: 20px;
 }
-.today {
+.title {
   @include SemiBold_Title_28;
+  color: $dark-font_5A;
 }
 .toggleMode {
   display: flex;
@@ -38,10 +39,10 @@
 }
 .addScheduleBtn {
   padding: 10px 15px;
-  background-color: $dark-font_5A;
+  background-color: $dark-font_33;
   border: none;
   border-radius: 8px;
-  color: white;
+  color: $white_FF;
   @include SemiBold_Body_16;
   cursor: pointer;
 }
