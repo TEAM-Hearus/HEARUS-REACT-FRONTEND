@@ -40,9 +40,11 @@ const RecordHeader = ({ handleQuit }: IProps) => {
 
   return (
     <header className={styles.container}>
-      <Link to="/home">
-        <Back />
-      </Link>
+      <span className={styles.linkContainer}>
+        <Link to="/home">
+          <Back />
+        </Link>
+      </span>
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>{RECORD_TITLE}</h1>
         <button className={styles.tagBtn}>태그</button>

@@ -7,6 +7,7 @@ import MyScript from './Main/MyScript/MyScript';
 import TrashCan from './Main/TrashCan/TrashCan';
 import PrivateRoute from './PrivateRoute';
 import Record from './Record/Record';
+import Test from './Test/Test';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   {
     path: '/record',
     element: <PrivateRoute element={<Record />} />,
+  },
+  {
+    path: '/test',
+    element: <PrivateRoute element={<Test />} />,
   },
 ]);
 
