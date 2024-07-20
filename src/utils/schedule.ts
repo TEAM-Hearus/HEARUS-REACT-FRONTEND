@@ -20,12 +20,14 @@ export const getScheduleStyle = (
   const endHour = Number(endTime.slice(11, 13));
   const endMinute = Number(endTime.slice(14, 16)) / 60;
   // return 값
-  const top = (startHour + startMinute - 9) * 80 + 50;
+  const top = (startHour + startMinute - 9) * 80 + 60;
   const height = (endHour + endMinute - startHour - startMinute) * 80;
-  const left = `calc((100% - 30px) * ${DAYMAP[dayOfWeek]} / 7)`;
+  const left = `calc((100% - 120px) * ${DAYMAP[dayOfWeek]} / 7)`;
+
   return {
     '--schedule-left': left,
     '--schedule-top': `${top}px`,
-    '--schedule-height': `${height}px`,
+    '--schedule-height': `${height + 1}px`,
+    height,
   } as React.CSSProperties;
 };
