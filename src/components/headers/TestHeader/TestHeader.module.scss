@@ -1,0 +1,40 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/variables/fonts.scss';
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100dvw;
+  height: 70px;
+  padding: 0 100px;
+  background-color: white;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.linkContainer {
+  width: 100px;
+}
+.title {
+  @include Medium_Body_18;
+  color: $dark-font_5A;
+}
+.quitBtnContainer {
+  display: flex;
+  justify-content: flex-end;
+  width: 100px;
+}
+.quitBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: #333333;
+  border: none;
+  border-radius: 24px;
+  @include SemiBold_Body_16;
+  color: white;
+  cursor: pointer;
+}
