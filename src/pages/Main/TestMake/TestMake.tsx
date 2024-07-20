@@ -3,8 +3,11 @@ import styles from './TestMake.module.scss';
 import { getAllScripts, IScriptInList } from '../../../apis/script';
 import QuestionTypeBtn from '../../../components/common/buttons/QuestionTypeBtn/QuestionTypeBtn';
 import useTestSettingsStore from '../../../store/TestSettingsStore';
+import { useNavigate } from 'react-router-dom';
 
 const TestMake = () => {
+  const navigate = useNavigate();
+
   const { data } = useQuery<IScriptInList[], Error>({
     queryKey: ['allScripts'],
     queryFn: () => getAllScripts(),
@@ -30,11 +33,21 @@ const TestMake = () => {
     setTimeLimit(parseInt(e.target.value, 10));
   };
 
+  const handleTestStartBtnClick = () => {
+    // 문제 유형 유효성 검사 로직 구현 예정
+    navigate('/test');
+  };
+
   return (
     <div className={styles.wholeContainer}>
       <div className={styles.titleContainer}>
         <h2 className={styles.title}>문제 스크립트</h2>
-        <button className={styles.testStartBtn}>테스트 시작</button>
+        <button
+          className={styles.testStartBtn}
+          onClick={handleTestStartBtnClick}
+        >
+          테스트 시작
+        </button>
       </div>
       <div className={styles.contentContainer}>
         {data && data.length > 0 ? (

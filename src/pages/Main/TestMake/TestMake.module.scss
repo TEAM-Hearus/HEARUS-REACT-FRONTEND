@@ -27,6 +27,7 @@
   background-color: $brand-point;
   color: $white_FF;
   @include SemiBold_Body_16;
+  cursor: pointer;
 }
 .contentContainer {
   display: flex;
