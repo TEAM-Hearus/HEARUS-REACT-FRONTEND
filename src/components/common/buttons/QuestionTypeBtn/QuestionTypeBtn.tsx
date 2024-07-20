@@ -1,6 +1,6 @@
 import { translateTypeToEnglish } from '../../../../utils/test';
 import styles from './QuestionTypeBtn.module.scss';
-import useQuestionTypeStore from '../../../../store/QuestionTypeStore';
+import useQuestionTypeStore from '../../../../store/TestSettingsStore';
 
 interface IProps {
   children: string;

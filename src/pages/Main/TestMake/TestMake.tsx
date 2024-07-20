@@ -2,12 +2,33 @@ import { useQuery } from '@tanstack/react-query';
 import styles from './TestMake.module.scss';
 import { getAllScripts, IScriptInList } from '../../../apis/script';
 import QuestionTypeBtn from '../../../components/common/buttons/QuestionTypeBtn/QuestionTypeBtn';
+import useTestSettingsStore from '../../../store/TestSettingsStore';
 
 const TestMake = () => {
   const { data } = useQuery<IScriptInList[], Error>({
     queryKey: ['allScripts'],
     queryFn: () => getAllScripts(),
   });
+
+  const { questionCount, timeLimit, setQuestionCount, setTimeLimit } =
+    useTestSettingsStore();
+
+  const handleQuestionCountChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setQuestionCount(parseInt(e.target.value, 10));
+  };
+
+  const handleTimeLimitChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    setTimeLimit(checked ? 0 : null);
+  };
+
+  const handleTimeLimitValueChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setTimeLimit(parseInt(e.target.value, 10));
+  };
 
   return (
     <div className={styles.wholeContainer}>
@@ -39,7 +60,13 @@ const TestMake = () => {
           </div>
           <div className={styles.selectBox}>
             <p className={styles.selectTitle}>문제 개수</p>
-            <input className={styles.numInput} type="number" min="0" />
+            <input
+              className={styles.numInput}
+              type="number"
+              min="0"
+              value={questionCount}
+              onChange={handleQuestionCountChange}
+            />
             <span className={styles.inputCaption}>개</span>
           </div>
           <div className={styles.selectBox}>
@@ -48,13 +75,25 @@ const TestMake = () => {
                 className={styles.timeLimitInput}
                 type="checkbox"
                 id="time"
+                checked={timeLimit !== null}
+                onChange={handleTimeLimitChange}
               />
               <label className={styles.checkBoxTitle} htmlFor="time">
                 시간 제한
               </label>
             </span>
-            <input className={styles.numInput} type="number" min="0" />
-            <span className={styles.inputCaption}>분</span>
+            {timeLimit !== null && (
+              <>
+                <input
+                  className={styles.numInput}
+                  type="number"
+                  min="0"
+                  value={timeLimit}
+                  onChange={handleTimeLimitValueChange}
+                />
+                <span className={styles.inputCaption}>분</span>
+              </>
+            )}
           </div>
         </section>
       </div>

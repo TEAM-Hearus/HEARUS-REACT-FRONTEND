@@ -1,15 +1,21 @@
 import { create } from 'zustand';
 import { EnQuestionType } from '../utils/test';
 
-type QuestionTypeStore = {
+type TestSettingsStore = {
   questionTypes: EnQuestionType[];
+  questionCount: number;
+  timeLimit: number | null;
   pushQuestionType: (type: EnQuestionType) => void;
   popQuestionType: (type: EnQuestionType) => void;
-  clearQuestionType: () => void;
+  setQuestionCount: (count: number) => void;
+  setTimeLimit: (limit: number | null) => void;
+  clearSettings: () => void;
 };
 
-const useQuestionTypeStore = create<QuestionTypeStore>()((set) => ({
+const useTestSettingsStore = create<TestSettingsStore>()((set) => ({
   questionTypes: ['MultipleChoice'],
+  questionCount: 0,
+  timeLimit: null,
 
   pushQuestionType: (type) =>
     set((state) => ({
@@ -23,7 +29,12 @@ const useQuestionTypeStore = create<QuestionTypeStore>()((set) => ({
       questionTypes: state.questionTypes.filter((t) => t !== type),
     })),
 
-  clearQuestionType: () => set({ questionTypes: [] }),
+  setQuestionCount: (count: number) => set({ questionCount: count }),
+
+  setTimeLimit: (limit: number | null) => set({ timeLimit: limit }),
+
+  clearSettings: () =>
+    set({ questionTypes: [], questionCount: 0, timeLimit: null }),
 }));
 
-export default useQuestionTypeStore;
+export default useTestSettingsStore;
