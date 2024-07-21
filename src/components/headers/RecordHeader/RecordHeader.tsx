@@ -2,7 +2,7 @@ import styles from './Recordheader.module.scss';
 import Back from '../../../assets/images/arrow/back.svg?react';
 import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import { formatTime } from '../../../utils/record';
+import { formatRecordTime } from '../../../utils/dateFormatters';
 
 interface IProps {
   handleQuit: () => void;
@@ -50,7 +50,7 @@ const RecordHeader = ({ handleQuit }: IProps) => {
         <button className={styles.tagBtn}>태그</button>
       </div>
       <div className={styles.timerContainer}>
-        <p className={styles.timer}>{formatTime(seconds)}</p>
+        <p className={styles.timer}>{formatRecordTime(seconds)}</p>
         <button className={styles.quitBtn} onClick={handleOnClickQuitBtn}>
           종료
         </button>

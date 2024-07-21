@@ -4,6 +4,7 @@
 .wholeContainer {
   display: flex;
   flex-direction: column;
+  gap: 20px;
   width: 100%;
   padding: 30px 40px;
 }
@@ -36,4 +37,5 @@
   width: 100%;
   height: auto;
   flex-wrap: wrap;
+  gap: 20px;
 }
