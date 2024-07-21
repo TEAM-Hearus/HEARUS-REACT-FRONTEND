@@ -3,6 +3,8 @@ import styles from './TestMake.module.scss';
 import { getAllScripts, IScriptInList } from '../../../apis/script';
 import { useNavigate } from 'react-router-dom';
 import TestOptionSelector from '../../../components/TestOptionSelector/TestOptionSelector';
+import ScriptItem from '../../../components/common/ScriptItem/ScriptItem';
+import useTestSettingsStore from '../../../store/TestSettingsStore';
 
 const TestMake = () => {
   const navigate = useNavigate();
@@ -11,6 +13,12 @@ const TestMake = () => {
     queryKey: ['allScripts'],
     queryFn: () => getAllScripts(),
   });
+
+  const { lectureId, setLectureId } = useTestSettingsStore();
+
+  const handleScriptClick = (id: string) => {
+    setLectureId(id);
+  };
 
   const handleTestStartBtnClick = () => {
     // 문제 유형 유효성 검사 로직 구현 예정
@@ -30,7 +38,18 @@ const TestMake = () => {
       </div>
       <div className={styles.contentContainer}>
         {data && data.length > 0 ? (
-          <section className={styles.scriptsContainer}></section>
+          <section className={styles.scriptsContainer}>
+            {data.map((script) => (
+              <span
+                className={`${script.id === lectureId ? styles.selectedScript : styles.scriptWrapper}`}
+                onClick={() => {
+                  handleScriptClick(script.id);
+                }}
+              >
+                <ScriptItem key={script.id} {...script} />
+              </span>
+            ))}
+          </section>
         ) : (
           <section className={styles.noScript}>
             <p className={styles.noScriptText}>스크립트 없음</p>

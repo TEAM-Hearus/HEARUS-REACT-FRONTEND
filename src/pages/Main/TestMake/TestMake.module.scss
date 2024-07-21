@@ -37,10 +37,19 @@
 }
 .scriptsContainer {
   display: flex;
-  height: 100%;
+  gap: 20px;
   flex-wrap: wrap;
-  flex-grow: 1;
+  height: 100%;
+  padding: 20px;
   background-color: $light-bg_F2;
+  border-radius: 8px;
+}
+.scriptWrapper {
+  border: 1px solid $white_FF;
+  border-radius: 8px;
+}
+.selectedScript {
+  border: 1px solid $brand-point;
   border-radius: 8px;
 }
 .noScript {
