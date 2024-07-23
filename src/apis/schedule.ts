@@ -1,4 +1,4 @@
-import { mockAPI_URL } from '.';
+import { API_URL } from '.';
 import { IScheduleElement } from '../constants/schedule';
 
 interface IGetScheduleResponse {
@@ -17,7 +17,7 @@ export const getSchedule = async (
   name: string,
 ): Promise<IScheduleElement[]> => {
   try {
-    const res = await fetch(`${mockAPI_URL}/schedule/getSchedule?name=${name}`);
+    const res = await fetch(`${API_URL}/schedule/getSchedule?name=${name}`);
     const data: IGetScheduleResponse = await res.json();
     return data.object['scheduleElements'];
   } catch (error) {
