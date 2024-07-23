@@ -1,0 +1,80 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/variables/fonts.scss';
+
+.testOptionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  min-width: 400px;
+  padding: 30px;
+  background-color: $white_FF;
+  border-radius: 8px;
+}
+.selectBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+.selectTitle {
+  @include SemiBold_Body_16;
+  color: $dark-font_5A;
+}
+.selectionBtnsContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+}
+.numInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px 12px calc(50% - 24px);
+  border: 1px solid $light-bg_E5;
+  border-radius: 8px;
+  @include Medium_Body_16;
+  color: $dark-orange_E5;
+}
+.inputCaption {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  @include Medium_Body_16;
+  color: $light-gray_81;
+}
+.checkBoxTitle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  @include SemiBold_Body_16;
+  color: $dark-font_5A;
+}
+.checkBoxContainer {
+  display: flex;
+}
+.timeLimitInput {
+  display: none;
+}
+.timeLimitInput + label {
+  cursor: pointer;
+}
+label:before {
+  margin-right: 3px;
+}
+.timeLimitInput + label:before {
+  content: '';
+  display: flex;
+  width: 16px;
+  height: 16px;
+  border: 1px solid $brand-point;
+  border-radius: 3px;
+}
+.timeLimitInput:checked + label:before {
+  content: '';
+  background-color: $brand-point;
+  border: 1px solid $brand-point;
+  border-radius: 3px;
+  background-image: url('../../assets/images/check.svg');
+  background-repeat: no-repeat;
+  background-position: 50%;
+}

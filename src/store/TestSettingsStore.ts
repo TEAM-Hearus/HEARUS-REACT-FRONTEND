@@ -2,9 +2,11 @@ import { create } from 'zustand';
 import { EnQuestionType } from '../utils/test';
 
 type TestSettingsStore = {
+  lectureId: string;
   questionTypes: EnQuestionType[];
   questionCount: number;
   timeLimit: number | null;
+  setLectureId: (id: string) => void;
   pushQuestionType: (type: EnQuestionType) => void;
   popQuestionType: (type: EnQuestionType) => void;
   setQuestionCount: (count: number) => void;
@@ -13,10 +15,12 @@ type TestSettingsStore = {
 };
 
 const useTestSettingsStore = create<TestSettingsStore>()((set) => ({
+  lectureId: '',
   questionTypes: ['MultipleChoice'],
   questionCount: 0,
   timeLimit: null,
 
+  setLectureId: (id) => set({ lectureId: id }),
   pushQuestionType: (type) =>
     set((state) => ({
       questionTypes: state.questionTypes.includes(type)

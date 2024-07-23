@@ -10,7 +10,7 @@
   border-radius: 8px;
   box-shadow: 0px 3px 4px 0px $box-shadow_00;
   padding: 10px;
-  margin: 20px;
+  cursor: pointer;
 }
 .title {
   @include SemiBold_Body_16;
@@ -28,6 +28,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
+  line-clamp: 9;
   -webkit-line-clamp: 9;
   -webkit-box-orient: vertical;
   line-height: 22px;
