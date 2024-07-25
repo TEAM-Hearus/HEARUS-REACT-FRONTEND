@@ -8,11 +8,16 @@ import TrashCan from './Main/TrashCan/TrashCan';
 import PrivateRoute from './PrivateRoute';
 import Record from './Record/Record';
 import Test from './Test/Test';
+import OAuthCallback from './Auth/OAuthCallback';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Landing />,
+  },
+  {
+    path: '/auth/:provider/callback',
+    element: <OAuthCallback />,
   },
   {
     path: '/home',
