@@ -25,8 +25,8 @@ export const googleLogin = async ({ state, code }: IGoogleParams) => {
         credentials: 'include',
       },
     );
-    const data = await res.json();
-    return data;
+    const data: IGoogleLoginResponse = await res.json();
+    return data.object;
   } catch (error) {
     throw error;
   }
