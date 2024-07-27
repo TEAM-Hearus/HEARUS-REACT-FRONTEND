@@ -9,11 +9,16 @@ import PrivateRoute from './PrivateRoute';
 import Record from './Record/Record';
 import Test from './Test/Test';
 import OAuthCallback from './Auth/OAuthCallback';
+import Login from './Auth/Login';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Landing />,
+  },
+  {
+    path: '/login',
+    element: <Login />,
   },
   {
     path: '/auth/:provider/callback',
