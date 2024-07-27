@@ -59,6 +59,7 @@
   border: none;
   border-radius: 12px;
   @include Medium_Body_16;
+  cursor: pointer;
   img {
     position: absolute;
     left: 20px;

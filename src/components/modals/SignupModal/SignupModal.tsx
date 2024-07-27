@@ -3,6 +3,7 @@ import X from '../../../assets/images/cancel.svg?react';
 import Google from '../../../assets/images/logo/google.png';
 import Kakao from '../../../assets/images/logo/kakao.png';
 import Email from '../../../assets/images/logo/email.png';
+import { API_URL } from '../../../apis';
 
 interface IProps {
   closeModal: () => void;
@@ -14,6 +15,11 @@ const SignupModal = ({ closeModal }: IProps) => {
       closeModal();
     }
   };
+
+  const handleGoogleLoginClick = () => {
+    window.location.href = `${API_URL}/oauth2/authorization/google`;
+  };
+
   return (
     <div className={styles.modalWrapper} onClick={handleWrapperClick}>
       <article className={styles.modalContainer}>
@@ -27,7 +33,10 @@ const SignupModal = ({ closeModal }: IProps) => {
           <p>로그인할 수 있어요</p>
         </div>
         <div className={styles.loginBtnsContainer}>
-          <button className={`${styles.loginBtn} ${styles.google}`}>
+          <button
+            className={`${styles.loginBtn} ${styles.google}`}
+            onClick={handleGoogleLoginClick}
+          >
             <img src={Google} alt="Google Logo" />
             구글 아이디로 시작하기
           </button>

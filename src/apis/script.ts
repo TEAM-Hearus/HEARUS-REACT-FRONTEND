@@ -1,7 +1,4 @@
-import { API_URL } from '.';
-
-const token = //임시 token
-  'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMTZiZDAyOC03OGMxLTRjZTUtYjlhNC1hZDc0Y2ZlYzNkZTIiLCJyb2xlIjoiVVNFUiIsImV4cCI6MTcyMjA3NzAzNX0.dN5G2bMI0jah-peCWY_xn1c-iHRxTW7EjttbKKm86ak';
+import { API_URL, token } from '.';
 
 interface IGetAllScriptResponse {
   status: string;
