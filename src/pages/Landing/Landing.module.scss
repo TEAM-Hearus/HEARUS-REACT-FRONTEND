@@ -1,23 +1,214 @@
 @import '../../styles/variables/colors.scss';
 @import '../../styles/variables/fonts.scss';
 
-.firstBg {
+.topBgContainer {
+  position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  background-image: url('../../assets/images/landing_page_bg.png');
   width: 100dvw;
   height: 100dvh;
-  background: linear-gradient(to bottom, #f5f5f5, #dfdfdf);
+}
+.header {
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100dvw;
+  height: 88px;
+  padding: 20px 100px;
 }
 .loginBtn {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px 30px;
-  background-color: #6d6d6d;
-  color: white;
+  background-color: $white_FF;
+  padding: 12px 24px;
+  border: 1px solid $light-bg_E5;
+  border-radius: 24px;
   @include SemiBold_Body_16;
-  border: none;
+  color: $dark-font_33;
+  text-decoration: none;
+}
+.startBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $brand-point;
+  padding: 12px 24px;
+  border: 1px solid $light-bg_E5;
+  border-radius: 24px;
+  @include SemiBold_Body_16;
+  color: $white_FF;
+  text-decoration: none;
+}
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 200px;
+}
+.mainTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.h1 {
+  font-family: 'Pretendard-ExtraBold';
+  font-size: 80px;
+}
+.subTitle {
+  font-family: 'Pretendard-Medium';
+  font-size: 28px;
+  color: #434343;
+}
+.introductionContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100dvw;
+  height: calc(100dvh + 58px);
+  background-color: $white_FF;
+}
+.upIntro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding-top: 100px;
+  h2 {
+    @include Medium_Title_24;
+    color: $dark-font_33;
+  }
+}
+.hearus {
+  font-family: 'Pretendard-Bold';
+  font-size: 40px;
+  color: $brand-point;
+}
+.downIntro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80dvw;
+  height: 50dvh;
+  background-color: $light-bg_F9;
+  border-radius: 30px;
+  p {
+    @include Medium_Title_24;
+    color: $dark-font_33;
+  }
+}
+.functionsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  width: 100dvw;
+  height: 520px;
+  background-color: $light-bg_F9;
+  border-radius: 30px;
+}
+.function {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  h3 {
+    font-family: 'Pretendard-Bold';
+    font-size: 28px;
+    color: $dark-font_33;
+  }
+}
+.functionImg {
+  width: 230px;
+  height: 230px;
+  background-color: $white_FF;
   border-radius: 12px;
-  cursor: pointer;
+}
+.descriptionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  @include Medium_Body_16;
+  color: $dark-font_33;
+}
+.highLight {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: $white_FF;
+  img {
+    height: 50dvh;
+  }
+}
+.scrollingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+}
+.scrollingText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  position: absolute;
+  top: 36px;
+  transition: transform 1s ease;
+  p {
+    height: 36px;
+    font-family: 'Pretendard-SemiBold';
+    font-size: 36px;
+    color: $light-bg_E5;
+    transition: color 0.3s ease;
+    &.active {
+      font-family: 'Pretendard-SemiBold';
+      font-size: 36px;
+      color: $brand-point;
+    }
+  }
+}
+
+.unCompleted {
+  display: flex;
+  width: 100dvw;
+  height: 520px;
+  background-color: $light-bg_F9;
+  border-radius: 30px;
+}
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  width: 100dvw;
+  height: 180px;
+  padding: 30px 200px;
+  background-color: $dark-font_33;
+  @include Medium_Body_16;
+  color: $white_FF;
+}
+.footerBody {
+  display: flex;
+}
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 200px;
+  justify-content: space-between;
 }

@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { googleLogin } from '../../apis/auth';
 import { useQuery } from '@tanstack/react-query';
+import { googleLogin } from '../../apis/auth';
+import Loading from '../../assets/images/LoadingCircle.gif';
+import styles from './OAuthCallback.module.scss';
 
 const OAuthCallback = () => {
   const navigate = useNavigate();
@@ -35,7 +37,11 @@ const OAuthCallback = () => {
     }
   }, [state, code, data, isError]);
 
-  return <div>로그인 시도중...</div>;
+  return (
+    <div className={styles.container}>
+      <img src={Loading} alt="로그인 시도중..." />
+    </div>
+  );
 };
 
 export default OAuthCallback;
