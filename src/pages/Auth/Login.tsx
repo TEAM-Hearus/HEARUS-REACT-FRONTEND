@@ -1,18 +1,41 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 import { API_URL } from '../../apis';
 import Google from '../../assets/images/logo/google.png';
 import Kakao from '../../assets/images/logo/kakao.png';
+import { emailLogin } from '../../apis/auth';
 import styles from './Login.module.scss';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const loginMutation = useMutation({
+    mutationFn: emailLogin,
+    onSuccess: (data) => {
+      console.log('Login successful', data);
+      localStorage.setItem('token', data.accessToken);
+      navigate('/home'); // 로그인 성공 후 리다이렉트
+    },
+    onError: (error) => {
+      console.error('Login failed', error);
+      alert('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
+    },
+  });
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    loginMutation.mutate({ userEmail: email, userPassword: password });
+  };
+
   const handleGoogleLoginClick = () => {
-    const url = `${API_URL}/oauth2/authorization/google`;
-    console.log('Redirecting to:', url);
-    window.location.href = url;
+    window.location.href = `${API_URL}/oauth2/authorization/google`;
   };
   return (
     <div className={styles.bg}>
       <div className={styles.loginContainer}>
-        <form className={styles.loginForm}>
+        <form className={styles.loginForm} onSubmit={handleSubmit}>
           <h1 className={styles.h1}>로그인</h1>
           <div className={styles.inputBox}>
             <label className={styles.label}>
@@ -21,6 +44,8 @@ const Login = () => {
                 type="email"
                 placeholder="이메일을 입력하세요"
                 className={styles.input}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </label>
           </div>
@@ -31,6 +56,8 @@ const Login = () => {
                 type="password"
                 placeholder="비밀번호를 입력하세요"
                 className={styles.input}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </label>
             <span className={styles.checkboxContainer}>
