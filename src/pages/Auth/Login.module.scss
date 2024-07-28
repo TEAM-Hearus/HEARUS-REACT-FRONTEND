@@ -9,15 +9,20 @@
   height: 100dvh;
   background-image: url('../../assets/images/landing_page_bg.png');
 }
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 520px;
+  padding: 50px 70px;
+  background-color: $white_FF;
+  border-radius: 24px;
+}
 .loginForm {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 20px;
-  width: 520px;
-  padding: 50px 70px;
-  background-color: $white_FF;
-  border-radius: 24px;
 }
 .h1 {
   display: flex;
@@ -97,6 +102,7 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
+  margin: 20px 0px;
   padding: 12px 48px;
   @include Medium_Sub_14;
   color: $light-font_9E;
