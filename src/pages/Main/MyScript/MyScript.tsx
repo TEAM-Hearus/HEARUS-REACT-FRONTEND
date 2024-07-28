@@ -33,11 +33,12 @@ const MyScript = () => {
         <div className={styles.scriptContainer}>
           {data?.map((script) => (
             <span
+              key={script.id}
               onClick={() => {
                 handleScriptClick(script.id);
               }}
             >
-              <ScriptItem key={script.id} {...script} />
+              <ScriptItem {...script} />
             </span>
           ))}
         </div>

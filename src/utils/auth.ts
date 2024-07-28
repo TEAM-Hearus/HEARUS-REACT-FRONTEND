@@ -1,3 +1,5 @@
 export const checkAuthentication = () => {
-  return true; //임시로 로그인 체크 허용
+  const token = localStorage.getItem('token');
+  if (token != null) return true;
+  else return false;
 };
