@@ -1,8 +1,12 @@
+import { API_URL } from '../../apis';
 import Google from '../../assets/images/logo/google.png';
 import Kakao from '../../assets/images/logo/kakao.png';
 import styles from './Login.module.scss';
 
 const Login = () => {
+  const handleGoogleLoginClick = () => {
+    window.location.href = `${API_URL}/oauth2/authorization/google`;
+  };
   return (
     <div className={styles.bg}>
       <form className={styles.loginForm}>
@@ -44,7 +48,7 @@ const Login = () => {
           <hr className={styles.line} />
         </span>
         <div className={styles.oauthBtnsContainer}>
-          <button className={styles.googleBtn}>
+          <button className={styles.googleBtn} onClick={handleGoogleLoginClick}>
             <img src={Google} alt="Google Logo" />
           </button>
           <button className={styles.kakaoBtn}>
