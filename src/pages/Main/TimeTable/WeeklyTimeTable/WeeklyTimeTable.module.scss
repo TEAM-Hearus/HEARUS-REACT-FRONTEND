@@ -11,8 +11,7 @@
   border-radius: 12px;
 }
 .tableContainer {
-  // position: relative;
-  margin: 10px 30px;
+  // margin: 10px 30px;
 }
 .dayOfWeekRow {
   display: flex;
@@ -49,7 +48,7 @@
   display: block;
   width: calc((100% - 60px) / 7);
   height: 80px;
-  border: 1px solid #aaa;
+  border: 1px solid $light-bg_E5;
   border-bottom: 0px;
   border-right: 0px;
 }
@@ -58,7 +57,7 @@
 }
 .daytime:nth-child(8) {
   background-color: $light-bg_F9;
-  border-right: 1px solid #aaa;
+  border-right: 1px solid $light-bg_E5;
 }
 .lastCell {
   background-color: transparent !important;
