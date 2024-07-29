@@ -21,9 +21,9 @@ const TimeTableItem = ({
       style={{ ...style, backgroundColor, color: textColor }}
     >
       <span className={styles.title}>
-        {Number(height) < 53 ? (
+        {Number(height) < 33 ? (
           ''
-        ) : 53 < Number(height) && 120 > Number(height) ? (
+        ) : 33 < Number(height) && 53 > Number(height) ? (
           <h6 className={styles.name}>{name}</h6>
         ) : (
           <>
@@ -32,9 +32,13 @@ const TimeTableItem = ({
           </>
         )}
       </span>
-      <p
-        className={styles.time}
-      >{`${startTime.slice(11, 16)}~${endTime.slice(11, 16)}`}</p>
+      {Number(height) < 73 ? (
+        ''
+      ) : (
+        <p
+          className={styles.time}
+        >{`${startTime.slice(11, 16)}~${endTime.slice(11, 16)}`}</p>
+      )}
     </div>
   );
 };
