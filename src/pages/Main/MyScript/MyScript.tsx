@@ -3,17 +3,36 @@ import StartingButton from '../../../components/common/buttons/StartBtn/StartBtn
 import ScriptItem from '../../../components/common/ScriptItem/ScriptItem';
 import { useQuery } from '@tanstack/react-query';
 import { getAllScripts, IScriptInList } from '../../../apis/script';
+import { useEffect, useState } from 'react';
+import ScriptDetailModal from '../../../components/modals/ScriptDetailModal/ScriptDetailModal';
 
 const MyScript = () => {
+  const [selectedScriptId, setSelectedScriptId] = useState<string | null>(null);
+
   const { data } = useQuery<IScriptInList[], Error>({
     queryKey: ['allScripts'],
     queryFn: () => getAllScripts(),
   });
 
   const handleScriptClick = (id: string) => {
-    // 스크립트 상세 모달 구현 예정
-    console.log(id);
+    setSelectedScriptId(id);
   };
+
+  const handleCloseModal = () => {
+    setSelectedScriptId(null);
+  };
+
+  useEffect(() => {
+    if (selectedScriptId !== null) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [selectedScriptId]);
 
   return (
     <div className={styles.wholeContainer}>
@@ -42,6 +61,12 @@ const MyScript = () => {
             </span>
           ))}
         </div>
+      )}
+      {selectedScriptId !== null && (
+        <ScriptDetailModal
+          scriptId={selectedScriptId}
+          closeModal={handleCloseModal}
+        />
       )}
     </div>
   );
