@@ -7,6 +7,13 @@ interface IGetAllScriptResponse {
   success: boolean;
 }
 
+interface IGetScriptDetailResponse {
+  status: string;
+  msg: string;
+  object: IScriptDetail;
+  success: boolean;
+}
+
 export interface IScriptInList {
   id: string;
   name: string;
@@ -17,6 +24,11 @@ export interface IScriptInList {
   problems: null;
 }
 
+interface IScriptDetail {
+  name: string;
+  processedScript: string[];
+}
+
 export const getAllScripts = async (): Promise<IScriptInList[]> => {
   try {
     const res = await fetch(`${API_URL}/api/v1/lecture/getAllLecture`, {
@@ -25,6 +37,23 @@ export const getAllScripts = async (): Promise<IScriptInList[]> => {
       },
     });
     const data: IGetAllScriptResponse = await res.json();
+    return data.object;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getScriptDetail = async (id: string) => {
+  try {
+    const res = await fetch(
+      `${API_URL}/api/v1/lecture/getLecture?lectureId=${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    const data: IGetScriptDetailResponse = await res.json();
     return data.object;
   } catch (error) {
     throw error;
