@@ -11,7 +11,7 @@
 .problemsContainer {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
   width: 60%;
   padding: 50px;
   margin-top: 100px;
@@ -30,6 +30,7 @@
   color: $dark-orange_E5;
 }
 .questionTitle {
+  padding-bottom: 10px;
   @include Medium_Body_18;
   color: $dark-font_33;
 }

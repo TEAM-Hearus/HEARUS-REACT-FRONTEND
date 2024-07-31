@@ -1,3 +1,8 @@
+export interface IQuestion {
+  options: string[];
+  answer: string | number;
+}
+
 export const QUESTION_LIST = [
   {
     type: 'MultipleChoice',

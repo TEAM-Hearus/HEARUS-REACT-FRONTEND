@@ -1,0 +1,26 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/variables/fonts.scss';
+
+.optionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.optionItem {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  border-radius: 8px;
+  @include Regular_Body_16;
+  cursor: pointer;
+}
+.unselected {
+  background-color: $light-bg_F9;
+  border: 1px solid $light-bg_E5;
+  color: $light-gray_81;
+}
+.selected {
+  background-color: $dark-font_33;
+  border: 1px solid $dark-font_33;
+  color: $white_FF;
+}
