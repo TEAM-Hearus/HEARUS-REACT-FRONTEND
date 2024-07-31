@@ -10,6 +10,8 @@
 }
 .problemsContainer {
   display: flex;
+  flex-direction: column;
+  gap: 20px;
   width: 60%;
   padding: 50px;
   margin-top: 100px;
@@ -17,4 +19,17 @@
   border: none;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+}
+.questionBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.qestionNumber {
+  @include Medium_Body_18;
+  color: $dark-orange_E5;
+}
+.questionTitle {
+  @include Medium_Body_18;
+  color: $dark-font_33;
 }
