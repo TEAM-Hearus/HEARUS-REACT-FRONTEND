@@ -1,10 +1,12 @@
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import X from '../../../assets/images/cancel.svg?react';
-import Play from '../../../assets/images/play.svg?react';
-import styles from './ScriptDetailModal.module.scss';
-import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import X from '../../../assets/images/cancel.svg?react';
+import Play from '../../../assets/images/audio/play.svg?react';
+import Pause from '../../../assets/images/audio/pause.svg?react';
+import styles from './ScriptDetailModal.module.scss';
 import { getScriptDetail } from '../../../apis/script';
+import { formatTimer } from '../../../utils/dateFormatters';
 
 interface IProps {
   scriptId: string;
@@ -12,10 +14,16 @@ interface IProps {
 }
 
 const ScriptDetailModal = ({ scriptId, closeModal }: IProps) => {
-  const [time, setTime] = useState('00:00:00');
+  const [time, setTime] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const intervalRef = useRef<number | null>(null);
 
   const handleContentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+  };
+
+  const handlePlayClick = () => {
+    setIsPlaying(!isPlaying);
   };
 
   const { data } = useQuery({
@@ -23,7 +31,23 @@ const ScriptDetailModal = ({ scriptId, closeModal }: IProps) => {
     queryFn: () => getScriptDetail(scriptId),
   });
 
-  console.log(scriptId);
+  useEffect(() => {
+    if (isPlaying) {
+      intervalRef.current = window.setInterval(() => {
+        setTime((prevTime) => prevTime + 1);
+      }, 1000);
+    } else {
+      if (intervalRef.current !== null) {
+        clearInterval(intervalRef.current);
+      }
+    }
+
+    return () => {
+      if (intervalRef.current !== null) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [isPlaying]);
 
   return createPortal(
     <div className={styles.overlay} onClick={closeModal}>
@@ -33,10 +57,10 @@ const ScriptDetailModal = ({ scriptId, closeModal }: IProps) => {
         </span>
         <p className={styles.title}>{data?.name}</p>
         <div className={styles.playBox}>
-          <span className={styles.playBtn}>
-            <Play />
+          <span className={styles.playBtn} onClick={handlePlayClick}>
+            {isPlaying ? <Pause /> : <Play />}
           </span>
-          <p className={styles.time}>{time}</p>
+          <p className={styles.time}>{formatTimer(time)}</p>
         </div>
         <p className={styles.textBox}>{data?.processedScript.join(' ')}</p>
       </article>

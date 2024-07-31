@@ -58,6 +58,7 @@
   cursor: pointer;
 }
 .time {
+  width: 60px;
   @include SemiBold_Sub_14;
   color: $light-gray_81;
 }
