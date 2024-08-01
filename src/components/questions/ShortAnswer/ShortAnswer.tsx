@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styles from './ShortAnswer.module.scss';
 import { IQuestionProps } from '../../../constants/question';
 
@@ -9,7 +8,7 @@ const ShortAnswer = ({
   showResult,
 }: IQuestionProps) => {
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onAnswerChange(e.target.value);
+    if (!showResult) onAnswerChange(e.target.value);
   };
   return (
     <input
