@@ -1,0 +1,13 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/variables/fonts.scss';
+
+.input {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  background-color: $light-bg_F9;
+  border: 1px solid $light-bg_E5;
+  border-radius: 8px;
+  @include Regular_Body_16;
+  color: $light-gray_81;
+}

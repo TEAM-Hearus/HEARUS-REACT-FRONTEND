@@ -1,5 +1,6 @@
 import TestHeader from '../../components/headers/TestHeader/TestHeader';
 import MultipleChoice from '../../components/questions/MultipleChoice/MultipleChoice';
+import ShortAnswer from '../../components/questions/ShortAnswer/ShortAnswer';
 import { QUESTION_LIST } from '../../constants/question';
 import styles from './Test.module.scss';
 
@@ -12,12 +13,18 @@ const Test = () => {
           <section key={question.direction} className={styles.questionBox}>
             <p className={styles.qestionNumber}>Q{index + 1}</p>
             <p className={styles.questionTitle}>{question.direction}</p>
-            {question.type === 'MultipleChoice' ? (
+            {question.type === 'MultipleChoice' && (
               <MultipleChoice
                 options={question.options}
                 answer={question.answer}
               />
-            ) : null}
+            )}
+            {question.type === 'ShortAnswer' && (
+              <ShortAnswer
+                options={question.options}
+                answer={question.answer}
+              />
+            )}
           </section>
         ))}
       </article>

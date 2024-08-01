@@ -17,7 +17,7 @@ export const QUESTION_LIST = [
     answer: 3,
   },
   {
-    type: 'ShrotAnswer',
+    type: 'ShortAnswer',
     direction:
       '알프레드 마셜이 1903년에 케임브리지 대학에 경제학과를 개설한 것은 최초였다.',
     options: [],
