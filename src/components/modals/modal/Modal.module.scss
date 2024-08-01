@@ -1,0 +1,89 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/variables/fonts.scss';
+
+.modalWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+.modalContainer {
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  height: 330px;
+  padding: 20px;
+  background-color: white;
+  border: none;
+  border-radius: 12px;
+}
+.modalTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.modalTitle h2 {
+  margin-top: 25px;
+  margin-bottom: 30px;
+  @include SemiBold_Body_18;
+  color: $dark-font_33;
+}
+.modalField {
+  display: flex;
+  margin-bottom: 20px;
+  width: 330px;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  align-items: center;
+}
+.modalField label {
+  margin: 15px;
+  width: 40px;
+  text-align: center;
+  color: $light-gray_81;
+}
+.separator {
+  border-left: 2px solid #eaeaea;
+  height: 20px;
+}
+.modalField input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 0;
+}
+
+.modalActions {
+  display: flex;
+  width: 330px;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.modalClose {
+  background-color: $light-bg_F2;
+  border: 1px solid $light-bg_F2;
+  border-radius: 8px;
+  padding: 10px 20px;
+  width: 160px;
+  height: 48px;
+  @include Medium_Body_16;
+  color: $dark-font_5A;
+}
+.modalSave {
+  background-color: $brand-point;
+  border: 1px solid $brand-point;
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: white;
+  width: 160px;
+  height: 48px;
+  @include Medium_Body_16;
+}
