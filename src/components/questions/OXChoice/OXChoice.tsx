@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import styles from './OXChoice.module.scss';
+import { IQuestionProps } from '../../../constants/question';
 
-interface IProps {
-  answer: string | number;
-}
-
-const OXChoice = ({ answer }: IProps) => {
-  const [userAnswer, setUserAnswer] = useState(2);
-
+const OXChoice = ({
+  answer,
+  userAnswer,
+  onAnswerChange,
+  showResult,
+}: IQuestionProps) => {
   const handleItemClick = (index: number) => {
-    setUserAnswer(index);
+    onAnswerChange(index);
   };
 
   return (

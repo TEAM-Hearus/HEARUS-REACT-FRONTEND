@@ -25,3 +25,13 @@
   border: 1px solid $dark-font_33;
   color: $white_FF;
 }
+.wrong {
+  background-color: rgba(255, 96, 61, 0.1);
+  border: 1px solid $dark-orange_E5;
+  color: $dark-orange_E5;
+}
+.correct {
+  background-color: #d6ffda;
+  border: 1px solid #327354;
+  color: #327354;
+}

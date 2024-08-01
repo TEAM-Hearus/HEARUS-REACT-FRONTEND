@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import styles from './ShortAnswer.module.scss';
+import { IQuestionProps } from '../../../constants/question';
 
-interface IProps {
-  answer: string | number;
-}
-
-const ShortAnswer = ({ answer }: IProps) => {
-  const [userAnswer, setUserAnswer] = useState('');
+const ShortAnswer = ({
+  answer,
+  userAnswer,
+  onAnswerChange,
+  showResult,
+}: IQuestionProps) => {
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserAnswer(e.target.value);
+    onAnswerChange(e.target.value);
   };
   return (
     <input

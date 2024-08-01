@@ -1,6 +1,9 @@
-export interface IQuestion {
+export interface IQuestionProps {
   options: string[];
-  answer: string | number;
+  answer: number | string;
+  userAnswer: number | string;
+  onAnswerChange: (answer: number | string) => void;
+  showResult: boolean;
 }
 
 export const QUESTION_LIST = [

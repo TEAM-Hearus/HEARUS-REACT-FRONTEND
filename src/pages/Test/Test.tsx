@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import TestHeader from '../../components/headers/TestHeader/TestHeader';
 import MultipleChoice from '../../components/questions/MultipleChoice/MultipleChoice';
 import OXChoice from '../../components/questions/OXChoice/OXChoice';
@@ -6,9 +7,24 @@ import { QUESTION_LIST } from '../../constants/question';
 import styles from './Test.module.scss';
 
 const Test = () => {
+  const [userAnswers, setUserAnswers] = useState<(string | number)[]>(
+    Array(QUESTION_LIST.length).fill(''),
+  );
+  const [showResults, setShowResults] = useState(false);
+
+  const handleAnswerChange = (index: number, answer: string | number) => {
+    const newAnswers = [...userAnswers];
+    newAnswers[index] = answer;
+    setUserAnswers(newAnswers);
+  };
+
+  const handleSubmit = () => {
+    setShowResults(true);
+  };
+
   return (
     <div className={styles.container}>
-      <TestHeader />
+      <TestHeader handleSubmit={handleSubmit} />
       <article className={styles.problemsContainer}>
         {QUESTION_LIST.map((question, index) => (
           <section key={question.direction} className={styles.questionBox}>
@@ -17,14 +33,29 @@ const Test = () => {
             {question.type === 'MultipleChoice' && (
               <MultipleChoice
                 options={question.options}
-                answer={question.answer}
+                answer={question.answer as number}
+                userAnswer={userAnswers[index] as number}
+                onAnswerChange={(answer) => handleAnswerChange(index, answer)}
+                showResult={showResults}
               />
             )}
             {question.type === 'ShortAnswer' && (
-              <ShortAnswer answer={question.answer} />
+              <ShortAnswer
+                options={question.options}
+                answer={question.answer}
+                userAnswer={userAnswers[index] as string}
+                onAnswerChange={(answer) => handleAnswerChange(index, answer)}
+                showResult={showResults}
+              />
             )}
             {question.type === 'OXChoice' && (
-              <OXChoice answer={question.answer} />
+              <OXChoice
+                options={question.options}
+                answer={question.answer}
+                userAnswer={userAnswers[index] as number}
+                onAnswerChange={(answer) => handleAnswerChange(index, answer)}
+                showResult={showResults}
+              />
             )}
           </section>
         ))}
