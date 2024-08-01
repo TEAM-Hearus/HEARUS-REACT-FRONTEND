@@ -1,0 +1,37 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/variables/fonts.scss';
+
+.optionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.optionItem {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  @include Regular_Body_16;
+  cursor: pointer;
+}
+.unselected {
+  background-color: $light-bg_F9;
+  border: 1px solid $light-bg_E5;
+  color: $light-gray_81;
+}
+.selected {
+  background-color: $dark-font_33;
+  border: 1px solid $dark-font_33;
+  color: $white_FF;
+}
+.wrong {
+  background-color: rgba(255, 96, 61, 0.1);
+  border: 1px solid $dark-orange_E5;
+  color: $dark-orange_E5;
+}
+.correct {
+  background-color: #d6ffda;
+  border: 1px solid #327354;
+  color: #327354;
+}
