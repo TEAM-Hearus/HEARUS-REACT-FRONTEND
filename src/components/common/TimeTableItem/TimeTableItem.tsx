@@ -1,7 +1,7 @@
 import { IScheduleElement } from '../../../constants/schedule';
 import { getScheduleStyle } from '../../../utils/schedule';
 import styles from './TimeTableItem.module.scss';
-import { getRandomColor } from '../../../utils/randomColor';
+import { getScheduleItemColor } from '../../../utils/randomColor';
 
 const TimeTableItem = ({
   //id,
@@ -9,11 +9,12 @@ const TimeTableItem = ({
   name,
   location,
   dayOfWeek,
+  color,
   startTime,
   endTime,
 }: IScheduleElement) => {
   const { height, ...style } = getScheduleStyle(dayOfWeek, startTime, endTime);
-  const { backgroundColor, textColor } = getRandomColor();
+  const { backgroundColor, textColor } = getScheduleItemColor(color);
 
   return (
     <div
