@@ -1,10 +1,13 @@
-import { COLORS, TEXT_COLORS } from '../constants/colors';
+import { COLORS, ColorKey } from '../constants/schedule';
 
-export const getRandomColor = () => {
-  const colorKeys = Object.keys(COLORS);
-  const randomKey = colorKeys[Math.floor(Math.random() * colorKeys.length)];
+interface ScheduleItemColor {
+  backgroundColor: string;
+  textColor: string;
+}
+
+export const getScheduleItemColor = (color: ColorKey): ScheduleItemColor => {
   return {
-    backgroundColor: COLORS[randomKey],
-    textColor: TEXT_COLORS[randomKey],
+    backgroundColor: color,
+    textColor: COLORS[color],
   };
 };
