@@ -32,3 +32,37 @@ export const getSchedule = async (
     throw error;
   }
 };
+
+interface IGetLectureByScheduleElementResponse {
+  status: string;
+  msg: string;
+  object: ILectureItem[];
+  success: boolean;
+}
+
+interface ILectureItem {
+  id: string;
+  name: string;
+  processedScript: null;
+  scheduleElementId: string;
+  lectureDate: string;
+  createdAt: string;
+  problems: null;
+}
+
+export const getLectureByScheduleElement = async (id: number) => {
+  try {
+    const res = await fetch(
+      `${API_URL}/api/v1/lecture/getLectureByScheduleElement?scheduleElementId=${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    const data: IGetLectureByScheduleElementResponse = await res.json();
+    return data.object;
+  } catch (error) {
+    throw error;
+  }
+};
