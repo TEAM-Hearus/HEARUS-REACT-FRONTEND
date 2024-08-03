@@ -57,7 +57,7 @@ const TimeTableItem = ({
       </div>
       {isShowingToolTip && (
         <span
-          className={styles.tooptipWrapper}
+          className={styles.tooltipWrapper}
           style={{ ...style }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
