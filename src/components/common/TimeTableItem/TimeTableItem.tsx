@@ -15,11 +15,7 @@ const TimeTableItem = ({
   startTime,
   endTime,
 }: IScheduleElement) => {
-  const { height, top, left, ...style } = getScheduleStyle(
-    dayOfWeek,
-    startTime,
-    endTime,
-  );
+  const { height, ...style } = getScheduleStyle(dayOfWeek, startTime, endTime);
   const { backgroundColor, textColor } = getScheduleItemColor(color);
   const [isShowingToolTip, setIsShowingToolTip] = useState(false);
 
@@ -62,7 +58,7 @@ const TimeTableItem = ({
       {isShowingToolTip && (
         <span
           className={styles.tooptipWrapper}
-          style={{ top: `${top}px`, left }}
+          style={{ ...style }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >

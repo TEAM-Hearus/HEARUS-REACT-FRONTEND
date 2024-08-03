@@ -29,7 +29,5 @@ export const getScheduleStyle = (
     '--schedule-top': `${top}px`,
     '--schedule-height': `${height + 1}px`,
     height,
-    top,
-    left,
   } as React.CSSProperties;
 };

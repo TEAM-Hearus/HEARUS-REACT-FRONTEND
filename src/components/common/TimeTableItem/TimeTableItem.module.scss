@@ -37,4 +37,6 @@
 
 .tooptipWrapper {
   position: absolute;
+  left: var(--schedule-left);
+  top: var(--schedule-top);
 }
