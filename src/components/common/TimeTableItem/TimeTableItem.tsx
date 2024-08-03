@@ -21,15 +21,23 @@ const TimeTableItem = ({
     endTime,
   );
   const { backgroundColor, textColor } = getScheduleItemColor(color);
-  const [showToolTip, setShowToolTip] = useState(false);
+  const [isShowingToolTip, setIsShowingToolTip] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsShowingToolTip(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsShowingToolTip(false);
+  };
 
   return (
     <>
       <div
         className={styles.scheduleItem}
         style={{ ...style, backgroundColor, color: textColor }}
-        onMouseEnter={() => setShowToolTip(true)}
-        onMouseLeave={() => setShowToolTip(false)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         <span className={styles.title}>
           {Number(height) < 33 ? (
@@ -51,12 +59,12 @@ const TimeTableItem = ({
           >{`${startTime.slice(11, 16)}~${endTime.slice(11, 16)}`}</p>
         )}
       </div>
-      {showToolTip && (
+      {isShowingToolTip && (
         <span
           className={styles.tooptipWrapper}
           style={{ top: `${top}px`, left }}
-          onMouseEnter={() => setShowToolTip(true)}
-          onMouseLeave={() => setShowToolTip(false)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <ScriptToolTip id={id} />
         </span>
