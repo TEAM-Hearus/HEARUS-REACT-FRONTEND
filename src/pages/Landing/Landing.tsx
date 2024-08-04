@@ -12,7 +12,7 @@ const Landing = () => {
           <Link to="/login" className={styles.loginBtn}>
             로그인
           </Link>
-          <Link to="/login" className={styles.startBtn}>
+          <Link to="/signup" className={styles.startBtn}>
             무료로 시작하기
           </Link>
         </header>

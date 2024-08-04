@@ -1,5 +1,5 @@
-@import '../../styles/variables/colors.scss';
-@import '../../styles/variables/fonts.scss';
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/variables/fonts.scss';
 
 .bg {
   display: flex;
@@ -7,9 +7,9 @@
   align-items: center;
   width: 100dvw;
   height: 100dvh;
-  background-image: url('../../assets/images/landing_page_bg.png');
+  background-image: url('../../../assets/images/landing_page_bg.png');
 }
-.loginContainer {
+.authContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,7 +18,7 @@
   background-color: $white_FF;
   border-radius: 24px;
 }
-.loginForm {
+.authForm {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,6 +36,9 @@
   gap: 8px;
   @include SemiBold_Body_16;
   color: $dark-font_33;
+}
+.inputBox {
+  position: relative;
 }
 .input {
   display: flex;
@@ -85,7 +88,7 @@
   background-repeat: no-repeat;
   background-position: 50%;
 }
-.loginBtn {
+.authBtn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -118,6 +121,7 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
+  padding: 20px;
 }
 .googleBtn {
   display: flex;
@@ -140,4 +144,26 @@
   border: none;
   border-radius: 50%;
   cursor: pointer;
+}
+.AuthGoBox {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  p {
+    color: $light-font_9E;
+    padding-right: 5px;
+  }
+  a {
+    color: $brand-point;
+    text-decoration: none;
+  }
+}
+
+.showBtn {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50px;
+  right: 10px;
+  border: none;
+  background: none;
 }
