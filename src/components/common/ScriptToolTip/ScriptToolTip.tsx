@@ -17,7 +17,7 @@ const ScriptToolTip = ({ id }: IProps) => {
     queryFn: () => getLectureByScheduleElement(id),
   });
 
-  const handleClick = (scriptId: string) => {
+  const handleToolTipClick = (scriptId: string) => {
     setSelectedScriptId(scriptId);
   };
 
@@ -42,7 +42,7 @@ const ScriptToolTip = ({ id }: IProps) => {
       {data?.map((lecture) => (
         <div
           className={styles.tooltipItem}
-          onClick={() => handleClick(lecture.id)}
+          onClick={() => handleToolTipClick(lecture.id)}
         >
           {lecture.name}
           <ScriptIcon />
