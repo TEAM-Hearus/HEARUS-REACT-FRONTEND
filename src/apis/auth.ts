@@ -1,6 +1,6 @@
 import { API_URL } from '.';
 
-interface IEmailLoginParams {
+interface IEmailAuthSignUpParams {
   userEmail: string;
   userPassword: string;
 }
@@ -10,7 +10,7 @@ interface IGoogleLoginParams {
   code: string;
 }
 
-interface ILoginResponse {
+interface IAuthResponse {
   status: string;
   msg: string;
   object: ITokens;
@@ -30,7 +30,7 @@ export const googleLogin = async ({ state, code }: IGoogleLoginParams) => {
         credentials: 'include',
       },
     );
-    const data: ILoginResponse = await res.json();
+    const data: IAuthResponse = await res.json();
     return data.object;
   } catch (error) {
     throw error;
@@ -40,7 +40,7 @@ export const googleLogin = async ({ state, code }: IGoogleLoginParams) => {
 export const emailLogin = async ({
   userEmail,
   userPassword,
-}: IEmailLoginParams) => {
+}: IEmailAuthSignUpParams) => {
   try {
     const res = await fetch(`${API_URL}/api/v1/auth/login`, {
       method: 'POST',
@@ -53,11 +53,48 @@ export const emailLogin = async ({
         userIsOAuth: false,
       }),
     });
+    console.log(res);
     if (!res.ok) {
       throw new Error('Login failed');
     }
-    const data: ILoginResponse = await res.json();
-    return data.object;
+    const data: IAuthResponse = await res.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const emailSignUp = async ({
+  userEmail,
+  userPassword,
+}: IEmailAuthSignUpParams) => {
+  try {
+    const res = await fetch(`${API_URL}/api/v1/auth/signup`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userEmail,
+        userPassword,
+        userIsOAuth: false,
+        userId: 'hearus',
+        userName: '김히얼',
+        userSchool: '건국대학교',
+        userMajor: '경제학과',
+        userFrade: 'junior',
+        userUsePurpose: 'offline',
+      }),
+    });
+    console.log(res);
+    const data: IAuthResponse = await res.json();
+    console.log(data);
+
+    if (!res.ok) {
+      throw new Error('SignUp failed');
+    }
+    return data;
   } catch (error) {
     throw error;
   }
