@@ -17,7 +17,6 @@
   display: flex;
   flex-direction: column;
   width: 380px;
-  height: 330px;
   padding: 20px;
   background-color: white;
   border: none;
@@ -35,18 +34,26 @@
   @include SemiBold_Body_18;
   color: $dark-font_33;
 }
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .modalField {
   display: flex;
-  margin-bottom: 20px;
+  align-items: center;
   width: 330px;
+  height: 56px;
   border: 1px solid #eaeaea;
   border-radius: 8px;
-  align-items: center;
 }
-.modalField label {
-  margin: 15px;
-  width: 40px;
-  text-align: center;
+.label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  padding: 10px;
+  @include Medium_Body_16;
   color: $light-gray_81;
 }
 .separator {
@@ -57,14 +64,20 @@
   width: 100%;
   padding: 10px;
   font-size: 16px;
-  border: 0;
+  border: none;
+  @include Medium_Body_16;
+  color: $dark-font_5A;
+  text-align: center;
+  &:focus {
+    outline: none;
+  }
 }
 
 .modalActions {
   display: flex;
   width: 330px;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .modalClose {

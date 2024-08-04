@@ -6,7 +6,11 @@ const Modal: React.FC = () => {
   const { isOpen, modalData, closeModal, updateModalData, saveData } =
     useModalStore();
 
-  if (!isOpen || !modalData) return null;
+  if (!isOpen) return null;
+
+  const handleClickModalContent = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -19,35 +23,43 @@ const Modal: React.FC = () => {
   };
 
   return (
-    <div className={styles.modalWrapper}>
-      <div className={styles.modalContainer}>
+    <div className={styles.modalWrapper} onClick={closeModal}>
+      <div className={styles.modalContainer} onClick={handleClickModalContent}>
         <div className={styles.modalTitle}>
           <h2>녹음을 이대로 저장하시겠습니까?</h2>
-          <div className={styles.modalField}>
-            <label>제목</label>
-            <div className={styles.separator}></div>
-            <input
-              type="text"
-              name="title"
-              value={modalData.title}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={styles.modalField}>
-            <label>태그</label>
-            <div className={styles.separator}></div>
-            <input
-              type="text"
-              name="tag"
-              value={modalData.tag}
-              onChange={handleChange}
-            />
+          <div className={styles.inputsContainer}>
+            <div className={styles.modalField}>
+              <label className={styles.label} htmlFor="title">
+                제목
+              </label>
+              <div className={styles.separator} />
+              <input
+                id="title"
+                type="text"
+                name="title"
+                value={modalData?.title}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={styles.modalField}>
+              <label className={styles.label} htmlFor="tag">
+                태그
+              </label>
+              <div className={styles.separator} />
+              <input
+                id="tag"
+                type="text"
+                name="tag"
+                value={modalData?.tag}
+                onChange={handleChange}
+              />
+            </div>
           </div>
           <div className={styles.modalActions}>
-            <button onClick={closeModal} className={styles.modalClose}>
+            <button className={styles.modalClose} onClick={closeModal}>
               뒤로 돌아가기
             </button>
-            <button onClick={handleSave} className={styles.modalSave}>
+            <button className={styles.modalSave} onClick={handleSave}>
               저장
             </button>
           </div>
