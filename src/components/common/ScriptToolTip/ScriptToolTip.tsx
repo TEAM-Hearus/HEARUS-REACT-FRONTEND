@@ -1,9 +1,9 @@
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import ScriptDetailModal from '../../modals/ScriptDetailModal/ScriptDetailModal';
 import { getLectureByScheduleElement } from '../../../apis/schedule';
 import ScriptIcon from '../../../assets/images/nav/my-script-inactive.svg?react';
 import styles from './ScriptToolTip.module.scss';
-import ScriptDetailModal from '../../modals/ScriptDetailModal/ScriptDetailModal';
-import { useEffect, useState } from 'react';
 
 interface IProps {
   id: number;
