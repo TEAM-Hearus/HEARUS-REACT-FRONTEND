@@ -1,12 +1,9 @@
-import React from 'react';
-import styles from './Modal.module.scss';
-import { useModalStore } from '../../../store/useModalStore';
+import { createPortal } from 'react-dom';
+import { useRecordModalStore } from '../../../store/useRecordModalStore';
+import styles from './RecordModal.module.scss';
 
-const Modal: React.FC = () => {
-  const { isOpen, modalData, closeModal, updateModalData, saveData } =
-    useModalStore();
-
-  if (!isOpen) return null;
+const RecordModal = () => {
+  const { recordData, closeModal, updateModalData } = useRecordModalStore();
 
   const handleClickModalContent = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -18,11 +15,10 @@ const Modal: React.FC = () => {
   };
 
   const handleSave = () => {
-    saveData();
     closeModal();
   };
 
-  return (
+  return createPortal(
     <div className={styles.modalWrapper} onClick={closeModal}>
       <div className={styles.modalContainer} onClick={handleClickModalContent}>
         <div className={styles.modalTitle}>
@@ -37,7 +33,7 @@ const Modal: React.FC = () => {
                 id="title"
                 type="text"
                 name="title"
-                value={modalData?.title}
+                value={recordData.title}
                 onChange={handleChange}
               />
             </div>
@@ -50,7 +46,7 @@ const Modal: React.FC = () => {
                 id="tag"
                 type="text"
                 name="tag"
-                value={modalData?.tag}
+                value={recordData.tag}
                 onChange={handleChange}
               />
             </div>
@@ -65,16 +61,8 @@ const Modal: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 };
-export default Modal;
-
-//import { useModalStore } from '../../../store/useModalStore';
-// import Modal from '../../../components/modals/modal/Madal';
-//  const openModal = useModalStore((state) => state.openModal);
-//  const handleOpenModal = () => {
-//    openModal({ title: '', tag: '' });
-//  };
-//onClick={handleOpenModal}
-//      <Modal />
+export default RecordModal;

@@ -3,8 +3,8 @@ import RecordHeader from '../../components/headers/RecordHeader/RecordHeader';
 import styles from './Record.module.scss';
 import { useSocket } from '../../hooks/useSocket';
 import { useRecorder } from '../../hooks/useRecorder';
-import Modal from '../../components/modals/modal/Madal';
-import { useModalStore } from '../../store/useModalStore';
+import RecordModal from '../../components/modals/RecordModal/RecordModal';
+import { useRecordModalStore } from '../../store/useRecordModalStore';
 
 const Record = () => {
   const [recognitionResult, setRecognitionResult] = useState('');
@@ -25,19 +25,19 @@ const Record = () => {
 
   const { stopRecording } = useRecorder(onAudioData);
 
-  const { openModal } = useModalStore();
+  const { isModalOpen, openModal } = useRecordModalStore();
 
   const handleQuit = useCallback(() => {
     stopRecording();
     socketRef.current?.disconnect();
-    openModal({ title: '새로운 녹음-240711', tag: '경제학원론' });
+    openModal();
   }, [stopRecording, socketRef]);
 
   return (
     <div className={styles.container}>
       <RecordHeader handleQuit={handleQuit} />
       <article className={styles.captionContainer}>{recognitionResult}</article>
-      <Modal />
+      {isModalOpen && <RecordModal />}
     </div>
   );
 };
