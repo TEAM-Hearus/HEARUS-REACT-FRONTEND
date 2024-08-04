@@ -5,14 +5,14 @@ interface IScriptProps {
   id: string;
   name: string;
   processedScript: string[];
-  createdAt: string;
+  lectureDate: string;
 }
-const ScriptItem = ({ name, processedScript, createdAt }: IScriptProps) => {
+const ScriptItem = ({ name, processedScript, lectureDate }: IScriptProps) => {
   return (
     <div className={styles.postItContainer}>
       <div className={styles.title}>{name}</div>
       <div className={styles.content}>{processedScript[0]}...</div>
-      <span className={styles.date}>{formatScriptDate(createdAt)}</span>
+      <span className={styles.date}>{formatScriptDate(lectureDate)}</span>
     </div>
   );
 };
