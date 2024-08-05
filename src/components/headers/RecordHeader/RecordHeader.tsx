@@ -3,16 +3,20 @@ import Back from '../../../assets/images/arrow/back.svg?react';
 import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { formatTimer } from '../../../utils/dateFormatters';
+import { useRecordModalStore } from '../../../store/useRecordModalStore';
+import RecordModal from '../../modals/RecordModal/RecordModal';
 
 interface IProps {
-  handleQuit: () => void;
+  stopRecordingAndDisconnectSocket: () => void;
 }
 
 const RECORD_TITLE = '새로운 녹음-240711';
 
-const RecordHeader = ({ handleQuit }: IProps) => {
+const RecordHeader = ({ stopRecordingAndDisconnectSocket }: IProps) => {
   const [seconds, setSeconds] = useState(0);
   const timerIntervalRef = useRef<number | null>(null);
+
+  const { isModalOpen, openModal } = useRecordModalStore();
 
   useEffect(() => {
     startTimer();
@@ -28,14 +32,15 @@ const RecordHeader = ({ handleQuit }: IProps) => {
 
   const stopTimer = () => {
     if (timerIntervalRef.current === null) return;
+    setSeconds(0);
     clearInterval(timerIntervalRef.current);
     timerIntervalRef.current = null;
   };
 
-  const handleOnClickQuitBtn = () => {
+  const handleQuit = () => {
+    // 타이머, 녹음, 소켓 연결 종료
     stopTimer();
-    setSeconds(0);
-    handleQuit();
+    stopRecordingAndDisconnectSocket();
   };
 
   return (
@@ -51,10 +56,11 @@ const RecordHeader = ({ handleQuit }: IProps) => {
       </div>
       <div className={styles.timerContainer}>
         <p className={styles.timer}>{formatTimer(seconds)}</p>
-        <button className={styles.quitBtn} onClick={handleOnClickQuitBtn}>
+        <button className={styles.quitBtn} onClick={openModal}>
           종료
         </button>
       </div>
+      {isModalOpen && <RecordModal handleQuit={handleQuit} />}
     </header>
   );
 };

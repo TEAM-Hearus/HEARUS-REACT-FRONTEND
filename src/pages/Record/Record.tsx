@@ -3,8 +3,6 @@ import RecordHeader from '../../components/headers/RecordHeader/RecordHeader';
 import styles from './Record.module.scss';
 import { useSocket } from '../../hooks/useSocket';
 import { useRecorder } from '../../hooks/useRecorder';
-import RecordModal from '../../components/modals/RecordModal/RecordModal';
-import { useRecordModalStore } from '../../store/useRecordModalStore';
 
 const Record = () => {
   const [recognitionResult, setRecognitionResult] = useState('');
@@ -25,19 +23,17 @@ const Record = () => {
 
   const { stopRecording } = useRecorder(onAudioData);
 
-  const { isModalOpen, openModal } = useRecordModalStore();
-
-  const handleQuit = useCallback(() => {
+  const stopRecordingAndDisconnectSocket = useCallback(() => {
     stopRecording();
     socketRef.current?.disconnect();
-    openModal();
   }, [stopRecording, socketRef]);
 
   return (
     <div className={styles.container}>
-      <RecordHeader handleQuit={handleQuit} />
+      <RecordHeader
+        stopRecordingAndDisconnectSocket={stopRecordingAndDisconnectSocket}
+      />
       <article className={styles.captionContainer}>{recognitionResult}</article>
-      {isModalOpen && <RecordModal />}
     </div>
   );
 };

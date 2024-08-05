@@ -1,8 +1,15 @@
 import { createPortal } from 'react-dom';
 import { useRecordModalStore } from '../../../store/useRecordModalStore';
 import styles from './RecordModal.module.scss';
+import { useNavigate } from 'react-router-dom';
 
-const RecordModal = () => {
+interface IProps {
+  handleQuit: () => void; // 타이머, 녹음, 소켓 연결 종료
+}
+
+const RecordModal = ({ handleQuit }: IProps) => {
+  const navigate = useNavigate();
+
   const { recordData, closeModal, updateModalData } = useRecordModalStore();
 
   const handleClickModalContent = (e: React.MouseEvent) => {
@@ -14,8 +21,10 @@ const RecordModal = () => {
     updateModalData({ [name]: value });
   };
 
-  const handleSave = () => {
+  const handleClickSaveBtn = () => {
+    handleQuit();
     closeModal();
+    navigate('/home');
   };
 
   return createPortal(
@@ -55,7 +64,7 @@ const RecordModal = () => {
             <button className={styles.modalClose} onClick={closeModal}>
               뒤로 돌아가기
             </button>
-            <button className={styles.modalSave} onClick={handleSave}>
+            <button className={styles.modalSave} onClick={handleClickSaveBtn}>
               저장
             </button>
           </div>
