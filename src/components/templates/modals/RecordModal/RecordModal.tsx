@@ -37,7 +37,13 @@ const RecordModal = ({ handleQuit }: IProps) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setLocalData((prev) => ({ ...prev, [name]: value }));
+    if (name === 'title') {
+      setLocalData((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleTagClick = (tag: string) => {
+    setLocalData((prev) => ({ ...prev, tag }));
   };
 
   const handleClickArrow = () => {
@@ -91,8 +97,11 @@ const RecordModal = ({ handleQuit }: IProps) => {
           <ul className={styles.tagBtnsUl}>
             {TAGS.map((name, index) => (
               <li
-                className={`${styles.tagLiBtn} ${styles.inactive}`}
+                className={`${styles.tagLiBtn} ${
+                  localData.tag === name ? styles.active : styles.inactive
+                }`}
                 key={index}
+                onClick={() => handleTagClick(name)}
               >
                 {name}
               </li>
