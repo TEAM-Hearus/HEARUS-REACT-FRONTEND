@@ -21,6 +21,6 @@ export const COLORS = {
   '#D6DFFF': '#323973', // Blue
   '#D6F8FF': '#326073', // BlueGreen
   '#EAD6FF': '#6E3273', //Purple
-};
+} as const;
 
 export type ColorKey = keyof typeof COLORS;
