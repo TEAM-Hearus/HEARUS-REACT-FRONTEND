@@ -1,0 +1,134 @@
+@import '../../../../styles/variables/colors.scss';
+@import '../../../../styles/variables/fonts.scss';
+
+.modalWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+.modalContainer {
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  padding: 25px;
+  background-color: white;
+  border: none;
+  border-radius: 12px;
+}
+.modalTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0 25px 0;
+  @include SemiBold_Body_18;
+  color: $dark-font_33;
+}
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.modalField {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 56px;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+}
+.label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  padding: 10px;
+  @include Medium_Body_16;
+  color: $light-gray_81;
+}
+.separator {
+  border-left: 2px solid #eaeaea;
+  height: 20px;
+}
+.modalField input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  @include Medium_Body_16;
+  color: $dark-font_5A;
+  text-align: center;
+  &:focus {
+    outline: none;
+  }
+}
+
+.modalActions {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.modalClose {
+  background-color: $light-bg_F2;
+  border: 1px solid $light-bg_F2;
+  border-radius: 8px;
+  padding: 10px 20px;
+  width: 160px;
+  height: 48px;
+  @include Medium_Body_16;
+  color: $dark-font_5A;
+}
+.modalSave {
+  background-color: $brand-point;
+  border: 1px solid $brand-point;
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: white;
+  width: 160px;
+  height: 48px;
+  @include Medium_Body_16;
+}
+.tagBtnsUl {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 20px;
+}
+.tagLiBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 18px;
+  @include Medium_Sub_14;
+  border-radius: 17px;
+  cursor: pointer;
+
+  &.active {
+    background-color: $white_FF;
+    border: 1px solid $dark-font_33;
+    color: $dark-font_33;
+  }
+
+  &.inactive {
+    background-color: $light-bg_F9;
+    border: 1px solid #eaeaea;
+    color: $light-gray_81;
+  }
+}
+.arrow {
+  position: absolute;
+  right: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

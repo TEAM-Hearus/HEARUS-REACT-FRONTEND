@@ -1,10 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
-import styles from './TestMake.module.scss';
-import { getAllScripts, IScriptInList } from '../../../apis/script';
 import { useNavigate } from 'react-router-dom';
-import TestOptionSelector from '../../../components/TestOptionSelector/TestOptionSelector';
-import ScriptItem from '../../../components/common/ScriptItem/ScriptItem';
+import { useQuery } from '@tanstack/react-query';
+import TestOptionSelector from '../../../components/organisms/TestOptionSelector/TestOptionSelector';
+import ScriptItem from '../../../components/molecules/ScriptItem/ScriptItem';
 import useTestSettingsStore from '../../../store/TestSettingsStore';
+import { getAllScripts, IScriptInList } from '../../../apis/script';
+import styles from './TestMake.module.scss';
 
 const TestMake = () => {
   const navigate = useNavigate();

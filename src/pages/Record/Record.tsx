@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import RecordHeader from '../../components/headers/RecordHeader/RecordHeader';
+import RecordHeader from '../../components/organisms/headers/RecordHeader/RecordHeader';
 import styles from './Record.module.scss';
 import { useSocket } from '../../hooks/useSocket';
 import { useRecorder } from '../../hooks/useRecorder';
@@ -23,14 +23,16 @@ const Record = () => {
 
   const { stopRecording } = useRecorder(onAudioData);
 
-  const handleQuit = useCallback(() => {
+  const stopRecordingAndDisconnectSocket = useCallback(() => {
     stopRecording();
     socketRef.current?.disconnect();
   }, [stopRecording, socketRef]);
 
   return (
     <div className={styles.container}>
-      <RecordHeader handleQuit={handleQuit} />
+      <RecordHeader
+        stopRecordingAndDisconnectSocket={stopRecordingAndDisconnectSocket}
+      />
       <article className={styles.captionContainer}>{recognitionResult}</article>
     </div>
   );

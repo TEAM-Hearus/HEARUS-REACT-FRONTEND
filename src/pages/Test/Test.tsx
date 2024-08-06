@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import TestHeader from '../../components/headers/TestHeader/TestHeader';
-import MultipleChoice from '../../components/questions/MultipleChoice/MultipleChoice';
-import OXChoice from '../../components/questions/OXChoice/OXChoice';
-import ShortAnswer from '../../components/questions/ShortAnswer/ShortAnswer';
+import TestHeader from '../../components/organisms/headers/TestHeader/TestHeader';
+import MultipleChoice from '../../components/molecules/questions/MultipleChoice/MultipleChoice';
+import OXChoice from '../../components/molecules/questions/OXChoice/OXChoice';
+import ShortAnswer from '../../components/molecules/questions/ShortAnswer/ShortAnswer';
 import { QUESTION_LIST } from '../../constants/question';
 import styles from './Test.module.scss';
 

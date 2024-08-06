@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Landing from './Landing/Landing';
-import HomeLayout from '../components/HomeLayout/HomeLayout';
+import HomeLayout from '../components/templates/HomeLayout/HomeLayout';
 import TimeTable from './Main/TimeTable/TimeTable';
 import TestMake from './Main/TestMake/TestMake';
 import MyScript from './Main/MyScript/MyScript';
