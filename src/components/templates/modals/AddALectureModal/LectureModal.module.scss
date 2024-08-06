@@ -1,0 +1,141 @@
+@import '../../../../styles/variables/colors.scss';
+@import '../../../../styles/variables/fonts.scss';
+
+.modalWrapper {
+  position: absolute;
+  top: 90px;
+  left: 85%;
+  transform: translateX(-50%);
+  width: 450px;
+  background-color: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0px 2px 20px 0px #0000001a;
+}
+.modalContainer {
+  padding: 10px;
+}
+.inputField {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+.inputField label {
+  margin-bottom: 10px;
+  color: $dark-font_5A;
+}
+
+.inputField input {
+  width: 100%;
+  height: 48px;
+  padding: 15px;
+  background-color: $light-bg_F9;
+  border-radius: 6px;
+  border: 1px solid $light-bg_F2;
+  color: $dark-font_33;
+}
+.inputField input::placeholder {
+  color: $light-font_9E;
+}
+
+.titleInput {
+  background-color: $white_FF !important;
+}
+
+.colorSelectBox {
+  display: flex;
+  justify-content: flex-end;
+  margin: 5px;
+}
+.colorBox {
+  width: 16px;
+  height: 16px;
+  margin: 3px;
+  border: 2px solid $white_FF;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.daySelectBox {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 5px;
+  color: $dark-font_5A;
+}
+
+.dayOfWeek {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0px;
+}
+.dayBtn {
+  width: 45px;
+  height: 48px;
+  border: 1px solid $light-bg_F2;
+  border-radius: 6px;
+  background-color: $white_FF;
+  color: $dark-font_5A;
+  cursor: pointer;
+}
+.selected {
+  width: 45px;
+  height: 48px;
+  border: 1px solid $brand-point;
+  border-radius: 6px;
+  background-color: $white_FF;
+  color: $dark-font_5A;
+}
+.timeSelectBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px;
+  border-radius: 6px;
+  width: 100%;
+  height: 48px;
+  background-color: $light-bg_F9;
+}
+.timeSelectBox input {
+  border: 0px;
+  width: 23px;
+  height: 22px;
+  color: $dark-font_5A;
+  background-color: $light-bg_F9;
+  @include Regular_Body_16;
+}
+.separator {
+  font-size: 24px;
+  color: $light-font_9E;
+  margin: 0 20px;
+  vertical-align: middle;
+}
+.dash {
+  width: 12px;
+  height: 2px; /* 두께를 조절할 수 있습니다 */
+  background-color: $light-blue_B3;
+  margin: 0 10px;
+  vertical-align: middle;
+}
+.submitButton {
+  width: 368px;
+  height: 48px;
+  margin-left: 6px;
+  background-color: $brand-point;
+  border: 0;
+  border-radius: 6px;
+  @include Medium_Body_16;
+  color: $white_FF;
+  cursor: pointer;
+}
+.disabledBtn {
+  background-color: $light-bg_F2;
+  color: $light-blue_B3;
+  cursor: unset;
+}
+
+.warning {
+  margin: 5px;
+  display: inline-flex;
+  @include Regular_Sub_14;
+  color: $brand-point;
+}

@@ -22,7 +22,7 @@ interface AuthFormProps {
   authGoLinkMessage: string;
 }
 
-const AuthForm: React.FC<AuthFormProps> = ({
+const AuthForm = ({
   title,
   buttonText,
   mutationFn,
@@ -31,7 +31,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
   authGoBoxMessage,
   authGoLink,
   authGoLinkMessage,
-}) => {
+}: AuthFormProps) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
@@ -61,6 +61,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
       if (title === '로그인') {
         if (data.status === 'OK') {
           console.log(successMessage, data);
+          localStorage.setItem('token', data.accessToken);
           navigate('/home'); // 로그인 성공 후 리다이렉트
         }
       } else if (data.status === 'CREATED') {
