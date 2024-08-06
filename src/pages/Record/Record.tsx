@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import RecordHeader from '../../components/headers/RecordHeader/RecordHeader';
+import RecordHeader from '../../components/organisms/headers/RecordHeader/RecordHeader';
 import styles from './Record.module.scss';
 import { useSocket } from '../../hooks/useSocket';
 import { useRecorder } from '../../hooks/useRecorder';

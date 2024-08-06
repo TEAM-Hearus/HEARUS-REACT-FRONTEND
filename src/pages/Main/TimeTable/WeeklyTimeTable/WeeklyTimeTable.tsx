@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import TimeTableItem from '../../../../components/common/TimeTableItem/TimeTableItem';
+import TimeTableItem from '../../../../components/molecules/TimeTableItem/TimeTableItem';
 import { IScheduleElement, TIMELIST } from '../../../../constants/schedule';
 import styles from './WeeklyTimeTable.module.scss';
 import { getSchedule } from '../../../../apis/schedule';

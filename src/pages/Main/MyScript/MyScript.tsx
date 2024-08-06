@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import ScriptDetailModal from '../../../components/modals/ScriptDetailModal/ScriptDetailModal';
-import ScriptItem from '../../../components/common/ScriptItem/ScriptItem';
-import StartingButton from '../../../components/common/buttons/StartBtn/StartBtn';
+import ScriptDetailModal from '../../../components/templates/modals/ScriptDetailModal/ScriptDetailModal';
+import ScriptItem from '../../../components/molecules/ScriptItem/ScriptItem';
+import StartingButton from '../../../components/atoms/buttons/StartBtn/StartBtn';
 import { getAllScripts, IScriptInList } from '../../../apis/script';
 import styles from './MyScript.module.scss';
 
