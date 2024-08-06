@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './LectureModal.module.scss';
 import { COLORS, ColorKey } from '../../../../constants/schedule';
-import Warning from '../../../assets/images/warning.svg?react';
+import Warning from '../../../../assets/images/warning.svg?react';
 
 interface IProps {
   isOpen: boolean;
