@@ -18,6 +18,14 @@ const ScriptDetailModal = ({ scriptId, closeModal }: IProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const intervalRef = useRef<number | null>(null);
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
   const handleContentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };

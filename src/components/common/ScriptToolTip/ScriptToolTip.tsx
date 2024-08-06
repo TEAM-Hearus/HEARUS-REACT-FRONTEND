@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import ScriptDetailModal from '../../modals/ScriptDetailModal/ScriptDetailModal';
 import { getLectureByScheduleElement } from '../../../apis/schedule';
@@ -24,18 +24,6 @@ const ScriptToolTip = ({ id }: IProps) => {
   const handleCloseModal = () => {
     setSelectedScriptId(null);
   };
-
-  useEffect(() => {
-    if (selectedScriptId !== null) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [selectedScriptId]);
 
   return (
     <div className={styles.container}>
