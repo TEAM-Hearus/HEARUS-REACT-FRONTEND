@@ -16,7 +16,7 @@ const RecordTagDropDown = () => {
   const [isTagBtnClicked, setIsTagBtnClicked] = useState(false);
 
   const { recordData, updateModalData } = useRecordModalStore();
-  const { title, tag } = recordData;
+  const { tag } = recordData;
 
   const TAGS = useMemo(() => {
     if (!data) return [];

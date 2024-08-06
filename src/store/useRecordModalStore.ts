@@ -1,4 +1,5 @@
 import create from 'zustand';
+import { generateRecordingTitle } from '../utils/dateFormatters';
 
 interface IRecordData {
   title: string;
@@ -14,7 +15,7 @@ interface IRecordModalState {
 }
 
 const initialRecordData = {
-  title: '',
+  title: generateRecordingTitle(),
   tag: '',
 };
 
