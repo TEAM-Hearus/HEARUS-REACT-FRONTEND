@@ -28,18 +28,6 @@
   @include Medium_Body_18;
   color: $dark-font_5A;
 }
-.tagBtn {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px 10px;
-  background-color: white;
-  @include SemiBold_Sub_14;
-  color: $light-gray_81;
-  border: 1px solid $light-bg_E5;
-  border-radius: 8px;
-}
 .timerContainer {
   display: flex;
   justify-content: flex-end;

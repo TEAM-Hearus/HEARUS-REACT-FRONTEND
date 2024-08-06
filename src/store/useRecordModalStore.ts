@@ -24,12 +24,10 @@ const useRecordModalStore = create<IRecordModalState>((set) => ({
   openModal: () => set({ isModalOpen: true }),
   closeModal: () => set({ isModalOpen: false }),
   updateModalData: (data) =>
-    set((state) => {
-      if (state.recordData) {
-        return { recordData: { ...state.recordData, ...data } };
-      }
-      return state;
-    }),
+    set((state) => ({
+      ...state,
+      recordData: { ...state.recordData, ...data },
+    })),
 }));
 
 export { useRecordModalStore };

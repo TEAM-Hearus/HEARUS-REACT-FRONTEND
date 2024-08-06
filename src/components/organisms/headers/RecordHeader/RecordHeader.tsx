@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { formatTimer } from '../../../../utils/dateFormatters';
 import { useRecordModalStore } from '../../../../store/useRecordModalStore';
 import RecordModal from '../../../templates/modals/RecordModal/RecordModal';
+import RecordTagDropDown from '../../../molecules/RecordTagDropDown/RecordTagDropDown';
 
 interface IProps {
   stopRecordingAndDisconnectSocket: () => void;
@@ -17,11 +18,6 @@ const RecordHeader = ({ stopRecordingAndDisconnectSocket }: IProps) => {
   const timerIntervalRef = useRef<number | null>(null);
 
   const { isModalOpen, openModal } = useRecordModalStore();
-
-  useEffect(() => {
-    startTimer();
-    return () => stopTimer();
-  }, []);
 
   const startTimer = () => {
     if (timerIntervalRef.current !== null) return;
@@ -43,6 +39,11 @@ const RecordHeader = ({ stopRecordingAndDisconnectSocket }: IProps) => {
     stopRecordingAndDisconnectSocket();
   };
 
+  useEffect(() => {
+    startTimer();
+    return () => stopTimer();
+  }, []);
+
   return (
     <header className={styles.container}>
       <span className={styles.linkContainer}>
@@ -52,7 +53,7 @@ const RecordHeader = ({ stopRecordingAndDisconnectSocket }: IProps) => {
       </span>
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>{RECORD_TITLE}</h1>
-        <button className={styles.tagBtn}>태그</button>
+        <RecordTagDropDown />
       </div>
       <div className={styles.timerContainer}>
         <p className={styles.timer}>{formatTimer(seconds)}</p>
