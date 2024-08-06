@@ -5,9 +5,9 @@ import { useQuery } from '@tanstack/react-query';
 import { useRecordModalStore } from '../../../../store/useRecordModalStore';
 import Up from '../../../../assets/images/arrow/up-arrow.svg?react';
 import Down from '../../../../assets/images/arrow/down-arrow.svg?react';
-import styles from './RecordModal.module.scss';
 import { IScheduleElement } from '../../../../constants/schedule';
 import { getSchedule } from '../../../../apis/schedule';
+import styles from './RecordModal.module.scss';
 
 interface IProps {
   handleQuit: () => void; // 타이머, 녹음, 소켓 연결 종료
@@ -87,6 +87,7 @@ const RecordModal = ({ handleQuit }: IProps) => {
               name="tag"
               value={localData.tag}
               onChange={handleChange}
+              readOnly
             />
             <span className={styles.arrow} onClick={handleClickArrow}>
               {isTagClicked ? <Up /> : <Down />}
