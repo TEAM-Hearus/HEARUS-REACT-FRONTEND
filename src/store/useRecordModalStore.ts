@@ -11,7 +11,8 @@ interface IRecordModalState {
   recordData: IRecordData;
   openModal: () => void;
   closeModal: () => void;
-  updateModalData: (data: Partial<IRecordData>) => void;
+  updateRecordData: (data: Partial<IRecordData>) => void;
+  clearRecordData: () => void;
 }
 
 const initialRecordData = {
@@ -24,10 +25,15 @@ const useRecordModalStore = create<IRecordModalState>((set) => ({
   recordData: initialRecordData,
   openModal: () => set({ isModalOpen: true }),
   closeModal: () => set({ isModalOpen: false }),
-  updateModalData: (data) =>
+  updateRecordData: (data) =>
     set((state) => ({
       ...state,
       recordData: { ...state.recordData, ...data },
+    })),
+  clearRecordData: () =>
+    set((state) => ({
+      ...state,
+      recordData: initialRecordData,
     })),
 }));
 

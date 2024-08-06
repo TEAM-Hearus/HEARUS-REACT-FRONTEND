@@ -1,14 +1,11 @@
-import styles from './Recordheader.module.scss';
-import Back from '../../../../assets/images/arrow/back.svg?react';
-import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import {
-  formatTimer,
-  generateRecordingTitle,
-} from '../../../../utils/dateFormatters';
-import { useRecordModalStore } from '../../../../store/useRecordModalStore';
+import { Link } from 'react-router-dom';
 import RecordModal from '../../../templates/modals/RecordModal/RecordModal';
 import RecordTagDropDown from '../../../molecules/RecordTagDropDown/RecordTagDropDown';
+import { useRecordModalStore } from '../../../../store/useRecordModalStore';
+import Back from '../../../../assets/images/arrow/back.svg?react';
+import { formatTimer } from '../../../../utils/dateFormatters';
+import styles from './Recordheader.module.scss';
 
 interface IProps {
   stopRecordingAndDisconnectSocket: () => void;
@@ -18,9 +15,9 @@ const RecordHeader = ({ stopRecordingAndDisconnectSocket }: IProps) => {
   const [seconds, setSeconds] = useState(0);
   const timerIntervalRef = useRef<number | null>(null);
 
-  const { isModalOpen, openModal } = useRecordModalStore();
+  const { isModalOpen, openModal, recordData } = useRecordModalStore();
 
-  const title = generateRecordingTitle();
+  const { title } = recordData;
 
   const startTimer = () => {
     if (timerIntervalRef.current !== null) return;
