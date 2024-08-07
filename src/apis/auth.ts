@@ -1,6 +1,12 @@
 import { API_URL } from '.';
 
-interface IEmailAuthSignUpParams {
+interface IEmailSignUpParams {
+  userEmail: string;
+  userPassword: string;
+  userName: string;
+}
+
+interface IEmailLoginParams {
   userEmail: string;
   userPassword: string;
 }
@@ -10,10 +16,17 @@ interface IGoogleLoginParams {
   code: string;
 }
 
-interface IAuthResponse {
+interface ILoginResponse {
   status: string;
   msg: string;
   object: ITokens;
+}
+
+interface IEmailSignupResponse {
+  status: string;
+  msg: string;
+  object: null;
+  success: boolean;
 }
 
 interface ITokens {
@@ -30,7 +43,7 @@ export const googleLogin = async ({ state, code }: IGoogleLoginParams) => {
         credentials: 'include',
       },
     );
-    const data: IAuthResponse = await res.json();
+    const data: ILoginResponse = await res.json();
     return data.object;
   } catch (error) {
     throw error;
@@ -40,7 +53,7 @@ export const googleLogin = async ({ state, code }: IGoogleLoginParams) => {
 export const emailLogin = async ({
   userEmail,
   userPassword,
-}: IEmailAuthSignUpParams) => {
+}: IEmailLoginParams) => {
   try {
     const res = await fetch(`${API_URL}/api/v1/auth/login`, {
       method: 'POST',
@@ -53,13 +66,11 @@ export const emailLogin = async ({
         userIsOAuth: false,
       }),
     });
-    console.log(res);
     if (!res.ok) {
       throw new Error('Login failed');
     }
-    const data: IAuthResponse = await res.json();
-    console.log(data);
-    return data;
+    const data: ILoginResponse = await res.json();
+    return data.object;
   } catch (error) {
     throw error;
   }
@@ -68,7 +79,8 @@ export const emailLogin = async ({
 export const emailSignUp = async ({
   userEmail,
   userPassword,
-}: IEmailAuthSignUpParams) => {
+  userName,
+}: IEmailSignUpParams) => {
   try {
     const res = await fetch(`${API_URL}/api/v1/auth/signup`, {
       method: 'POST',
@@ -79,17 +91,10 @@ export const emailSignUp = async ({
         userEmail,
         userPassword,
         userIsOAuth: false,
-        userId: 'hearus',
-        userName: '김히얼',
-        userSchool: '건국대학교',
-        userMajor: '경제학과',
-        userFrade: 'junior',
-        userUsePurpose: 'offline',
+        userName,
       }),
     });
-    console.log(res);
-    const data: IAuthResponse = await res.json();
-    console.log(data);
+    const data: IEmailSignupResponse = await res.json();
 
     if (!res.ok) {
       throw new Error('SignUp failed');
