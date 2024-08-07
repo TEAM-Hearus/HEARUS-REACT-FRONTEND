@@ -29,10 +29,15 @@
   background-color: $light-bg_F9;
   border-radius: 6px;
   border: 1px solid $light-bg_F2;
+  @include Medium_Body_16;
   color: $dark-font_33;
   &::placeholder {
+    @include Regular_Body_16;
     color: $light-font_9E;
   }
+}
+.activeInput {
+  background-color: $white_FF;
 }
 .colorSelectBox {
   display: flex;

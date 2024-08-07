@@ -102,7 +102,7 @@ const AddScheduleForm = ({ onClose }: IProps) => {
       <div className={styles.inputField}>
         <label className={styles.inputTitle}>강의 제목</label>
         <input
-          className={styles.textInput}
+          className={`${styles.textInput} ${lectureInfo.title.trim() !== '' && styles.activeInput}`}
           type="text"
           name="title"
           placeholder="ex. 경제학 수업"
