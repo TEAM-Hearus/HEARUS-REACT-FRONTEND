@@ -38,6 +38,9 @@
   @include Medium_Body_16;
   color: $dark-font_5A;
   text-align: center;
+  &:focus {
+    outline: none;
+  }
 }
 .completeStatus {
   display: flex;

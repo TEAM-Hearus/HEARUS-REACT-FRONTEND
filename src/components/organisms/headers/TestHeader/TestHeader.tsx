@@ -11,13 +11,7 @@ interface IProps {
 }
 
 const TestHeader = ({ handleSubmit }: IProps) => {
-  const handleClickQuitBtn = () => {
-    openModal();
-    handleSubmit();
-  };
-
-  const { isModalOpen, openModal, testData, updateTestData, clearTestData } =
-    useTestModalStore();
+  const { isModalOpen, openModal } = useTestModalStore();
   return (
     <header className={styles.container}>
       <span className={styles.linkContainer}>
@@ -27,11 +21,13 @@ const TestHeader = ({ handleSubmit }: IProps) => {
       </span>
       <h1 className={styles.title}>{TEST_TITLE}</h1>
       <span className={styles.quitBtnContainer}>
-        <button className={styles.quitBtn} onClick={handleClickQuitBtn}>
+        <button className={styles.quitBtn} onClick={openModal}>
           종료
         </button>
       </span>
-      {isModalOpen && <TestModal title={TEST_TITLE} />}
+      {isModalOpen && (
+        <TestModal title={TEST_TITLE} handleSubmit={handleSubmit} />
+      )}
     </header>
   );
 };

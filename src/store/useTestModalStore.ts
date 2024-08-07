@@ -29,12 +29,12 @@ const useTestModalStore = create<ITestModalState>((set) => ({
   updateTestData: (data) =>
     set((state) => ({
       ...state,
-      recordData: { ...state.testData, ...data },
+      testData: { ...state.testData, ...data },
     })),
   clearTestData: () =>
     set((state) => ({
       ...state,
-      recordData: initialTestData,
+      testData: initialTestData,
     })),
 }));
 

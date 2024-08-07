@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TestHeader from '../../components/organisms/headers/TestHeader/TestHeader';
 import MultipleChoice from '../../components/molecules/questions/MultipleChoice/MultipleChoice';
 import OXChoice from '../../components/molecules/questions/OXChoice/OXChoice';
@@ -19,11 +19,17 @@ const Test = () => {
     const newAnswers = [...userAnswers];
     newAnswers[index] = answer;
     setUserAnswers(newAnswers);
+    const completeNum = newAnswers.filter((answer) => answer !== '').length;
+    updateTestData({ completeNum });
   };
 
   const handleSubmit = () => {
     setShowResults(true);
   };
+
+  useEffect(() => {
+    updateTestData({ totalNum: QUESTION_LIST.length });
+  }, []);
 
   return (
     <div className={styles.container}>
