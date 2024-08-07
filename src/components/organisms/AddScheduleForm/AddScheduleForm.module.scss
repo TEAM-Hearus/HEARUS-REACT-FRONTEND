@@ -97,6 +97,9 @@
   background-color: $light-bg_F9;
 }
 .timeSelectBox input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 0px;
   width: 23px;
   height: 22px;
@@ -104,11 +107,14 @@
   background-color: $light-bg_F9;
   @include Regular_Body_16;
 }
+.timeBlock {
+  display: flex;
+  gap: 20px;
+}
 .separator {
-  font-size: 24px;
+  align-self: flex-start;
+  @include SemiBold_Body_18;
   color: $light-font_9E;
-  margin: 0 20px;
-  vertical-align: middle;
 }
 .dash {
   width: 12px;
@@ -133,7 +139,6 @@
   color: $light-blue_B3;
   cursor: unset;
 }
-
 .warning {
   margin: 5px;
   display: inline-flex;
