@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useRecordModalStore } from '../../../store/useRecordModalStore';
+import useRecordModalStore from '../../../store/useRecordModalStore';
 import { IScheduleElement } from '../../../constants/schedule';
 import { getSchedule } from '../../../apis/schedule';
 import styles from './RecordTagDropDown.module.scss';

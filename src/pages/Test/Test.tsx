@@ -5,12 +5,15 @@ import OXChoice from '../../components/molecules/questions/OXChoice/OXChoice';
 import ShortAnswer from '../../components/molecules/questions/ShortAnswer/ShortAnswer';
 import { QUESTION_LIST } from '../../constants/question';
 import styles from './Test.module.scss';
+import useTestModalStore from '../../store/useTestModalStore';
 
 const Test = () => {
   const [userAnswers, setUserAnswers] = useState<(string | number)[]>(
     Array(QUESTION_LIST.length).fill(''),
   );
   const [showResults, setShowResults] = useState(false);
+
+  const { updateTestData } = useTestModalStore();
 
   const handleAnswerChange = (index: number, answer: string | number) => {
     const newAnswers = [...userAnswers];
@@ -60,6 +63,7 @@ const Test = () => {
           </section>
         ))}
       </article>
+      {}
     </div>
   );
 };
