@@ -7,14 +7,11 @@ import Kakao from '../../../assets/images/logo/kakao.png';
 import styles from './AuthForm.module.scss';
 import On from '../../../assets/images/showPasswordOn.svg?react';
 import Off from '../../../assets/images/showPasswordOff.svg?react';
+import { emailLogin, emailSignUp } from '../../../apis/auth';
 
 interface AuthFormProps {
   title: string;
   buttonText: string;
-  mutationFn: (variables: {
-    userEmail: string;
-    userPassword: string;
-  }) => Promise<any>;
   errorMessage: string;
   authGoBoxMessage: string;
   authGoLink: string;
@@ -24,13 +21,13 @@ interface AuthFormProps {
 const AuthForm = ({
   title,
   buttonText,
-  mutationFn,
   errorMessage,
   authGoBoxMessage,
   authGoLink,
   authGoLinkMessage,
 }: AuthFormProps) => {
   const navigate = useNavigate();
+
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
@@ -48,9 +45,8 @@ const AuthForm = ({
   };
 
   const loginMutation = useMutation({
-    mutationFn: mutationFn,
+    mutationFn: emailLogin,
     onSuccess: (data) => {
-      console.log('Login successful', data);
       localStorage.setItem('token', data.accessToken);
       navigate('/home');
     },
@@ -61,9 +57,8 @@ const AuthForm = ({
   });
 
   const signupMutation = useMutation({
-    mutationFn: mutationFn,
-    onSuccess: (data) => {
-      console.log('Signup successful', data);
+    mutationFn: emailSignUp,
+    onSuccess: () => {
       alert('회원가입에 성공했습니다! 로그인 페이지로 이동합니다.');
       navigate('/login');
     },
@@ -75,15 +70,19 @@ const AuthForm = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //title이 새 계정이고 비밀번호와 비밀번호확인이 같으면 회원가입 진행
+    // 회원가입
     if (title === '새 계정' && password === passwordConfirm) {
-      signupMutation.mutate({ userEmail: email, userPassword: password });
+      signupMutation.mutate({
+        userEmail: email,
+        userPassword: password,
+        userName: '김히얼',
+      });
     }
-    //title이 로그인이고 비밀번호 확인이 빈값이면 로그인 진행
+    // 로그인
     if (title === '로그인') {
       loginMutation.mutate({ userEmail: email, userPassword: password });
     }
-    //title이 새 계정이고 비밀번호와 비밀번호 확인이 일치하지 않으면 팝업
+    // 비밀번호와 비밀번호 확인이 일치하지 않으면 팝업
     if (title === '새 계정' && password !== passwordConfirm) {
       alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
     }
