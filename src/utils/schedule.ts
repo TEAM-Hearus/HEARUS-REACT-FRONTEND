@@ -1,4 +1,4 @@
-import { DayOfWeek } from '../constants/schedule';
+import { DayOfWeek, LectureInfo } from '../constants/schedule';
 
 const DAYMAP: Record<DayOfWeek, number> = {
   SUN: 0,
@@ -30,4 +30,56 @@ export const getScheduleStyle = (
     '--schedule-height': `${height + 1}px`,
     height,
   } as React.CSSProperties;
+};
+
+export const getIsTimeValid = (
+  startHour: number,
+  startMinute: number,
+  endHour: number,
+  endMinute: number,
+): boolean => {
+  if (
+    startHour < 9 ||
+    startHour > 21 ||
+    startMinute < 0 ||
+    startMinute > 59 ||
+    endHour < 9 ||
+    endHour > 21 ||
+    endMinute < 0 ||
+    endMinute > 59
+  ) {
+    return false;
+  }
+
+  const startTime = startHour * 60 + startMinute;
+  const endTime = endHour * 60 + endMinute;
+  if (startTime < endTime) {
+    return true;
+  }
+
+  return startTime < endTime;
+};
+
+export const getIsAddScheduleFormValid = ({
+  title,
+  lectureColor,
+  location,
+  day,
+  startHour,
+  startMinute,
+  endHour,
+  endMinute,
+}: LectureInfo) => {
+  const isValid =
+    title.trim() !== '' &&
+    lectureColor.trim() !== '' &&
+    location.trim() !== '' &&
+    day.trim() !== '' &&
+    getIsTimeValid(
+      Number(startHour),
+      Number(startMinute),
+      Number(endHour),
+      Number(endMinute),
+    );
+  return isValid;
 };
