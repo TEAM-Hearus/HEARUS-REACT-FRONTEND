@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import styles from './LectureModal.module.scss';
-import { COLORS, ColorKey } from '../../../../constants/schedule';
 import Warning from '../../../../assets/images/warning.svg?react';
+import { COLORS, ColorKey } from '../../../constants/schedule';
+import styles from './AddLectureForm.module.scss';
 
 interface IProps {
   isOpen: boolean;
@@ -19,7 +19,7 @@ interface LectureInfo {
   endMinute: string;
 }
 
-const LectureModal = ({ isOpen, onClose }: IProps) => {
+const AddLectureForm = ({ isOpen, onClose }: IProps) => {
   if (!isOpen) return null;
 
   const initialLectureInfo: LectureInfo = {
@@ -105,10 +105,6 @@ const LectureModal = ({ isOpen, onClose }: IProps) => {
     );
     setIsFormValid(isValid);
   }, [lectureInfo]);
-
-  //   useEffect(() => {
-  //     lectureInfo.day && startHourRef.current.focus();
-  //   }, [lectureInfo.day]);
 
   const handleColorClick = (color: ColorKey) => {
     setSelectedColor(color);
@@ -280,7 +276,6 @@ const LectureModal = ({ isOpen, onClose }: IProps) => {
           )}
         </div>
         <button
-          //   className={isFormValid ? styles.submitButton : styles.disabledBtn}
           className={`${styles.submitButton} ${isFormValid ? '' : styles.disabledBtn}`}
           onClick={handleSubmit}
           disabled={!isFormValid}
@@ -292,4 +287,4 @@ const LectureModal = ({ isOpen, onClose }: IProps) => {
   );
 };
 
-export default LectureModal;
+export default AddLectureForm;
