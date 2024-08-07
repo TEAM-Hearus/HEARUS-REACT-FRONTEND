@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import styles from './TestHeader.module.scss';
-import Back from '../../../../assets/images/arrow/back.svg?react';
-import useTestModalStore from '../../../../store/useTestModalStore';
 import TestModal from '../../../templates/modals/TestModal/TestModal';
+import useTestModalStore from '../../../../store/useTestModalStore';
+import Back from '../../../../assets/images/arrow/back.svg?react';
 import { formatTimer } from '../../../../utils/dateFormatters';
+import styles from './TestHeader.module.scss';
 
 const TEST_TITLE = '테스트-경제학원론-240708'; //임시
 
@@ -41,6 +41,10 @@ const TestHeader = ({ handleSubmit, showResults }: IProps) => {
     startTimer();
     return () => stopTimer();
   }, []);
+
+  useEffect(() => {
+    if (showResults) stopTimer();
+  }, [showResults]);
 
   return (
     <header className={styles.container}>
