@@ -38,11 +38,11 @@ const AuthForm = ({
 
   const toggleShowPassword = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
-    setIsShowPasswordClick(!isShowPasswordClick);
+    setIsShowPasswordClick((prev) => !prev);
   };
   const toggleShowPasswordConfirm = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
-    setIsShowPasswordConfirmClick(!isShowPasswordConfirmClick);
+    setIsShowPasswordConfirmClick((prev) => !prev);
   };
 
   const loginMutation = useMutation({
@@ -71,10 +71,12 @@ const AuthForm = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const isValid =
-      email.trim() !== '' &&
-      password.trim() !== '' &&
-      passwordConfirm.trim() !== '' &&
-      name.trim() !== '';
+      title === '새 계정'
+        ? email.trim() !== '' &&
+          password.trim() !== '' &&
+          passwordConfirm.trim() !== '' &&
+          name.trim() !== ''
+        : email.trim() !== '' && password.trim() !== '';
     if (!isValid) return;
     if (title === '새 계정' && password === passwordConfirm) {
       signupMutation.mutate({
