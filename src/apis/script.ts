@@ -1,4 +1,4 @@
-import { API_URL, token } from '.';
+import { API_URL, getToken } from '.';
 
 interface IGetAllScriptResponse {
   status: string;
@@ -30,6 +30,7 @@ interface IScriptDetail {
 }
 
 export const getAllScripts = async (): Promise<IScriptInList[]> => {
+  const token = getToken();
   try {
     const res = await fetch(`${API_URL}/api/v1/lecture/getAllLecture`, {
       headers: {
@@ -44,6 +45,7 @@ export const getAllScripts = async (): Promise<IScriptInList[]> => {
 };
 
 export const getScriptDetail = async (id: string) => {
+  const token = getToken();
   try {
     const res = await fetch(
       `${API_URL}/api/v1/lecture/getLecture?lectureId=${id}`,

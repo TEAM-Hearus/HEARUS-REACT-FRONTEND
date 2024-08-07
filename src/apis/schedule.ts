@@ -1,6 +1,6 @@
 import { API_URL } from '.';
 import { IScheduleElement } from '../constants/schedule';
-import { token } from './';
+import { getToken } from './';
 
 interface IGetScheduleResponse {
   status: string;
@@ -17,6 +17,7 @@ interface IGetScheduleResponse {
 export const getSchedule = async (
   name: string,
 ): Promise<IScheduleElement[]> => {
+  const token = getToken();
   try {
     const res = await fetch(
       `${API_URL}/api/v1/schedule/getSchedule?name=${name}`,
@@ -51,6 +52,7 @@ interface ILectureItem {
 }
 
 export const getLectureByScheduleElement = async (id: number) => {
+  const token = getToken();
   try {
     const res = await fetch(
       `${API_URL}/api/v1/lecture/getLectureByScheduleElement?scheduleElementId=${id}`,

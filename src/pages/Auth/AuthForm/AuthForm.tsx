@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useMutation, UseMutationResult } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { API_URL } from '../../../apis';
 import Google from '../../../assets/images/logo/google.png';
 import Kakao from '../../../assets/images/logo/kakao.png';
 import styles from './AuthForm.module.scss';
 import On from '../../../assets/images/showPasswordOn.svg?react';
 import Off from '../../../assets/images/showPasswordOff.svg?react';
+import { emailLogin, emailSignUp } from '../../../apis/auth';
 
 interface AuthFormProps {
   title: string;
   buttonText: string;
-  mutationFn: (variables: {
-    userEmail: string;
-    userPassword: string;
-  }) => Promise<any>;
-  successMessage: string;
   errorMessage: string;
   authGoBoxMessage: string;
   authGoLink: string;
@@ -25,53 +21,46 @@ interface AuthFormProps {
 const AuthForm = ({
   title,
   buttonText,
-  mutationFn,
-  successMessage,
   errorMessage,
   authGoBoxMessage,
   authGoLink,
   authGoLinkMessage,
 }: AuthFormProps) => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
-
-  const navigate = useNavigate();
   const [isShowPasswordClick, setIsShowPasswordClick] = useState(false);
   const [isShowPasswordConfirmClick, setIsShowPasswordConfirmClick] =
     useState(false);
+  const [name, setName] = useState('');
 
   const toggleShowPassword = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
-    setIsShowPasswordClick(!isShowPasswordClick);
+    setIsShowPasswordClick((prev) => !prev);
   };
   const toggleShowPasswordConfirm = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
-    setIsShowPasswordConfirmClick(!isShowPasswordConfirmClick);
+    setIsShowPasswordConfirmClick((prev) => !prev);
   };
 
-  const mutation: UseMutationResult<
-    any,
-    unknown,
-    { userEmail: string; userPassword: string },
-    unknown
-  > = useMutation({
-    mutationFn: mutationFn,
+  const loginMutation = useMutation({
+    mutationFn: emailLogin,
     onSuccess: (data) => {
-      if (title === '로그인') {
-        if (data.status === 'OK') {
-          console.log(successMessage, data);
-          localStorage.setItem('token', data.accessToken);
-          navigate('/home');
-        }
-      } else if (data.status === 'CREATED') {
-        console.log(successMessage, data);
-        alert('회원가입 성공!');
-        navigate('/login');
-      } else {
-        console.log('Operation failed:', data.msg);
-        alert(data.msg || errorMessage);
-      }
+      localStorage.setItem('token', data.accessToken);
+      navigate('/home');
+    },
+    onError: () => {
+      alert('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
+    },
+  });
+
+  const signupMutation = useMutation({
+    mutationFn: emailSignUp,
+    onSuccess: () => {
+      alert('회원가입에 성공했습니다! 로그인 페이지로 이동합니다.');
+      navigate('/login');
     },
     onError: (error) => {
       console.error(errorMessage, error);
@@ -81,16 +70,25 @@ const AuthForm = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //title이 새 계정이고 비밀번호와 비밀번호확인이 같으면 회원가입 진행
+    const isValid =
+      title === '새 계정'
+        ? email.trim() !== '' &&
+          password.trim() !== '' &&
+          passwordConfirm.trim() !== '' &&
+          name.trim() !== ''
+        : email.trim() !== '' && password.trim() !== '';
+    if (!isValid) return;
     if (title === '새 계정' && password === passwordConfirm) {
-      mutation.mutate({ userEmail: email, userPassword: password });
+      signupMutation.mutate({
+        userEmail: email,
+        userPassword: password,
+        userName: name,
+      });
     }
-    //title이 로그인이고 비밀번호 확인이 빈값이면 로그인 진행
-    else if (title === '로그인' && passwordConfirm === '') {
-      mutation.mutate({ userEmail: email, userPassword: password });
+    if (title === '로그인') {
+      loginMutation.mutate({ userEmail: email, userPassword: password });
     }
-    //title이 새 계정이고 비밀번호와 비밀번호 확인이 일치하지 않으면 팝업
-    else if (title === '새 계정' && password !== passwordConfirm) {
+    if (title === '새 계정' && password !== passwordConfirm) {
       alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
     }
   };
@@ -130,8 +128,7 @@ const AuthForm = ({
                 {isShowPasswordClick ? <On /> : <Off />}
               </button>
             </label>
-
-            {title === '로그인' ? (
+            {title === '로그인' && (
               <span className={styles.checkboxContainer}>
                 <input
                   type="checkbox"
@@ -142,31 +139,41 @@ const AuthForm = ({
                   로그인 유지하기
                 </label>
               </span>
-            ) : (
-              ''
             )}
           </div>
-          {title === '새 계정' ? (
-            <div className={styles.inputBox}>
-              <label className={styles.label}>
-                비밀번호 확인
-                <input
-                  type={isShowPasswordConfirmClick ? 'text' : 'password'}
-                  placeholder="비밀번호를 입력하세요"
-                  className={styles.input}
-                  value={passwordConfirm}
-                  onChange={(e) => setPasswordConfirm(e.target.value)}
-                />
-              </label>
-              <button
-                className={styles.showBtn}
-                onClick={toggleShowPasswordConfirm}
-              >
-                {isShowPasswordConfirmClick ? <On /> : <Off />}
-              </button>
-            </div>
-          ) : (
-            ''
+          {title === '새 계정' && (
+            <>
+              <div className={styles.inputBox}>
+                <label className={styles.label}>
+                  비밀번호 확인
+                  <input
+                    type={isShowPasswordConfirmClick ? 'text' : 'password'}
+                    placeholder="비밀번호를 입력하세요"
+                    className={styles.input}
+                    value={passwordConfirm}
+                    onChange={(e) => setPasswordConfirm(e.target.value)}
+                  />
+                </label>
+                <button
+                  className={styles.showBtn}
+                  onClick={toggleShowPasswordConfirm}
+                >
+                  {isShowPasswordConfirmClick ? <On /> : <Off />}
+                </button>
+              </div>
+              <div className={styles.inputBox}>
+                <label className={styles.label}>
+                  이름
+                  <input
+                    type="text"
+                    placeholder="이름을 입력하세요"
+                    className={styles.input}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </label>
+              </div>
+            </>
           )}
           <button className={styles.authBtn}>{buttonText}</button>
         </form>

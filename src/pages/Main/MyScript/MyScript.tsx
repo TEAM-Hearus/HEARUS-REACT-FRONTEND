@@ -31,7 +31,7 @@ const MyScript = () => {
           <StartingButton>녹음 시작</StartingButton>
         </Link>
       </div>
-      {!data ? (
+      {!data || data.length === 0 ? (
         <div className={styles.noneScriptContainer}>
           <h4 className={styles.noneScript}>스크립트 없음</h4>
           <br></br>
