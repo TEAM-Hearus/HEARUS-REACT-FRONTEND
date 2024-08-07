@@ -1,4 +1,4 @@
-import useTestSettingsStore from '../../../store/TestSettingsStore';
+import useTestSettingsStore from '../../../store/useTestSettingsStore';
 import QuestionTypeBtn from '../../atoms/buttons/QuestionTypeBtn/QuestionTypeBtn';
 import styles from './TestOptionSelector.module.scss';
 

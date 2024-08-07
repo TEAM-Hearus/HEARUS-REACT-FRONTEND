@@ -37,4 +37,4 @@ const useRecordModalStore = create<IRecordModalState>((set) => ({
     })),
 }));
 
-export { useRecordModalStore };
+export default useRecordModalStore;

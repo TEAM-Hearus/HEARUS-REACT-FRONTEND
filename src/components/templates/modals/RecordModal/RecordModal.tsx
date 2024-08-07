@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { useRecordModalStore } from '../../../../store/useRecordModalStore';
+import useRecordModalStore from '../../../../store/useRecordModalStore';
 import Up from '../../../../assets/images/arrow/up-arrow.svg?react';
 import Down from '../../../../assets/images/arrow/down-arrow.svg?react';
 import { IScheduleElement } from '../../../../constants/schedule';
@@ -52,7 +52,7 @@ const RecordModal = ({ handleQuit }: IProps) => {
 
   const handleClickSaveBtn = () => {
     handleQuit();
-    console.log(localData); // API 연결 예정? 아마도..
+    console.log(localData); // API 연결 예정
     clearRecordData();
     closeModal();
     navigate('/home');

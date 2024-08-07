@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './TimeTable.module.scss';
 import WeeklyTimeTable from './WeeklyTimeTable/WeeklyTimeTable';
-import LectureModal from '../../../components/templates/modals/AddALectureModal/LectureModal';
+import AddScheduleForm from '../../../components/organisms/AddScheduleForm/AddScheduleForm';
 
 const TimeTable = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +23,7 @@ const TimeTable = () => {
         </button>
       </div>
       <WeeklyTimeTable />
-      {isOpen && <LectureModal isOpen={isOpen} onClose={handleCloseModal} />}
+      {isOpen && <AddScheduleForm onClose={handleCloseModal} />}
     </div>
   );
 };

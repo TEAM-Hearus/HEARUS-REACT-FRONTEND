@@ -10,21 +10,24 @@
   width: 100dvw;
   height: 70px;
   padding: 0 100px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
   z-index: 10;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-.linkContainer {
-  width: 100px;
+.leftContainer {
+  width: 200px;
 }
 .title {
   @include Medium_Body_18;
   color: $dark-font_5A;
 }
-.quitBtnContainer {
+.rightContainer {
   display: flex;
   justify-content: flex-end;
-  width: 100px;
+  align-items: center;
+  gap: 10px;
+  width: 200px;
 }
 .quitBtn {
   display: flex;
@@ -37,4 +40,8 @@
   @include SemiBold_Body_16;
   color: white;
   cursor: pointer;
+}
+.timer {
+  @include Medium_Sub_14;
+  color: $dark-font_5A;
 }

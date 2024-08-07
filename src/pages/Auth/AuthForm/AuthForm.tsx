@@ -62,7 +62,7 @@ const AuthForm = ({
         if (data.status === 'OK') {
           console.log(successMessage, data);
           localStorage.setItem('token', data.accessToken);
-          navigate('/home'); // 로그인 성공 후 리다이렉트
+          navigate('/home');
         }
       } else if (data.status === 'CREATED') {
         console.log(successMessage, data);
@@ -78,8 +78,6 @@ const AuthForm = ({
       alert(errorMessage);
     },
   });
-  // const emailRegex =
-  // /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -182,7 +180,7 @@ const AuthForm = ({
         </div>
         <div className={styles.AuthGoBox}>
           <p>{authGoBoxMessage}</p>
-          <Link to={authGoLink}>{authGoLinkMessage} </Link>
+          <Link to={authGoLink}>{authGoLinkMessage}</Link>
         </div>
       </div>
     </div>

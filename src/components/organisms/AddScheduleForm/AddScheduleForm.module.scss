@@ -1,7 +1,7 @@
-@import '../../../../styles/variables/colors.scss';
-@import '../../../../styles/variables/fonts.scss';
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/variables/fonts.scss';
 
-.modalWrapper {
+.modalContainer {
   position: absolute;
   top: 90px;
   left: 85%;
@@ -12,36 +12,33 @@
   border-radius: 12px;
   box-shadow: 0px 2px 20px 0px #0000001a;
 }
-.modalContainer {
-  padding: 10px;
-}
 .inputField {
   display: flex;
   flex-direction: column;
+  gap: 10px;
   padding: 5px;
 }
-.inputField label {
-  margin-bottom: 10px;
+.inputTitle {
+  @include SemiBold_Body_16;
   color: $dark-font_5A;
 }
-
-.inputField input {
+.textInput {
   width: 100%;
   height: 48px;
   padding: 15px;
   background-color: $light-bg_F9;
   border-radius: 6px;
   border: 1px solid $light-bg_F2;
+  @include Medium_Body_16;
   color: $dark-font_33;
+  &::placeholder {
+    @include Regular_Body_16;
+    color: $light-font_9E;
+  }
 }
-.inputField input::placeholder {
-  color: $light-font_9E;
+.activeInput {
+  background-color: $white_FF;
 }
-
-.titleInput {
-  background-color: $white_FF !important;
-}
-
 .colorSelectBox {
   display: flex;
   justify-content: flex-end;
@@ -54,6 +51,10 @@
   border: 2px solid $white_FF;
   border-radius: 2px;
   cursor: pointer;
+}
+
+.activeColor {
+  border: 2px solid #733232;
 }
 
 .daySelectBox {
@@ -96,6 +97,9 @@
   background-color: $light-bg_F9;
 }
 .timeSelectBox input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 0px;
   width: 23px;
   height: 22px;
@@ -103,15 +107,18 @@
   background-color: $light-bg_F9;
   @include Regular_Body_16;
 }
+.timeBlock {
+  display: flex;
+  gap: 20px;
+}
 .separator {
-  font-size: 24px;
+  align-self: flex-start;
+  @include SemiBold_Body_18;
   color: $light-font_9E;
-  margin: 0 20px;
-  vertical-align: middle;
 }
 .dash {
   width: 12px;
-  height: 2px; /* 두께를 조절할 수 있습니다 */
+  height: 2px;
   background-color: $light-blue_B3;
   margin: 0 10px;
   vertical-align: middle;
@@ -132,7 +139,6 @@
   color: $light-blue_B3;
   cursor: unset;
 }
-
 .warning {
   margin: 5px;
   display: inline-flex;

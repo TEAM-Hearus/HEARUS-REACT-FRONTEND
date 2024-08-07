@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import RecordModal from '../../../templates/modals/RecordModal/RecordModal';
 import RecordTagDropDown from '../../../molecules/RecordTagDropDown/RecordTagDropDown';
-import { useRecordModalStore } from '../../../../store/useRecordModalStore';
+import useRecordModalStore from '../../../../store/useRecordModalStore';
 import Back from '../../../../assets/images/arrow/back.svg?react';
 import { formatTimer } from '../../../../utils/dateFormatters';
 import styles from './Recordheader.module.scss';

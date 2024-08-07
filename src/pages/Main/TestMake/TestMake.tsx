@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import TestOptionSelector from '../../../components/organisms/TestOptionSelector/TestOptionSelector';
 import ScriptItem from '../../../components/molecules/ScriptItem/ScriptItem';
-import useTestSettingsStore from '../../../store/TestSettingsStore';
+import useTestSettingsStore from '../../../store/useTestSettingsStore';
 import { getAllScripts, IScriptInList } from '../../../apis/script';
 import styles from './TestMake.module.scss';
 

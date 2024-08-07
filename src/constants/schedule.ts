@@ -1,5 +1,7 @@
 export type DayOfWeek = 'SUN' | 'MON' | 'TUE' | 'WED' | 'THU' | 'FRI' | 'SAT';
 
+export const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
+
 export interface IScheduleElement {
   id: number;
   scheduleId: number;
@@ -24,3 +26,25 @@ export const COLORS = {
 } as const;
 
 export type ColorKey = keyof typeof COLORS;
+
+export interface LectureInfo {
+  title: string;
+  lectureColor: ColorKey;
+  location: string;
+  day: string;
+  startHour: string;
+  startMinute: string;
+  endHour: string;
+  endMinute: string;
+}
+
+export const initialLectureInfo: LectureInfo = {
+  title: '',
+  lectureColor: '#FFD6D6',
+  location: '',
+  day: '',
+  startHour: '00',
+  startMinute: '00',
+  endHour: '00',
+  endMinute: '00',
+};
