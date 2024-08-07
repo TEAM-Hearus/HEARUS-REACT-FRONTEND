@@ -39,10 +39,12 @@
 }
 .time {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   width: 35px;
+  padding-right: 5px;
   @include Medium_Sub_14;
+  color: $light-gray_81;
 }
 .daytime {
   display: block;

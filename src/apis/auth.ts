@@ -1,5 +1,11 @@
 import { API_URL } from '.';
 
+interface IEmailSignUpParams {
+  userEmail: string;
+  userPassword: string;
+  userName: string;
+}
+
 interface IEmailLoginParams {
   userEmail: string;
   userPassword: string;
@@ -14,6 +20,13 @@ interface ILoginResponse {
   status: string;
   msg: string;
   object: ITokens;
+}
+
+interface IEmailSignupResponse {
+  status: string;
+  msg: string;
+  object: null;
+  success: boolean;
 }
 
 interface ITokens {
@@ -58,6 +71,35 @@ export const emailLogin = async ({
     }
     const data: ILoginResponse = await res.json();
     return data.object;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const emailSignUp = async ({
+  userEmail,
+  userPassword,
+  userName,
+}: IEmailSignUpParams) => {
+  try {
+    const res = await fetch(`${API_URL}/api/v1/auth/signup`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userEmail,
+        userPassword,
+        userIsOAuth: false,
+        userName,
+      }),
+    });
+    const data: IEmailSignupResponse = await res.json();
+
+    if (!res.ok) {
+      throw new Error('SignUp failed');
+    }
+    return data;
   } catch (error) {
     throw error;
   }

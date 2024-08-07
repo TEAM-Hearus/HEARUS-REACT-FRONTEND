@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Landing from './Landing/Landing';
-import HomeLayout from '../components/HomeLayout/HomeLayout';
+import HomeLayout from '../components/templates/HomeLayout/HomeLayout';
 import TimeTable from './Main/TimeTable/TimeTable';
 import TestMake from './Main/TestMake/TestMake';
 import MyScript from './Main/MyScript/MyScript';
@@ -9,7 +9,8 @@ import PrivateRoute from './PrivateRoute';
 import Record from './Record/Record';
 import Test from './Test/Test';
 import OAuthCallback from './Auth/OAuthCallback';
-import Login from './Auth/Login';
+import Login from './Auth/AuthForm/Login';
+import SignUp from './Auth/AuthForm/SignUp';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
+  },
+  {
+    path: '/signup',
+    element: <SignUp />,
   },
   {
     path: '/auth/:provider/callback',

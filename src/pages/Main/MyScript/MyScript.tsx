@@ -1,10 +1,11 @@
-import styles from './MyScript.module.scss';
-import StartingButton from '../../../components/common/buttons/StartBtn/StartBtn';
-import ScriptItem from '../../../components/common/ScriptItem/ScriptItem';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import ScriptDetailModal from '../../../components/templates/modals/ScriptDetailModal/ScriptDetailModal';
+import ScriptItem from '../../../components/molecules/ScriptItem/ScriptItem';
+import StartingButton from '../../../components/atoms/buttons/StartBtn/StartBtn';
 import { getAllScripts, IScriptInList } from '../../../apis/script';
-import { useEffect, useState } from 'react';
-import ScriptDetailModal from '../../../components/modals/ScriptDetailModal/ScriptDetailModal';
+import styles from './MyScript.module.scss';
 
 const MyScript = () => {
   const [selectedScriptId, setSelectedScriptId] = useState<string | null>(null);
@@ -22,25 +23,15 @@ const MyScript = () => {
     setSelectedScriptId(null);
   };
 
-  useEffect(() => {
-    if (selectedScriptId !== null) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [selectedScriptId]);
-
   return (
     <div className={styles.wholeContainer}>
       <div className={styles.headerContainer}>
         <div className={styles.recentScripts}>최근 스크립트</div>
-        <StartingButton>녹음 시작</StartingButton>
+        <Link to="/record">
+          <StartingButton>녹음 시작</StartingButton>
+        </Link>
       </div>
-      {!data ? (
+      {!data || data.length === 0 ? (
         <div className={styles.noneScriptContainer}>
           <h4 className={styles.noneScript}>스크립트 없음</h4>
           <br></br>

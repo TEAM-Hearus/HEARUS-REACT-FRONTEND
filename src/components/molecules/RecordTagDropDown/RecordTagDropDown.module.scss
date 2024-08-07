@@ -1,0 +1,48 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/variables/fonts.scss';
+
+.tagBtn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  background-color: white;
+  @include SemiBold_Sub_14;
+  color: $light-gray_81;
+  border: 1px solid $light-bg_E5;
+  border-radius: 8px;
+  &.active {
+    cursor: pointer;
+    &:hover {
+      background-color: $light-bg_F2;
+    }
+  }
+}
+.wrapper {
+  position: relative;
+}
+.tagsUl {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  margin-top: 10px;
+  padding: 8px 0;
+  background-color: $white_FF;
+  border-radius: 8px;
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+}
+.tagLi {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 30px;
+  @include Medium_Body_16;
+  color: $dark-font_5A;
+  &:hover {
+    background-color: $light-bg_F9;
+  }
+}

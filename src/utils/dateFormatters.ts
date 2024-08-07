@@ -9,3 +9,11 @@ export const formatTimer = (totalSeconds: number) => {
 export const formatScriptDate = (date: string): string => {
   return date.slice(0, 10).replace(/-/g, '.');
 };
+
+export const generateRecordingTitle = () => {
+  const now = new Date();
+  const year = now.getFullYear().toString().slice(-2);
+  const month = (now.getMonth() + 1).toString().padStart(2, '0');
+  const day = now.getDate().toString().padStart(2, '0');
+  return `새로운 녹음-${year}${month}${day}`;
+};
