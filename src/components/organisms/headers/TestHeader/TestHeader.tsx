@@ -8,10 +8,16 @@ const TEST_TITLE = '테스트-경제학원론-240708'; //임시
 
 interface IProps {
   handleSubmit: () => void;
+  showResults: boolean;
 }
 
-const TestHeader = ({ handleSubmit }: IProps) => {
+const TestHeader = ({ handleSubmit, showResults }: IProps) => {
   const { isModalOpen, openModal } = useTestModalStore();
+
+  const handleClickQuitBtn = () => {
+    if (!showResults) openModal();
+  };
+
   return (
     <header className={styles.container}>
       <span className={styles.linkContainer}>
@@ -21,7 +27,7 @@ const TestHeader = ({ handleSubmit }: IProps) => {
       </span>
       <h1 className={styles.title}>{TEST_TITLE}</h1>
       <span className={styles.quitBtnContainer}>
-        <button className={styles.quitBtn} onClick={openModal}>
+        <button className={styles.quitBtn} onClick={handleClickQuitBtn}>
           종료
         </button>
       </span>

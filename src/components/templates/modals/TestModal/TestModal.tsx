@@ -1,7 +1,6 @@
 import { createPortal } from 'react-dom';
-import styles from './TestModal.module.scss';
 import useTestModalStore from '../../../../store/useTestModalStore';
-import { useState } from 'react';
+import styles from './TestModal.module.scss';
 
 interface IProps {
   title: string;
@@ -19,6 +18,7 @@ const TestModal = ({ title, handleSubmit }: IProps) => {
   const handleClickQuitBtn = () => {
     closeModal();
     handleSubmit();
+    clearTestData();
   };
 
   return createPortal(

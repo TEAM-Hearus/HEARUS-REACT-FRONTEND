@@ -13,7 +13,7 @@ const Test = () => {
   );
   const [showResults, setShowResults] = useState(false);
 
-  const { updateTestData } = useTestModalStore();
+  const { updateTestData, clearTestData } = useTestModalStore();
 
   const handleAnswerChange = (index: number, answer: string | number) => {
     const newAnswers = [...userAnswers];
@@ -29,11 +29,12 @@ const Test = () => {
 
   useEffect(() => {
     updateTestData({ totalNum: QUESTION_LIST.length });
+    return () => clearTestData();
   }, []);
 
   return (
     <div className={styles.container}>
-      <TestHeader handleSubmit={handleSubmit} />
+      <TestHeader handleSubmit={handleSubmit} showResults={showResults} />
       <article className={styles.problemsContainer}>
         {QUESTION_LIST.map((question, index) => (
           <section key={question.direction} className={styles.questionBox}>
