@@ -34,6 +34,7 @@ const AuthForm = ({
   const [isShowPasswordClick, setIsShowPasswordClick] = useState(false);
   const [isShowPasswordConfirmClick, setIsShowPasswordConfirmClick] =
     useState(false);
+  const [name, setName] = useState('');
 
   const toggleShowPassword = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
@@ -50,8 +51,7 @@ const AuthForm = ({
       localStorage.setItem('token', data.accessToken);
       navigate('/home');
     },
-    onError: (error) => {
-      console.error('Login failed', error);
+    onError: () => {
       alert('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
     },
   });
@@ -70,19 +70,22 @@ const AuthForm = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // 회원가입
+    const isValid =
+      email.trim() !== '' &&
+      password.trim() !== '' &&
+      passwordConfirm.trim() !== '' &&
+      name.trim() !== '';
+    if (!isValid) return;
     if (title === '새 계정' && password === passwordConfirm) {
       signupMutation.mutate({
         userEmail: email,
         userPassword: password,
-        userName: '김히얼',
+        userName: name,
       });
     }
-    // 로그인
     if (title === '로그인') {
       loginMutation.mutate({ userEmail: email, userPassword: password });
     }
-    // 비밀번호와 비밀번호 확인이 일치하지 않으면 팝업
     if (title === '새 계정' && password !== passwordConfirm) {
       alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
     }
@@ -137,24 +140,38 @@ const AuthForm = ({
             )}
           </div>
           {title === '새 계정' && (
-            <div className={styles.inputBox}>
-              <label className={styles.label}>
-                비밀번호 확인
-                <input
-                  type={isShowPasswordConfirmClick ? 'text' : 'password'}
-                  placeholder="비밀번호를 입력하세요"
-                  className={styles.input}
-                  value={passwordConfirm}
-                  onChange={(e) => setPasswordConfirm(e.target.value)}
-                />
-              </label>
-              <button
-                className={styles.showBtn}
-                onClick={toggleShowPasswordConfirm}
-              >
-                {isShowPasswordConfirmClick ? <On /> : <Off />}
-              </button>
-            </div>
+            <>
+              <div className={styles.inputBox}>
+                <label className={styles.label}>
+                  비밀번호 확인
+                  <input
+                    type={isShowPasswordConfirmClick ? 'text' : 'password'}
+                    placeholder="비밀번호를 입력하세요"
+                    className={styles.input}
+                    value={passwordConfirm}
+                    onChange={(e) => setPasswordConfirm(e.target.value)}
+                  />
+                </label>
+                <button
+                  className={styles.showBtn}
+                  onClick={toggleShowPasswordConfirm}
+                >
+                  {isShowPasswordConfirmClick ? <On /> : <Off />}
+                </button>
+              </div>
+              <div className={styles.inputBox}>
+                <label className={styles.label}>
+                  이름
+                  <input
+                    type="text"
+                    placeholder="이름을 입력하세요"
+                    className={styles.input}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </label>
+              </div>
+            </>
           )}
           <button className={styles.authBtn}>{buttonText}</button>
         </form>
