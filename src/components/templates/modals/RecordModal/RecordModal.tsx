@@ -13,7 +13,7 @@ interface IProps {
   handleQuit: () => void; // 타이머, 녹음, 소켓 연결 종료
 }
 
-const name = '건국대학교 3-1학기'; // 임시 지정
+const name = '김히얼'; // 임시 지정
 
 const RecordModal = ({ handleQuit }: IProps) => {
   const navigate = useNavigate();

@@ -5,7 +5,7 @@ import { IScheduleElement } from '../../../constants/schedule';
 import { getSchedule } from '../../../apis/schedule';
 import styles from './RecordTagDropDown.module.scss';
 
-const name = '건국대학교 3-1학기'; // 임시 지정
+const name = '김히얼'; // 임시 지정
 
 const RecordTagDropDown = () => {
   const { data } = useQuery<IScheduleElement[], Error>({

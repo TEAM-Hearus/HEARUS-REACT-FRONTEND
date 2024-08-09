@@ -8,7 +8,7 @@ import {
 import { getSchedule } from '../../../../apis/schedule';
 import styles from './WeeklyTimeTable.module.scss';
 
-const name = '건국대학교 3-1학기'; // 임시 지정
+const name = '김히얼'; // 임시 지정
 
 const WeeklyTimeTable = () => {
   const { data } = useQuery<IScheduleElement[], Error>({
