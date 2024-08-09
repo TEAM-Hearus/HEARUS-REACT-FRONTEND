@@ -10,9 +10,6 @@
   padding: 10px 30px;
   border-radius: 12px;
 }
-.tableContainer {
-  // margin: 10px 30px;
-}
 .dayOfWeekRow {
   display: flex;
   justify-content: space-between;
@@ -61,10 +58,6 @@
   background-color: $light-bg_F9;
   border-right: 1px solid $light-bg_E5;
 }
-.lastCell {
-  background-color: transparent !important;
-  // border: none;
-  text-align: center;
-  border-right: 0 !important;
-  border-left: 0 !important;
+.lastRow {
+  border-bottom: 1px solid $light-bg_E5;
 }

@@ -60,14 +60,14 @@ const ScriptDetailModal = ({ scriptId, closeModal }: IProps) => {
   return createPortal(
     <div className={styles.overlay} onClick={closeModal}>
       <article className={styles.contentContainer} onClick={handleContentClick}>
-        <span className={styles.xBtn} onClick={closeModal}>
+        <button className={styles.xBtn} onClick={closeModal}>
           <X />
-        </span>
+        </button>
         <p className={styles.title}>{data?.name}</p>
         <div className={styles.playBox}>
-          <span className={styles.playBtn} onClick={handlePlayClick}>
+          <div className={styles.playBtn} onClick={handlePlayClick}>
             {isPlaying ? <Pause /> : <Play />}
-          </span>
+          </div>
           <p className={styles.time}>{formatTimer(time)}</p>
         </div>
         <p className={styles.textBox}>{data?.processedScript.join(' ')}</p>

@@ -5,8 +5,8 @@ import {
   IScheduleElement,
   TIMELIST,
 } from '../../../../constants/schedule';
-import styles from './WeeklyTimeTable.module.scss';
 import { getSchedule } from '../../../../apis/schedule';
+import styles from './WeeklyTimeTable.module.scss';
 
 const name = '건국대학교 3-1학기'; // 임시 지정
 
@@ -28,14 +28,13 @@ const WeeklyTimeTable = () => {
         {TIMELIST.map((time, index) => (
           <div className={styles.timeRow} key={index}>
             <span className={styles.time}>{time}</span>
-            {daysOfWeek.map((day) => (
-              <div
-                className={`${styles.daytime} ${
-                  index === TIMELIST.length - 1 ? styles.lastCell : ''
-                }`}
-                key={day}
-              ></div>
-            ))}
+            {index !== TIMELIST.length - 1 &&
+              daysOfWeek.map((day) => (
+                <div
+                  className={`${styles.daytime} ${index === TIMELIST.length - 2 && styles.lastRow}`}
+                  key={day}
+                />
+              ))}
           </div>
         ))}
       </div>

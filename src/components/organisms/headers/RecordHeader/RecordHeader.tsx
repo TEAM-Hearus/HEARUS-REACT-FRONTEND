@@ -46,11 +46,11 @@ const RecordHeader = ({ stopRecordingAndDisconnectSocket }: IProps) => {
 
   return (
     <header className={styles.container}>
-      <span className={styles.linkContainer}>
+      <div className={styles.linkContainer}>
         <Link to="/home">
           <Back />
         </Link>
-      </span>
+      </div>
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>{title}</h1>
         <RecordTagDropDown />

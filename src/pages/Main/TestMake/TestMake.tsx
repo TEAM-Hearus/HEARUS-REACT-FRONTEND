@@ -40,7 +40,7 @@ const TestMake = () => {
         {data && data.length > 0 ? (
           <section className={styles.scriptsContainer}>
             {data.map((script) => (
-              <span
+              <div
                 key={script.id}
                 className={`${script.id === lectureId ? styles.selectedScript : styles.scriptWrapper}`}
                 onClick={() => {
@@ -48,7 +48,7 @@ const TestMake = () => {
                 }}
               >
                 <ScriptItem {...script} />
-              </span>
+              </div>
             ))}
           </section>
         ) : (
