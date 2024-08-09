@@ -68,3 +68,35 @@ export const getLectureByScheduleElement = async (id: number) => {
     throw error;
   }
 };
+
+interface IDeleteScheduleElementResponse {
+  status: string;
+  msg: string;
+  object: null;
+  success: boolean;
+}
+
+export const deleteScheduleElement = async (scheduleElementId: number) => {
+  const token = getToken();
+  try {
+    const res = await fetch(`/api/v1/schedule/deleteElement`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        scheduleDTO: {
+          name: '김히얼', // 동적 할당 구현 예정
+        },
+        scheduleElementDTO: {
+          id: scheduleElementId,
+        },
+      }),
+    });
+    const data: IDeleteScheduleElementResponse = await res.json();
+    return data.success;
+  } catch (error) {
+    throw new Error('Failed to delete schedule element');
+  }
+};
