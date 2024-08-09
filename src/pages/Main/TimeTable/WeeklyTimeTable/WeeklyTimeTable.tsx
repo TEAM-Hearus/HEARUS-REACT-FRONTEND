@@ -27,7 +27,7 @@ const WeeklyTimeTable = () => {
       <div className={styles.tableBox}>
         {TIMELIST.map((time, index) => (
           <div className={styles.timeRow} key={index}>
-            <span className={styles.time}>{time}</span>
+            <p className={styles.time}>{time}</p>
             {index !== TIMELIST.length - 1 &&
               daysOfWeek.map((day) => (
                 <div

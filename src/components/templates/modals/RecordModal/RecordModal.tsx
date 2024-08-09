@@ -89,9 +89,11 @@ const RecordModal = ({ handleQuit }: IProps) => {
               onChange={handleChange}
               readOnly
             />
-            <span className={styles.arrow} onClick={handleClickArrow}>
-              {isTagClicked ? <Up /> : <Down />}
-            </span>
+            {TAGS.length > 0 && (
+              <div className={styles.arrow} onClick={handleClickArrow}>
+                {isTagClicked ? <Up /> : <Down />}
+              </div>
+            )}
           </div>
         </div>
         {isTagClicked && (
