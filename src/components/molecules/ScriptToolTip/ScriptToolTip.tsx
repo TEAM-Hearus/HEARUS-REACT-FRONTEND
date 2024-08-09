@@ -25,25 +25,26 @@ const ScriptToolTip = ({ id }: IProps) => {
     setSelectedScriptId(null);
   };
 
-  return (
-    <div className={styles.container}>
-      {data?.map((lecture) => (
-        <div
-          className={styles.tooltipItem}
-          onClick={() => handleToolTipClick(lecture.id)}
-        >
-          {lecture.name}
-          <ScriptIcon />
-        </div>
-      ))}
-      {selectedScriptId !== null && (
-        <ScriptDetailModal
-          scriptId={selectedScriptId}
-          closeModal={handleCloseModal}
-        />
-      )}
-    </div>
-  );
+  if (data != null)
+    return (
+      <div className={styles.container}>
+        {data?.map((lecture) => (
+          <div
+            className={styles.tooltipItem}
+            onClick={() => handleToolTipClick(lecture.id)}
+          >
+            {lecture.name}
+            <ScriptIcon />
+          </div>
+        ))}
+        {selectedScriptId !== null && (
+          <ScriptDetailModal
+            scriptId={selectedScriptId}
+            closeModal={handleCloseModal}
+          />
+        )}
+      </div>
+    );
 };
 
 export default ScriptToolTip;
