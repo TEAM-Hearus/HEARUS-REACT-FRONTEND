@@ -62,7 +62,7 @@ const TimeTableItem = ({
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <ScriptToolTip id={id} />
+          <ScriptToolTip id={id} scheduleName={name} />
         </span>
       )}
     </>

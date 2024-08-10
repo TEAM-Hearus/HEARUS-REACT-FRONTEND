@@ -9,11 +9,11 @@ interface IScriptProps {
 }
 const ScriptItem = ({ name, processedScript, lectureDate }: IScriptProps) => {
   return (
-    <div className={styles.postItContainer}>
-      <div className={styles.title}>{name}</div>
-      <div className={styles.content}>{processedScript[0]}...</div>
-      <span className={styles.date}>{formatScriptDate(lectureDate)}</span>
-    </div>
+    <article className={styles.postItContainer}>
+      <p className={styles.title}>{name}</p>
+      <p className={styles.content}>{processedScript[0]}...</p>
+      <p className={styles.date}>{formatScriptDate(lectureDate)}</p>
+    </article>
   );
 };
 export default ScriptItem;

@@ -45,29 +45,29 @@ const Landing = () => {
         <article className={styles.function}>
           <div className={styles.functionImg}></div>
           <h3>청각장애학우 지원</h3>
-          <span className={styles.descriptionContainer}>
+          <div className={styles.descriptionContainer}>
             <p>강의 중, 조별과제, 회의 상황에서</p>
             <p>실시간 음성인식 자막을 통해</p>
             <p>빠르게 이해하고 소통할 수 있어요</p>
-          </span>
+          </div>
         </article>
         <article className={styles.function}>
           <div className={styles.functionImg}></div>
           <h3>학습효율 향상</h3>
-          <span className={styles.descriptionContainer}>
+          <div className={styles.descriptionContainer}>
             <p>녹음 스크립트가 준비되었다면</p>
             <p>테스트 자동 생성 기능으로</p>
             <p>어려운 부분을 찾아 복습해보세요</p>
-          </span>
+          </div>
         </article>
         <article className={styles.function}>
           <div className={styles.functionImg}></div>
           <h3>교육적 불평등 완화</h3>
-          <span className={styles.descriptionContainer}>
+          <div className={styles.descriptionContainer}>
             <p>너무 빠르거나 익숙하지 않아서,</p>
             <p>곧바로 이해하기 어려운 수업도</p>
             <p>여러 번 읽고 깊게 생각해보세요</p>
-          </span>
+          </div>
         </article>
       </section>
       <section className={styles.highLight}>

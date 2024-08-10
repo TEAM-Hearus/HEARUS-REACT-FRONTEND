@@ -48,18 +48,18 @@ const TestHeader = ({ handleSubmit, showResults }: IProps) => {
 
   return (
     <header className={styles.container}>
-      <span className={styles.leftContainer}>
+      <div className={styles.leftContainer}>
         <Link to="/home/test-make">
           <Back />
         </Link>
-      </span>
+      </div>
       <h1 className={styles.title}>{TEST_TITLE}</h1>
-      <span className={styles.rightContainer}>
+      <div className={styles.rightContainer}>
         <p className={styles.timer}>{formatTimer(seconds)}</p>
         <button className={styles.quitBtn} onClick={handleClickQuitBtn}>
           종료
         </button>
-      </span>
+      </div>
       {isModalOpen && (
         <TestModal title={TEST_TITLE} handleSubmit={handleSubmit} />
       )}

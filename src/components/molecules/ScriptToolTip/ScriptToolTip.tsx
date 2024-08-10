@@ -1,20 +1,38 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import ScriptDetailModal from '../../templates/modals/ScriptDetailModal/ScriptDetailModal';
-import { getLectureByScheduleElement } from '../../../apis/schedule';
+import {
+  deleteScheduleElement,
+  getLectureByScheduleElement,
+} from '../../../apis/schedule';
 import ScriptIcon from '../../../assets/images/nav/my-script-inactive.svg?react';
+import TrashCan from '../../../assets/images/orange-trash-can.svg?react';
 import styles from './ScriptToolTip.module.scss';
 
 interface IProps {
   id: number;
+  scheduleName: string;
 }
 
-const ScriptToolTip = ({ id }: IProps) => {
+const name = '김히얼'; //임시
+
+const ScriptToolTip = ({ id, scheduleName }: IProps) => {
   const [selectedScriptId, setSelectedScriptId] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
   const { data } = useQuery({
     queryKey: ['tooltip', id],
     queryFn: () => getLectureByScheduleElement(id),
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: (id: number) => deleteScheduleElement(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['schedule', name] });
+    },
+    onError: () => {
+      alert('시간표 삭제를 실패했습니다.');
+    },
   });
 
   const handleToolTipClick = (scriptId: string) => {
@@ -25,8 +43,20 @@ const ScriptToolTip = ({ id }: IProps) => {
     setSelectedScriptId(null);
   };
 
+  const handleDeleteBtnClick = () => {
+    if (window.confirm(`'${scheduleName}' 수업을 삭제하시겠습니까?`)) {
+      deleteMutation.mutate(id);
+    }
+  };
+
   return (
     <div className={styles.container}>
+      <div className={styles.deleteBtnWrapper}>
+        <button className={styles.deleteBtn} onClick={handleDeleteBtnClick}>
+          이 수업 삭제하기
+          <TrashCan />
+        </button>
+      </div>
       {data?.map((lecture) => (
         <div
           className={styles.tooltipItem}

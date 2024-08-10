@@ -58,16 +58,21 @@ const ScriptDetailModal = ({ scriptId, closeModal }: IProps) => {
   }, [isPlaying]);
 
   return createPortal(
-    <div className={styles.overlay} onClick={closeModal}>
+    <div
+      className={styles.overlay}
+      onClick={closeModal}
+      onMouseEnter={(e) => e.stopPropagation()}
+      onMouseLeave={(e) => e.stopPropagation()}
+    >
       <article className={styles.contentContainer} onClick={handleContentClick}>
         <span className={styles.xBtn} onClick={closeModal}>
           <X />
         </span>
         <p className={styles.title}>{data?.name}</p>
         <div className={styles.playBox}>
-          <span className={styles.playBtn} onClick={handlePlayClick}>
+          <div className={styles.playBtn} onClick={handlePlayClick}>
             {isPlaying ? <Pause /> : <Play />}
-          </span>
+          </div>
           <p className={styles.time}>{formatTimer(time)}</p>
         </div>
         <p className={styles.textBox}>{data?.processedScript.join(' ')}</p>
