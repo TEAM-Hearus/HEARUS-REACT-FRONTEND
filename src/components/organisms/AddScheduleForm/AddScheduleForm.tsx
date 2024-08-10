@@ -95,6 +95,7 @@ const AddScheduleForm = ({ onClose }: IProps) => {
     mutationFn: (data: IScheduleElementDTO) => addScheduleElement(data),
     onSuccess: () => {
       onClose();
+      const name = '김히얼'; // 동적 할당 구현 예정
       queryClient.invalidateQueries({ queryKey: ['schedule', name] });
     },
     onError: () => {
@@ -104,7 +105,6 @@ const AddScheduleForm = ({ onClose }: IProps) => {
 
   const handleSubmit = () => {
     if (isFormValid) {
-      console.log('Lecture added:', lectureInfo);
       const formattedData = transformToScheduleElementDTO(lectureInfo);
       postMutation.mutate(formattedData);
     }
