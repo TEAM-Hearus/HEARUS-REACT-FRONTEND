@@ -38,20 +38,17 @@ const RecordTagDropDown = () => {
       <button
         className={`${styles.tagBtn} ${data !== undefined && data.length > 0 && styles.active}`}
         onClick={handleTagBtnClick}
-        aria-haspopup="listbox"
-        aria-expanded={isTagBtnClicked}
       >
         {tag !== '' ? tag : '태그'}
       </button>
       {isTagBtnClicked && (
-        <ul className={styles.tagsUl} role="listbox">
+        <ul className={styles.tagsUl}>
           {TAGS.map((name) => (
             <li
               key={name}
               className={styles.tagLi}
               onClick={() => handleLiClick(name)}
               role="option"
-              aria-selected={tag === name}
             >
               {name}
             </li>
