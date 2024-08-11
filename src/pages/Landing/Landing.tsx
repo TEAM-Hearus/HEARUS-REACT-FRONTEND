@@ -9,20 +9,23 @@ const Landing = () => {
     <main>
       <section className={styles.topBgContainer}>
         <header className={styles.header}>
-          <Link to="/login" className={styles.loginBtn}>
-            로그인
-          </Link>
-          <Link to="/signup" className={styles.startBtn}>
-            무료로 시작하기
-          </Link>
-        </header>
-        <article className={styles.titleContainer}>
-          <div className={styles.mainTitle}>
-            <Logo />
-            <h1 className={styles.h1}>HEARUS</h1>
+          <Logo />
+          <div className={styles.authBtnsContainer}>
+            <Link to="/login" className={styles.loginBtn}>
+              로그인
+            </Link>
+            <Link to="/signup" className={styles.startBtn}>
+              무료로 시작하기
+            </Link>
           </div>
-          <p className={styles.subTitle}>SIOGANNN SIOGANNN</p>
-        </article>
+        </header>
+        <div className={styles.bgImg}>
+          <div className={styles.outerCircleInImg}>
+            <div className={styles.innerCircleInImg}>
+              <h1 className={styles.h1}>HEARUS</h1>
+            </div>
+          </div>
+        </div>
       </section>
       <section className={styles.introductionContainer}>
         <article className={styles.upIntro}>

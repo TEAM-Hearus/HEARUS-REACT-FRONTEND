@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-image: url('../../assets/images/landing_page_bg.png');
+  background-color: #f6f6f6;
   width: 100dvw;
   height: 100dvh;
 }
@@ -14,11 +14,55 @@
   position: absolute;
   top: 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 10px;
   width: 100dvw;
   height: 88px;
   padding: 20px 100px;
+}
+.bgImg {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../../assets/images/landig-page-bg.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
+}
+.outerCircleInImg {
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100dvh;
+  height: 100dvh;
+  padding: 100px;
+  background-color: rgba(239, 239, 239, 0.24);
+  backdrop-filter: blur(3px);
+  border: none;
+  border-radius: 50%;
+}
+.innerCircleInImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.26);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.69);
+  border-radius: 50%;
+}
+.h1 {
+  font-family: 'Pretendard-ExtraBold';
+  font-size: 64px;
+}
+.authBtnsContainer {
+  display: flex;
+  gap: 6px;
 }
 .loginBtn {
   display: flex;
@@ -44,26 +88,7 @@
   color: $white_FF;
   text-decoration: none;
 }
-.titleContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-left: 200px;
-}
-.mainTitle {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.h1 {
-  font-family: 'Pretendard-ExtraBold';
-  font-size: 80px;
-}
-.subTitle {
-  font-family: 'Pretendard-Medium';
-  font-size: 28px;
-  color: #434343;
-}
+
 .introductionContainer {
   display: flex;
   flex-direction: column;
