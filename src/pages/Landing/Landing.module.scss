@@ -230,6 +230,11 @@
   font-size: 18px;
   color: $dark-font_33;
 }
+.exampleImg {
+  height: 50dvh;
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+}
 .descriptionContainer {
   display: flex;
   flex-direction: column;
@@ -247,39 +252,38 @@
   width: 100dvw;
   height: 100dvh;
   background-color: $white_FF;
-  img {
-    height: 50dvh;
-  }
 }
 .scrollingContainer {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
   width: 100%;
-  height: 100px;
   overflow: hidden;
 }
 .scrollingText {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
-  position: absolute;
-  top: 36px;
-  transition: transform 1s ease;
-  p {
-    height: 36px;
+  height: 150px;
+  gap: 20px;
+  h4 {
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+  }
+  .inactive {
     font-family: 'Pretendard-SemiBold';
     font-size: 36px;
     color: $light-bg_E5;
-    transition: color 0.3s ease;
-    &.active {
-      font-family: 'Pretendard-SemiBold';
-      font-size: 36px;
-      color: $brand-point;
-    }
+    transition: all 0.3s ease;
+  }
+  .active {
+    font-family: 'Pretendard-SemiBold';
+    font-size: 36px;
+    color: $brand-point;
+    transition: all 0.3s ease;
   }
 }
 

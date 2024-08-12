@@ -7,9 +7,21 @@ import function2 from '../../assets/images/landing/function2.png';
 import function3 from '../../assets/images/landing/function3.png';
 import example from '../../assets/images/landing/landing-myscript.jpg';
 import styles from './Landing.module.scss';
-import { SCROLLING_TEXTS } from '../../constants/landing';
+import { DOUBLED_TEXTS, SCROLLING_TEXTS } from '../../constants/landing';
+import { useEffect, useRef, useState } from 'react';
 
 const Landing = () => {
+  const [activeIndex, setActiveIndex] = useState(1);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prevIndex) => (prevIndex + 1) % SCROLLING_TEXTS.length);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <main>
       <section className={styles.topBgContainer}>
@@ -131,13 +143,29 @@ const Landing = () => {
       <section className={styles.highLight}>
         {/* 스크롤 애니메이션 구현 예정 */}
         <article className={styles.scrollingContainer}>
-          <div className={styles.scrollingText}>
+          <div className={styles.scrollingText} ref={containerRef}>
             {SCROLLING_TEXTS.map((text, index) => (
-              <p key={index}>{text}</p>
+              <h4
+                key={index}
+                className={
+                  index % SCROLLING_TEXTS.length === activeIndex
+                    ? styles.active
+                    : styles.inactive
+                }
+                style={{
+                  transform: `translateY(-${activeIndex * 50}px)`,
+                }}
+              >
+                {text}
+              </h4>
             ))}
           </div>
         </article>
-        <img src={example} alt="recent script page example" />
+        <img
+          className={styles.exampleImg}
+          src={example}
+          alt="recent script page example"
+        />
       </section>
       <section className={styles.unCompleted}></section>
       <footer className={styles.footer}>
