@@ -69,14 +69,12 @@
     outline: none;
   }
 }
-
 .modalActions {
   display: flex;
   width: 100%;
   justify-content: space-between;
   margin-top: 30px;
 }
-
 .modalClose {
   background-color: $light-bg_F2;
   border: 1px solid $light-bg_F2;
@@ -131,4 +129,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }

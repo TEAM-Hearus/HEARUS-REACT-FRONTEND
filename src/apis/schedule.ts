@@ -1,5 +1,6 @@
 import { API_URL } from '.';
 import { IScheduleElement } from '../constants/schedule';
+import { IScheduleElementDTO } from '../utils/schedule';
 import { getToken } from './';
 
 interface IGetScheduleResponse {
@@ -66,5 +67,60 @@ export const getLectureByScheduleElement = async (id: number) => {
     return data.object;
   } catch (error) {
     throw error;
+  }
+};
+
+interface IPOSTScheduleElementResponse {
+  status: string;
+  msg: string;
+  object: null;
+  success: boolean;
+}
+
+export const addScheduleElement = async (inputData: IScheduleElementDTO) => {
+  const token = getToken();
+  try {
+    const res = await fetch(`${API_URL}/api/v1/schedule/addElement`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        scheduleDTO: {
+          name: '김히얼', // 동적 할당 구현 예정
+        },
+        scheduleElementDTO: inputData,
+      }),
+    });
+    const data: IPOSTScheduleElementResponse = await res.json();
+    return data.success;
+  } catch (error) {
+    throw new Error('Failed to delete schedule element');
+  }
+};
+
+export const deleteScheduleElement = async (scheduleElementId: number) => {
+  const token = getToken();
+  try {
+    const res = await fetch(`${API_URL}/api/v1/schedule/deleteElement`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        scheduleDTO: {
+          name: '김히얼', // 동적 할당 구현 예정
+        },
+        scheduleElementDTO: {
+          id: scheduleElementId,
+        },
+      }),
+    });
+    const data: IPOSTScheduleElementResponse = await res.json();
+    return data.success;
+  } catch (error) {
+    throw new Error('Failed to delete schedule element');
   }
 };

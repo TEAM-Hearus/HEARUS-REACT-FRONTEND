@@ -23,7 +23,7 @@ const TabLink = ({
   return (
     <Link to={to} className={`${styles.navItem} ${isActive && styles.active}`}>
       {isActive ? activeIcon : inactiveIcon}
-      <span>{children}</span>
+      <p>{children}</p>
     </Link>
   );
 };

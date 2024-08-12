@@ -1,4 +1,9 @@
-import { DayOfWeek, LectureInfo } from '../constants/schedule';
+import {
+  ColorKey,
+  DayOfWeek,
+  daysObject,
+  LectureInfo,
+} from '../constants/schedule';
 
 const DAYMAP: Record<DayOfWeek, number> = {
   SUN: 0,
@@ -82,4 +87,39 @@ export const getIsAddScheduleFormValid = ({
       Number(endMinute),
     );
   return isValid;
+};
+
+// 요일 한글 -> 대문자 영어 변환
+const getDayOfWeek = (day: string) => {
+  return daysObject[day as keyof typeof daysObject] || day;
+};
+
+// 시간 ISO 변환
+const getFormattedTime = (hour: string, minute: string) => {
+  const date = new Date();
+  date.setHours(parseInt(hour), parseInt(minute), 0, 0);
+  const dateString = date.toISOString().split('T')[0];
+  const timeString = `${hour.padStart(2, '0')}:${minute.padStart(2, '0')}:00`;
+  return `${dateString}T${timeString}`;
+};
+
+export interface IScheduleElementDTO {
+  name: string;
+  location: string;
+  dayOfWeek: string;
+  startTime: string;
+  endTime: string;
+  color: ColorKey;
+}
+
+export const transformToScheduleElementDTO = (lectureData: LectureInfo) => {
+  const transformedData = {
+    name: lectureData.title,
+    location: lectureData.location,
+    dayOfWeek: getDayOfWeek(lectureData.day),
+    startTime: getFormattedTime(lectureData.startHour, lectureData.startMinute),
+    endTime: getFormattedTime(lectureData.endHour, lectureData.endMinute),
+    color: lectureData.lectureColor,
+  };
+  return transformedData;
 };

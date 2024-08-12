@@ -1,0 +1,40 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/variables/fonts.scss';
+
+.errorPageWrapper {
+  width: 100%;
+  height: 100%;
+}
+.errorpageBox {
+  padding: 200px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.errorImg {
+  width: 150px;
+  height: 150px;
+}
+.errorMsg {
+  @include SemiBold_Title_28;
+  color: $dark-font_33;
+  padding-top: 30px;
+}
+.errorContent {
+  @include Regular_Body_16;
+  color: $light-gray_81;
+  padding: 10px 0 50px 0;
+}
+.goHomeBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  height: 40px;
+  background-color: $dark-font_33;
+  color: $white_FF;
+  border-radius: 6px;
+  border: 0;
+  text-decoration: none;
+}
