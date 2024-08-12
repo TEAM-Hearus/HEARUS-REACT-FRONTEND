@@ -1,0 +1,36 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/variables/fonts.scss';
+
+.errorPageWrapper {
+  width: 100%;
+  height: 100%;
+}
+.errorpageBox {
+  padding: 270px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.errorpageBox img {
+  width: 150px;
+  height: 150px;
+}
+.errorpageBox h1 {
+  @include SemiBold_Title_28;
+  color: $dark-font_33;
+  padding-top: 30px;
+}
+.errorpageBox h5 {
+  @include Regular_Body_16;
+  color: $light-gray_81;
+  padding: 10px 0 50px 0;
+}
+.goHomeBtn {
+  width: 140px;
+  height: 40px;
+  background-color: $dark-font_33;
+  color: $white_FF;
+  border-radius: 6px;
+  border: 0;
+}
