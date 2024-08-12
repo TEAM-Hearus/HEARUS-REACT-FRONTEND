@@ -142,16 +142,19 @@ const Landing = () => {
       </section>
       <section className={styles.highLight}>
         <article className={styles.scrollingContainer}>
-          <ul className={styles.scrollingText} ref={carouselRef}>
+          <ul
+            className={styles.scrollingText}
+            ref={carouselRef}
+            style={{
+              transform: `translateY(-${activeIndex * 50}px)`,
+            }}
+          >
             {SCROLLING_TEXTS.map((text, index) => (
               <li
                 key={index}
                 className={
                   index === activeIndex ? styles.active : styles.inactive
                 }
-                style={{
-                  transform: `translateY(-${activeIndex * 50}px)`,
-                }}
               >
                 {text}
               </li>

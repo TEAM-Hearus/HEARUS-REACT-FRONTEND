@@ -266,8 +266,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 120px;
+  height: 110px;
   gap: 20px;
+  transition: all 0.3s ease;
   li {
     justify-content: center;
     align-items: center;
@@ -277,13 +278,11 @@
     font-family: 'Pretendard-SemiBold';
     font-size: 36px;
     color: $light-bg_E5;
-    transition: all 0.3s ease;
   }
   .active {
     font-family: 'Pretendard-SemiBold';
     font-size: 36px;
     color: $brand-point;
-    transition: all 0.3s ease;
   }
 }
 
