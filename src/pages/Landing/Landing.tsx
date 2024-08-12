@@ -141,7 +141,6 @@ const Landing = () => {
         </div>
       </section>
       <section className={styles.highLight}>
-        {/* 스크롤 애니메이션 구현 예정 */}
         <article className={styles.scrollingContainer}>
           <ul className={styles.scrollingText} ref={carouselRef}>
             {SCROLLING_TEXTS.map((text, index) => (
@@ -165,20 +164,23 @@ const Landing = () => {
           alt="recent script page example"
         />
       </section>
-      <section className={styles.unCompleted}></section>
+      <section className={styles.finalSection}>
+        <p>모두의 들을 권리를 위하여 Hearus가 함께 하겠습니다.</p>
+      </section>
       <footer className={styles.footer}>
-        <p>Hearus(히어러스)</p>
+        <p className={styles.footerTitle}>Hearus(히어러스)</p>
         <div className={styles.footerBody}>
-          <div className={styles.footerColumn}>
-            <p>대표자</p>
-            <p>주소</p>
-            <p>연락처</p>
+          <div className={styles.footerLeftBody}>
+            <div className={styles.footerColumn}>
+              <p>대표자 000</p>
+              <p>연락처 000-0000-0000</p>
+            </div>
+            <div className={styles.footerColumn}>
+              <p>사업자 등록번호 000-00-00000</p>
+              <p>주소 0000 000 00000</p>
+            </div>
           </div>
-          <div className={styles.footerColumn}>
-            <p>사업자 등록번호</p>
-            <p>SNS계정</p>
-          </div>
-          <div className={styles.footerColumn}>
+          <div className={styles.footerRightBody}>
             <p>서비스 이용약관</p>
             <p>개인정보 처리방침</p>
             <p>이용자의 권리 및 유의사항</p>
