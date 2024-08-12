@@ -9,7 +9,10 @@ const PrivateRoute = ({ element }: IProps) => {
   // 로그인 상태 확인
   const isAuthenticated = checkAuthentication();
 
-  return isAuthenticated ? element : <Navigate to="/" replace />;
+  if (!isAuthenticated) {
+    return <Navigate to="/" replace state={{ errorType: 'auth' }} />;
+  }
+  return element;
 };
 
 export default PrivateRoute;
