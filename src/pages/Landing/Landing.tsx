@@ -150,6 +150,9 @@ const Landing = () => {
                 className={
                   index === activeIndex ? styles.active : styles.inactive
                 }
+                style={{
+                  transform: `translateY(-${activeIndex * 50}px)`,
+                }}
               >
                 {text}
               </li>
