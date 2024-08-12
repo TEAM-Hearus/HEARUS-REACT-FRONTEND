@@ -19,6 +19,7 @@
   width: 100dvw;
   height: 88px;
   padding: 20px 100px;
+  z-index: 1;
 }
 .bgImg {
   position: relative;
@@ -181,30 +182,53 @@
 }
 .functionsContainer {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-end;
   align-items: center;
-  gap: 100px;
+  gap: 50px;
   width: 100dvw;
-  height: 520px;
+  height: 600px;
   background-color: $white_FF;
   border-radius: 30px;
 }
-.function {
+.functionsTitleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.functionTitle {
+  @include SemiBold_Body_16;
+  color: $brand-point;
+}
+.funcitonSubTitle {
+  font-family: 'Pretendard-ExtraBold';
+  font-size: 28px;
+}
+.functionBoxContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.functionBox {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 30px;
-  h4 {
-    font-family: 'Pretendard-Bold';
-    font-size: 28px;
-    color: $dark-font_33;
-  }
+  width: 300px;
+  padding: 20px;
+  border: 1px solid $light-bg_F2;
+  border-radius: 16px;
 }
 .functionImg {
   width: 230px;
   height: 230px;
-  background-color: $white_FF;
-  border-radius: 12px;
+}
+.boxTitle {
+  font-family: 'Pretendard-Bold';
+  font-size: 18px;
+  color: $dark-font_33;
 }
 .descriptionContainer {
   display: flex;

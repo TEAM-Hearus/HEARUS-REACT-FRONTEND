@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom';
 import Logo from '../../assets/images/logo/landing-logo.svg?react';
 import graph1 from '../../assets/images/landing/graph1.png';
 import graph2 from '../../assets/images/landing/graph2.png';
+import function1 from '../../assets/images/landing/function1.png';
+import function2 from '../../assets/images/landing/function2.png';
+import function3 from '../../assets/images/landing/function3.png';
 import example from '../../assets/images/landing/landing-myscript.jpg';
 import styles from './Landing.module.scss';
 import { SCROLLING_TEXTS } from '../../constants/landing';
@@ -77,33 +80,53 @@ const Landing = () => {
         </article>
       </section>
       <section className={styles.functionsContainer}>
-        <article className={styles.function}>
-          <div className={styles.functionImg}></div>
-          <h4>청각장애학우 지원</h4>
-          <span className={styles.descriptionContainer}>
-            <p>강의 중, 조별과제, 회의 상황에서</p>
-            <p>실시간 음성인식 자막을 통해</p>
-            <p>빠르게 이해하고 소통할 수 있어요</p>
-          </span>
-        </article>
-        <article className={styles.function}>
-          <div className={styles.functionImg}></div>
-          <h3>학습효율 향상</h3>
-          <span className={styles.descriptionContainer}>
-            <p>녹음 스크립트가 준비되었다면</p>
-            <p>테스트 자동 생성 기능으로</p>
-            <p>어려운 부분을 찾아 복습해보세요</p>
-          </span>
-        </article>
-        <article className={styles.function}>
-          <div className={styles.functionImg}></div>
-          <h3>교육적 불평등 완화</h3>
-          <span className={styles.descriptionContainer}>
-            <p>너무 빠르거나 익숙하지 않아서,</p>
-            <p>곧바로 이해하기 어려운 수업도</p>
-            <p>여러 번 읽고 깊게 생각해보세요</p>
-          </span>
-        </article>
+        <div className={styles.functionsTitleContainer}>
+          <p className={styles.functionTitle}>FUNCTION</p>
+          <p className={styles.funcitonSubTitle}>
+            모두에게 평등한 학습 환경, 히어러스가 만들어 나갈게요
+          </p>
+        </div>
+        <div className={styles.functionBoxContainer}>
+          <article className={styles.functionBox}>
+            <img
+              className={styles.functionImg}
+              src={function1}
+              alt="청각장애학우 지원"
+            />
+            <p className={styles.boxTitle}>청각장애학우 지원</p>
+            <span className={styles.descriptionContainer}>
+              <p>강의 중, 조별과제, 회의 상황에서</p>
+              <p>실시간 음성인식 자막을 통해</p>
+              <p>빠르게 이해하고 소통할 수 있어요</p>
+            </span>
+          </article>
+          <article className={styles.functionBox}>
+            <img
+              className={styles.functionImg}
+              src={function2}
+              alt="학습효율 향상"
+            />
+            <p className={styles.boxTitle}>학습효율 향상</p>
+            <span className={styles.descriptionContainer}>
+              <p>녹음 스크립트가 준비되었다면</p>
+              <p>테스트 자동 생성 기능으로</p>
+              <p>어려운 부분을 찾아 복습해보세요</p>
+            </span>
+          </article>
+          <article className={styles.functionBox}>
+            <img
+              className={styles.functionImg}
+              src={function3}
+              alt="교육적 불평등 완화"
+            />
+            <p className={styles.boxTitle}>교육적 불평등 완화</p>
+            <span className={styles.descriptionContainer}>
+              <p>너무 빠르거나 익숙하지 않아서,</p>
+              <p>곧바로 이해하기 어려운 수업도</p>
+              <p>여러 번 읽고 깊게 생각해보세요</p>
+            </span>
+          </article>
+        </div>
       </section>
       <section className={styles.highLight}>
         {/* 스크롤 애니메이션 구현 예정 */}
