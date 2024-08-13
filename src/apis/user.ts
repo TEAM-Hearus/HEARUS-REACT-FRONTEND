@@ -7,7 +7,7 @@ interface IGetUserInfoResponse {
   success: boolean;
 }
 
-interface IUserInfo {
+export interface IUserInfo {
   userId: string;
   userName: string;
   userEmail: string;
