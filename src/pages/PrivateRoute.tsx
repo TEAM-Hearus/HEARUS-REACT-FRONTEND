@@ -13,6 +13,7 @@ const PrivateRoute = ({ element }: IProps) => {
   const { data } = useQuery({
     queryKey: ['user'],
     queryFn: getUserInfo,
+    staleTime: 5 * 60 * 1000,
   });
   const { setUserInfo } = useUserInfoStore();
   useEffect(() => {
