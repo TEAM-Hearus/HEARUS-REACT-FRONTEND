@@ -14,12 +14,17 @@ const TestMake = () => {
     queryFn: () => getAllScripts(),
   });
 
-  const { lectureId, setLectureId, setScheduleElementId } =
+  const { lectureId, setLectureId, setScheduleElementId, setTestName } =
     useTestSettingsStore();
 
-  const handleScriptClick = (lectureId: string, scheduleElementId: number) => {
+  const handleScriptClick = (
+    lectureId: string,
+    scheduleElementId: number,
+    name: string,
+  ) => {
     setLectureId(lectureId);
     setScheduleElementId(scheduleElementId);
+    setTestName(`테스트-${name}`);
   };
 
   const handleTestStartBtnClick = () => {
@@ -46,7 +51,11 @@ const TestMake = () => {
                 key={script.id}
                 className={`${script.id === lectureId ? styles.selectedScript : styles.scriptWrapper}`}
                 onClick={() => {
-                  handleScriptClick(script.id, script.scheduleElementId);
+                  handleScriptClick(
+                    script.id,
+                    script.scheduleElementId,
+                    script.name,
+                  );
                 }}
               >
                 <ScriptItem {...script} />
