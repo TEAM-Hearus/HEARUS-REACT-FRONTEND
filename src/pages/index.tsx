@@ -11,6 +11,7 @@ import Test from './Test/Test';
 import OAuthCallback from './Auth/OAuthCallback';
 import Login from './Auth/AuthForm/Login';
 import SignUp from './Auth/AuthForm/SignUp';
+import ErrorPage from './Error/ErrorPage';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
   {
     path: '/home',
     element: <PrivateRoute element={<HomeLayout />} />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '',
@@ -58,6 +60,10 @@ const router = createBrowserRouter([
   {
     path: '/test',
     element: <PrivateRoute element={<Test />} />,
+  },
+  {
+    path: '*',
+    element: <ErrorPage />,
   },
 ]);
 

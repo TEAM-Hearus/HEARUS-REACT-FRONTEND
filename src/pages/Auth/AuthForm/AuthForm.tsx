@@ -129,7 +129,7 @@ const AuthForm = ({
               </button>
             </label>
             {title === '로그인' && (
-              <span className={styles.checkboxContainer}>
+              <div className={styles.checkboxContainer}>
                 <input
                   type="checkbox"
                   id="remember"
@@ -138,7 +138,7 @@ const AuthForm = ({
                 <label className={styles.checkBoxLabel} htmlFor="remember">
                   로그인 유지하기
                 </label>
-              </span>
+              </div>
             )}
           </div>
           {title === '새 계정' && (

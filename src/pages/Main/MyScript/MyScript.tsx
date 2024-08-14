@@ -42,14 +42,14 @@ const MyScript = () => {
       ) : (
         <div className={styles.scriptContainer}>
           {data?.map((script) => (
-            <span
+            <div
               key={script.id}
               onClick={() => {
                 handleScriptClick(script.id);
               }}
             >
               <ScriptItem {...script} />
-            </span>
+            </div>
           ))}
         </div>
       )}

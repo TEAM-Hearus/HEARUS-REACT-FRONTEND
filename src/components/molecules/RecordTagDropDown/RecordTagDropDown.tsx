@@ -4,13 +4,13 @@ import useRecordModalStore from '../../../store/useRecordModalStore';
 import { IScheduleElement } from '../../../constants/schedule';
 import { getSchedule } from '../../../apis/schedule';
 import styles from './RecordTagDropDown.module.scss';
-
-const name = '건국대학교 3-1학기'; // 임시 지정
+import { useUserInfoStore } from '../../../store/userUserInfoStore';
 
 const RecordTagDropDown = () => {
+  const { userInfo } = useUserInfoStore();
   const { data } = useQuery<IScheduleElement[], Error>({
-    queryKey: ['schedule', name],
-    queryFn: () => getSchedule(name),
+    queryKey: ['schedule', userInfo.userName],
+    queryFn: () => getSchedule(userInfo.userName),
   });
 
   const [isTagBtnClicked, setIsTagBtnClicked] = useState(false);
@@ -34,7 +34,7 @@ const RecordTagDropDown = () => {
   };
 
   return (
-    <span className={styles.wrapper}>
+    <div className={styles.wrapper}>
       <button
         className={`${styles.tagBtn} ${data !== undefined && data.length > 0 && styles.active}`}
         onClick={handleTagBtnClick}
@@ -44,13 +44,18 @@ const RecordTagDropDown = () => {
       {isTagBtnClicked && (
         <ul className={styles.tagsUl}>
           {TAGS.map((name) => (
-            <li className={styles.tagLi} onClick={() => handleLiClick(name)}>
+            <li
+              key={name}
+              className={styles.tagLi}
+              onClick={() => handleLiClick(name)}
+              role="option"
+            >
               {name}
             </li>
           ))}
         </ul>
       )}
-    </span>
+    </div>
   );
 };
 

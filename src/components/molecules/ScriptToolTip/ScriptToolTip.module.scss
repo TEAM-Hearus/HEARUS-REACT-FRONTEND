@@ -8,9 +8,6 @@
   background-color: $white_FF;
   border-radius: 8px;
   box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.1);
-  :last-child {
-    border: none;
-  }
 }
 .tooltipItem {
   display: flex;
@@ -21,5 +18,26 @@
   @include Medium_Body_16;
   color: $dark-font_33;
   border-bottom: 1px solid $light-bg_F2;
+  cursor: pointer;
+}
+.deleteBtnWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 9px;
+}
+.deleteBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-width: 210px;
+  height: 34px;
+  padding: 12px;
+  background-color: $white_FF;
+  border: 1px solid #ffd6d6;
+  border-radius: 8px;
+  @include SemiBold_Sub_14;
+  color: $brand-point;
   cursor: pointer;
 }

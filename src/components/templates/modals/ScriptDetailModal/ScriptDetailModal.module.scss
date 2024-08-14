@@ -14,12 +14,14 @@
   height: 100dvh;
   padding: 20px;
   background: rgba(0, 0, 0, 0.1);
+  z-index: 10;
 }
 .contentContainer {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 6px;
   width: 50%;
   height: 100%;
   padding: 40px;
@@ -41,26 +43,17 @@
   font-size: 24px;
   color: $dark-font_5A;
 }
-.playBox {
+.subjectTag {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 6px;
-  width: max-content;
-  padding: 4px 12px;
-  margin-top: 4px;
+  height: 30px;
+  padding: 12px;
   background-color: $light-bg_F9;
-  border-radius: 6px;
-}
-.playBtn {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-.time {
-  width: 60px;
+  border: 1px solid $light-bg_E5;
+  border-radius: 15px;
   @include SemiBold_Sub_14;
-  color: $light-gray_81;
+  color: $dark-font_5A;
 }
 .textBox {
   display: flex;

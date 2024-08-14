@@ -8,12 +8,11 @@ import Down from '../../../../assets/images/arrow/down-arrow.svg?react';
 import { IScheduleElement } from '../../../../constants/schedule';
 import { getSchedule } from '../../../../apis/schedule';
 import styles from './RecordModal.module.scss';
+import { useUserInfoStore } from '../../../../store/userUserInfoStore';
 
 interface IProps {
   handleQuit: () => void; // 타이머, 녹음, 소켓 연결 종료
 }
-
-const name = '건국대학교 3-1학기'; // 임시 지정
 
 const RecordModal = ({ handleQuit }: IProps) => {
   const navigate = useNavigate();
@@ -21,9 +20,11 @@ const RecordModal = ({ handleQuit }: IProps) => {
   const [localData, setLocalData] = useState(recordData);
   const [isTagClicked, setIsTagClicked] = useState(false);
 
+  const { userInfo } = useUserInfoStore();
+
   const { data } = useQuery<IScheduleElement[], Error>({
-    queryKey: ['schedule', name],
-    queryFn: () => getSchedule(name),
+    queryKey: ['schedule', userInfo.userName],
+    queryFn: () => getSchedule(userInfo.userName),
   });
   const TAGS = useMemo(() => {
     if (!data) return [];
@@ -89,9 +90,11 @@ const RecordModal = ({ handleQuit }: IProps) => {
               onChange={handleChange}
               readOnly
             />
-            <span className={styles.arrow} onClick={handleClickArrow}>
-              {isTagClicked ? <Up /> : <Down />}
-            </span>
+            {TAGS.length > 0 && (
+              <div className={styles.arrow} onClick={handleClickArrow}>
+                {isTagClicked ? <Up /> : <Down />}
+              </div>
+            )}
           </div>
         </div>
         {isTagClicked && (

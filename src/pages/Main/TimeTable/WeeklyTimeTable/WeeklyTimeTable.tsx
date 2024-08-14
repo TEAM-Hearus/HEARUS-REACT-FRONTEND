@@ -5,15 +5,16 @@ import {
   IScheduleElement,
   TIMELIST,
 } from '../../../../constants/schedule';
-import styles from './WeeklyTimeTable.module.scss';
 import { getSchedule } from '../../../../apis/schedule';
-
-const name = '건국대학교 3-1학기'; // 임시 지정
+import styles from './WeeklyTimeTable.module.scss';
+import { useUserInfoStore } from '../../../../store/userUserInfoStore';
 
 const WeeklyTimeTable = () => {
+  const { userInfo } = useUserInfoStore();
+
   const { data } = useQuery<IScheduleElement[], Error>({
-    queryKey: ['schedule', name],
-    queryFn: () => getSchedule(name),
+    queryKey: ['schedule', userInfo.userName],
+    queryFn: () => getSchedule(userInfo.userName),
   });
   return (
     <div className={styles.table}>
@@ -27,15 +28,14 @@ const WeeklyTimeTable = () => {
       <div className={styles.tableBox}>
         {TIMELIST.map((time, index) => (
           <div className={styles.timeRow} key={index}>
-            <span className={styles.time}>{time}</span>
-            {daysOfWeek.map((day) => (
-              <div
-                className={`${styles.daytime} ${
-                  index === TIMELIST.length - 1 ? styles.lastCell : ''
-                }`}
-                key={day}
-              ></div>
-            ))}
+            <p className={styles.time}>{time}</p>
+            {index !== TIMELIST.length - 1 &&
+              daysOfWeek.map((day) => (
+                <div
+                  className={`${styles.daytime} ${index === TIMELIST.length - 2 && styles.lastRow}`}
+                  key={day}
+                />
+              ))}
           </div>
         ))}
       </div>

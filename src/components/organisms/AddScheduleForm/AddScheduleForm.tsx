@@ -10,14 +10,20 @@ import {
 import {
   getIsAddScheduleFormValid,
   getIsTimeValid,
+  IScheduleElementDTO,
+  transformToScheduleElementDTO,
 } from '../../../utils/schedule';
 import styles from './AddScheduleForm.module.scss';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { addScheduleElement } from '../../../apis/schedule';
+import { useUserInfoStore } from '../../../store/userUserInfoStore';
 
 interface IProps {
   onClose: () => void;
 }
 
 const AddScheduleForm = ({ onClose }: IProps) => {
+  const queryClient = useQueryClient();
   const [lectureInfo, setLectureInfo] =
     useState<LectureInfo>(initialLectureInfo);
   const [isTimeValid, setIsTimeValid] = useState(false);
@@ -27,6 +33,8 @@ const AddScheduleForm = ({ onClose }: IProps) => {
   const startMinuteRef = useRef<HTMLInputElement | null>(null);
   const endHourRef = useRef<HTMLInputElement | null>(null);
   const endMinuteRef = useRef<HTMLInputElement | null>(null);
+
+  const { userInfo } = useUserInfoStore();
 
   useEffect(() => {
     const isFormValid = getIsAddScheduleFormValid(lectureInfo);
@@ -86,10 +94,24 @@ const AddScheduleForm = ({ onClose }: IProps) => {
     setLectureInfo((prevState) => ({ ...prevState, day }));
   };
 
+  const postMutation = useMutation({
+    mutationFn: (data: IScheduleElementDTO) =>
+      addScheduleElement(data, userInfo.userName),
+    onSuccess: () => {
+      onClose();
+      queryClient.invalidateQueries({
+        queryKey: ['schedule', userInfo.userName],
+      });
+    },
+    onError: () => {
+      alert('강의 추가를 실패했습니다.');
+    },
+  });
+
   const handleSubmit = () => {
     if (isFormValid) {
-      console.log('Lecture added:', lectureInfo);
-      onClose();
+      const formattedData = transformToScheduleElementDTO(lectureInfo);
+      postMutation.mutate(formattedData);
     }
   };
 

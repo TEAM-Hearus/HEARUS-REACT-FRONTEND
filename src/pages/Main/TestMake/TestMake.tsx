@@ -14,15 +14,31 @@ const TestMake = () => {
     queryFn: () => getAllScripts(),
   });
 
-  const { lectureId, setLectureId } = useTestSettingsStore();
+  const {
+    lectureId,
+    questionCount,
+    questionTypes,
+    setLectureId,
+    setScheduleElementId,
+    setTestName,
+  } = useTestSettingsStore();
 
-  const handleScriptClick = (id: string) => {
-    setLectureId(id);
+  const handleScriptClick = (
+    lectureId: string,
+    scheduleElementId: number,
+    name: string,
+  ) => {
+    setLectureId(lectureId);
+    setScheduleElementId(scheduleElementId);
+    setTestName(`테스트-${name}`);
   };
 
   const handleTestStartBtnClick = () => {
-    // 문제 유형 유효성 검사 로직 구현 예정
-    navigate('/test');
+    if (lectureId.length < 0 && questionCount > 0 && questionTypes.length > 0) {
+      navigate('/test');
+    } else {
+      alert('스크립트와 문제 유형, 문제 개수를 모두 선택해주세요.');
+    }
   };
 
   return (
@@ -40,15 +56,19 @@ const TestMake = () => {
         {data && data.length > 0 ? (
           <section className={styles.scriptsContainer}>
             {data.map((script) => (
-              <span
+              <div
                 key={script.id}
                 className={`${script.id === lectureId ? styles.selectedScript : styles.scriptWrapper}`}
                 onClick={() => {
-                  handleScriptClick(script.id);
+                  handleScriptClick(
+                    script.id,
+                    script.scheduleElementId,
+                    script.name,
+                  );
                 }}
               >
                 <ScriptItem {...script} />
-              </span>
+              </div>
             ))}
           </section>
         ) : (
