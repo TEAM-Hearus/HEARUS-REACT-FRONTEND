@@ -5,8 +5,7 @@ import useTestModalStore from '../../../../store/useTestModalStore';
 import Back from '../../../../assets/images/arrow/back.svg?react';
 import { formatTimer } from '../../../../utils/dateFormatters';
 import styles from './TestHeader.module.scss';
-
-const TEST_TITLE = '테스트-경제학원론-240708'; //임시
+import useTestSettingsStore from '../../../../store/useTestSettingsStore';
 
 interface IProps {
   handleSubmit: () => void;
@@ -17,6 +16,7 @@ const TestHeader = ({ handleSubmit, showResults }: IProps) => {
   const [seconds, setSeconds] = useState(0);
   const timerIntervalRef = useRef<number | null>(null);
 
+  const { testName } = useTestSettingsStore();
   const { isModalOpen, openModal } = useTestModalStore();
 
   const startTimer = () => {
@@ -53,7 +53,7 @@ const TestHeader = ({ handleSubmit, showResults }: IProps) => {
           <Back />
         </Link>
       </div>
-      <h1 className={styles.title}>{TEST_TITLE}</h1>
+      <h1 className={styles.title}>{testName}</h1>
       <div className={styles.rightContainer}>
         <p className={styles.timer}>{formatTimer(seconds)}</p>
         <button className={styles.quitBtn} onClick={handleClickQuitBtn}>
@@ -61,7 +61,7 @@ const TestHeader = ({ handleSubmit, showResults }: IProps) => {
         </button>
       </div>
       {isModalOpen && (
-        <TestModal title={TEST_TITLE} handleSubmit={handleSubmit} />
+        <TestModal title={testName} handleSubmit={handleSubmit} />
       )}
     </header>
   );
