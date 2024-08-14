@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import TestHeader from '../../components/organisms/headers/TestHeader/TestHeader';
 import MultipleChoice from '../../components/molecules/questions/MultipleChoice/MultipleChoice';
 import OXChoice from '../../components/molecules/questions/OXChoice/OXChoice';
 import ShortAnswer from '../../components/molecules/questions/ShortAnswer/ShortAnswer';
-import { QUESTION_LIST } from '../../constants/question';
-import styles from './Test.module.scss';
 import useTestModalStore from '../../store/useTestModalStore';
 import useTestSettingsStore from '../../store/useTestSettingsStore';
-import { useQuery } from '@tanstack/react-query';
+import { QUESTION_LIST } from '../../constants/question';
 import { generateProblem } from '../../apis/test';
+import styles from './Test.module.scss';
 
 const Test = () => {
   const { lectureId, scheduleElementId, questionCount, questionTypes } =
