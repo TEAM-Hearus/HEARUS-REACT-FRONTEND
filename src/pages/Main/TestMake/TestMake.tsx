@@ -14,8 +14,14 @@ const TestMake = () => {
     queryFn: () => getAllScripts(),
   });
 
-  const { lectureId, setLectureId, setScheduleElementId, setTestName } =
-    useTestSettingsStore();
+  const {
+    lectureId,
+    questionCount,
+    questionTypes,
+    setLectureId,
+    setScheduleElementId,
+    setTestName,
+  } = useTestSettingsStore();
 
   const handleScriptClick = (
     lectureId: string,
@@ -28,8 +34,11 @@ const TestMake = () => {
   };
 
   const handleTestStartBtnClick = () => {
-    // 문제 유형 유효성 검사 로직 구현 예정
-    navigate('/test');
+    if (lectureId.length < 0 && questionCount > 0 && questionTypes.length > 0) {
+      navigate('/test');
+    } else {
+      alert('스크립트와 문제 유형, 문제 개수를 모두 선택해주세요.');
+    }
   };
 
   return (
