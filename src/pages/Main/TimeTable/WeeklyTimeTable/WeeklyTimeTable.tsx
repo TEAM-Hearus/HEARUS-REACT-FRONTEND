@@ -7,13 +7,14 @@ import {
 } from '../../../../constants/schedule';
 import { getSchedule } from '../../../../apis/schedule';
 import styles from './WeeklyTimeTable.module.scss';
-
-const name = '김히얼'; // 임시 지정
+import { useUserInfoStore } from '../../../../store/userUserInfoStore';
 
 const WeeklyTimeTable = () => {
+  const { userInfo } = useUserInfoStore();
+
   const { data } = useQuery<IScheduleElement[], Error>({
-    queryKey: ['schedule', name],
-    queryFn: () => getSchedule(name),
+    queryKey: ['schedule', userInfo.userName],
+    queryFn: () => getSchedule(userInfo.userName),
   });
   return (
     <div className={styles.table}>

@@ -9,14 +9,17 @@ import TestMakeInactive from '../../../../assets/images/nav/test-make-inactive.s
 import TrashCanActive from '../../../../assets/images/nav/trash-can-active.svg?react';
 import TrashCanInactive from '../../../../assets/images/nav/trash-can-inactive.svg?react';
 import styles from './MainNav.module.scss';
+import { useUserInfoStore } from '../../../../store/userUserInfoStore';
 
 const MainNav = () => {
-  const USERNAME = 'UserName'; // 임시 지정
+  const { userInfo } = useUserInfoStore();
+  const USERNAME = userInfo.userName;
+
   return (
     <nav className={styles.container}>
       <div className={styles.userProfile}>
         <div className={styles.profileImage}></div>
-        <p className={styles.useName}>{USERNAME}</p>
+        <p className={styles.userName}>{USERNAME}</p>
       </div>
       <span className={styles.searchIcon}>
         <Search />

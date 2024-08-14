@@ -16,6 +16,7 @@ import {
 import styles from './AddScheduleForm.module.scss';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addScheduleElement } from '../../../apis/schedule';
+import { useUserInfoStore } from '../../../store/userUserInfoStore';
 
 interface IProps {
   onClose: () => void;
@@ -32,6 +33,8 @@ const AddScheduleForm = ({ onClose }: IProps) => {
   const startMinuteRef = useRef<HTMLInputElement | null>(null);
   const endHourRef = useRef<HTMLInputElement | null>(null);
   const endMinuteRef = useRef<HTMLInputElement | null>(null);
+
+  const { userInfo } = useUserInfoStore();
 
   useEffect(() => {
     const isFormValid = getIsAddScheduleFormValid(lectureInfo);
@@ -92,11 +95,13 @@ const AddScheduleForm = ({ onClose }: IProps) => {
   };
 
   const postMutation = useMutation({
-    mutationFn: (data: IScheduleElementDTO) => addScheduleElement(data),
+    mutationFn: (data: IScheduleElementDTO) =>
+      addScheduleElement(data, userInfo.userName),
     onSuccess: () => {
       onClose();
-      const name = '김히얼'; // 동적 할당 구현 예정
-      queryClient.invalidateQueries({ queryKey: ['schedule', name] });
+      queryClient.invalidateQueries({
+        queryKey: ['schedule', userInfo.userName],
+      });
     },
     onError: () => {
       alert('강의 추가를 실패했습니다.');

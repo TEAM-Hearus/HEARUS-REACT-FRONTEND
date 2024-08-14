@@ -77,7 +77,10 @@ interface IPOSTScheduleElementResponse {
   success: boolean;
 }
 
-export const addScheduleElement = async (inputData: IScheduleElementDTO) => {
+export const addScheduleElement = async (
+  inputData: IScheduleElementDTO,
+  name: string,
+) => {
   const token = getToken();
   try {
     const res = await fetch(`${API_URL}/api/v1/schedule/addElement`, {
@@ -88,7 +91,7 @@ export const addScheduleElement = async (inputData: IScheduleElementDTO) => {
       },
       body: JSON.stringify({
         scheduleDTO: {
-          name: '김히얼', // 동적 할당 구현 예정
+          name,
         },
         scheduleElementDTO: inputData,
       }),
@@ -100,7 +103,10 @@ export const addScheduleElement = async (inputData: IScheduleElementDTO) => {
   }
 };
 
-export const deleteScheduleElement = async (scheduleElementId: number) => {
+export const deleteScheduleElement = async (
+  scheduleElementId: number,
+  name: string,
+) => {
   const token = getToken();
   try {
     const res = await fetch(`${API_URL}/api/v1/schedule/deleteElement`, {
@@ -111,7 +117,7 @@ export const deleteScheduleElement = async (scheduleElementId: number) => {
       },
       body: JSON.stringify({
         scheduleDTO: {
-          name: '김히얼', // 동적 할당 구현 예정
+          name,
         },
         scheduleElementDTO: {
           id: scheduleElementId,

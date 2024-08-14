@@ -8,17 +8,18 @@ import {
 import ScriptIcon from '../../../assets/images/nav/my-script-inactive.svg?react';
 import TrashCan from '../../../assets/images/orange-trash-can.svg?react';
 import styles from './ScriptToolTip.module.scss';
+import { useUserInfoStore } from '../../../store/userUserInfoStore';
 
 interface IProps {
   id: number;
   scheduleName: string;
 }
 
-const name = '김히얼'; //임시
-
 const ScriptToolTip = ({ id, scheduleName }: IProps) => {
   const [selectedScriptId, setSelectedScriptId] = useState<string | null>(null);
   const queryClient = useQueryClient();
+
+  const { userInfo } = useUserInfoStore();
 
   const { data } = useQuery({
     queryKey: ['tooltip', id],
@@ -26,7 +27,7 @@ const ScriptToolTip = ({ id, scheduleName }: IProps) => {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id: number) => deleteScheduleElement(id),
+    mutationFn: (id: number) => deleteScheduleElement(id, userInfo.userName),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['schedule', name] });
     },

@@ -4,13 +4,13 @@ import useRecordModalStore from '../../../store/useRecordModalStore';
 import { IScheduleElement } from '../../../constants/schedule';
 import { getSchedule } from '../../../apis/schedule';
 import styles from './RecordTagDropDown.module.scss';
-
-const name = '김히얼'; // 임시 지정
+import { useUserInfoStore } from '../../../store/userUserInfoStore';
 
 const RecordTagDropDown = () => {
+  const { userInfo } = useUserInfoStore();
   const { data } = useQuery<IScheduleElement[], Error>({
-    queryKey: ['schedule', name],
-    queryFn: () => getSchedule(name),
+    queryKey: ['schedule', userInfo.userName],
+    queryFn: () => getSchedule(userInfo.userName),
   });
 
   const [isTagBtnClicked, setIsTagBtnClicked] = useState(false);
