@@ -15,13 +15,13 @@ const MultipleChoice = ({
     <ul className={styles.optionsContainer}>
       {options.map((option, index) => (
         <li
-          key={`${option}-${index + 1}`}
+          key={`${option}-${index}`}
           className={`${styles.optionItem} 
-            ${userAnswer === index + 1 ? styles.selected : styles.unselected}
-            ${showResult && userAnswer !== answer && answer === index + 1 ? styles.wrong : ''}
-            ${showResult && userAnswer !== answer && userAnswer === index + 1 ? styles.selected : ''}
-            ${showResult && userAnswer === answer && index + 1 === answer ? styles.correct : ''}`}
-          onClick={() => handleItemClick(index + 1)}
+            ${userAnswer === index ? styles.selected : styles.unselected}
+            ${showResult && userAnswer !== answer && answer === index ? styles.wrong : ''}
+            ${showResult && userAnswer !== answer && userAnswer === index ? styles.selected : ''}
+            ${showResult && userAnswer === answer && index === answer ? styles.correct : ''}`}
+          onClick={() => handleItemClick(index)}
         >
           {`${index + 1}. ${option}`}
         </li>

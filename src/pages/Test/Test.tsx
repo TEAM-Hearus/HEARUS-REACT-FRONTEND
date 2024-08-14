@@ -57,7 +57,7 @@ const Test = () => {
     <div className={styles.container}>
       <TestHeader handleSubmit={handleSubmit} showResults={showResults} />
       <article className={styles.problemsContainer}>
-        {QUESTION_LIST.map((question, index) => (
+        {data?.map((question, index) => (
           <section key={question.direction} className={styles.questionBox}>
             <p className={styles.qestionNumber}>Q{index + 1}</p>
             <p className={styles.questionTitle}>{question.direction}</p>

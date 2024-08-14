@@ -3,8 +3,15 @@ import { API_URL, getToken } from '.';
 interface IGenerateProblemResponse {
   status: string;
   msg: string;
-  object: any; // 임시
+  object: IQuestion[];
   success: boolean;
+}
+
+export interface IQuestion {
+  type: string;
+  direction: string;
+  options: string[];
+  answer: string | number;
 }
 
 export interface IProblemInput {
