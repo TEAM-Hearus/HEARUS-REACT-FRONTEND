@@ -44,7 +44,6 @@ const AuthForm = ({
     e.preventDefault();
     setIsShowPasswordConfirmClick((prev) => !prev);
   };
-
   const loginMutation = useMutation({
     mutationFn: emailLogin,
     onSuccess: (data) => {
@@ -93,8 +92,8 @@ const AuthForm = ({
     }
   };
 
-  const handleGoogleClick = () => {
-    window.location.href = `${API_URL}/oauth2/authorization/google`;
+  const handleOAuthClick = (e: string) => {
+    window.location.href = `${API_URL}/oauth2/authorization/${e}`;
   };
 
   return (
@@ -178,11 +177,18 @@ const AuthForm = ({
           <button className={styles.authBtn}>{buttonText}</button>
         </form>
         <div className={styles.oauthBtnsContainer}>
-          <button className={styles.googleBtn} onClick={handleGoogleClick}>
+          <button
+            className={styles.googleBtn}
+            onClick={() => handleOAuthClick('google')}
+          >
             <img src={Google} alt="Google Logo" />
           </button>
           <button className={styles.kakaoBtn}>
-            <img src={Kakao} alt="Kakao Logo" />
+            <img
+              src={Kakao}
+              alt="Kakao Logo"
+              onClick={() => handleOAuthClick('kakao')}
+            />
           </button>
         </div>
         <div className={styles.AuthGoBox}>
