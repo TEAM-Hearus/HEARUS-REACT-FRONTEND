@@ -11,7 +11,8 @@ interface IEmailLoginParams {
   userPassword: string;
 }
 
-interface IGoogleLoginParams {
+interface ISocialLoginParams {
+  social: string;
   state: string;
   code: string;
 }
@@ -35,10 +36,14 @@ interface ITokens {
   refreshToken: string;
 }
 
-export const googleLogin = async ({ state, code }: IGoogleLoginParams) => {
+export const OAuthLogin = async ({
+  social,
+  state,
+  code,
+}: ISocialLoginParams) => {
   try {
     const res = await fetch(
-      `${API_URL}/login/oauth2/code/google?state=${state}&code=${code}`,
+      `${API_URL}/login/oauth2/code/${social}?state=${state}&code=${code}`,
       {
         credentials: 'include',
       },
