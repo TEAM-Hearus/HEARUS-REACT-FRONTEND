@@ -6,7 +6,6 @@ import OXChoice from '../../components/molecules/questions/OXChoice/OXChoice';
 import ShortAnswer from '../../components/molecules/questions/ShortAnswer/ShortAnswer';
 import useTestModalStore from '../../store/useTestModalStore';
 import useTestSettingsStore from '../../store/useTestSettingsStore';
-import { QUESTION_LIST } from '../../constants/question';
 import { generateProblem } from '../../apis/test';
 import styles from './Test.module.scss';
 
@@ -26,12 +25,12 @@ const Test = () => {
     retry: false,
   });
 
+  const [userAnswers, setUserAnswers] = useState<(string | number)[]>([]);
+
   useEffect(() => {
-    console.log(data);
+    setUserAnswers(Array(data?.length).fill(''));
   }, [data]);
-  const [userAnswers, setUserAnswers] = useState<(string | number)[]>(
-    Array(QUESTION_LIST.length).fill(''),
-  );
+
   const [showResults, setShowResults] = useState(false);
 
   const { updateTestData, clearTestData } = useTestModalStore();
@@ -49,9 +48,9 @@ const Test = () => {
   };
 
   useEffect(() => {
-    updateTestData({ totalNum: QUESTION_LIST.length });
+    updateTestData({ totalNum: data?.length });
     return () => clearTestData();
-  }, []);
+  }, [data]);
 
   return (
     <div className={styles.container}>
