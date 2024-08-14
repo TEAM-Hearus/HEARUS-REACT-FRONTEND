@@ -26,6 +26,7 @@ export interface IScriptInList {
 
 interface IScriptDetail {
   name: string;
+  scheduleElementId: string;
   processedScript: string[];
 }
 

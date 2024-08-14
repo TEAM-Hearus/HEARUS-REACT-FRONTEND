@@ -1,0 +1,10 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/variables/fonts.scss';
+
+.sentence {
+  @include Regular_Body_16;
+  color: $dark-font_33;
+}
+.highlight {
+  background-color: #fff3d6;
+}
