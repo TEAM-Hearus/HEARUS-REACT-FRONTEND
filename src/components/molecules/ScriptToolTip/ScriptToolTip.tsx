@@ -29,7 +29,9 @@ const ScriptToolTip = ({ id, scheduleName }: IProps) => {
   const deleteMutation = useMutation({
     mutationFn: (id: number) => deleteScheduleElement(id, userInfo.userName),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['schedule', name] });
+      queryClient.invalidateQueries({
+        queryKey: ['schedule', userInfo.userName],
+      });
     },
     onError: () => {
       alert('시간표 삭제를 실패했습니다.');
