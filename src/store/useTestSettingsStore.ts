@@ -3,10 +3,12 @@ import { EnQuestionType } from '../utils/test';
 
 type TestSettingsStore = {
   lectureId: string;
+  scheduleElementId: number;
   questionTypes: EnQuestionType[];
   questionCount: number;
   timeLimit: number | null;
   setLectureId: (id: string) => void;
+  setScheduleElementId: (id: number) => void;
   pushQuestionType: (type: EnQuestionType) => void;
   popQuestionType: (type: EnQuestionType) => void;
   setQuestionCount: (count: number) => void;
@@ -16,11 +18,13 @@ type TestSettingsStore = {
 
 const useTestSettingsStore = create<TestSettingsStore>()((set) => ({
   lectureId: '',
+  scheduleElementId: 0,
   questionTypes: ['MultipleChoice'],
   questionCount: 0,
   timeLimit: null,
 
   setLectureId: (id) => set({ lectureId: id }),
+  setScheduleElementId: (id) => set({ scheduleElementId: id }),
   pushQuestionType: (type) =>
     set((state) => ({
       questionTypes: state.questionTypes.includes(type)

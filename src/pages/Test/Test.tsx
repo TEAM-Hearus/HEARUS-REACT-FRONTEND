@@ -6,8 +6,29 @@ import ShortAnswer from '../../components/molecules/questions/ShortAnswer/ShortA
 import { QUESTION_LIST } from '../../constants/question';
 import styles from './Test.module.scss';
 import useTestModalStore from '../../store/useTestModalStore';
+import useTestSettingsStore from '../../store/useTestSettingsStore';
+import { useQuery } from '@tanstack/react-query';
+import { generateProblem } from '../../apis/test';
 
 const Test = () => {
+  const { lectureId, scheduleElementId, questionCount, questionTypes } =
+    useTestSettingsStore();
+  const inputData = {
+    lectureId: lectureId,
+    subject: scheduleElementId,
+    problem_num: questionCount,
+    problem_types: questionTypes.join(','),
+  };
+
+  const { data } = useQuery({
+    queryKey: ['problem', lectureId],
+    queryFn: () => generateProblem(inputData),
+    retry: false,
+  });
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   const [userAnswers, setUserAnswers] = useState<(string | number)[]>(
     Array(QUESTION_LIST.length).fill(''),
   );
