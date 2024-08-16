@@ -1,19 +1,9 @@
 import {
-  ColorKey,
+  daysEnNumMap,
   DayOfWeek,
-  daysObject,
+  daysKorEnMap,
   LectureInfo,
 } from '../constants/schedule';
-
-const DAYMAP: Record<DayOfWeek, number> = {
-  SUN: 0,
-  MON: 1,
-  TUE: 2,
-  WED: 3,
-  THU: 4,
-  FRI: 5,
-  SAT: 6,
-};
 
 export const getScheduleStyle = (
   dayOfWeek: DayOfWeek,
@@ -27,7 +17,7 @@ export const getScheduleStyle = (
   // return 값
   const top = (startHour + startMinute - 9) * 80 + 60;
   const height = (endHour + endMinute - startHour - startMinute) * 80;
-  const left = `calc((100% - 120px) * ${DAYMAP[dayOfWeek]} / 7)`;
+  const left = `calc((100% - 120px) * ${daysEnNumMap[dayOfWeek]} / 7)`;
 
   return {
     '--schedule-left': left,
@@ -91,7 +81,7 @@ export const getIsAddScheduleFormValid = ({
 
 // 요일 한글 -> 대문자 영어 변환
 const getDayOfWeek = (day: string) => {
-  return daysObject[day as keyof typeof daysObject] || day;
+  return daysKorEnMap[day as keyof typeof daysKorEnMap] || day;
 };
 
 // 시간 ISO 변환
@@ -102,15 +92,6 @@ const getFormattedTime = (hour: string, minute: string) => {
   const timeString = `${hour.padStart(2, '0')}:${minute.padStart(2, '0')}:00`;
   return `${dateString}T${timeString}`;
 };
-
-export interface IScheduleElementDTO {
-  name: string;
-  location: string;
-  dayOfWeek: string;
-  startTime: string;
-  endTime: string;
-  color: ColorKey;
-}
 
 export const transformToScheduleElementDTO = (lectureData: LectureInfo) => {
   const transformedData = {

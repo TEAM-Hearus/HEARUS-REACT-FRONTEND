@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useUserInfoStore } from '../../../store/userUserInfoStore';
 import Warning from '../../../assets/images/warning.svg?react';
 import {
   COLORS,
   ColorKey,
+  IScheduleElementDTO,
   LectureInfo,
   daysOfWeek,
   initialLectureInfo,
@@ -10,13 +13,10 @@ import {
 import {
   getIsAddScheduleFormValid,
   getIsTimeValid,
-  IScheduleElementDTO,
   transformToScheduleElementDTO,
 } from '../../../utils/schedule';
-import styles from './AddScheduleForm.module.scss';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addScheduleElement } from '../../../apis/schedule';
-import { useUserInfoStore } from '../../../store/userUserInfoStore';
+import styles from './AddScheduleForm.module.scss';
 
 interface IProps {
   onClose: () => void;
