@@ -123,9 +123,9 @@ const AuthForm = ({
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button className={styles.showBtn} onClick={toggleShowPassword}>
+              <div className={styles.showBtn} onClick={toggleShowPassword}>
                 {isShowPasswordClick ? <On /> : <Off />}
-              </button>
+              </div>
             </label>
             {title === '로그인' && (
               <div className={styles.checkboxContainer}>
