@@ -1,6 +1,6 @@
 import { API_URL } from '.';
 import { IScheduleElement } from '../constants/schedule';
-import { IScheduleElementDTO } from '../utils/schedule';
+import { IScheduleElementDTO } from '../constants/schedule';
 import { getToken } from './';
 
 interface IGetScheduleResponse {

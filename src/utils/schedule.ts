@@ -3,6 +3,8 @@ import {
   DayOfWeek,
   daysKorEnMap,
   LectureInfo,
+  IScheduleElement,
+  IAddScheduleElement,
 } from '../constants/schedule';
 
 export const getScheduleStyle = (
@@ -103,4 +105,30 @@ export const transformToScheduleElementDTO = (lectureData: LectureInfo) => {
     color: lectureData.lectureColor,
   };
   return transformedData;
+};
+
+export const hasNewElementConflict = (
+  newElement: IAddScheduleElement,
+  existingElements: IScheduleElement[],
+): boolean => {
+  for (const existingElement of existingElements) {
+    if (newElement.dayOfWeek === existingElement.dayOfWeek) {
+      const startNew = new Date(`1970-01-01T${newElement.startTime}`).getTime();
+      const endNew = new Date(`1970-01-01T${newElement.endTime}`).getTime();
+      const startExisting = new Date(
+        `1970-01-01T${existingElement.startTime}`,
+      ).getTime();
+      const endExisting = new Date(
+        `1970-01-01T${existingElement.endTime}`,
+      ).getTime();
+
+      if (
+        (startNew < endExisting && startExisting < endNew) ||
+        (startExisting < endNew && startNew < endExisting)
+      ) {
+        return true;
+      }
+    }
+  }
+  return false;
 };

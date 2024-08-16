@@ -13,10 +13,19 @@ export interface IScheduleElement {
   endTime: string;
 }
 
+export interface IAddScheduleElement {
+  name: string;
+  location: string;
+  dayOfWeek: DayOfWeek;
+  color: ColorKey;
+  startTime: string;
+  endTime: string;
+}
+
 export interface IScheduleElementDTO {
   name: string;
   location: string;
-  dayOfWeek: string;
+  dayOfWeek: DayOfWeek;
   startTime: string;
   endTime: string;
   color: ColorKey;
@@ -66,7 +75,7 @@ export const daysKorEnMap = {
   금: 'FRI',
   토: 'SAT',
   일: 'SUN',
-};
+} as const;
 
 export const daysEnNumMap: Record<DayOfWeek, number> = {
   SUN: 0,
