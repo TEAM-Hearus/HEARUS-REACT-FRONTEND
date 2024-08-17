@@ -25,6 +25,10 @@ export const getSchedule = async (
       },
     );
     const data: IGetScheduleResponse = await res.json();
+    if (data.msg === 'Schedule not found with name') {
+      await createNewScheduleName(name);
+      return getSchedule(name);
+    }
     return data.object['scheduleElements'];
   } catch (error) {
     throw error;
@@ -113,6 +117,28 @@ export const deleteScheduleElement = async (
     });
     const data: IPOSTScheduleElementResponse = await res.json();
     return data.success;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const createNewScheduleName = async (name: string) => {
+  const token = getToken();
+  try {
+    const res = await fetch(`${API_URL}/api/v1/schedule/addSchedule`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name,
+      }),
+    });
+    const data = await res.json();
+    if (!data.success) {
+      throw new Error(data.msg);
+    }
   } catch (error) {
     throw error;
   }
