@@ -12,14 +12,38 @@ import { useEffect, useRef, useState } from 'react';
 
 const Landing = () => {
   const [activeIndex, setActiveIndex] = useState(1);
-  const carouselRef = useRef<HTMLUListElement>(null);
+  const [transition, setTransition] = useState(true);
+  const intervalRef = useRef<number | null>(null);
+
+  const startInterval = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+
+    intervalRef.current = setInterval(() => {
+      setActiveIndex((prevIndex) => {
+        if (prevIndex === SCROLLING_TEXTS.length - 2) {
+          setTimeout(() => {
+            setActiveIndex(0);
+            setTransition(false);
+
+            requestAnimationFrame(() => {
+              setActiveIndex(1);
+              setTransition(true);
+            });
+          }, 300);
+
+          return prevIndex;
+        }
+        setTransition(true);
+        return (prevIndex + 1) % SCROLLING_TEXTS.length;
+      });
+    }, 2000);
+  };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % SCROLLING_TEXTS.length);
-    }, 2000);
-
-    return () => clearInterval(interval);
+    startInterval();
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
   }, []);
 
   return (
@@ -144,9 +168,9 @@ const Landing = () => {
         <article className={styles.scrollingContainer}>
           <ul
             className={styles.scrollingText}
-            ref={carouselRef}
             style={{
-              transform: `translateY(-${activeIndex * 50}px)`,
+              transform: `translateY(-${activeIndex * 55}px)`,
+              transition: transition ? 'transform 0.3s ease' : 'none',
             }}
           >
             {SCROLLING_TEXTS.map((text, index) => (
