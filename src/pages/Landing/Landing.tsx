@@ -14,6 +14,7 @@ const Landing = () => {
   const [activeIndex, setActiveIndex] = useState(1);
   const [transition, setTransition] = useState(true);
   const intervalRef = useRef<number | null>(null);
+  const timeoutRef = useRef<number | null>(null);
 
   const startInterval = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
@@ -21,7 +22,7 @@ const Landing = () => {
     intervalRef.current = setInterval(() => {
       setActiveIndex((prevIndex) => {
         if (prevIndex === SCROLLING_TEXTS.length - 2) {
-          setTimeout(() => {
+          timeoutRef.current = setTimeout(() => {
             setActiveIndex(1);
             setTransition(false);
 
@@ -29,7 +30,7 @@ const Landing = () => {
               setActiveIndex(2);
               setTransition(true);
             });
-          }, 300);
+          }, 301);
 
           return prevIndex;
         }
@@ -43,6 +44,7 @@ const Landing = () => {
     startInterval();
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
 
