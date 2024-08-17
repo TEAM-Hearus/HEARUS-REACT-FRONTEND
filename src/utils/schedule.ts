@@ -113,13 +113,17 @@ export const hasNewElementConflict = (
 ): boolean => {
   for (const existingElement of existingElements) {
     if (newElement.dayOfWeek === existingElement.dayOfWeek) {
-      const startNew = new Date(`1970-01-01T${newElement.startTime}`).getTime();
-      const endNew = new Date(`1970-01-01T${newElement.endTime}`).getTime();
+      const startNew = new Date(
+        `1970-01-01T${newElement.startTime.slice(11)}`,
+      ).getTime();
+      const endNew = new Date(
+        `1970-01-01T${newElement.endTime.slice(11)}`,
+      ).getTime();
       const startExisting = new Date(
-        `1970-01-01T${existingElement.startTime}`,
+        `1970-01-01T${existingElement.startTime.slice(11)}`,
       ).getTime();
       const endExisting = new Date(
-        `1970-01-01T${existingElement.endTime}`,
+        `1970-01-01T${existingElement.endTime.slice(11)}`,
       ).getTime();
 
       if (
