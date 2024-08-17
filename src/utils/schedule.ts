@@ -109,26 +109,27 @@ export const transformToScheduleElementDTO = (lectureData: LectureInfo) => {
 
 export const hasNewElementConflict = (
   newElement: IAddScheduleElement,
-  existingElements: IScheduleElement[],
+  oldElements: IScheduleElement[],
 ): boolean => {
-  for (const existingElement of existingElements) {
-    if (newElement.dayOfWeek === existingElement.dayOfWeek) {
-      const startNew = new Date(
-        `1970-01-01T${newElement.startTime.slice(11)}`,
-      ).getTime();
-      const endNew = new Date(
-        `1970-01-01T${newElement.endTime.slice(11)}`,
-      ).getTime();
-      const startExisting = new Date(
-        `1970-01-01T${existingElement.startTime.slice(11)}`,
-      ).getTime();
-      const endExisting = new Date(
-        `1970-01-01T${existingElement.endTime.slice(11)}`,
-      ).getTime();
+  for (const oldElement of oldElements) {
+    if (newElement.dayOfWeek === oldElement.dayOfWeek) {
+      const startNewHour = Number(newElement.startTime.slice(11, 13));
+      const startNewMinute = Number(newElement.startTime.slice(14, 16)) / 60;
+      const endNewHour = Number(newElement.endTime.slice(11, 13));
+      const endNewMinute = Number(newElement.endTime.slice(14, 16)) / 60;
+      const startNewTime = startNewHour + startNewMinute;
+      const endNewTime = endNewHour + endNewMinute;
 
+      const startOldHour = Number(oldElement.startTime.slice(11, 13));
+      const startOldMinute = Number(oldElement.startTime.slice(14, 16)) / 60;
+      const endOldHour = Number(oldElement.endTime.slice(11, 13));
+      const endOldMinute = Number(oldElement.endTime.slice(14, 16)) / 60;
+      const startOldTime = startOldHour + startOldMinute;
+      const endOldTime = endOldHour + endOldMinute;
       if (
-        (startNew < endExisting && startExisting < endNew) ||
-        (startExisting < endNew && startNew < endExisting)
+        (startNewTime < endOldTime && endNewTime > startOldTime) ||
+        (startOldTime < endNewTime && endOldTime > startNewTime) ||
+        (startNewTime === startOldTime && endNewTime === endOldTime)
       ) {
         return true;
       }
