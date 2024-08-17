@@ -22,11 +22,11 @@ const Landing = () => {
       setActiveIndex((prevIndex) => {
         if (prevIndex === SCROLLING_TEXTS.length - 2) {
           setTimeout(() => {
-            setActiveIndex(0);
+            setActiveIndex(1);
             setTransition(false);
 
             requestAnimationFrame(() => {
-              setActiveIndex(1);
+              setActiveIndex(2);
               setTransition(true);
             });
           }, 300);
@@ -169,7 +169,7 @@ const Landing = () => {
           <ul
             className={styles.scrollingText}
             style={{
-              transform: `translateY(-${activeIndex * 55}px)`,
+              transform: `translateY(-${(activeIndex - 1) * 55}px)`,
               transition: transition ? 'transform 0.3s ease' : 'none',
             }}
           >
