@@ -11,7 +11,7 @@ import { SCROLLING_TEXTS } from '../../constants/landing';
 import { useEffect, useRef, useState } from 'react';
 
 const Landing = () => {
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(2);
   const [transition, setTransition] = useState(true);
   const intervalRef = useRef<number | null>(null);
   const timeoutRef = useRef<number | null>(null);
@@ -30,7 +30,7 @@ const Landing = () => {
               setActiveIndex(2);
               setTransition(true);
             });
-          }, 301);
+          }, 300);
 
           return prevIndex;
         }
