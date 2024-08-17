@@ -1,18 +1,8 @@
-import { API_URL, getToken } from '.';
+import { API_URL, getToken, IApiResponse } from '.';
 
-interface IGetAllScriptResponse {
-  status: string;
-  msg: string;
-  object: IScriptInList[];
-  success: boolean;
-}
+interface IGetAllScriptResponse extends IApiResponse<IScriptInList[]> {}
 
-interface IGetScriptDetailResponse {
-  status: string;
-  msg: string;
-  object: IScriptDetail;
-  success: boolean;
-}
+interface IGetScriptDetailResponse extends IApiResponse<IScriptDetail> {}
 
 export interface IScriptInList {
   id: string;

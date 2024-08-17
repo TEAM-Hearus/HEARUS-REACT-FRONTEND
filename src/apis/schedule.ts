@@ -1,18 +1,14 @@
-import { API_URL } from '.';
+import { API_URL, IApiResponse, getToken } from '.';
 import { IScheduleElement } from '../constants/schedule';
 import { IScheduleElementDTO } from '../constants/schedule';
-import { getToken } from './';
 
-interface IGetScheduleResponse {
-  status: string;
-  msg: string;
-  object: {
-    id: number;
-    scheduleElements: IScheduleElement[];
-    name: string;
-    userId: string | null;
-  };
-  success: boolean;
+interface IGetScheduleResponse extends IApiResponse<IGetScheduleObject> {}
+
+interface IGetScheduleObject {
+  id: number;
+  scheduleElements: IScheduleElement[];
+  name: string;
+  userId: string | null;
 }
 
 export const getSchedule = async (
@@ -35,12 +31,8 @@ export const getSchedule = async (
   }
 };
 
-interface IGetLectureByScheduleElementResponse {
-  status: string;
-  msg: string;
-  object: ILectureItem[];
-  success: boolean;
-}
+interface IGetLectureByScheduleElementResponse
+  extends IApiResponse<ILectureItem[]> {}
 
 interface ILectureItem {
   id: string;
@@ -70,12 +62,7 @@ export const getLectureByScheduleElement = async (id: number) => {
   }
 };
 
-interface IPOSTScheduleElementResponse {
-  status: string;
-  msg: string;
-  object: null;
-  success: boolean;
-}
+interface IPOSTScheduleElementResponse extends IApiResponse<null> {}
 
 export const addScheduleElement = async (
   inputData: IScheduleElementDTO,
@@ -99,7 +86,7 @@ export const addScheduleElement = async (
     const data: IPOSTScheduleElementResponse = await res.json();
     return data.success;
   } catch (error) {
-    throw new Error('Failed to delete schedule element');
+    throw error;
   }
 };
 
@@ -127,6 +114,6 @@ export const deleteScheduleElement = async (
     const data: IPOSTScheduleElementResponse = await res.json();
     return data.success;
   } catch (error) {
-    throw new Error('Failed to delete schedule element');
+    throw error;
   }
 };

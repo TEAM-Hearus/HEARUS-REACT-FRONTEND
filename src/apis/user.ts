@@ -1,11 +1,6 @@
-import { API_URL, getToken } from '.';
+import { API_URL, getToken, IApiResponse } from '.';
 
-interface IGetUserInfoResponse {
-  status: string;
-  msg: string;
-  object: IUserInfo;
-  success: boolean;
-}
+interface IGetUserInfoResponse extends IApiResponse<IUserInfo> {}
 
 export interface IUserInfo {
   userId: string;

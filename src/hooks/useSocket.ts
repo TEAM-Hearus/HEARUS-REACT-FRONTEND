@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { io, Socket } from 'socket.io-client';
-import SOCKETURL from '../apis/record';
+import { SOCKETURL } from '../apis/index';
 
 export const useSocket = (onTransitionResult: (result: string) => void) => {
   const socketRef = useRef<Socket | null>(null);
