@@ -1,11 +1,6 @@
-import { API_URL, getToken } from '.';
+import { API_URL, getToken, IApiResponse } from '.';
 
-interface IGenerateProblemResponse {
-  status: string;
-  msg: string;
-  object: IQuestion[];
-  success: boolean;
-}
+interface IGenerateProblemResponse extends IApiResponse<IQuestion[]> {}
 
 export interface IQuestion {
   type: string;

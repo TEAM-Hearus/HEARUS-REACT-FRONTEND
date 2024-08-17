@@ -1,4 +1,4 @@
-import { API_URL } from '.';
+import { API_URL, IApiResponse } from '.';
 
 interface IEmailSignUpParams {
   userEmail: string;
@@ -17,18 +17,9 @@ interface ISocialLoginParams {
   code: string;
 }
 
-interface ILoginResponse {
-  status: string;
-  msg: string;
-  object: ITokens;
-}
+interface ILoginResponse extends IApiResponse<ITokens> {}
 
-interface IEmailSignupResponse {
-  status: string;
-  msg: string;
-  object: null;
-  success: boolean;
-}
+interface IEmailSignupResponse extends IApiResponse<null> {}
 
 interface ITokens {
   grantType: string;
@@ -71,9 +62,6 @@ export const emailLogin = async ({
         userIsOAuth: false,
       }),
     });
-    if (!res.ok) {
-      throw new Error('Login failed');
-    }
     const data: ILoginResponse = await res.json();
     return data.object;
   } catch (error) {
@@ -100,10 +88,6 @@ export const emailSignUp = async ({
       }),
     });
     const data: IEmailSignupResponse = await res.json();
-
-    if (!res.ok) {
-      throw new Error('SignUp failed');
-    }
     return data;
   } catch (error) {
     throw error;
