@@ -34,7 +34,6 @@ const Landing = () => {
 
           return prevIndex;
         }
-        setTransition(true);
         return (prevIndex + 1) % SCROLLING_TEXTS.length;
       });
     }, 2000);
