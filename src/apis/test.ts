@@ -28,7 +28,7 @@ export const generateProblem = async (inputData: IProblemInput) => {
       body: JSON.stringify(inputData),
     });
     const data: IGenerateProblemResponse = await res.json();
-    return data.object;
+    return data;
   } catch (error) {
     throw error;
   }
