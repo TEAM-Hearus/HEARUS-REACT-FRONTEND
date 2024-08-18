@@ -27,7 +27,7 @@ const Test = () => {
     problem_types: questionTypes.join(','),
   };
 
-  const { data, isLoading } = useQuery({
+  const { data, isFetching } = useQuery({
     queryKey: ['problem', lectureId],
     queryFn: () => generateProblem(inputData),
     retry: false,
@@ -69,7 +69,7 @@ const Test = () => {
     <div className={styles.container}>
       <TestHeader handleSubmit={handleSubmit} showResults={showResults} />
       <article className={styles.problemsContainer}>
-        {isLoading && <img src={Loading} alt="문제 생성중..." />}
+        {isFetching && <img src={Loading} alt="문제 생성중..." />}
         {data != null &&
           data.object != null &&
           data.object.map((question, index) => (
