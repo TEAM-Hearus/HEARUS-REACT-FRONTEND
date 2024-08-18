@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/images/logo/landing-logo.svg?react';
 import graph1 from '../../assets/images/landing/graph1.png';
@@ -6,46 +7,34 @@ import function1 from '../../assets/images/landing/function1.png';
 import function2 from '../../assets/images/landing/function2.png';
 import function3 from '../../assets/images/landing/function3.png';
 import example from '../../assets/images/landing/landing-myscript.jpg';
-import styles from './Landing.module.scss';
 import { SCROLLING_TEXTS } from '../../constants/landing';
-import { useEffect, useRef, useState } from 'react';
+import styles from './Landing.module.scss';
 
 const Landing = () => {
-  const [activeIndex, setActiveIndex] = useState(2);
+  const FIRST_TEXT_INDEX = 2;
+  const LAST_TEXT_INDEX = SCROLLING_TEXTS.length - 3;
+
+  const [activeIndex, setActiveIndex] = useState(FIRST_TEXT_INDEX);
   const [transition, setTransition] = useState(true);
-  const intervalRef = useRef<number | null>(null);
-  const timeoutRef = useRef<number | null>(null);
 
-  const startInterval = () => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
+  const next = () => {
+    setTransition(true);
+    setActiveIndex((prev) => prev + 1);
 
-    intervalRef.current = setInterval(() => {
-      setActiveIndex((prevIndex) => {
-        if (prevIndex === SCROLLING_TEXTS.length - 2) {
-          timeoutRef.current = setTimeout(() => {
-            setActiveIndex(1);
-            setTransition(false);
+    const transitionEndTimer = setTimeout(() => {
+      if (activeIndex === LAST_TEXT_INDEX) {
+        setTransition(false);
+        setActiveIndex(FIRST_TEXT_INDEX);
+      }
+    }, 300);
 
-            requestAnimationFrame(() => {
-              setActiveIndex(2);
-              setTransition(true);
-            });
-          }, 300);
-
-          return prevIndex;
-        }
-        return (prevIndex + 1) % SCROLLING_TEXTS.length;
-      });
-    }, 2000);
+    return () => clearTimeout(transitionEndTimer);
   };
 
   useEffect(() => {
-    startInterval();
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, []);
+    const slideInterval = setInterval(next, 3000);
+    return () => clearInterval(slideInterval);
+  }, [next]);
 
   return (
     <main>
