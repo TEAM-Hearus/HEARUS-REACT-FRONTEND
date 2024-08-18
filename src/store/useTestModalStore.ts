@@ -1,7 +1,6 @@
 import create from 'zustand';
 
 interface ITestData {
-  time: number;
   completeNum: number;
   totalNum: number;
 }
@@ -16,7 +15,6 @@ interface ITestModalState {
 }
 
 const initialTestData = {
-  time: 0,
   completeNum: 0,
   totalNum: 0,
 };
