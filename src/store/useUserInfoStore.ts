@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import { IUserInfo } from '../apis/user';
 
 interface IUserStoreState {
