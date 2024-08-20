@@ -31,7 +31,6 @@ const PrivateRoute = ({ element }: IProps) => {
   const isUserInfoComplete = (userInfo: UserInfo | null) => {
     if (!userInfo) return false;
     const { userSchool, userMajor, userGrade } = userInfo;
-    console.log(userSchool, userMajor, userGrade);
     return userSchool !== null && userMajor !== null && userGrade !== null;
   };
 
