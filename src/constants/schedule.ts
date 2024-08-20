@@ -13,6 +13,24 @@ export interface IScheduleElement {
   endTime: string;
 }
 
+export interface IAddScheduleElement {
+  name: string;
+  location: string;
+  dayOfWeek: DayOfWeek;
+  color: ColorKey;
+  startTime: string;
+  endTime: string;
+}
+
+export interface IScheduleElementDTO {
+  name: string;
+  location: string;
+  dayOfWeek: DayOfWeek;
+  startTime: string;
+  endTime: string;
+  color: ColorKey;
+}
+
 export const TIMELIST = Array.from(Array(13), (_, i) => i + 9);
 
 export const COLORS = {
@@ -49,7 +67,7 @@ export const initialLectureInfo: LectureInfo = {
   endMinute: '00',
 };
 
-export const daysObject = {
+export const daysKorEnMap = {
   월: 'MON',
   화: 'TUE',
   수: 'WED',
@@ -57,4 +75,14 @@ export const daysObject = {
   금: 'FRI',
   토: 'SAT',
   일: 'SUN',
+} as const;
+
+export const daysEnNumMap: Record<DayOfWeek, number> = {
+  SUN: 0,
+  MON: 1,
+  TUE: 2,
+  WED: 3,
+  THU: 4,
+  FRI: 5,
+  SAT: 6,
 };

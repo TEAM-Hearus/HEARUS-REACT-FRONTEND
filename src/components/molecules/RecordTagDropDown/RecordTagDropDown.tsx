@@ -1,6 +1,8 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import useRecordModalStore from '../../../store/useRecordModalStore';
+import useRecordModalStore, {
+  ITagItem,
+} from '../../../store/useRecordModalStore';
 import { IScheduleElement } from '../../../constants/schedule';
 import { getSchedule } from '../../../apis/schedule';
 import styles from './RecordTagDropDown.module.scss';
@@ -21,17 +23,32 @@ const RecordTagDropDown = () => {
   const TAGS = useMemo(() => {
     if (!data) return [];
 
-    return Array.from(new Set(data.map((item) => item.name)));
+    const tagObject: { [key: string]: number } = {};
+
+    data.forEach((item) => {
+      if (!tagObject.hasOwnProperty(item.name)) {
+        tagObject[item.name] = item.scheduleId;
+      }
+    });
+
+    return Object.entries(tagObject).map(([name, id]) => ({
+      name,
+      scheduleId: id,
+    }));
   }, [data]);
 
   const handleTagBtnClick = () => {
     setIsTagBtnClicked((prev) => !prev);
   };
 
-  const handleLiClick = (name: string) => {
-    updateRecordData({ tag: name });
+  const handleLiClick = (item: ITagItem) => {
+    updateRecordData({ tag: item.name, scheduleId: item.scheduleId });
     setIsTagBtnClicked(false);
   };
+
+  useEffect(() => {
+    console.log(recordData);
+  }, [recordData]);
 
   return (
     <div className={styles.wrapper}>
@@ -43,14 +60,14 @@ const RecordTagDropDown = () => {
       </button>
       {isTagBtnClicked && (
         <ul className={styles.tagsUl}>
-          {TAGS.map((name) => (
+          {TAGS.map((item) => (
             <li
-              key={name}
+              key={item.name}
               className={styles.tagLi}
-              onClick={() => handleLiClick(name)}
+              onClick={() => handleLiClick(item)}
               role="option"
             >
-              {name}
+              {item.name}
             </li>
           ))}
         </ul>

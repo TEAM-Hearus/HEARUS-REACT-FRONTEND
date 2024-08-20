@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useUserInfoStore } from '../../../store/userUserInfoStore';
 import Warning from '../../../assets/images/warning.svg?react';
 import {
   COLORS,
   ColorKey,
+  IScheduleElement,
+  IScheduleElementDTO,
   LectureInfo,
   daysOfWeek,
   initialLectureInfo,
@@ -10,13 +14,11 @@ import {
 import {
   getIsAddScheduleFormValid,
   getIsTimeValid,
-  IScheduleElementDTO,
+  hasNewElementConflict,
   transformToScheduleElementDTO,
 } from '../../../utils/schedule';
-import styles from './AddScheduleForm.module.scss';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addScheduleElement } from '../../../apis/schedule';
-import { useUserInfoStore } from '../../../store/userUserInfoStore';
+import styles from './AddScheduleForm.module.scss';
 
 interface IProps {
   onClose: () => void;
@@ -98,6 +100,7 @@ const AddScheduleForm = ({ onClose }: IProps) => {
     mutationFn: (data: IScheduleElementDTO) =>
       addScheduleElement(data, userInfo.userName),
     onSuccess: () => {
+      alert('강의 추가에 성공했습니다.');
       onClose();
       queryClient.invalidateQueries({
         queryKey: ['schedule', userInfo.userName],
@@ -110,8 +113,25 @@ const AddScheduleForm = ({ onClose }: IProps) => {
 
   const handleSubmit = () => {
     if (isFormValid) {
+      const existingSchedule = queryClient.getQueryData<IScheduleElement[]>([
+        'schedule',
+        userInfo.userName,
+      ]);
       const formattedData = transformToScheduleElementDTO(lectureInfo);
-      postMutation.mutate(formattedData);
+      if (existingSchedule) {
+        if (hasNewElementConflict(formattedData, existingSchedule)) {
+          alert(
+            '새로운 강의 시간이 기존 스케줄과 겹칩니다. 다른 시간을 선택해주세요.',
+          );
+          return;
+        } else {
+          postMutation.mutate(formattedData);
+        }
+      } else {
+        alert(
+          '스케줄 데이터를 불러올 수 없습니다. 페이지를 새로고침한 후 다시 시도해주세요.',
+        );
+      }
     }
   };
 

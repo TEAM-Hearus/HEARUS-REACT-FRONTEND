@@ -44,7 +44,6 @@ const AuthForm = ({
     e.preventDefault();
     setIsShowPasswordConfirmClick((prev) => !prev);
   };
-
   const loginMutation = useMutation({
     mutationFn: emailLogin,
     onSuccess: (data) => {
@@ -93,8 +92,8 @@ const AuthForm = ({
     }
   };
 
-  const handleGoogleClick = () => {
-    window.location.href = `${API_URL}/oauth2/authorization/google`;
+  const handleOAuthClick = (e: string) => {
+    window.location.href = `${API_URL}/oauth2/authorization/${e}`;
   };
 
   return (
@@ -124,9 +123,9 @@ const AuthForm = ({
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button className={styles.showBtn} onClick={toggleShowPassword}>
+              <div className={styles.showBtn} onClick={toggleShowPassword}>
                 {isShowPasswordClick ? <On /> : <Off />}
-              </button>
+              </div>
             </label>
             {title === '로그인' && (
               <div className={styles.checkboxContainer}>
@@ -154,12 +153,12 @@ const AuthForm = ({
                     onChange={(e) => setPasswordConfirm(e.target.value)}
                   />
                 </label>
-                <button
+                <div
                   className={styles.showBtn}
                   onClick={toggleShowPasswordConfirm}
                 >
                   {isShowPasswordConfirmClick ? <On /> : <Off />}
-                </button>
+                </div>
               </div>
               <div className={styles.inputBox}>
                 <label className={styles.label}>
@@ -178,11 +177,18 @@ const AuthForm = ({
           <button className={styles.authBtn}>{buttonText}</button>
         </form>
         <div className={styles.oauthBtnsContainer}>
-          <button className={styles.googleBtn} onClick={handleGoogleClick}>
+          <button
+            className={styles.googleBtn}
+            onClick={() => handleOAuthClick('google')}
+          >
             <img src={Google} alt="Google Logo" />
           </button>
           <button className={styles.kakaoBtn}>
-            <img src={Kakao} alt="Kakao Logo" />
+            <img
+              src={Kakao}
+              alt="Kakao Logo"
+              onClick={() => handleOAuthClick('kakao')}
+            />
           </button>
         </div>
         <div className={styles.AuthGoBox}>

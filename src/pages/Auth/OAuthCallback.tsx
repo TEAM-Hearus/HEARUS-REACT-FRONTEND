@@ -1,19 +1,22 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { googleLogin } from '../../apis/auth';
+import { OAuthLogin } from '../../apis/auth';
 import Loading from '../../assets/images/LoadingCircle.gif';
 import styles from './OAuthCallback.module.scss';
 
 const OAuthCallback = () => {
   const navigate = useNavigate();
   const searchParams = new URLSearchParams(window.location.search);
+  const params = useLocation();
+  const parts = params.pathname?.split('/');
+  const social = parts[1];
   const state = searchParams.get('state') || '';
   const code = searchParams.get('code') || '';
 
   const { data, isError } = useQuery({
-    queryKey: ['google', code],
-    queryFn: () => googleLogin({ state, code }),
+    queryKey: ['oauth', code],
+    queryFn: () => OAuthLogin({ social, state, code }),
     enabled: !!state && !!code,
     retry: false,
   });

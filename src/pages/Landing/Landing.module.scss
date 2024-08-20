@@ -266,10 +266,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 110px;
+  height: 150px;
   gap: 20px;
-  transition: all 0.3s ease;
   li {
+    display: flex;
     justify-content: center;
     align-items: center;
     height: 50px;

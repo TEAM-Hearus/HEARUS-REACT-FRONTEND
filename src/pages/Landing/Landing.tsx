@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/images/logo/landing-logo.svg?react';
 import graph1 from '../../assets/images/landing/graph1.png';
@@ -6,21 +7,34 @@ import function1 from '../../assets/images/landing/function1.png';
 import function2 from '../../assets/images/landing/function2.png';
 import function3 from '../../assets/images/landing/function3.png';
 import example from '../../assets/images/landing/landing-myscript.jpg';
-import styles from './Landing.module.scss';
 import { SCROLLING_TEXTS } from '../../constants/landing';
-import { useEffect, useRef, useState } from 'react';
+import styles from './Landing.module.scss';
 
 const Landing = () => {
-  const [activeIndex, setActiveIndex] = useState(1);
-  const carouselRef = useRef<HTMLUListElement>(null);
+  const FIRST_TEXT_INDEX = 2;
+  const LAST_TEXT_INDEX = SCROLLING_TEXTS.length - 3;
+
+  const [activeIndex, setActiveIndex] = useState(FIRST_TEXT_INDEX);
+  const [transition, setTransition] = useState(true);
+
+  const next = () => {
+    setTransition(true);
+    setActiveIndex((prev) => prev + 1);
+
+    const transitionEndTimer = setTimeout(() => {
+      if (activeIndex === LAST_TEXT_INDEX) {
+        setTransition(false);
+        setActiveIndex(FIRST_TEXT_INDEX);
+      }
+    }, 300);
+
+    return () => clearTimeout(transitionEndTimer);
+  };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % SCROLLING_TEXTS.length);
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }, []);
+    const slideInterval = setInterval(next, 3000);
+    return () => clearInterval(slideInterval);
+  }, [next]);
 
   return (
     <main>
@@ -144,9 +158,9 @@ const Landing = () => {
         <article className={styles.scrollingContainer}>
           <ul
             className={styles.scrollingText}
-            ref={carouselRef}
             style={{
-              transform: `translateY(-${activeIndex * 50}px)`,
+              transform: `translateY(-${(activeIndex - 1) * 55}px)`,
+              transition: transition ? 'transform 0.3s ease' : 'none',
             }}
           >
             {SCROLLING_TEXTS.map((text, index) => (

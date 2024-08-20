@@ -1,9 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { io, Socket } from 'socket.io-client';
-import SOCKETURL from '../apis/record';
+import { SOCKETURL } from '../apis/index';
+import useRecordModalStore from '../store/useRecordModalStore';
 
 export const useSocket = (onTransitionResult: (result: string) => void) => {
   const socketRef = useRef<Socket | null>(null);
+  const { recordData } = useRecordModalStore();
 
   useEffect(() => {
     socketRef.current = io(SOCKETURL, {
@@ -20,7 +22,7 @@ export const useSocket = (onTransitionResult: (result: string) => void) => {
 
     socketRef.current.on('connect', () => {
       console.log('socket connected');
-      const lectureId = '668cceb8ebef2b4462de0fb5';
+      const lectureId = recordData.scheduleId;
       socketRef.current?.emit('lectureId', lectureId);
     });
 

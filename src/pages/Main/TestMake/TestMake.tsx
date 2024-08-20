@@ -34,7 +34,7 @@ const TestMake = () => {
   };
 
   const handleTestStartBtnClick = () => {
-    if (lectureId.length < 0 && questionCount > 0 && questionTypes.length > 0) {
+    if (lectureId.length > 0 && questionCount > 0 && questionTypes.length > 0) {
       navigate('/test');
     } else {
       alert('스크립트와 문제 유형, 문제 개수를 모두 선택해주세요.');

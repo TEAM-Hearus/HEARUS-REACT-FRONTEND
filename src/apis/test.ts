@@ -1,11 +1,6 @@
-import { API_URL, getToken } from '.';
+import { API_URL, getToken, IApiResponse } from '.';
 
-interface IGenerateProblemResponse {
-  status: string;
-  msg: string;
-  object: IQuestion[];
-  success: boolean;
-}
+interface IGenerateProblemResponse extends IApiResponse<IQuestion[]> {}
 
 export interface IQuestion {
   type: string;
@@ -33,7 +28,7 @@ export const generateProblem = async (inputData: IProblemInput) => {
       body: JSON.stringify(inputData),
     });
     const data: IGenerateProblemResponse = await res.json();
-    return data.object;
+    return data;
   } catch (error) {
     throw error;
   }
