@@ -22,7 +22,7 @@ const PrivateRoute = ({ element }: IProps) => {
   const { setUserInfo } = useUserInfoStore();
   const [showModal, setShowModal] = useState(false);
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['user'],
     queryFn: getUserInfo,
     staleTime: 5 * 60 * 1000,
@@ -36,7 +36,7 @@ const PrivateRoute = ({ element }: IProps) => {
   };
 
   useEffect(() => {
-    if (data != null) {
+    if (!isLoading && data != null) {
       setUserInfo(data);
 
       if (!isUserInfoComplete(data)) {
@@ -61,7 +61,7 @@ const PrivateRoute = ({ element }: IProps) => {
         }
       }
     }
-  }, [data]);
+  }, [data, isLoading]);
 
   const handleSkip = () => {
     localStorage.setItem('SupplementarySkipped', 'true');
