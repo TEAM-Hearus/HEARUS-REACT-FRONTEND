@@ -9,7 +9,7 @@ interface IRecordData {
 
 export interface ITagItem {
   name: string;
-  scheduleElementId: number | null;
+  scheduleId: number | null;
 }
 
 interface IRecordModalState {
