@@ -4,7 +4,7 @@ import HomeLayout from '../components/templates/HomeLayout/HomeLayout';
 import TimeTable from './Main/TimeTable/TimeTable';
 import TestMake from './Main/TestMake/TestMake';
 import MyScript from './Main/MyScript/MyScript';
-import TrashCan from './Main/TrashCan/TrashCan';
+import MyPage from './Main/Mypage/Mypage';
 import PrivateRoute from './PrivateRoute';
 import Record from './Record/Record';
 import Test from './Test/Test';
@@ -48,8 +48,8 @@ const router = createBrowserRouter([
         element: <TestMake />,
       },
       {
-        path: 'trash-can',
-        element: <TrashCan />,
+        path: 'my-page',
+        element: <MyPage />,
       },
     ],
   },
