@@ -153,12 +153,12 @@ const AuthForm = ({
                     onChange={(e) => setPasswordConfirm(e.target.value)}
                   />
                 </label>
-                <button
+                <div
                   className={styles.showBtn}
                   onClick={toggleShowPasswordConfirm}
                 >
                   {isShowPasswordConfirmClick ? <On /> : <Off />}
-                </button>
+                </div>
               </div>
               <div className={styles.inputBox}>
                 <label className={styles.label}>
