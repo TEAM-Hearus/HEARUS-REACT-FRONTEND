@@ -100,15 +100,7 @@
   color: $dark-font_5A;
   border: 0;
   border-radius: 8px;
-}
-
-.submitBtn {
-  height: 48px;
-  @include SemiBold_Body_16;
-  background-color: $dark-font_33;
-  color: $white_FF;
-  border: 0;
-  border-radius: 8px;
+  cursor: pointer;
 }
 .logoutBtn {
   @include SemiBold_Body_16;
@@ -116,4 +108,5 @@
   height: 60px;
   border: 0;
   background-color: $white_FF;
+  cursor: pointer;
 }

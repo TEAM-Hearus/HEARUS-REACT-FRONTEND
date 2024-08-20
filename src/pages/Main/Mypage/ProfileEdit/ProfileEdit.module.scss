@@ -98,14 +98,6 @@
   flex-direction: column;
   padding: 20px 0;
 }
-.modifyBtn {
-  height: 48px;
-  @include SemiBold_Body_16;
-  background-color: $light-bg_F2;
-  color: $dark-font_5A;
-  border: 0;
-  border-radius: 8px;
-}
 
 .submitBtn {
   height: 48px;
@@ -114,6 +106,7 @@
   color: $white_FF;
   border: 0;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .showBtn {
@@ -123,4 +116,5 @@
   right: 10px;
   border: none;
   background: none;
+  cursor: pointer;
 }
