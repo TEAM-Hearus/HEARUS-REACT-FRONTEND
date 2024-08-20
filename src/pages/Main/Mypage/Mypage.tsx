@@ -50,7 +50,6 @@ const MyPage = () => {
       userPasswordConfirm: '',
     });
   }, [userInfo]);
-  console.log(info);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
