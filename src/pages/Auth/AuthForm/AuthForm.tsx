@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { API_URL } from '../../../apis';
 import Google from '../../../assets/images/logo/google.png';
 import Kakao from '../../../assets/images/logo/kakao.png';
+import Naver from '../../../assets/images/logo/naver.png';
 import styles from './AuthForm.module.scss';
 import On from '../../../assets/images/showPasswordOn.svg?react';
 import Off from '../../../assets/images/showPasswordOff.svg?react';
@@ -188,6 +189,13 @@ const AuthForm = ({
               src={Kakao}
               alt="Kakao Logo"
               onClick={() => handleOAuthClick('kakao')}
+            />
+          </button>
+          <button className={styles.naverBtn}>
+            <img
+              src={Naver}
+              alt="naver Logo"
+              onClick={() => handleOAuthClick('naver')}
             />
           </button>
         </div>

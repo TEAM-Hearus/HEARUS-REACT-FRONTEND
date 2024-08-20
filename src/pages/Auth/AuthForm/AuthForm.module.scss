@@ -145,6 +145,18 @@
   border-radius: 50%;
   cursor: pointer;
 }
+.naverBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #30d341;
+}
+
 .AuthGoBox {
   display: flex;
   justify-content: center;
