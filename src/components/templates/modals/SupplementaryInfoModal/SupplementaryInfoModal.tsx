@@ -67,7 +67,7 @@ const SupplementaryInfoModal = ({ onSkip, onSave }: IProps) => {
       alert('추가 정보를 모두 입력해야 합니다.');
       return;
     }
-    // SupplementaryUpdateMutation.mutate(info);
+    SupplementaryUpdateMutation.mutate(info);
     onSave();
   };
 
