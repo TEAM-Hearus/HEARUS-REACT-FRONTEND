@@ -14,11 +14,12 @@ import { useUserInfoStore } from '../../../../store/useUserInfoStore';
 const MainNav = () => {
   const { userInfo } = useUserInfoStore();
   const USERNAME = userInfo.userName;
+  const firstLetter = USERNAME.charAt(0);
 
   return (
     <nav className={styles.container}>
       <div className={styles.userProfile}>
-        <div className={styles.profileImage}></div>
+        <div className={styles.profileImage}>{firstLetter}</div>
         <p className={styles.userName}>{USERNAME}</p>
       </div>
       <span className={styles.searchIcon}>

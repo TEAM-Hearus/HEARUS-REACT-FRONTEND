@@ -19,10 +19,15 @@
   padding: 10px 5px 0px 5px;
 }
 .profileImage {
+  @include SemiBold_Sub_14;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 24px;
   height: 24px;
   border-radius: 50%;
   background-color: #e7e7e7;
+  color: $light-gray_81;
 }
 .userName {
   @include Medium_Body_16;
