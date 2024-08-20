@@ -7,7 +7,7 @@ import {
 } from '../../../../constants/schedule';
 import { getSchedule } from '../../../../apis/schedule';
 import styles from './WeeklyTimeTable.module.scss';
-import { useUserInfoStore } from '../../../../store/userUserInfoStore';
+import { useUserInfoStore } from '../../../../store/useUserInfoStore';
 
 const WeeklyTimeTable = () => {
   const { userInfo } = useUserInfoStore();

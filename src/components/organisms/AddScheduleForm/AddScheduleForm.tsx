@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useUserInfoStore } from '../../../store/userUserInfoStore';
+import { useUserInfoStore } from '../../../store/useUserInfoStore';
 import Warning from '../../../assets/images/warning.svg?react';
 import {
   COLORS,

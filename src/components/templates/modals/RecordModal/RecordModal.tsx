@@ -8,7 +8,7 @@ import Down from '../../../../assets/images/arrow/down-arrow.svg?react';
 import { IScheduleElement } from '../../../../constants/schedule';
 import { getSchedule } from '../../../../apis/schedule';
 import styles from './RecordModal.module.scss';
-import { useUserInfoStore } from '../../../../store/userUserInfoStore';
+import { useUserInfoStore } from '../../../../store/useUserInfoStore';
 
 interface IProps {
   handleQuit: () => void; // 타이머, 녹음, 소켓 연결 종료

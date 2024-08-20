@@ -8,7 +8,7 @@ import {
 import ScriptIcon from '../../../assets/images/nav/my-script-inactive.svg?react';
 import TrashCan from '../../../assets/images/orange-trash-can.svg?react';
 import styles from './ScriptToolTip.module.scss';
-import { useUserInfoStore } from '../../../store/userUserInfoStore';
+import { useUserInfoStore } from '../../../store/useUserInfoStore';
 
 interface IProps {
   id: number;
