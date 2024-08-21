@@ -10,6 +10,9 @@ Hearus는 대학교 교내 청각장애 학우 대필지원 도우미 활동에�
   <img src="https://i.ibb.co/CWc1WmJ/logo.png" alt="HEARUS-logo" border="0" width="100"/>
 </a> 
 
+## MVP Model
+![image](https://github.com/user-attachments/assets/6b86e0fc-93fa-4fc4-a77f-1750009f4488)
+
 ## 서비스 플로우
 **1. 내 스크립트** : 스크립트 목록 클릭시 상세 스크립트 모달 등장, 상세 스크립트에서 과목 및 AI가 구분해준 하이라이트 표시 
 |  스크립트 목록  |  상세 스크립트  |
