@@ -5,13 +5,15 @@ Hearus는 대학교 교내 청각장애 학우 대필지원 도우미 활동에�
 청각장애 학우들이 더 나은 환경에서 학습하고, 비장애 학우들과의 교육적 불평등을 해소할 수 있도록 하기 위해 </br>
 인공지능을 활용한 실시간 음성 텍스트 변환과 문제 생성, 하이라이팅 기능을 지닌 서비스입니다.
 
-## 서비스 링크
-<a href="https://hearus.site/" target="_blank">
-  <img src="https://i.ibb.co/CWc1WmJ/logo.png" alt="HEARUS-logo" border="0" width="100"/>
-</a> 
-
 ## MVP Model
 ![image](https://github.com/user-attachments/assets/6b86e0fc-93fa-4fc4-a77f-1750009f4488)
+
+## 서비스 링크
+<p align="center">
+  <a href="https://hearus.site/" target="_blank">
+    <img src="https://i.ibb.co/CWc1WmJ/logo.png" alt="HEARUS-logo" border="0" width="100"/>
+  </a> 
+</p>
 
 ## 서비스 플로우
 **1. 내 스크립트** : 스크립트 목록 클릭시 상세 스크립트 모달 등장, 상세 스크립트에서 과목 및 AI가 구분해준 하이라이트 표시 
@@ -111,7 +113,7 @@ src/
    npm run dev
    ```
 
-## 팀원
+## 주요 기여자
 | FE | FE | Designer |
 |--|--|--|
 |[김나연](https://github.com/Nangniya) |[고은비](https://github.com/koeunbeee)|장연우|
