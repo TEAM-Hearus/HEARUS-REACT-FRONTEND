@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import styles from './Mypage.module.scss';
-import Preview from '../../../assets/images/preview.png';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { useUserInfoStore } from '../../../store/useUserInfoStore';
 import Edit from './ProfileEdit/ProfileEdit';
 import View from './ProfileView/ProfileView';
-import { useQueryClient, useMutation } from '@tanstack/react-query';
+import Preview from '../../../assets/images/preview.png';
 import { updateInfo, IUserUpdateInfo } from '../../../apis/user';
+import styles from './Mypage.module.scss';
 
 interface UserInfo {
   userName: string;
@@ -34,7 +34,7 @@ const MyPage = () => {
   });
 
   const [preveiw, setPreview] = useState<string>(Preview);
-  const [currentPage, setCurrentPage] = useState<'view' | 'edit'>('view');
+  const [currentMode, setCurrentMode] = useState<'view' | 'edit'>('view');
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -62,14 +62,14 @@ const MyPage = () => {
     }
   };
   const handleEditClick = () => {
-    setCurrentPage('edit');
+    setCurrentMode('edit');
   };
 
   const updateMutation = useMutation({
     mutationFn: updateInfo,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['user'] });
-      setCurrentPage('view');
+      setCurrentMode('view');
     },
     onError: (error) => {
       console.error(error);
@@ -77,17 +77,12 @@ const MyPage = () => {
   });
 
   const handleSaveClick = () => {
-    if (!info.userPassword || !info.userPasswordConfirm) {
-      alert('비밀번호와 비밀번호 확인을 입력해야 합니다.');
-      return;
-    }
     if (info.userPassword !== info.userPasswordConfirm) {
       alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
       return;
     }
 
     const updateData: IUserUpdateInfo = {
-      userEmail: info.userEmail,
       userName: info.userName || '',
       userPassword: info.userPassword || '',
       userSchool: info.userSchool || '',
@@ -95,10 +90,9 @@ const MyPage = () => {
       userMajor: info.userMajor || '',
     };
 
-    // 다시 사용할거라 둡니다.
-    // if (!info.userPassword) {
-    //   delete updateData.userPassword;
-    // }
+    if (!info.userPassword) {
+      delete updateData.userPassword;
+    }
     updateMutation.mutate(updateData);
   };
 
@@ -112,7 +106,7 @@ const MyPage = () => {
             src={preveiw}
             alt="프로필 이미지"
           />
-          {currentPage === 'edit' && (
+          {currentMode === 'edit' && (
             <label className={styles.selectBtnLabel}>
               프로필 이미지
               <input
@@ -124,7 +118,7 @@ const MyPage = () => {
             </label>
           )}
         </div>
-        {currentPage === 'view' ? (
+        {currentMode === 'view' ? (
           <View info={info} onEditClick={handleEditClick} />
         ) : (
           <Edit info={info} setInfo={setInfo} onSaveClick={handleSaveClick} />
