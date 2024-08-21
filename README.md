@@ -67,7 +67,7 @@ src/
 │
 ├── components/ # 아토믹 디자인 시스템 차용
 │   ├── atoms/ 
-|   ├── molcules/
+|   ├── molecules/
 |   ├── organisms/
 │   └── templates/
 │
