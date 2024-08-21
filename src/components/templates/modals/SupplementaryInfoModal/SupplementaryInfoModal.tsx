@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import styles from './SupplementaryInfoModal.module.scss';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
 import Next from '../../../../assets/images/arrow/next-arrow.svg?react';
 import Back from '../../../../assets/images/arrow/back-arrow.svg?react';
-import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { SupplementaryUpdateInfo } from '../../../../apis/user';
+import styles from './SupplementaryInfoModal.module.scss';
 
 interface UserInfo {
   userSchool: string;

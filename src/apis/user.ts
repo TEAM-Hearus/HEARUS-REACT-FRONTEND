@@ -22,7 +22,6 @@ export interface IUserInfo {
 }
 
 export interface IUserUpdateInfo {
-  userEmail: string;
   userName: string;
   userPassword?: string;
   userSchool: string;
@@ -52,7 +51,6 @@ export const getUserInfo = async () => {
 };
 
 export const updateInfo = async ({
-  userEmail,
   userName,
   userPassword,
   userSchool,
@@ -68,7 +66,6 @@ export const updateInfo = async ({
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        userEmail,
         userName,
         userPassword,
         userSchool,

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import styles from './ProfileEdit.module.scss';
 import Google from '../../../../assets/images/logo/google.png';
 import Kakao from '../../../../assets/images/logo/kakao.png';
 import Naver from '../../../../assets/images/logo/naver.png';
 import On from '../../../../assets/images/showPasswordOn.svg?react';
 import Off from '../../../../assets/images/showPasswordOff.svg?react';
+import styles from './ProfileEdit.module.scss';
 
 interface UserInfo {
   userName: string;

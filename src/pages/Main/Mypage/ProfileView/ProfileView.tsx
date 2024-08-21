@@ -1,7 +1,7 @@
-import styles from './ProfileView.module.scss';
 import Google from '../../../../assets/images/logo/google.png';
 import Kakao from '../../../../assets/images/logo/kakao.png';
 import Naver from '../../../../assets/images/logo/naver.png';
+import styles from './ProfileView.module.scss';
 
 interface UserInfo {
   userName: string;
