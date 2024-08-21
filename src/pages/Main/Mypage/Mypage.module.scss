@@ -1,0 +1,51 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/variables/fonts.scss';
+
+.wholeContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+  padding: 2% 4%;
+}
+.profileContainer {
+  width: 100%;
+  min-height: 670px;
+  padding: 50px;
+  background-color: $white_FF;
+  border-radius: 8px;
+  gap: 1%;
+  display: flex;
+  justify-content: center;
+}
+.title {
+  @include SemiBold_Title_28;
+  color: $dark-font_5A;
+  padding: 7px 0;
+}
+.profileBox {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  justify-content: center;
+}
+.profileImgBox {
+  min-width: 162px;
+  padding: 0 5% 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profileImg {
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.selectBtnLabel {
+  width: 132px;
+  padding: 10px;
+  text-align: center;
+}
+.imgSelectBtn {
+  display: none;
+}

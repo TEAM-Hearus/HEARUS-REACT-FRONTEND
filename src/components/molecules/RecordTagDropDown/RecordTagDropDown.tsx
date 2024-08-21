@@ -6,7 +6,7 @@ import useRecordModalStore, {
 import { IScheduleElement } from '../../../constants/schedule';
 import { getSchedule } from '../../../apis/schedule';
 import styles from './RecordTagDropDown.module.scss';
-import { useUserInfoStore } from '../../../store/userUserInfoStore';
+import { useUserInfoStore } from '../../../store/useUserInfoStore';
 
 const RecordTagDropDown = () => {
   const { userInfo } = useUserInfoStore();

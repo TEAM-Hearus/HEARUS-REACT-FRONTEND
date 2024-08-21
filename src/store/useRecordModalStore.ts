@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import { generateRecordingTitle } from '../utils/dateFormatters';
 
 interface IRecordData {

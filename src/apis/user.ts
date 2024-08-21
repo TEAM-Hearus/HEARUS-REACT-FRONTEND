@@ -1,6 +1,9 @@
 import { API_URL, getToken, IApiResponse } from '.';
 
 interface IGetUserInfoResponse extends IApiResponse<IUserInfo> {}
+interface IUpdateUserInfoResponse extends IApiResponse<IUserUpdateInfo> {}
+interface ISupplementaryUpdateInfoResponse
+  extends IApiResponse<IUserSupplementaryUpdateInfo> {}
 
 export interface IUserInfo {
   userId: string;
@@ -18,6 +21,20 @@ export interface IUserInfo {
   userUsePurpose: any; // 임시 타입
 }
 
+export interface IUserUpdateInfo {
+  userName: string;
+  userPassword?: string;
+  userSchool: string;
+  userMajor: string;
+  userGrade: string;
+}
+
+export interface IUserSupplementaryUpdateInfo {
+  userSchool: string;
+  userMajor: string;
+  userGrade: string;
+}
+
 export const getUserInfo = async () => {
   const token = getToken();
   try {
@@ -27,6 +44,62 @@ export const getUserInfo = async () => {
       },
     });
     const data: IGetUserInfoResponse = await res.json();
+    return data.object;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateInfo = async ({
+  userName,
+  userPassword,
+  userSchool,
+  userMajor,
+  userGrade,
+}: IUserUpdateInfo) => {
+  const token = getToken();
+  try {
+    const res = await fetch(`${API_URL}/api/v1/user/updateUser`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        userName,
+        userPassword,
+        userSchool,
+        userMajor,
+        userGrade,
+      }),
+    });
+    const data: IUpdateUserInfoResponse = await res.json();
+    return data.object;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const SupplementaryUpdateInfo = async ({
+  userSchool,
+  userMajor,
+  userGrade,
+}: IUserSupplementaryUpdateInfo) => {
+  const token = getToken();
+  try {
+    const res = await fetch(`${API_URL}/api/v1/user/updateUser`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        userSchool,
+        userMajor,
+        userGrade,
+      }),
+    });
+    const data: ISupplementaryUpdateInfoResponse = await res.json();
     return data.object;
   } catch (error) {
     throw error;
