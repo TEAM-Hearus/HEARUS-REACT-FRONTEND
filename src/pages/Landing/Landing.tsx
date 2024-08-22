@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { checkAuthentication } from '../../utils/auth';
 import Logo from '../../assets/images/logo/landing-logo.svg?react';
 import graph1 from '../../assets/images/landing/graph1.png';
 import graph2 from '../../assets/images/landing/graph2.png';
@@ -36,6 +37,11 @@ const Landing = () => {
     return () => clearInterval(slideInterval);
   }, [next]);
 
+  const isAuthenticated = checkAuthentication();
+
+  if (isAuthenticated) {
+    return <Navigate to="/home" replace />;
+  }
   return (
     <main>
       <section className={styles.topBgContainer}>
