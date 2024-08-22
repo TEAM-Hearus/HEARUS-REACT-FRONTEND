@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 }
 .inputBox {
   width: 100%;
@@ -18,7 +18,7 @@
   flex-direction: column;
   @include SemiBold_Sub_14;
   color: $light-gray_81;
-  gap: 8px;
+  gap: 6px;
 }
 .input {
   @include SemiBold_Body_16;
@@ -67,8 +67,7 @@
 }
 .schoolInputBox {
   width: 100%;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
+  display: flex;
   gap: 15px;
 }
 .schoolInput {
@@ -91,7 +90,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 20px 0;
 }
 .modifyBtn {
   height: 48px;

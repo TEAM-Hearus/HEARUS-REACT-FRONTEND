@@ -4,6 +4,8 @@ import Kakao from '../../../../assets/images/logo/kakao.png';
 import Naver from '../../../../assets/images/logo/naver.png';
 import On from '../../../../assets/images/showPasswordOn.svg?react';
 import Off from '../../../../assets/images/showPasswordOff.svg?react';
+import Next from '../../../../assets/images/arrow/next-arrow.svg?react';
+import Back from '../../../../assets/images/arrow/back-arrow.svg?react';
 import styles from './ProfileEdit.module.scss';
 
 interface UserInfo {
@@ -22,9 +24,15 @@ interface ProfileEditProps {
   info: UserInfo;
   setInfo: React.Dispatch<React.SetStateAction<UserInfo>>;
   onSaveClick: () => void;
+  onViewClick: () => void;
 }
 
-const ProfileEdit = ({ info, setInfo, onSaveClick }: ProfileEditProps) => {
+const ProfileEdit = ({
+  info,
+  setInfo,
+  onSaveClick,
+  onViewClick,
+}: ProfileEditProps) => {
   const [isShowPasswordClick, setIsShowPasswordClick] = useState(false);
   const [isShowPasswordConfirmClick, setIsShowPasswordConfirmClick] =
     useState(false);
@@ -57,6 +65,24 @@ const ProfileEdit = ({ info, setInfo, onSaveClick }: ProfileEditProps) => {
   const toggleShowPasswordConfirm = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
     setIsShowPasswordConfirmClick((prev) => !prev);
+  };
+
+  const increaseGrade = () => {
+    if (parseInt(info.userGrade) < 8) {
+      setInfo({
+        ...info,
+        userGrade: (parseInt(info.userGrade) + 1).toString(),
+      });
+    }
+  };
+
+  const decreaseGrade = () => {
+    if (parseInt(info.userGrade) > 1) {
+      setInfo({
+        ...info,
+        userGrade: (parseInt(info.userGrade) - 1).toString(),
+      });
+    }
   };
 
   return (
@@ -147,14 +173,15 @@ const ProfileEdit = ({ info, setInfo, onSaveClick }: ProfileEditProps) => {
         </label>
         <label className={styles.inputLabel}>
           학년
-          <input
-            className={styles.gradeInput}
-            type="text"
-            name="userGrade"
-            value={info.userGrade}
-            onChange={handleChange}
-            placeholder="학년을 입력하세요"
-          />
+          <div className={styles.gradeInput}>
+            <div className={styles.arrowBtn} onClick={decreaseGrade}>
+              <Back />
+            </div>
+            <span className={styles.gradeNum}>{info.userGrade}</span>
+            <div className={styles.arrowBtn} onClick={increaseGrade}>
+              <Next />
+            </div>
+          </div>
         </label>
       </div>
       <div className={styles.inputBox}>
@@ -173,7 +200,10 @@ const ProfileEdit = ({ info, setInfo, onSaveClick }: ProfileEditProps) => {
 
       <div className={styles.btnBox}>
         <button className={styles.submitBtn} onClick={onSaveClick}>
-          완료하기
+          저장하기
+        </button>
+        <button className={styles.viewModeBtn} onClick={onViewClick}>
+          프로필 수정 취소
         </button>
       </div>
     </div>

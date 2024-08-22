@@ -5,46 +5,49 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-width: 406px;
   gap: 20px;
   padding: 2% 4%;
 }
 .profileContainer {
   width: 100%;
   min-height: 670px;
-  padding: 50px;
+  padding: 40px;
   background-color: $white_FF;
   border-radius: 8px;
-  gap: 1%;
+  gap: 35px;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 .title {
   @include SemiBold_Title_28;
   color: $dark-font_5A;
   padding: 7px 0;
 }
-.profileBox {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  justify-content: center;
-}
 .profileImgBox {
-  min-width: 162px;
-  padding: 0 5% 0 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 100%;
+  max-width: 400px;
 }
 .profileImg {
-  width: 132px;
-  height: 132px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
 }
-.selectBtnLabel {
+
+// edit
+.selectBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 132px;
-  padding: 10px;
-  text-align: center;
+  height: 132px;
+  border: 1px solid $light-bg_E5;
+  border-radius: 50%;
+  cursor: pointer;
 }
 .imgSelectBtn {
   display: none;

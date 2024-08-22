@@ -33,7 +33,7 @@ const MyPage = () => {
     userPasswordConfirm: '',
   });
 
-  const [preveiw, setPreview] = useState<string>(Preview);
+  const [preview, setPreview] = useState<string>(Preview);
   const [currentMode, setCurrentMode] = useState<'view' | 'edit'>('view');
   const queryClient = useQueryClient();
 
@@ -63,6 +63,9 @@ const MyPage = () => {
   };
   const handleEditClick = () => {
     setCurrentMode('edit');
+  };
+  const handleViewClick = () => {
+    setCurrentMode('view');
   };
 
   const updateMutation = useMutation({
@@ -101,14 +104,19 @@ const MyPage = () => {
       <h1 className={styles.title}>계정 정보</h1>
       <div className={styles.profileContainer}>
         <div className={styles.profileImgBox}>
-          <img
-            className={styles.profileImg}
-            src={preveiw}
-            alt="프로필 이미지"
-          />
-          {currentMode === 'edit' && (
-            <label className={styles.selectBtnLabel}>
-              프로필 이미지
+          {currentMode === 'view' ? (
+            <img
+              className={styles.profileImg}
+              src={preview}
+              alt="프로필 이미지"
+            />
+          ) : (
+            <label className={styles.selectBtn}>
+              <img
+                className={styles.profileImg}
+                src={preview}
+                alt="프로필 이미지"
+              />
               <input
                 className={styles.imgSelectBtn}
                 type="file"
@@ -121,7 +129,12 @@ const MyPage = () => {
         {currentMode === 'view' ? (
           <View info={info} onEditClick={handleEditClick} />
         ) : (
-          <Edit info={info} setInfo={setInfo} onSaveClick={handleSaveClick} />
+          <Edit
+            info={info}
+            setInfo={setInfo}
+            onSaveClick={handleSaveClick}
+            onViewClick={handleViewClick}
+          />
         )}
       </div>
     </div>
