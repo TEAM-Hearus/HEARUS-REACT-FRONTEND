@@ -2,11 +2,12 @@
 @import '../../../../styles/variables/fonts.scss';
 
 .infoBox {
+  width: 100%;
   max-width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
 }
 .inputBox {
   width: 100%;
@@ -18,7 +19,7 @@
   display: flex;
   flex-direction: column;
   @include SemiBold_Body_16;
-  gap: 8px;
+  gap: 7px;
 }
 .inputLabel {
   width: 100%;
@@ -26,7 +27,7 @@
   flex-direction: column;
   @include SemiBold_Body_16;
   color: $dark-font_5A;
-  gap: 8px;
+  gap: 7px;
 }
 
 .input {
@@ -58,10 +59,19 @@
   height: 48px;
   border: 1px solid $light-bg_E5;
   border-radius: 8px;
-  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px;
 }
-.LanguageUsedBox {
-  padding: 30px 10px;
+.arrowBtn {
+  border: 0;
+  background-color: $white_FF;
+  width: 24px;
+  height: 24px;
+}
+.gradeNum {
+  color: $dark-font_33;
 }
 .oauthTypeBox {
   position: absolute;
@@ -96,9 +106,9 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 20px 0;
+  padding: 16px 0 42px 0;
+  gap: 16px;
 }
-
 .submitBtn {
   height: 48px;
   @include SemiBold_Body_16;
@@ -108,7 +118,14 @@
   border-radius: 8px;
   cursor: pointer;
 }
-
+.viewModeBtn {
+  border: none;
+  color: $light-font_9E;
+  background-color: $white_FF;
+  cursor: pointer;
+  @include SemiBold_Sub_14;
+  text-decoration-line: underline;
+}
 .showBtn {
   position: absolute;
   transform: translateY(-50%);
