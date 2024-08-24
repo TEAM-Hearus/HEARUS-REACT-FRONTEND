@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import styles from './TimeTable.module.scss';
 import WeeklyTimeTable from './WeeklyTimeTable/WeeklyTimeTable';
 import AddScheduleForm from '../../../components/organisms/AddScheduleForm/AddScheduleForm';
 import { useUserInfoStore } from '../../../store/useUserInfoStore';
+import { useOutsideClick } from '../../../hooks/useOutsideClick';
 
 const TimeTable = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
   const { userInfo } = useUserInfoStore();
 
   const handleOpenModal = () => {
@@ -14,6 +16,13 @@ const TimeTable = () => {
   const handleCloseModal = () => {
     setIsOpen(false);
   };
+
+  useOutsideClick(modalRef, () => {
+    if (isOpen) {
+      setIsOpen(false);
+    }
+  });
+
   return (
     <div className={styles.wholeWrapper}>
       <div className={styles.headerContainer}>
@@ -25,7 +34,11 @@ const TimeTable = () => {
         </button>
       </div>
       <WeeklyTimeTable />
-      {isOpen && <AddScheduleForm onClose={handleCloseModal} />}
+      {isOpen && (
+        <div ref={modalRef}>
+          <AddScheduleForm onClose={handleCloseModal} />
+        </div>
+      )}
     </div>
   );
 };
