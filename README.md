@@ -51,10 +51,10 @@ Hearus는 대학교 교내 청각장애 학우 대필지원 도우미 활동에�
 | | |
 
 ## 기술 스택
-| Language | Library | CSS | State Management | Data Fetching | Build | 배포 |
-|--|----|--|--|--|--|--|
-| ![image](https://github.com/user-attachments/assets/e5450c28-4022-4e1e-9c15-d962c8d0fe47) | ![image](https://github.com/user-attachments/assets/95a1b711-18d4-4c17-adff-02045bb2445b) | ![image](https://github.com/user-attachments/assets/62fcad28-4446-4ae5-a9b2-dcbbd8588d4e) | ![image](https://github.com/user-attachments/assets/f4eb48fc-d54b-4ab5-9299-bc27c6ae93da) | ![image](https://github.com/user-attachments/assets/03506e89-883b-4da8-a334-e5cad795b420) | ![image](https://github.com/user-attachments/assets/026f6425-a384-48d0-a3cc-3447e4d9ded8) | ![image](https://github.com/user-attachments/assets/50caa2e1-3f05-4059-90ae-c957a529f6ad) |
-| TypeScript | React | Scss module | Zustand | Tanstack React Query | Vite | Firebase |
+| Language | Library | CSS | State Management | Data Fetching | Build | 배포 | CI/CD |
+|--|--|--|--|--|--|--|--|
+| ![image](https://github.com/user-attachments/assets/e5450c28-4022-4e1e-9c15-d962c8d0fe47) | ![image](https://github.com/user-attachments/assets/95a1b711-18d4-4c17-adff-02045bb2445b) | ![image](https://github.com/user-attachments/assets/62fcad28-4446-4ae5-a9b2-dcbbd8588d4e) | ![image](https://github.com/user-attachments/assets/f4eb48fc-d54b-4ab5-9299-bc27c6ae93da) | ![image](https://github.com/user-attachments/assets/03506e89-883b-4da8-a334-e5cad795b420) | ![image](https://github.com/user-attachments/assets/026f6425-a384-48d0-a3cc-3447e4d9ded8) | ![image](https://github.com/user-attachments/assets/50caa2e1-3f05-4059-90ae-c957a529f6ad) | ![image](https://github.com/user-attachments/assets/ad4e87cf-cdea-43f2-bc2d-d5b73769b53f)|
+| TypeScript | React | Scss module | Zustand | Tanstack React Query | Vite | Firebase hosting | Github Actions |
 
 
 ## src 폴더구조
