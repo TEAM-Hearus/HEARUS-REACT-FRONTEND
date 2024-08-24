@@ -17,5 +17,21 @@
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   @include Regular_Body_18_200;
-  color: #333333;
+  color: $dark-font_33;
+}
+.smallSection {
+  position: fixed;
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 40%;
+  padding: 10px;
+  background-color: rgba(242, 242, 244, 0.8);
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+  @include Regular_Body_16;
+  color: $dark-font_5A;
+  border-radius: 8px;
+  z-index: 1;
 }
