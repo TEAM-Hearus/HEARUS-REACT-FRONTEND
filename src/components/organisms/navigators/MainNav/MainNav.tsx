@@ -6,19 +6,20 @@ import TimeTableActive from '../../../../assets/images/nav/time-table-active.svg
 import TimeTableInactive from '../../../../assets/images/nav/time-table-inactive.svg?react';
 import TestMakeActive from '../../../../assets/images/nav/test-make-active.svg?react';
 import TestMakeInactive from '../../../../assets/images/nav/test-make-inactive.svg?react';
-import TrashCanActive from '../../../../assets/images/nav/trash-can-active.svg?react';
-import TrashCanInactive from '../../../../assets/images/nav/trash-can-inactive.svg?react';
+import MyPageActive from '../../../../assets/images/nav/my-page-active.svg?react';
+import MyPageInactive from '../../../../assets/images/nav/my-page-inactive.svg?react';
 import styles from './MainNav.module.scss';
-import { useUserInfoStore } from '../../../../store/userUserInfoStore';
+import { useUserInfoStore } from '../../../../store/useUserInfoStore';
 
 const MainNav = () => {
   const { userInfo } = useUserInfoStore();
   const USERNAME = userInfo.userName;
+  const firstLetter = USERNAME.charAt(0);
 
   return (
     <nav className={styles.container}>
       <div className={styles.userProfile}>
-        <div className={styles.profileImage}></div>
+        <div className={styles.profileImage}>{firstLetter}</div>
         <p className={styles.userName}>{USERNAME}</p>
       </div>
       <span className={styles.searchIcon}>
@@ -49,11 +50,11 @@ const MainNav = () => {
           테스트 생성
         </TabLink>
         <TabLink
-          to="/home/trash-can"
-          activeIcon={<TrashCanActive />}
-          inactiveIcon={<TrashCanInactive />}
+          to="/home/my-page"
+          activeIcon={<MyPageActive />}
+          inactiveIcon={<MyPageInactive />}
         >
-          휴지통
+          마이페이지
         </TabLink>
       </section>
     </nav>

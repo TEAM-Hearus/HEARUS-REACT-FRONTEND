@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './TimeTable.module.scss';
 import WeeklyTimeTable from './WeeklyTimeTable/WeeklyTimeTable';
 import AddScheduleForm from '../../../components/organisms/AddScheduleForm/AddScheduleForm';
-import { useUserInfoStore } from '../../../store/userUserInfoStore';
+import { useUserInfoStore } from '../../../store/useUserInfoStore';
 
 const TimeTable = () => {
   const [isOpen, setIsOpen] = useState(false);
