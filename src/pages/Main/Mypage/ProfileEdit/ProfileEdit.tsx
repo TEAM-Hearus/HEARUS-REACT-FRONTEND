@@ -119,6 +119,7 @@ const ProfileEdit = ({
                 name="userPassword"
                 value={info.userPassword}
                 onChange={handleChange}
+                autoComplete="off"
               />
               <div className={styles.showBtn} onClick={toggleShowPassword}>
                 {isShowPasswordClick ? <On /> : <Off />}
@@ -134,6 +135,7 @@ const ProfileEdit = ({
                 name="userPasswordConfirm"
                 value={info.userPasswordConfirm}
                 onChange={handleChange}
+                autoComplete="off"
               />
               <div
                 className={styles.showBtn}
