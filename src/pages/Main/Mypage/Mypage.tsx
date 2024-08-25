@@ -65,6 +65,17 @@ const MyPage = () => {
     setCurrentMode('edit');
   };
   const handleViewClick = () => {
+    setInfo({
+      userName: userInfo.userName || '',
+      userEmail: userInfo.userEmail || '',
+      userPassword: userInfo.userPassword || '',
+      userSchool: userInfo.userSchool || '',
+      userGrade: userInfo.userGrade || '',
+      userMajor: userInfo.userMajor || '',
+      userImg: '',
+      userOAuthType: userInfo.userOAuthType || '',
+      userPasswordConfirm: '',
+    });
     setCurrentMode('view');
   };
 
