@@ -9,6 +9,7 @@ permissions:
   pull-requests: write
 env:
   VITE_API_URL: ${{ secrets.VITE_API_URL }}
+  VITE_SOCKETIO_HOST: ${{ secrets.SOCKETIO_HOST }}
 jobs:
   build_and_preview:
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
