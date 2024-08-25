@@ -22,9 +22,9 @@ Hearus는 대학교 교내 청각장애 학우 대필지원 도우미 활동에�
 |![image](https://github.com/user-attachments/assets/ecd3a0cf-62d3-4647-9b5c-ca70f4ccb904)| ![image](https://github.com/user-attachments/assets/8a321fb6-3b59-4d68-9c20-138abdfb0720) |
  
 **2. 강의 녹음 자막 생성 페이지**: 내 스크립트 페이지에서 녹음 시작 버튼 클릭시 MediaRecorder API와 Socket.io 활용해 실시간 자막 생성
-| 자막 생성(gif) | 녹음 종료 모달 | 
-|-----------|-----------------|
-|![녹음구현](https://github.com/user-attachments/assets/185a76fb-6091-4d10-a882-5d98940b946d)| ![image](https://github.com/user-attachments/assets/c161b894-3490-49e3-b793-4ebda89b2f8e)|
+| 자막 생성 | 녹음 종료 모달 | 
+|-------------------|--|
+| ![image](https://github.com/user-attachments/assets/b2e43478-58ad-4f66-83c1-518cf871ee66) | ![image](https://github.com/user-attachments/assets/c161b894-3490-49e3-b793-4ebda89b2f8e)|
 |  녹음 페이지 헤더의 '태그' 버튼을 클릭하면 과목 선택 가능  |  종료 버튼을 누르면 모달 등장, 모달에서도 과목 선택 가능  |
 
 **3. 시간표 페이지**: 대학교 학기의 시간표에 맞춰 시간표 추가 가능 
