@@ -27,7 +27,7 @@ const Test = () => {
     problem_types: questionTypes.join(','),
   };
 
-  const { data, isFetching } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['problem', lectureId],
     queryFn: () => generateProblem(inputData),
     retry: false,
@@ -46,7 +46,7 @@ const Test = () => {
   };
 
   useEffect(() => {
-    if (!data?.success) {
+    if (data != null && data.success === false) {
       alert('문제 생성을 실패했습니다. 다시 시도해주세요.');
       navigate('/home/test-make');
     }
@@ -69,7 +69,9 @@ const Test = () => {
     <div className={styles.container}>
       <TestHeader handleSubmit={handleSubmit} showResults={showResults} />
       <article className={styles.problemsContainer}>
-        {isFetching && <img src={Loading} alt="문제 생성중..." />}
+        {isLoading && (
+          <img className={styles.loading} src={Loading} alt="문제 생성중..." />
+        )}
         {data != null &&
           data.object != null &&
           data.object.map((question, index) => (

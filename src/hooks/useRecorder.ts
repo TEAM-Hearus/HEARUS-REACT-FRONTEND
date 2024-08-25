@@ -29,7 +29,7 @@ export const useRecorder = (onAudioData: (data: string) => void) => {
       }
     };
 
-    mediaRecorderRef.current.start(1000);
+    mediaRecorderRef.current.start(4000);
   };
 
   const startRecording = async () => {
