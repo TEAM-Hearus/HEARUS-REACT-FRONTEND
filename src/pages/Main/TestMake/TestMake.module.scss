@@ -47,10 +47,12 @@
 .scriptWrapper {
   border: 1px solid $white_FF;
   border-radius: 8px;
+  height: min-content;
 }
 .selectedScript {
   border: 1px solid $brand-point;
   border-radius: 8px;
+  height: min-content;
 }
 .noScript {
   display: flex;
