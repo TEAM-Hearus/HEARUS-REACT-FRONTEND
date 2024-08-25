@@ -7,7 +7,6 @@
   flex-direction: column;
   justify-content: center;
   background-color: #f6f6f6;
-  width: 100dvw;
   height: 100dvh;
 }
 .header {
@@ -16,7 +15,7 @@
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  width: 100dvw;
+  width: 100%;
   height: 88px;
   padding: 20px 100px;
   z-index: 1;
@@ -38,7 +37,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100dvh;
   height: 100dvh;
   padding: 100px;
   background-color: rgba(239, 239, 239, 0.24);
@@ -94,7 +92,6 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 100dvw;
   height: 100dvh;
 }
 .upIntro {
@@ -186,7 +183,6 @@
   justify-content: flex-end;
   align-items: center;
   gap: 50px;
-  width: 100dvw;
   height: 600px;
   background-color: $white_FF;
   border-radius: 30px;
@@ -249,7 +245,6 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
-  width: 100dvw;
   height: 100dvh;
   background-color: $white_FF;
 }
@@ -299,7 +294,6 @@
   flex-direction: column;
   justify-content: space-around;
   gap: 10px;
-  width: 100dvw;
   height: 180px;
   padding: 30px 200px;
   background-color: $dark-font_33;
