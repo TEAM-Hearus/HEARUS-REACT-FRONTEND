@@ -184,7 +184,7 @@
   justify-content: flex-end;
   align-items: center;
   gap: 50px;
-  height: 600px;
+  padding: 100px;
   background-color: $white_FF;
   border-radius: 30px;
 }
@@ -227,11 +227,6 @@
   font-size: 18px;
   color: $dark-font_33;
 }
-.exampleImg {
-  height: 50dvh;
-  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.15);
-  border-radius: 16px;
-}
 .descriptionContainer {
   display: flex;
   flex-direction: column;
@@ -240,12 +235,13 @@
   @include Medium_Body_16;
   color: $dark-font_33;
 }
-.highLight {
+.carouselsContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  background-image: url('../../assets/images/auth-page-bg.png');
+  gap: 40px;
   height: 100dvh;
   background-color: $white_FF;
 }

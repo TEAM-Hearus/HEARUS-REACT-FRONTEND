@@ -1,13 +1,13 @@
 import { Link, Navigate } from 'react-router-dom';
 import TextCarousel from '../../components/molecules/landings/TextCarousel/TextCarousel';
-import { checkAuthentication } from '../../utils/auth';
+import ImageCarousel from '../../components/molecules/landings/ImageCarousel/ImageCarousel';
 import Logo from '../../assets/images/logo/landing-logo.svg?react';
 import graph1 from '../../assets/images/landing/graph1.png';
 import graph2 from '../../assets/images/landing/graph2.png';
 import function1 from '../../assets/images/landing/function1.png';
 import function2 from '../../assets/images/landing/function2.png';
 import function3 from '../../assets/images/landing/function3.png';
-import example from '../../assets/images/landing/landing-myscript.jpg';
+import { checkAuthentication } from '../../utils/auth';
 import styles from './Landing.module.scss';
 
 const Landing = () => {
@@ -134,13 +134,9 @@ const Landing = () => {
           </article>
         </div>
       </section>
-      <section className={styles.highLight}>
+      <section className={styles.carouselsContainer}>
         <TextCarousel />
-        <img
-          className={styles.exampleImg}
-          src={example}
-          alt="recent script page example"
-        />
+        <ImageCarousel />
       </section>
       <section className={styles.finalSection}>
         <p>모두의 들을 권리를 위하여 Hearus가 함께 하겠습니다.</p>
