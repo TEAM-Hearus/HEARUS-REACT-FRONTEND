@@ -1,42 +1,16 @@
-import { useEffect, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { checkAuthentication } from '../../utils/auth';
+import TextCarousel from '../../components/molecules/landings/TextCarousel/TextCarousel';
+import ImageCarousel from '../../components/molecules/landings/ImageCarousel/ImageCarousel';
 import Logo from '../../assets/images/logo/landing-logo.svg?react';
 import graph1 from '../../assets/images/landing/graph1.png';
 import graph2 from '../../assets/images/landing/graph2.png';
 import function1 from '../../assets/images/landing/function1.png';
 import function2 from '../../assets/images/landing/function2.png';
 import function3 from '../../assets/images/landing/function3.png';
-import example from '../../assets/images/landing/landing-myscript.jpg';
-import { SCROLLING_TEXTS } from '../../constants/landing';
+import { checkAuthentication } from '../../utils/auth';
 import styles from './Landing.module.scss';
 
 const Landing = () => {
-  const FIRST_TEXT_INDEX = 2;
-  const LAST_TEXT_INDEX = SCROLLING_TEXTS.length - 3;
-
-  const [activeIndex, setActiveIndex] = useState(FIRST_TEXT_INDEX);
-  const [transition, setTransition] = useState(true);
-
-  const next = () => {
-    setTransition(true);
-    setActiveIndex((prev) => prev + 1);
-
-    const transitionEndTimer = setTimeout(() => {
-      if (activeIndex === LAST_TEXT_INDEX) {
-        setTransition(false);
-        setActiveIndex(FIRST_TEXT_INDEX);
-      }
-    }, 300);
-
-    return () => clearTimeout(transitionEndTimer);
-  };
-
-  useEffect(() => {
-    const slideInterval = setInterval(next, 3000);
-    return () => clearInterval(slideInterval);
-  }, [next]);
-
   const isAuthenticated = checkAuthentication();
 
   if (isAuthenticated) {
@@ -160,32 +134,9 @@ const Landing = () => {
           </article>
         </div>
       </section>
-      <section className={styles.highLight}>
-        <article className={styles.scrollingContainer}>
-          <ul
-            className={styles.scrollingText}
-            style={{
-              transform: `translateY(-${(activeIndex - 1) * 55}px)`,
-              transition: transition ? 'transform 0.3s ease' : 'none',
-            }}
-          >
-            {SCROLLING_TEXTS.map((text, index) => (
-              <li
-                key={index}
-                className={
-                  index === activeIndex ? styles.active : styles.inactive
-                }
-              >
-                {text}
-              </li>
-            ))}
-          </ul>
-        </article>
-        <img
-          className={styles.exampleImg}
-          src={example}
-          alt="recent script page example"
-        />
+      <section className={styles.carouselsContainer}>
+        <TextCarousel />
+        <ImageCarousel />
       </section>
       <section className={styles.finalSection}>
         <p>모두의 들을 권리를 위하여 Hearus가 함께 하겠습니다.</p>
