@@ -1,0 +1,26 @@
+@import '../../../../styles/variables/colors.scss';
+@import '../../../../styles/variables/fonts.scss';
+
+.container {
+  position: relative;
+  width: calc(50dvw + 50px);
+  padding: 20px;
+  overflow: hidden;
+}
+
+.ul {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.li {
+  width: 50dvw;
+  border-radius: 16px;
+}
+
+.img {
+  width: 50dvw;
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+}
