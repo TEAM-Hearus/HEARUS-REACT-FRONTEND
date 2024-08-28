@@ -1,0 +1,35 @@
+@import '../../../../styles/variables/colors.scss';
+@import '../../../../styles/variables/fonts.scss';
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+}
+.ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 150px;
+  gap: 20px;
+  li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+  }
+  .inactive {
+    font-family: 'Pretendard-SemiBold';
+    font-size: 36px;
+    color: $light-bg_E5;
+  }
+  .active {
+    font-family: 'Pretendard-SemiBold';
+    font-size: 36px;
+    color: $brand-point;
+  }
+}
