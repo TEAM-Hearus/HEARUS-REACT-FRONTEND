@@ -1,7 +1,26 @@
 @import '../../../../styles/variables/colors.scss';
 @import '../../../../styles/variables/fonts.scss';
 
-.exampleImg {
+.container {
+  position: relative;
+  height: calc(50dvh + 60px);
+  padding: 20px;
+  overflow: hidden;
+}
+
+.ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.li {
+  height: 50dvh;
+  border-radius: 16px;
+}
+
+.img {
   height: 50dvh;
   box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.15);
   border-radius: 16px;
