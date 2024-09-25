@@ -27,7 +27,7 @@ const Test = () => {
     problem_types: questionTypes.join(','),
   };
 
-  const { data, isLoading } = useQuery({
+  const { data, isSuccess } = useQuery({
     queryKey: ['problem', lectureId],
     queryFn: () => generateProblem(inputData),
     retry: false,
@@ -69,7 +69,7 @@ const Test = () => {
     <div className={styles.container}>
       <TestHeader handleSubmit={handleSubmit} showResults={showResults} />
       <article className={styles.problemsContainer}>
-        {isLoading && (
+        {!isSuccess && (
           <img className={styles.loading} src={Loading} alt="문제 생성중..." />
         )}
         {data != null &&
@@ -87,7 +87,8 @@ const Test = () => {
                   showResult={showResults}
                 />
               )}
-              {question.type === 'ShortAnswer' && (
+              {(question.type === 'ShortAnswer' ||
+                question.type === 'BlackQuestion') && (
                 <ShortAnswer
                   options={question.options}
                   answer={question.answer}
