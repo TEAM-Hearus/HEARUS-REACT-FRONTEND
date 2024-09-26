@@ -142,7 +142,7 @@ Hearus의 발전에 기여해 주셔서 감사합니다!
 3. Code Review: 다른 기여자의 PR을 리뷰하고 피드백 제공
 4. Documentation: README, 위키, 또는 코드 주석 개선
 
-자세한 기여 가이드라인은 [CONTRIBUTING.md](https://github.com/TEAM-Hearus/.github/blob/main/CONTRIBUTING.md)를 참조해 주세요.
+자세한 기여 가이드라인은 [CONTRIBUTING.md](https://github.com/TEAM-Hearus/.github/blob/main/CONTRIBUTING.md)를 참조해 주세요.</br>
 또한 프로젝트에 대한 문의사항이 있으시다면 [ISSUE](https://github.com/TEAM-Hearus/.github/tree/main/ISSUE_TEMPLATE)를 생성해 주세요.
 
 ---
