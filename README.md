@@ -137,10 +137,10 @@ Hearus의 발전에 기여해 주셔서 감사합니다!
 </br>
 우리는 모든 형태의 기여를 환영합니다.
 
-1. 이슈 생성: 버그 리포트, 기능 제안, 또는 질문
-2. 풀 리퀘스트: 코드 개선, 문서화, 또는 새로운 기능 구현
-3. 코드 리뷰: 다른 기여자의 PR을 리뷰하고 피드백 제공
-4. 문서화: README, 위키, 또는 코드 주석 개선
+1. Issue 생성: 버그 리포트, 기능 제안, 또는 질문
+2. Pull Request: 코드 개선, 문서화, 또는 새로운 기능 구현
+3. Code Review: 다른 기여자의 PR을 리뷰하고 피드백 제공
+4. Documentation: README, 위키, 또는 코드 주석 개선
 
 자세한 기여 가이드라인은 [CONTRIBUTING.md](https://github.com/TEAM-Hearus/.github/blob/main/CONTRIBUTING.md)를 참조해 주세요.
 
