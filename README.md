@@ -129,7 +129,7 @@ src/
 ## 📄 라이선스
 이 프로젝트는 MIT 라이선스 하에 배포됩니다. 
 </br>
-자세한 내용은 [LICENSE](https://github.com/TEAM-Hearus/HEARUS-REACT-FRONTEND/blob/main/LICENSE) 파일을 참조하세요.
+자세한 내용은 [LICENSE](https://github.com/TEAM-Hearus/HEARUS-REACT-FRONTEND/blob/main/LICENSE) 파일을 참조해주세요.
 
 ## 🤝 기여하기
 
@@ -143,6 +143,7 @@ Hearus의 발전에 기여해 주셔서 감사합니다!
 4. Documentation: README, 위키, 또는 코드 주석 개선
 
 자세한 기여 가이드라인은 [CONTRIBUTING.md](https://github.com/TEAM-Hearus/.github/blob/main/CONTRIBUTING.md)를 참조해 주세요.
+또한 프로젝트에 대한 문의사항이 있으시다면 [ISSUE](https://github.com/TEAM-Hearus/.github/tree/main/ISSUE_TEMPLATE)를 생성해 주세요.
 
 ---
 <p align="center">
