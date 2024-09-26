@@ -1,4 +1,6 @@
 ![image](https://github.com/user-attachments/assets/9be2766a-7aed-4c24-a1db-16652bb706fd)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
 ## 프로젝트 소개
 Hearus는 대학교 교내 청각장애 학우 대필지원 도우미 활동에서 느낀 문제들을 풀어내기 위해 시작되었습니다. </br>
@@ -123,6 +125,11 @@ src/
 | FE | FE | Designer |
 |--|--|--|
 |[김나연](https://github.com/Nangniya) |[고은비](https://github.com/koeunbeee)|장연우|
+
+## 📄 라이선스
+이 프로젝트는 MIT 라이선스 하에 배포됩니다. 
+</br>
+자세한 내용은 [LICENSE](https://github.com/TEAM-Hearus/HEARUS-REACT-FRONTEND/blob/main/LICENSE) 파일을 참조하세요.
 
 <p align="center">
   모두의 들을 권리를 위하여 Hearus가 함께하겠습니다
