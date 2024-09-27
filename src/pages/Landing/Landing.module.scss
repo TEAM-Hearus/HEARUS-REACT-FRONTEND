@@ -256,13 +256,21 @@
 }
 .footer {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  gap: 10px;
+  justify-content: space-between;
   height: 180px;
   padding: 30px 200px;
   background-color: $dark-font_33;
   color: $white_FF;
+}
+.footerLeftContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.footerTitleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .footerTitle {
   @include Medium_Body_16;
@@ -278,9 +286,11 @@
 .footerColumn {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 10px;
   width: 200px;
-  justify-content: space-between;
+  @include Regular_Sub_14;
+  color: $light-blue_B3;
 }
 .footerRightBody {
   display: flex;
