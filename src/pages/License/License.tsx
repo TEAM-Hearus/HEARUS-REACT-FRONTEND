@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Down from '../../assets/images/arrow/down-arrow.svg?react';
 import Up from '../../assets/images/arrow/up-arrow.svg?react';
 import { LICENSES } from '../../constants/landing';
@@ -10,6 +10,9 @@ const License = () => {
   const toggleAccordion = (name: string) => {
     setOpenAccordion(openAccordion === name ? null : name);
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <main className={styles.wholeContainer}>
       <article className={styles.mit}>
