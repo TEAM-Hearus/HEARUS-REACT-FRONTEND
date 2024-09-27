@@ -211,7 +211,7 @@ const AuthForm = ({
     onSuccess: async () => {
       const confirmed = await showConfirm(
         '회원가입',
-        '회원가입에 성공했습니다! 로그인 페이지로 이동하시겠습니까?',
+        '회원가입에 성공했습니다!\n 로그인 페이지로 이동하시겠습니까?',
         '확인',
       );
       if (confirmed) {

@@ -36,6 +36,7 @@
   color: $dark-font_33;
   @include SemiBold_Body_16;
   text-align: center;
+  white-space: pre-wrap;
 }
 .btnBox {
   display: flex;
