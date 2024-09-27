@@ -41,7 +41,9 @@ const ScriptDetailModal = ({ scriptId, closeModal }: IProps) => {
           <X />
         </span>
         <p className={styles.title}>{data?.name}</p>
-        <div className={styles.subjectTag}>{data?.scheduleElementId}</div>
+        {data?.scheduleElementId && (
+          <div className={styles.subjectTag}>{data.scheduleElementId}</div>
+        )}
         <article className={styles.textBox}>
           {data?.processedScript.map((text, index) => (
             <HighlightedText key={index} text={text} />
