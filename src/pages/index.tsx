@@ -12,11 +12,16 @@ import OAuthCallback from './Auth/OAuthCallback';
 import Login from './Auth/AuthForm/Login';
 import SignUp from './Auth/AuthForm/SignUp';
 import ErrorPage from './Error/ErrorPage';
+import License from './License/License';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Landing />,
+  },
+  {
+    path: '/license',
+    element: <License />,
   },
   {
     path: '/login',
