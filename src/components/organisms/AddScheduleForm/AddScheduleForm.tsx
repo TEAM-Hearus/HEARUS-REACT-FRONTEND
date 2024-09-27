@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useUserInfoStore } from '../../../store/useUserInfoStore';
+import { useAlert } from '../../../contexts/AlertContext';
 import Warning from '../../../assets/images/warning.svg?react';
 import {
   COLORS,
@@ -35,6 +36,7 @@ const AddScheduleForm = ({ onClose }: IProps) => {
   const startMinuteRef = useRef<HTMLInputElement | null>(null);
   const endHourRef = useRef<HTMLInputElement | null>(null);
   const endMinuteRef = useRef<HTMLInputElement | null>(null);
+  const { addAlert } = useAlert();
 
   const { userInfo } = useUserInfoStore();
 
@@ -100,14 +102,14 @@ const AddScheduleForm = ({ onClose }: IProps) => {
     mutationFn: (data: IScheduleElementDTO) =>
       addScheduleElement(data, userInfo.userName),
     onSuccess: () => {
-      alert('강의 추가에 성공했습니다.');
+      addAlert('강의 추가에 성공했습니다.', 'success');
       onClose();
       queryClient.invalidateQueries({
         queryKey: ['schedule', userInfo.userName],
       });
     },
     onError: () => {
-      alert('강의 추가를 실패했습니다.');
+      addAlert('강의 추가를 실패했습니다.', 'error');
     },
   });
 
@@ -120,16 +122,18 @@ const AddScheduleForm = ({ onClose }: IProps) => {
       const formattedData = transformToScheduleElementDTO(lectureInfo);
       if (existingSchedule) {
         if (hasNewElementConflict(formattedData, existingSchedule)) {
-          alert(
-            '새로운 강의 시간이 기존 스케줄과 겹칩니다. 다른 시간을 선택해주세요.',
+          addAlert(
+            '새로운 강의 시간이 기존 스케줄과 겹칩니다.\n 다른 시간을 선택해주세요.',
+            'error',
           );
           return;
         } else {
           postMutation.mutate(formattedData);
         }
       } else {
-        alert(
-          '스케줄 데이터를 불러올 수 없습니다. 페이지를 새로고침한 후 다시 시도해주세요.',
+        addAlert(
+          '스케줄 데이터를 불러올 수 없습니다.\n 페이지를 새로고침한 후 다시 시도해주세요.',
+          'error',
         );
       }
     }
