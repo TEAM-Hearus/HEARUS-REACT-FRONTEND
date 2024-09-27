@@ -158,6 +158,9 @@ const Landing = () => {
                 <p>연락처 000-3232-0437</p>
               </div>
             </div>
+            <Link to="/license" className={styles.license}>
+              라이센스 정보
+            </Link>
           </div>
         </article>
         <article className={styles.footerRightContainer}>
