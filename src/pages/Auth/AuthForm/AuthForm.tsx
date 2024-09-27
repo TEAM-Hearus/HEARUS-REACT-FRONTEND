@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { API_URL } from '../../../apis';
@@ -8,6 +8,7 @@ import Naver from '../../../assets/images/logo/naver.png';
 import styles from './AuthForm.module.scss';
 import On from '../../../assets/images/showPasswordOn.svg?react';
 import Off from '../../../assets/images/showPasswordOff.svg?react';
+import Warning from '../../../assets/images/warning.svg?react';
 import { emailLogin, emailSignUp } from '../../../apis/auth';
 
 interface AuthFormProps {
@@ -17,6 +18,16 @@ interface AuthFormProps {
   authGoBoxMessage: string;
   authGoLink: string;
   authGoLinkMessage: string;
+}
+interface ValidationState {
+  name: boolean;
+  nameErrorMessage: string;
+  email: boolean;
+  emailErrorMessage: string;
+  password: boolean;
+  passwordErrorMessage: string;
+  passwordConfirm: boolean;
+  passwordConfirmErrorMessage: string;
 }
 
 const AuthForm = ({
@@ -28,7 +39,6 @@ const AuthForm = ({
   authGoLinkMessage,
 }: AuthFormProps) => {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
@@ -36,6 +46,123 @@ const AuthForm = ({
   const [isShowPasswordConfirmClick, setIsShowPasswordConfirmClick] =
     useState(false);
   const [name, setName] = useState('');
+
+  const [validationState, setValidationState] = useState<ValidationState>({
+    name: true,
+    nameErrorMessage: '',
+    email: true,
+    emailErrorMessage: '',
+    password: true,
+    passwordErrorMessage: '',
+    passwordConfirm: true,
+    passwordConfirmErrorMessage: '',
+  });
+
+  const updateValidation = useCallback(
+    (
+      field: keyof ValidationState,
+      isValid: boolean,
+      errorMessage: string = '',
+    ) => {
+      setValidationState((prevState) => ({
+        ...prevState,
+        [field]: isValid,
+        [`${field}ErrorMessage`]: errorMessage,
+      }));
+    },
+    [],
+  );
+  const validateName = (value: string) => {
+    if (value.trim() === '') {
+      updateValidation('name', false, '이름을 입력해 주세요.');
+    } else {
+      updateValidation('name', true, '');
+    }
+  };
+
+  const validateEmail = useCallback(
+    (value: string) => {
+      if (value.trim() === '') {
+        updateValidation('email', false, '이메일은 필수 입력 값입니다.');
+        return;
+      }
+      const regex =
+        /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+      const isValid = regex.test(value);
+
+      if (!isValid) {
+        updateValidation('email', false, '유효하지 않은 이메일입니다.');
+      } else {
+        updateValidation('email', true, '');
+      }
+    },
+    [updateValidation],
+  );
+
+  const validatePassword = useCallback(
+    (value: string) => {
+      if (value.trim() === '') {
+        updateValidation('password', false, '비밀번호는 필수 입력 값입니다.');
+        return;
+      }
+      if (value.length < 8) {
+        updateValidation(
+          'password',
+          false,
+          '비밀번호는 최소 8자 이상이어야 합니다.',
+        );
+        return;
+      }
+      updateValidation('password', true, '');
+    },
+    [updateValidation],
+  );
+
+  const validatePasswordConfirm = useCallback(
+    (value: string, currentPassword: string) => {
+      if (value.trim() === '') {
+        updateValidation(
+          'passwordConfirm',
+          false,
+          '비밀번호 확인은 필수 입력 값입니다.',
+        );
+        return;
+      }
+
+      if (value !== currentPassword) {
+        updateValidation(
+          'passwordConfirm',
+          false,
+          '비밀번호가 일치하지 않습니다.',
+        );
+        return;
+      }
+
+      updateValidation('passwordConfirm', true, '');
+    },
+    [updateValidation],
+  );
+
+  const handlePasswordChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newPassword = e.target.value;
+      setPassword(newPassword);
+      validatePassword(newPassword);
+      if (passwordConfirm) {
+        validatePasswordConfirm(passwordConfirm, newPassword);
+      }
+    },
+    [validatePassword, validatePasswordConfirm, passwordConfirm],
+  );
+
+  const handlePasswordConfirmChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newPasswordConfirm = e.target.value;
+      setPasswordConfirm(newPasswordConfirm);
+      validatePasswordConfirm(newPasswordConfirm, password);
+    },
+    [validatePasswordConfirm, password],
+  );
 
   const toggleShowPassword = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
@@ -72,13 +199,13 @@ const AuthForm = ({
     e.preventDefault();
     const isValid =
       title === '새 계정'
-        ? email.trim() !== '' &&
-          password.trim() !== '' &&
-          passwordConfirm.trim() !== '' &&
-          name.trim() !== ''
+        ? validationState.email &&
+          validationState.name &&
+          validationState.password &&
+          validationState.passwordConfirm
         : email.trim() !== '' && password.trim() !== '';
     if (!isValid) return;
-    if (title === '새 계정' && password === passwordConfirm) {
+    if (title === '새 계정' && isValid) {
       signupMutation.mutate({
         userEmail: email,
         userPassword: password,
@@ -88,8 +215,8 @@ const AuthForm = ({
     if (title === '로그인') {
       loginMutation.mutate({ userEmail: email, userPassword: password });
     }
-    if (title === '새 계정' && password !== passwordConfirm) {
-      alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+    if (!isValid) {
+      alert('입력칸을 확인해주세요.');
     }
   };
 
@@ -102,32 +229,89 @@ const AuthForm = ({
       <div className={styles.authContainer}>
         <form className={styles.authForm} onSubmit={handleSubmit}>
           <h1 className={styles.h1}>{title}</h1>
-          <div className={styles.inputBox}>
+          {title === '새 계정' && (
+            <div
+              className={`${styles.inputBox} ${
+                !validationState.name ? styles.inputBoxError : ''
+              }`}
+            >
+              <label className={styles.label}>
+                사용자 이름
+                <input
+                  type="text"
+                  placeholder="사용자 이름 또는 닉네임을 입력하세요"
+                  className={`${styles.input} ${
+                    !validationState.name ? styles.inputError : ''
+                  }`}
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                    validateName(e.target.value);
+                  }}
+                />
+              </label>
+              {!validationState.name && (
+                <div className={styles.validMsg}>
+                  <Warning className={styles.warning} />
+                  {validationState.nameErrorMessage}
+                </div>
+              )}
+            </div>
+          )}
+          <div
+            className={`${styles.inputBox} ${
+              !validationState.email ? styles.inputBoxError : ''
+            }`}
+          >
             <label className={styles.label}>
               이메일
               <input
                 type="email"
                 placeholder="이메일을 입력하세요"
-                className={styles.input}
+                className={`${styles.input} ${
+                  !validationState.email ? styles.inputError : ''
+                }`}
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  validateEmail(e.target.value);
+                }}
               />
             </label>
+            {!validationState.email && (
+              <div className={styles.validMsg}>
+                <Warning className={styles.warning} />
+                {validationState.emailErrorMessage}
+              </div>
+            )}
           </div>
-          <div className={styles.inputBox}>
+
+          <div
+            className={`${styles.inputBox} ${
+              !validationState.password ? styles.inputBoxError : ''
+            }`}
+          >
             <label className={styles.label}>
               비밀번호
               <input
                 type={isShowPasswordClick ? 'text' : 'password'}
                 placeholder="비밀번호를 입력하세요"
-                className={styles.input}
+                className={`${styles.input} ${!validationState.password ? styles.inputError : ''}`}
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handlePasswordChange}
               />
               <div className={styles.showBtn} onClick={toggleShowPassword}>
                 {isShowPasswordClick ? <On /> : <Off />}
               </div>
             </label>
+            {!validationState.password &&
+              validationState.passwordErrorMessage && (
+                <div className={styles.validMsg}>
+                  <Warning className={styles.warning} />
+                  {validationState.passwordErrorMessage}
+                </div>
+              )}
+
             {title === '로그인' && (
               <div className={styles.checkboxContainer}>
                 <input
@@ -142,38 +326,35 @@ const AuthForm = ({
             )}
           </div>
           {title === '새 계정' && (
-            <>
-              <div className={styles.inputBox}>
-                <label className={styles.label}>
-                  비밀번호 확인
-                  <input
-                    type={isShowPasswordConfirmClick ? 'text' : 'password'}
-                    placeholder="비밀번호를 입력하세요"
-                    className={styles.input}
-                    value={passwordConfirm}
-                    onChange={(e) => setPasswordConfirm(e.target.value)}
-                  />
-                </label>
-                <div
-                  className={styles.showBtn}
-                  onClick={toggleShowPasswordConfirm}
-                >
-                  {isShowPasswordConfirmClick ? <On /> : <Off />}
-                </div>
+            <div
+              className={`${styles.inputBox} ${
+                !validationState.passwordConfirm ? styles.inputBoxError : ''
+              }`}
+            >
+              <label className={styles.label}>
+                비밀번호 확인
+                <input
+                  type={isShowPasswordConfirmClick ? 'text' : 'password'}
+                  placeholder="비밀번호를 재입력하세요"
+                  className={`${styles.input} ${!validationState.passwordConfirm ? styles.inputError : ''}`}
+                  value={passwordConfirm}
+                  onChange={handlePasswordConfirmChange}
+                />
+              </label>
+              <div
+                className={styles.showBtn}
+                onClick={toggleShowPasswordConfirm}
+              >
+                {isShowPasswordConfirmClick ? <On /> : <Off />}
               </div>
-              <div className={styles.inputBox}>
-                <label className={styles.label}>
-                  이름
-                  <input
-                    type="text"
-                    placeholder="이름을 입력하세요"
-                    className={styles.input}
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </label>
-              </div>
-            </>
+              {!validationState.passwordConfirm &&
+                validationState.passwordConfirmErrorMessage && (
+                  <div className={styles.validMsg}>
+                    <Warning className={styles.warning} />
+                    {validationState.passwordConfirmErrorMessage}
+                  </div>
+                )}
+            </div>
           )}
           <button className={styles.authBtn}>{buttonText}</button>
         </form>
@@ -199,9 +380,11 @@ const AuthForm = ({
             />
           </button>
         </div>
-        <div className={styles.AuthGoBox}>
-          <p>{authGoBoxMessage}</p>
-          <Link to={authGoLink}>{authGoLinkMessage}</Link>
+        <div className={styles.authGoBox}>
+          <p className={styles.authGoMsg}>{authGoBoxMessage}</p>
+          <Link className={styles.authGoLinkMsg} to={authGoLink}>
+            {authGoLinkMessage}
+          </Link>
         </div>
       </div>
     </div>
