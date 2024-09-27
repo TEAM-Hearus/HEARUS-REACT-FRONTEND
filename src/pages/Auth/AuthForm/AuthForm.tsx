@@ -128,18 +128,6 @@ const AuthForm = ({
                 {isShowPasswordClick ? <On /> : <Off />}
               </div>
             </label>
-            {title === '로그인' && (
-              <div className={styles.checkboxContainer}>
-                <input
-                  type="checkbox"
-                  id="remember"
-                  className={styles.checkBoxInput}
-                />
-                <label className={styles.checkBoxLabel} htmlFor="remember">
-                  로그인 유지하기
-                </label>
-              </div>
-            )}
           </div>
           {title === '새 계정' && (
             <>

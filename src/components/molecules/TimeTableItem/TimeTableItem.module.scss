@@ -38,6 +38,6 @@
 .tooltipWrapper {
   position: absolute;
   left: var(--schedule-left);
-  top: var(--schedule-top);
+  top: calc(var(--schedule-top) + 32px);
   z-index: 5;
 }
