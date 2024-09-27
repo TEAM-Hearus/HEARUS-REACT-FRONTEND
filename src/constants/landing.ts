@@ -17,6 +17,7 @@ interface License {
   license: string;
   copyright?: string;
   text: string[];
+  link: string;
 }
 
 export const LICENSES: License[] = [
@@ -44,6 +45,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.`,
     ],
+    link: 'https://github.com/TanStack/query/blob/main/LICENSE',
   },
   {
     name: 'react',
@@ -69,6 +71,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.`,
     ],
+    link: 'https://github.com/facebook/react/blob/main/LICENSE',
   },
   {
     name: 'react-dom',
@@ -93,6 +96,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.`,
     ],
+    link: 'https://github.com/facebook/react/blob/main/LICENSE',
   },
   {
     name: 'react-router-dom',
@@ -117,6 +121,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.`,
     ],
+    link: 'https://github.com/remix-run/react-router',
   },
   {
     name: 'socket.io-client',
@@ -141,6 +146,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.`,
     ],
+    link: 'https://github.com/socketio/socket.io/blob/main/LICENSE',
   },
   {
     name: 'styled-reset',
@@ -164,6 +170,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.`,
     ],
+    link: 'https://github.com/zacanger/styled-reset/blob/HEAD/LICENSE.md',
   },
   {
     name: 'zustand',
@@ -188,6 +195,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.`,
     ],
+    link: 'https://github.com/pmndrs/zustand/blob/main/LICENSEv',
   },
   {
     name: 'eslint',
@@ -211,6 +219,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.`,
     ],
+    link: 'https://github.com/eslint/eslint/blob/main/LICENSE',
   },
   {
     name: 'prettier',
@@ -234,6 +243,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.`,
     ],
+    link: 'https://github.com/prettier/prettier/blob/main/LICENSE',
   },
   {
     name: 'sass',
@@ -257,6 +267,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.`,
     ],
+    link: 'https://github.com/sass/dart-sass/blob/main/LICENSE',
   },
   {
     name: 'typescript',
@@ -292,12 +303,14 @@ SOFTWARE.`,
       '9. Accepting Warranty or Additional Liability. While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.',
       'END OF TERMS AND CONDITIONS',
     ],
+    link: 'https://github.com/microsoft/TypeScript/blob/main/LICENSE.txt',
   },
   {
     name: 'vite',
     version: '^5.3.1',
     license: 'MIT License',
     text: ['[Include the full MIT License text]'],
+    link: 'https://github.com/vitejs/vite/blob/main/LICENSE',
   },
   {
     name: 'vite-plugin-svgr',
@@ -321,5 +334,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.`,
     ],
+    link: 'https://github.com/pd4d10/vite-plugin-svgr/blob/main/LICENSE',
   },
 ];

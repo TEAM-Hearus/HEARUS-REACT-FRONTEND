@@ -3,6 +3,7 @@ import Down from '../../assets/images/arrow/down-arrow.svg?react';
 import Up from '../../assets/images/arrow/up-arrow.svg?react';
 import { LICENSES } from '../../constants/landing';
 import styles from './License.module.scss';
+import { Link } from 'react-router-dom';
 
 const License = () => {
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
@@ -51,18 +52,22 @@ const License = () => {
       <div className={styles.librarysContainer}>
         {LICENSES.map((license) => (
           <section key={license.name} className={styles.licenseItem}>
-            <div className={styles.licenseHeader}>
-              <p onClick={() => toggleAccordion(license.name)}>
-                {license.name} - {license.version}
-              </p>
-              {openAccordion === license.name ? (
-                <Up onClick={() => toggleAccordion(license.name)} />
-              ) : (
-                <Down onClick={() => toggleAccordion(license.name)} />
-              )}
+            <div className={styles.libraryHeaderwrapper}>
+              <div
+                className={styles.licenseHeader}
+                onClick={() => toggleAccordion(license.name)}
+              >
+                <p>
+                  {license.name} - {license.version}
+                </p>
+                {openAccordion === license.name ? <Up /> : <Down />}
+              </div>
             </div>
             {openAccordion === license.name && (
               <article className={styles.licenseContent}>
+                <Link to={license.link} target="_blank">
+                  {license.link}
+                </Link>
                 <p>License: {license.license}</p>
                 {license.copyright && <p>Copyright: {license.copyright}</p>}
                 {license.text.map((text) => (
