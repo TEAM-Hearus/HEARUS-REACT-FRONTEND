@@ -20,7 +20,7 @@ const ConfirmAlert = ({
         <p className={styles.message}>{message}</p>
         <div className={styles.btnBox}>
           <button className={styles.cancleBtn} onClick={() => onConfirm(false)}>
-            취소하기
+            취소
           </button>
           <button className={styles.selectBtn} onClick={() => onConfirm(true)}>
             {buttonText}

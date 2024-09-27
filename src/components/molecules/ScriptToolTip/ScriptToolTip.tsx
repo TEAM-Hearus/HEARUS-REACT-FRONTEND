@@ -52,7 +52,7 @@ const ScriptToolTip = ({ id, scheduleName }: IProps) => {
     const confirmed = await showConfirm(
       `'${scheduleName}'`,
       '이 수업을 시간표에서 삭제하시겠습니까?',
-      '삭제하기',
+      '삭제',
     );
 
     if (confirmed) {
