@@ -6,6 +6,7 @@ import MultipleChoice from '../../components/molecules/questions/MultipleChoice/
 import OXChoice from '../../components/molecules/questions/OXChoice/OXChoice';
 import ShortAnswer from '../../components/molecules/questions/ShortAnswer/ShortAnswer';
 import Loading from '../../assets/images/LoadingCircle.gif';
+import { useAlert } from '../../contexts/AlertContext';
 import useTestModalStore from '../../store/useTestModalStore';
 import useTestSettingsStore from '../../store/useTestSettingsStore';
 import { generateProblem } from '../../apis/test';
@@ -15,6 +16,7 @@ const Test = () => {
   const navigate = useNavigate();
   const [userAnswers, setUserAnswers] = useState<(string | number)[]>([]);
   const [showResults, setShowResults] = useState(false);
+  const { addAlert } = useAlert();
 
   const { updateTestData, clearTestData } = useTestModalStore();
   const { lectureId, scheduleElementId, questionCount, questionTypes } =
@@ -47,7 +49,7 @@ const Test = () => {
 
   useEffect(() => {
     if (data != null && data.success === false) {
-      alert('문제 생성을 실패했습니다. 다시 시도해주세요.');
+      addAlert('문제 생성을 실패했습니다. 다시 시도해주세요.', 'error');
       navigate('/home/test-make');
     }
     if (data != null && data.object != null) {

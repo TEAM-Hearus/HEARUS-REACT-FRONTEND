@@ -3,11 +3,13 @@ import { useQuery } from '@tanstack/react-query';
 import TestOptionSelector from '../../../components/organisms/TestOptionSelector/TestOptionSelector';
 import ScriptItem from '../../../components/molecules/ScriptItem/ScriptItem';
 import useTestSettingsStore from '../../../store/useTestSettingsStore';
+import { useAlert } from '../../../contexts/AlertContext';
 import { getAllScripts, IScriptInList } from '../../../apis/script';
 import styles from './TestMake.module.scss';
 
 const TestMake = () => {
   const navigate = useNavigate();
+  const { addAlert } = useAlert();
 
   const { data } = useQuery<IScriptInList[], Error>({
     queryKey: ['allScripts'],
@@ -37,7 +39,7 @@ const TestMake = () => {
     if (lectureId.length > 0 && questionCount > 0 && questionTypes.length > 0) {
       navigate('/test');
     } else {
-      alert('스크립트와 문제 유형, 문제 개수를 모두 선택해주세요.');
+      addAlert('스크립트와 문제 유형, 문제 개수를 모두 선택해주세요.', 'error');
     }
   };
 

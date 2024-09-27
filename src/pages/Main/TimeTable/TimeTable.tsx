@@ -35,7 +35,7 @@ const TimeTable = () => {
       </div>
       <WeeklyTimeTable />
       {isOpen && (
-        <div ref={modalRef}>
+        <div className={styles.AddScheduleContainer} ref={modalRef}>
           <AddScheduleForm onClose={handleCloseModal} />
         </div>
       )}

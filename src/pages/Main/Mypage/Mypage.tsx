@@ -3,6 +3,7 @@ import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { useUserInfoStore } from '../../../store/useUserInfoStore';
 import Edit from './ProfileEdit/ProfileEdit';
 import View from './ProfileView/ProfileView';
+import { useAlert } from '../../../contexts/AlertContext';
 import Preview from '../../../assets/images/preview.png';
 import { updateInfo, IUserUpdateInfo } from '../../../apis/user';
 import styles from './Mypage.module.scss';
@@ -36,6 +37,7 @@ const MyPage = () => {
   const [preview, setPreview] = useState<string>(Preview);
   const [currentMode, setCurrentMode] = useState<'view' | 'edit'>('view');
   const queryClient = useQueryClient();
+  const { addAlert } = useAlert();
 
   useEffect(() => {
     setInfo({
@@ -91,8 +93,11 @@ const MyPage = () => {
   });
 
   const handleSaveClick = () => {
-    if (info.userPassword !== info.userPasswordConfirm) {
-      alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+    if (
+      info.userPassword.trim() === '' &&
+      info.userPassword !== info.userPasswordConfirm
+    ) {
+      addAlert('비밀번호와 비밀번호 확인이 일치하지 않습니다.', 'error');
       return;
     }
 
