@@ -21,32 +21,23 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 9px;
+  gap: 20px;
 }
-
 .h1 {
   display: flex;
   justify-content: center;
-  padding-bottom: 12px;
+  padding-bottom: 20px;
   @include SemiBold_Title_28;
 }
 .label {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   @include SemiBold_Body_16;
   color: $dark-font_33;
 }
 .inputBox {
   position: relative;
-  padding-bottom: 7px;
-}
-.inputBox :focus {
-  position: relative;
-  background-color: $white_FF;
-}
-.inputBoxError {
-  padding-bottom: 0px;
 }
 .input {
   display: flex;
@@ -59,21 +50,6 @@
     @include Medium_Body_16;
     color: $light-blue_B3;
   }
-}
-.inputError {
-  border: 1px solid $brand-point;
-}
-.validMsg {
-  padding-top: 4px;
-  color: $brand-point;
-  @include Medium_Sub_14;
-  display: flex;
-}
-.warning {
-  align-items: center;
-}
-.isValidfalse {
-  padding-bottom: 0px;
 }
 .checkboxContainer {
   display: flex;
@@ -119,10 +95,19 @@
   margin-top: 20px;
   background-color: $dark-font_33;
   border-radius: 8px;
-  border: 0;
   @include SemiBold_Body_16;
   color: $white_FF;
   cursor: pointer;
+}
+.dividingLine {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0px;
+  padding: 12px 48px;
+  @include Medium_Sub_14;
+  color: $light-font_9E;
 }
 .line {
   flex-grow: 1;
@@ -135,7 +120,7 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
-  padding: 36px 0px 34px 0px;
+  padding: 20px;
 }
 .googleBtn {
   display: flex;
@@ -171,16 +156,16 @@
   background-color: #30d341;
 }
 
-.authGoBox {
+.AuthGoBox {
   display: flex;
   justify-content: center;
   padding: 10px;
   @include SemiBold_Sub_14;
-  .authGoMsg {
+  p {
     padding-right: 5px;
     color: $light-font_9E;
   }
-  .authGoLinkMsg {
+  a {
     color: $brand-point;
     text-decoration: none;
   }
