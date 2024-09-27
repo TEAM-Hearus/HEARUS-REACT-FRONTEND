@@ -7,6 +7,8 @@ import graph2 from '../../assets/images/landing/graph2.png';
 import function1 from '../../assets/images/landing/function1.png';
 import function2 from '../../assets/images/landing/function2.png';
 import function3 from '../../assets/images/landing/function3.png';
+import oss1 from '../../assets/images/landing/oss1.png';
+import oss2 from '../../assets/images/landing/oss2.png';
 import { checkAuthentication } from '../../utils/auth';
 import styles from './Landing.module.scss';
 
@@ -142,24 +144,29 @@ const Landing = () => {
         <p>모두의 들을 권리를 위하여 Hearus가 함께 하겠습니다.</p>
       </section>
       <footer className={styles.footer}>
-        <p className={styles.footerTitle}>Hearus(히어러스)</p>
-        <div className={styles.footerBody}>
-          <div className={styles.footerLeftBody}>
-            <div className={styles.footerColumn}>
-              <p>대표자 000</p>
-              <p>연락처 000-0000-0000</p>
-            </div>
-            <div className={styles.footerColumn}>
-              <p>사업자 등록번호 000-00-00000</p>
-              <p>주소 0000 000 00000</p>
-            </div>
+        <article className={styles.footerLeftContainer}>
+          <div className={styles.footerTitleContainer}>
+            <p className={styles.footerTitle}>Hearus(A175)</p>
+            <p className={styles.footerTitle}>
+              일반부문 지정과제 (사회문제형-교육)
+            </p>
           </div>
-          <div className={styles.footerRightBody}>
-            <p>서비스 이용약관</p>
-            <p>개인정보 처리방침</p>
-            <p>이용자의 권리 및 유의사항</p>
+          <div className={styles.footerBody}>
+            <div className={styles.footerLeftBody}>
+              <div className={styles.footerColumn}>
+                <p>대표자 민상연</p>
+                <p>연락처 000-3232-0437</p>
+              </div>
+            </div>
+            <Link to="/license" className={styles.license}>
+              라이센스 정보
+            </Link>
           </div>
-        </div>
+        </article>
+        <article className={styles.footerRightContainer}>
+          <img src={oss1} />
+          <img src={oss2} />
+        </article>
       </footer>
     </main>
   );

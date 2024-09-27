@@ -37,10 +37,16 @@
 }
 .scriptsContainer {
   display: flex;
-  gap: 20px;
+  gap: 30px;
   flex-wrap: wrap;
+  @media (min-width: 1200px) {
+    width: 630px;
+  }
+  @media (min-width: 1600px) {
+    width: fit-content;
+  }
   height: 100%;
-  padding: 20px;
+  padding: 30px;
   background-color: $light-bg_F2;
   border-radius: 8px;
 }

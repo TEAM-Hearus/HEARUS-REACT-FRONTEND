@@ -27,7 +27,7 @@ const Test = () => {
     problem_types: questionTypes.join(','),
   };
 
-  const { data, isLoading } = useQuery({
+  const { data, isSuccess } = useQuery({
     queryKey: ['problem', lectureId],
     queryFn: () => generateProblem(inputData),
     retry: false,
@@ -50,17 +50,9 @@ const Test = () => {
       alert('문제 생성을 실패했습니다. 다시 시도해주세요.');
       navigate('/home/test-make');
     }
-  }, [data]);
-
-  useEffect(() => {
-    if (data != null && data.object != null) {
-      setUserAnswers(Array(data.object.length).fill(''));
-    }
-  }, [data]);
-
-  useEffect(() => {
     if (data != null && data.object != null) {
       updateTestData({ totalNum: data.object.length });
+      setUserAnswers(Array(data.object.length).fill(''));
     }
     return () => clearTestData();
   }, [data]);
@@ -69,7 +61,7 @@ const Test = () => {
     <div className={styles.container}>
       <TestHeader handleSubmit={handleSubmit} showResults={showResults} />
       <article className={styles.problemsContainer}>
-        {isLoading && (
+        {!isSuccess && (
           <img className={styles.loading} src={Loading} alt="문제 생성중..." />
         )}
         {data != null &&
@@ -87,7 +79,8 @@ const Test = () => {
                   showResult={showResults}
                 />
               )}
-              {question.type === 'ShortAnswer' && (
+              {(question.type === 'ShortAnswer' ||
+                question.type === 'BlackQuestion') && (
                 <ShortAnswer
                   options={question.options}
                   answer={question.answer}

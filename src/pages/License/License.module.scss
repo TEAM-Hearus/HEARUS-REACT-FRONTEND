@@ -1,0 +1,68 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/variables/fonts.scss';
+
+.wholeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  background-image: url('../../assets/images/auth-page-bg.png');
+  background-size: cover;
+  min-height: 100dvh;
+  padding: 100px;
+}
+.h1 {
+  @include SemiBold_Title_28;
+}
+.mit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  @include Regular_Body_16_200;
+  color: $dark-font_5A;
+}
+.library {
+  @include Medium_Body_18;
+  color: $dark-font_33;
+}
+.librarysContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+}
+.licenseItem {
+  display: flex;
+  flex-direction: column;
+}
+.libraryHeaderwrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.licenseHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  height: 50px;
+  @include Medium_Body_18;
+  color: $dark-font_33;
+  cursor: pointer;
+}
+.licenseText {
+  @include Regular_Sub_14_150;
+  color: $dark-font_5A;
+}
+.licenseContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  @include Regular_Body_18_200;
+  border: 2px solid $light-font_9E;
+  border-radius: 8px;
+}

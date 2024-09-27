@@ -51,42 +51,6 @@
     color: $light-blue_B3;
   }
 }
-.checkboxContainer {
-  display: flex;
-  justify-content: flex-end;
-  padding-top: 20px;
-}
-.checkBoxLabel {
-  display: flex;
-  align-items: center;
-  @include Medium_Sub_14;
-  color: $light-gray_81;
-}
-.checkBoxInput {
-  display: none;
-}
-.checkBoxInput + .checkBoxLabel {
-  cursor: pointer;
-}
-.checkBoxLabel:before {
-  margin-right: 5px;
-}
-.checkBoxInput + .checkBoxLabel:before {
-  content: '';
-  display: flex;
-  width: 16px;
-  height: 16px;
-  background-color: $light-bg_E5;
-  border-radius: 3px;
-}
-.checkBoxInput:checked + .checkBoxLabel:before {
-  content: '';
-  background-color: $brand-point;
-  border-radius: 3px;
-  background-image: url('../../../assets/images/check.svg');
-  background-repeat: no-repeat;
-  background-position: 50%;
-}
 .authBtn {
   display: flex;
   justify-content: center;
