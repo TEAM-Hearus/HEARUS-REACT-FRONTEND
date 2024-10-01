@@ -33,8 +33,10 @@ export const OAuthLogin = async ({
   code,
 }: ISocialLoginParams) => {
   try {
+    const encodedState = encodeURIComponent(state);
+    const encodedCode = encodeURIComponent(code);
     const res = await fetch(
-      `${API_URL}/login/oauth2/code/${social}?state=${state}&code=${code}`,
+      `${API_URL}/login/oauth2/code/${social}?state=${encodedState}&code=${encodedCode}`,
       {
         credentials: 'include',
       },

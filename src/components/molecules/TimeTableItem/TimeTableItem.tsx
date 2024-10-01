@@ -7,7 +7,6 @@ import styles from './TimeTableItem.module.scss';
 
 const TimeTableItem = ({
   id,
-  //scheduleId,
   name,
   location,
   dayOfWeek,

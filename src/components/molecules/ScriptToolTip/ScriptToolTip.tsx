@@ -5,6 +5,7 @@ import {
   deleteScheduleElement,
   getLectureByScheduleElement,
 } from '../../../apis/schedule';
+import { useAlert } from '../../../contexts/AlertContext';
 import ScriptIcon from '../../../assets/images/nav/my-script-inactive.svg?react';
 import TrashCan from '../../../assets/images/orange-trash-can.svg?react';
 import styles from './ScriptToolTip.module.scss';
@@ -18,7 +19,7 @@ interface IProps {
 const ScriptToolTip = ({ id, scheduleName }: IProps) => {
   const [selectedScriptId, setSelectedScriptId] = useState<string | null>(null);
   const queryClient = useQueryClient();
-
+  const { addAlert, showConfirm } = useAlert();
   const { userInfo } = useUserInfoStore();
 
   const { data } = useQuery({
@@ -32,9 +33,10 @@ const ScriptToolTip = ({ id, scheduleName }: IProps) => {
       queryClient.invalidateQueries({
         queryKey: ['schedule', userInfo.userName],
       });
+      addAlert(`'${scheduleName}' 수업이 삭제되었습니다.`, 'success');
     },
     onError: () => {
-      alert('시간표 삭제를 실패했습니다.');
+      addAlert('시간표 삭제를 실패했습니다.', 'error');
     },
   });
 
@@ -46,8 +48,14 @@ const ScriptToolTip = ({ id, scheduleName }: IProps) => {
     setSelectedScriptId(null);
   };
 
-  const handleDeleteBtnClick = () => {
-    if (window.confirm(`'${scheduleName}' 수업을 삭제하시겠습니까?`)) {
+  const handleDeleteBtnClick = async () => {
+    const confirmed = await showConfirm(
+      `'${scheduleName}'`,
+      '이 수업을 시간표에서 삭제하시겠습니까?',
+      '삭제',
+    );
+
+    if (confirmed) {
       deleteMutation.mutate(id);
     }
   };
@@ -62,6 +70,7 @@ const ScriptToolTip = ({ id, scheduleName }: IProps) => {
       </div>
       {data?.map((lecture) => (
         <div
+          key={lecture.id}
           className={styles.tooltipItem}
           onClick={() => handleToolTipClick(lecture.id)}
         >
