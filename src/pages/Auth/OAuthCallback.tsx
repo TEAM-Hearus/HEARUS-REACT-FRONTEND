@@ -10,7 +10,7 @@ const OAuthCallback = () => {
   const searchParams = new URLSearchParams(window.location.search);
   const params = useLocation();
   const parts = params.pathname?.split('/');
-  const social = parts[1];
+  const social = parts[2];
   const state = searchParams.get('state') || '';
   const code = searchParams.get('code') || '';
 
