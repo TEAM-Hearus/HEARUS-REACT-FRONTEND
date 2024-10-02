@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import ScriptDetailModal from '../../../components/templates/modals/ScriptDetailModal/ScriptDetailModal';
 import ScriptItem from '../../../components/molecules/ScriptItem/ScriptItem';
 import StartingButton from '../../../components/atoms/buttons/StartBtn/StartBtn';
 import { getAllScripts } from '../../../apis/script';
+import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
 import styles from './MyScript.module.scss';
 
 const MyScript = () => {
-  const navigate = useNavigate();
   const [selectedScriptId, setSelectedScriptId] = useState<string | null>(null);
 
   const { data } = useQuery({
@@ -16,12 +16,7 @@ const MyScript = () => {
     queryFn: () => getAllScripts(),
   });
 
-  useEffect(() => {
-    if (data?.status === 'UNAUTHORIZED') {
-      navigate('/error', { state: { errorStatus: 401 } });
-      return;
-    }
-  }, [data]);
+  useUnauthorizedRedirect(data);
 
   const handleScriptClick = (id: string) => {
     setSelectedScriptId(id);

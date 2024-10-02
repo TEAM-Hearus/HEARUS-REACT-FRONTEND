@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import HighlightedText from '../../../atoms/HighlightedText/HighlightedText';
 import X from '../../../../assets/images/cancel.svg?react';
 import { getScriptDetail } from '../../../../apis/script';
+import { useUnauthorizedRedirect } from '../../../../hooks/useUnauthorizedRedirect';
 import styles from './ScriptDetailModal.module.scss';
 
 interface IProps {
@@ -13,19 +13,12 @@ interface IProps {
 }
 
 const ScriptDetailModal = ({ scriptId, closeModal }: IProps) => {
-  const navigate = useNavigate();
-
   const { data } = useQuery({
     queryKey: ['scriptDetail', scriptId],
     queryFn: () => getScriptDetail(scriptId),
   });
 
-  useEffect(() => {
-    if (data?.status === 'UNAUTHORIZED') {
-      navigate('/error', { state: { errorStatus: 401 } });
-      return;
-    }
-  }, [data]);
+  useUnauthorizedRedirect(data);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
