@@ -1,19 +1,27 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import ScriptDetailModal from '../../../components/templates/modals/ScriptDetailModal/ScriptDetailModal';
 import ScriptItem from '../../../components/molecules/ScriptItem/ScriptItem';
 import StartingButton from '../../../components/atoms/buttons/StartBtn/StartBtn';
-import { getAllScripts, IScriptInList } from '../../../apis/script';
+import { getAllScripts } from '../../../apis/script';
 import styles from './MyScript.module.scss';
 
 const MyScript = () => {
+  const navigate = useNavigate();
   const [selectedScriptId, setSelectedScriptId] = useState<string | null>(null);
 
-  const { data } = useQuery<IScriptInList[], Error>({
+  const { data } = useQuery({
     queryKey: ['allScripts'],
     queryFn: () => getAllScripts(),
   });
+
+  useEffect(() => {
+    if (data?.status === 'UNAUTHORIZED') {
+      navigate('/error', { state: { errorStatus: 401 } });
+      return;
+    }
+  }, [data]);
 
   const handleScriptClick = (id: string) => {
     setSelectedScriptId(id);
@@ -31,7 +39,7 @@ const MyScript = () => {
           <StartingButton>녹음 시작</StartingButton>
         </Link>
       </div>
-      {!data || data.length === 0 ? (
+      {!data || data?.object?.length === 0 ? (
         <div className={styles.noneScriptContainer}>
           <h4 className={styles.noneScript}>스크립트 없음</h4>
           <br></br>
@@ -41,7 +49,7 @@ const MyScript = () => {
         </div>
       ) : (
         <div className={styles.scriptContainer}>
-          {data?.map((script) => (
+          {data?.object?.map((script) => (
             <div
               key={script.id}
               onClick={() => {

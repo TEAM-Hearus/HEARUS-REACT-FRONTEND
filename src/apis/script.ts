@@ -20,19 +20,15 @@ interface IScriptDetail {
   processedScript: string[];
 }
 
-export const getAllScripts = async (): Promise<IScriptInList[]> => {
+export const getAllScripts = async (): Promise<IGetAllScriptResponse> => {
   const token = getToken();
-  try {
-    const res = await fetch(`${API_URL}/api/v1/lecture/getAllLecture`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const data: IGetAllScriptResponse = await res.json();
-    return data.object;
-  } catch (error) {
-    throw error;
-  }
+  const res = await fetch(`${API_URL}/api/v1/lecture/getAllLecture`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data: IGetAllScriptResponse = await res.json();
+  return data;
 };
 
 export const getScriptDetail = async (id: string) => {
