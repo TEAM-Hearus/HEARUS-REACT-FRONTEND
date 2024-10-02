@@ -14,7 +14,11 @@ const HighlightedText = ({ text, isPreview }: IProps) => {
         if (index % 2 === 0) {
           return part;
         } else {
-          return <span className={styles.highlight}>{part}</span>;
+          return (
+            <span key={`${part}-${index}`} className={styles.highlight}>
+              {part}
+            </span>
+          );
         }
       })}
     </p>
