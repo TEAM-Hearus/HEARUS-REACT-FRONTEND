@@ -33,18 +33,14 @@ export const getAllScripts = async (): Promise<IGetAllScriptResponse> => {
 
 export const getScriptDetail = async (id: string) => {
   const token = getToken();
-  try {
-    const res = await fetch(
-      `${API_URL}/api/v1/lecture/getLecture?lectureId=${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+  const res = await fetch(
+    `${API_URL}/api/v1/lecture/getLecture?lectureId=${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-    );
-    const data: IGetScriptDetailResponse = await res.json();
-    return data.object;
-  } catch (error) {
-    throw error;
-  }
+    },
+  );
+  const data: IGetScriptDetailResponse = await res.json();
+  return data;
 };
