@@ -1,21 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
 import TimeTableItem from '../../../../components/molecules/TimeTableItem/TimeTableItem';
-import {
-  daysOfWeek,
-  IScheduleElement,
-  TIMELIST,
-} from '../../../../constants/schedule';
+import { daysOfWeek, TIMELIST } from '../../../../constants/schedule';
 import { getSchedule } from '../../../../apis/schedule';
-import styles from './WeeklyTimeTable.module.scss';
 import { useUserInfoStore } from '../../../../store/useUserInfoStore';
+import { useUnauthorizedRedirect } from '../../../../hooks/useUnauthorizedRedirect';
+import styles from './WeeklyTimeTable.module.scss';
 
 const WeeklyTimeTable = () => {
   const { userInfo } = useUserInfoStore();
 
-  const { data } = useQuery<IScheduleElement[], Error>({
+  const { data } = useQuery({
     queryKey: ['schedule', userInfo.userName],
     queryFn: () => getSchedule(userInfo.userName),
   });
+
+  useUnauthorizedRedirect(data);
+
   return (
     <div className={styles.table}>
       <div className={styles.dayOfWeekRow}>
@@ -40,7 +40,7 @@ const WeeklyTimeTable = () => {
         ))}
       </div>
       <div className={styles.tableContainer}>
-        {data?.map((schedule) => (
+        {data?.object?.scheduleElements?.map((schedule) => (
           <TimeTableItem key={schedule.id} {...schedule} />
         ))}
       </div>

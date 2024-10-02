@@ -13,26 +13,30 @@ interface IGetScheduleObject {
 
 export const getSchedule = async (
   name: string,
-): Promise<IScheduleElement[]> => {
+  retryCount: number = 0, // 무한 루프 방지
+): Promise<IGetScheduleResponse> => {
+  const MAX_RETRIES = 1;
   const token = getToken();
-  try {
-    const res = await fetch(
-      `${API_URL}/api/v1/schedule/getSchedule?name=${name}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+  const res = await fetch(
+    `${API_URL}/api/v1/schedule/getSchedule?name=${name}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-    );
-    const data: IGetScheduleResponse = await res.json();
-    if (data.msg === 'Schedule not found with name') {
-      await createNewScheduleName(name);
-      return getSchedule(name);
+    },
+  );
+  const data: IGetScheduleResponse = await res.json();
+  // userName으로 된 시간표가 없을 경우 만들고 재귀 호출
+  if (data.msg === 'Schedule not found with name') {
+    if (retryCount >= MAX_RETRIES) {
+      throw new Error(
+        'Maximum retry limit reached. Unable to create schedule.',
+      );
     }
-    return data.object['scheduleElements'];
-  } catch (error) {
-    throw error;
+    await createNewScheduleName(name);
+    return getSchedule(name, retryCount + 1);
   }
+  return data;
 };
 
 interface IGetLectureByScheduleElementResponse
@@ -50,20 +54,16 @@ interface ILectureItem {
 
 export const getLectureByScheduleElement = async (id: number) => {
   const token = getToken();
-  try {
-    const res = await fetch(
-      `${API_URL}/api/v1/lecture/getLectureByScheduleElement?scheduleElementId=${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+  const res = await fetch(
+    `${API_URL}/api/v1/lecture/getLectureByScheduleElement?scheduleElementId=${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-    );
-    const data: IGetLectureByScheduleElementResponse = await res.json();
-    return data.object;
-  } catch (error) {
-    throw error;
-  }
+    },
+  );
+  const data: IGetLectureByScheduleElementResponse = await res.json();
+  return data;
 };
 
 interface IPOSTScheduleElementResponse extends IApiResponse<null> {}
@@ -73,25 +73,21 @@ export const addScheduleElement = async (
   name: string,
 ) => {
   const token = getToken();
-  try {
-    const res = await fetch(`${API_URL}/api/v1/schedule/addElement`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+  const res = await fetch(`${API_URL}/api/v1/schedule/addElement`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      scheduleDTO: {
+        name,
       },
-      body: JSON.stringify({
-        scheduleDTO: {
-          name,
-        },
-        scheduleElementDTO: inputData,
-      }),
-    });
-    const data: IPOSTScheduleElementResponse = await res.json();
-    return data.success;
-  } catch (error) {
-    throw error;
-  }
+      scheduleElementDTO: inputData,
+    }),
+  });
+  const data: IPOSTScheduleElementResponse = await res.json();
+  return data;
 };
 
 export const deleteScheduleElement = async (
@@ -99,29 +95,26 @@ export const deleteScheduleElement = async (
   name: string,
 ) => {
   const token = getToken();
-  try {
-    const res = await fetch(`${API_URL}/api/v1/schedule/deleteElement`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+  const res = await fetch(`${API_URL}/api/v1/schedule/deleteElement`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      scheduleDTO: {
+        name,
       },
-      body: JSON.stringify({
-        scheduleDTO: {
-          name,
-        },
-        scheduleElementDTO: {
-          id: scheduleElementId,
-        },
-      }),
-    });
-    const data: IPOSTScheduleElementResponse = await res.json();
-    return data.success;
-  } catch (error) {
-    throw error;
-  }
+      scheduleElementDTO: {
+        id: scheduleElementId,
+      },
+    }),
+  });
+  const data: IPOSTScheduleElementResponse = await res.json();
+  return data;
 };
 
+/** 현재는 시간표 조회할때 userName으로 된 시간표 없을 때만 쓰임. */
 const createNewScheduleName = async (name: string) => {
   const token = getToken();
   try {

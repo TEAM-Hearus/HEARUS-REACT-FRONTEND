@@ -5,10 +5,10 @@ import { useQuery } from '@tanstack/react-query';
 import useRecordModalStore from '../../../../store/useRecordModalStore';
 import Up from '../../../../assets/images/arrow/up-arrow.svg?react';
 import Down from '../../../../assets/images/arrow/down-arrow.svg?react';
-import { IScheduleElement } from '../../../../constants/schedule';
 import { getSchedule } from '../../../../apis/schedule';
-import styles from './RecordModal.module.scss';
 import { useUserInfoStore } from '../../../../store/useUserInfoStore';
+import { useUnauthorizedRedirect } from '../../../../hooks/useUnauthorizedRedirect';
+import styles from './RecordModal.module.scss';
 
 interface IProps {
   handleQuit: () => void; // 타이머, 녹음, 소켓 연결 종료
@@ -22,14 +22,19 @@ const RecordModal = ({ handleQuit }: IProps) => {
 
   const { userInfo } = useUserInfoStore();
 
-  const { data } = useQuery<IScheduleElement[], Error>({
+  const { data } = useQuery({
     queryKey: ['schedule', userInfo.userName],
     queryFn: () => getSchedule(userInfo.userName),
   });
+
+  useUnauthorizedRedirect(data);
+
   const TAGS = useMemo(() => {
     if (!data) return [];
 
-    return Array.from(new Set(data.map((item) => item.name)));
+    return Array.from(
+      new Set(data?.object?.scheduleElements?.map((item) => item.name)),
+    );
   }, [data]);
 
   const handleClickModalContent = (e: React.MouseEvent) => {
