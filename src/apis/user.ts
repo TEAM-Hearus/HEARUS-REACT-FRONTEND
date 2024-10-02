@@ -37,17 +37,13 @@ export interface IUserSupplementaryUpdateInfo {
 
 export const getUserInfo = async () => {
   const token = getToken();
-  try {
-    const res = await fetch(`${API_URL}/api/v1/user/present-user`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const data: IGetUserInfoResponse = await res.json();
-    return data.object;
-  } catch (error) {
-    throw error;
-  }
+  const res = await fetch(`${API_URL}/api/v1/user/present-user`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data: IGetUserInfoResponse = await res.json();
+  return data;
 };
 
 export const updateInfo = async ({

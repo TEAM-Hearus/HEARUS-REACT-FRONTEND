@@ -36,9 +36,9 @@ const PrivateRoute = ({ element }: IProps) => {
 
   useEffect(() => {
     if (!isLoading && data != null) {
-      setUserInfo(data);
+      setUserInfo(data?.object);
 
-      if (!isUserInfoComplete(data)) {
+      if (!isUserInfoComplete(data.object)) {
         const lastRequestTime = localStorage.getItem('lastRequestTime');
         const infoSkipped = localStorage.getItem('SupplementarySkipped');
         const now = Date.now();
