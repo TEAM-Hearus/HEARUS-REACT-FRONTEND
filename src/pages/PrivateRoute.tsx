@@ -25,7 +25,6 @@ const PrivateRoute = ({ element }: IProps) => {
   const { data, isLoading } = useQuery({
     queryKey: ['user'],
     queryFn: getUserInfo,
-    staleTime: 5 * 60 * 1000,
   });
 
   const isUserInfoComplete = (userInfo: UserInfo | null) => {

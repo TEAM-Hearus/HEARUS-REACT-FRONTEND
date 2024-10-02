@@ -27,7 +27,7 @@ const TimeTable = () => {
     <div className={styles.wholeWrapper}>
       <div className={styles.headerContainer}>
         <div className={styles.dateBox}>
-          <h3 className={styles.title}>{`${userInfo.userName}의 시간표`}</h3>
+          <h3 className={styles.title}>{`${userInfo?.userName}의 시간표`}</h3>
         </div>
         <button className={styles.addScheduleBtn} onClick={handleOpenModal}>
           강의 추가 +

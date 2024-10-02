@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useQueryClient, useMutation } from '@tanstack/react-query';
-import { useUserInfoStore } from '../../../store/useUserInfoStore';
+import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import Edit from './ProfileEdit/ProfileEdit';
 import View from './ProfileView/ProfileView';
 import { useAlert } from '../../../contexts/AlertContext';
 import Preview from '../../../assets/images/preview.png';
-import { updateInfo, IUserUpdateInfo } from '../../../apis/user';
+import { updateInfo, IUserUpdateInfo, getUserInfo } from '../../../apis/user';
+import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
 import styles from './Mypage.module.scss';
 
 interface UserInfo {
@@ -21,7 +21,13 @@ interface UserInfo {
 }
 
 const MyPage = () => {
-  const { userInfo } = useUserInfoStore();
+  const { data } = useQuery({
+    queryKey: ['user'],
+    queryFn: getUserInfo,
+  });
+
+  useUnauthorizedRedirect(data);
+
   const [info, setInfo] = useState<UserInfo>({
     userName: '',
     userEmail: '',
@@ -41,17 +47,17 @@ const MyPage = () => {
 
   useEffect(() => {
     setInfo({
-      userName: userInfo.userName || '',
-      userEmail: userInfo.userEmail || '',
-      userPassword: userInfo.userPassword || '',
-      userSchool: userInfo.userSchool || '',
-      userGrade: userInfo.userGrade || '',
-      userMajor: userInfo.userMajor || '',
+      userName: data?.object.userName || '',
+      userEmail: data?.object.userEmail || '',
+      userPassword: data?.object.userPassword || '',
+      userSchool: data?.object.userSchool || '',
+      userGrade: data?.object.userGrade || '',
+      userMajor: data?.object.userMajor || '',
       userImg: '',
-      userOAuthType: userInfo.userOAuthType || '',
+      userOAuthType: data?.object.userOAuthType || '',
       userPasswordConfirm: '',
     });
-  }, [userInfo]);
+  }, [data]);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -68,14 +74,14 @@ const MyPage = () => {
   };
   const handleViewClick = () => {
     setInfo({
-      userName: userInfo.userName || '',
-      userEmail: userInfo.userEmail || '',
-      userPassword: userInfo.userPassword || '',
-      userSchool: userInfo.userSchool || '',
-      userGrade: userInfo.userGrade || '',
-      userMajor: userInfo.userMajor || '',
+      userName: data?.object.userName || '',
+      userEmail: data?.object.userEmail || '',
+      userPassword: data?.object.userPassword || '',
+      userSchool: data?.object.userSchool || '',
+      userGrade: data?.object.userGrade || '',
+      userMajor: data?.object.userMajor || '',
       userImg: '',
-      userOAuthType: userInfo.userOAuthType || '',
+      userOAuthType: data?.object.userOAuthType || '',
       userPasswordConfirm: '',
     });
     setCurrentMode('view');

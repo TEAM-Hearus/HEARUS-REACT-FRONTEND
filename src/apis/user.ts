@@ -54,50 +54,42 @@ export const updateInfo = async ({
   userGrade,
 }: IUserUpdateInfo) => {
   const token = getToken();
-  try {
-    const res = await fetch(`${API_URL}/api/v1/user/updateUser`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        userName,
-        userPassword,
-        userSchool,
-        userMajor,
-        userGrade,
-      }),
-    });
-    const data: IUpdateUserInfoResponse = await res.json();
-    return data.object;
-  } catch (error) {
-    throw error;
-  }
+  const res = await fetch(`${API_URL}/api/v1/user/updateUser`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      userName,
+      userPassword,
+      userSchool,
+      userMajor,
+      userGrade,
+    }),
+  });
+  const data: IUpdateUserInfoResponse = await res.json();
+  return data;
 };
 
-export const SupplementaryUpdateInfo = async ({
+export const updateSupplementaryInfo = async ({
   userSchool,
   userMajor,
   userGrade,
 }: IUserSupplementaryUpdateInfo) => {
   const token = getToken();
-  try {
-    const res = await fetch(`${API_URL}/api/v1/user/updateUser`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        userSchool,
-        userMajor,
-        userGrade,
-      }),
-    });
-    const data: ISupplementaryUpdateInfoResponse = await res.json();
-    return data.object;
-  } catch (error) {
-    throw error;
-  }
+  const res = await fetch(`${API_URL}/api/v1/user/updateUser`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      userSchool,
+      userMajor,
+      userGrade,
+    }),
+  });
+  const data: ISupplementaryUpdateInfoResponse = await res.json();
+  return data;
 };

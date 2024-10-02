@@ -3,7 +3,7 @@ import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { useAlert } from '../../../../contexts/AlertContext';
 import Next from '../../../../assets/images/arrow/next-arrow.svg?react';
 import Back from '../../../../assets/images/arrow/back-arrow.svg?react';
-import { SupplementaryUpdateInfo } from '../../../../apis/user';
+import { updateSupplementaryInfo } from '../../../../apis/user';
 import styles from './SupplementaryInfoModal.module.scss';
 
 interface UserInfo {
@@ -52,7 +52,7 @@ const SupplementaryInfoModal = ({ onSkip, onSave }: IProps) => {
     }
   };
   const SupplementaryUpdateMutation = useMutation({
-    mutationFn: SupplementaryUpdateInfo,
+    mutationFn: updateSupplementaryInfo,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['user'] });
       localStorage.removeItem('SupplementarySkipped');

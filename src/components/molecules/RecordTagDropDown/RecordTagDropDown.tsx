@@ -11,8 +11,8 @@ import styles from './RecordTagDropDown.module.scss';
 const RecordTagDropDown = () => {
   const { userInfo } = useUserInfoStore();
   const { data } = useQuery({
-    queryKey: ['schedule', userInfo.userName],
-    queryFn: () => getSchedule(userInfo.userName),
+    queryKey: ['schedule', userInfo?.userName],
+    queryFn: () => getSchedule(userInfo?.userName),
   });
 
   useUnauthorizedRedirect(data);
