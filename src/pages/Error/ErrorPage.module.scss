@@ -6,11 +6,12 @@
   height: 100%;
 }
 .errorpageBox {
-  padding: 200px;
   display: flex;
-  align-items: center;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 30px;
+  height: 100dvh;
 }
 .errorImg {
   width: 150px;
@@ -19,22 +20,38 @@
 .errorMsg {
   @include SemiBold_Title_28;
   color: $dark-font_33;
-  padding-top: 30px;
 }
 .errorContent {
   @include Regular_Body_16;
   color: $light-gray_81;
-  padding: 10px 0 50px 0;
 }
-.goHomeBtn {
+.captionsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.btnsContainer {
+  display: flex;
+  gap: 12px;
+}
+@mixin btn-base {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 140px;
   height: 40px;
+  border-radius: 6px;
+  text-decoration: none;
+  @include SemiBold_Body_16;
+}
+.blackBtn {
+  @include btn-base;
   background-color: $dark-font_33;
   color: $white_FF;
-  border-radius: 6px;
-  border: 0;
-  text-decoration: none;
+}
+.grayBtn {
+  @include btn-base;
+  background-color: $light-bg_F2;
+  color: $dark-font_33;
 }

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 
 export const useRecorder = (onAudioData: (data: string) => void) => {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -50,21 +50,17 @@ export const useRecorder = (onAudioData: (data: string) => void) => {
   };
 
   const stopRecording = () => {
-    if (mediaRecorderRef.current?.state === 'recording') {
+    if (mediaRecorderRef.current) {
       mediaRecorderRef.current.stop();
     }
     streamRef.current?.getTracks().forEach((track) => track.stop());
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
+    mediaRecorderRef.current = null;
+    streamRef.current = null;
+    intervalRef.current = null;
   };
 
-  useEffect(() => {
-    startRecording();
-    return () => {
-      stopRecording();
-    };
-  }, []);
-
-  return { stopRecording };
+  return { startRecording, stopRecording };
 };

@@ -10,6 +10,7 @@ import { useAlert } from '../../contexts/AlertContext';
 import useTestModalStore from '../../store/useTestModalStore';
 import useTestSettingsStore from '../../store/useTestSettingsStore';
 import { generateProblem } from '../../apis/test';
+import { useUnauthorizedRedirect } from '../../hooks/useUnauthorizedRedirect';
 import styles from './Test.module.scss';
 
 const Test = () => {
@@ -34,6 +35,8 @@ const Test = () => {
     queryFn: () => generateProblem(inputData),
     retry: false,
   });
+
+  useUnauthorizedRedirect(data);
 
   const handleAnswerChange = (index: number, answer: string | number) => {
     const newAnswers = [...userAnswers];

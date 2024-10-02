@@ -25,7 +25,6 @@ const PrivateRoute = ({ element }: IProps) => {
   const { data, isLoading } = useQuery({
     queryKey: ['user'],
     queryFn: getUserInfo,
-    staleTime: 5 * 60 * 1000,
   });
 
   const isUserInfoComplete = (userInfo: UserInfo | null) => {
@@ -36,9 +35,9 @@ const PrivateRoute = ({ element }: IProps) => {
 
   useEffect(() => {
     if (!isLoading && data != null) {
-      setUserInfo(data);
+      setUserInfo(data?.object);
 
-      if (!isUserInfoComplete(data)) {
+      if (!isUserInfoComplete(data.object)) {
         const lastRequestTime = localStorage.getItem('lastRequestTime');
         const infoSkipped = localStorage.getItem('SupplementarySkipped');
         const now = Date.now();

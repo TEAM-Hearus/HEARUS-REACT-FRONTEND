@@ -1,19 +1,21 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useRecordModalStore, {
   ITagItem,
 } from '../../../store/useRecordModalStore';
-import { IScheduleElement } from '../../../constants/schedule';
 import { getSchedule } from '../../../apis/schedule';
-import styles from './RecordTagDropDown.module.scss';
 import { useUserInfoStore } from '../../../store/useUserInfoStore';
+import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
+import styles from './RecordTagDropDown.module.scss';
 
 const RecordTagDropDown = () => {
   const { userInfo } = useUserInfoStore();
-  const { data } = useQuery<IScheduleElement[], Error>({
-    queryKey: ['schedule', userInfo.userName],
-    queryFn: () => getSchedule(userInfo.userName),
+  const { data } = useQuery({
+    queryKey: ['schedule', userInfo?.userName],
+    queryFn: () => getSchedule(userInfo?.userName),
   });
+
+  useUnauthorizedRedirect(data);
 
   const [isTagBtnClicked, setIsTagBtnClicked] = useState(false);
 
@@ -25,7 +27,7 @@ const RecordTagDropDown = () => {
 
     const tagObject: { [key: string]: number } = {};
 
-    data.forEach((item) => {
+    data?.object?.scheduleElements.forEach((item) => {
       if (!tagObject.hasOwnProperty(item.name)) {
         tagObject[item.name] = item.scheduleId;
       }
@@ -46,14 +48,10 @@ const RecordTagDropDown = () => {
     setIsTagBtnClicked(false);
   };
 
-  useEffect(() => {
-    console.log(recordData);
-  }, [recordData]);
-
   return (
     <div className={styles.wrapper}>
       <button
-        className={`${styles.tagBtn} ${data !== undefined && data.length > 0 && styles.active}`}
+        className={`${styles.tagBtn} ${data != null && data.object?.scheduleElements?.length > 0 && styles.active}`}
         onClick={handleTagBtnClick}
       >
         {tag !== '' ? tag : '태그'}

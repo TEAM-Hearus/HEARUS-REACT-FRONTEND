@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import HighlightedText from '../../../atoms/HighlightedText/HighlightedText';
 import X from '../../../../assets/images/cancel.svg?react';
 import { getScriptDetail } from '../../../../apis/script';
+import { useUnauthorizedRedirect } from '../../../../hooks/useUnauthorizedRedirect';
 import styles from './ScriptDetailModal.module.scss';
 
 interface IProps {
@@ -12,6 +13,13 @@ interface IProps {
 }
 
 const ScriptDetailModal = ({ scriptId, closeModal }: IProps) => {
+  const { data } = useQuery({
+    queryKey: ['scriptDetail', scriptId],
+    queryFn: () => getScriptDetail(scriptId),
+  });
+
+  useUnauthorizedRedirect(data);
+
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
@@ -24,11 +32,6 @@ const ScriptDetailModal = ({ scriptId, closeModal }: IProps) => {
     e.stopPropagation();
   };
 
-  const { data } = useQuery({
-    queryKey: ['scriptDetail', scriptId],
-    queryFn: () => getScriptDetail(scriptId),
-  });
-
   return createPortal(
     <div
       className={styles.overlay}
@@ -40,12 +43,14 @@ const ScriptDetailModal = ({ scriptId, closeModal }: IProps) => {
         <span className={styles.xBtn} onClick={closeModal}>
           <X />
         </span>
-        <p className={styles.title}>{data?.name}</p>
-        {data?.scheduleElementId && (
-          <div className={styles.subjectTag}>{data.scheduleElementId}</div>
+        <p className={styles.title}>{data?.object?.name}</p>
+        {data?.object?.scheduleElementId && (
+          <div className={styles.subjectTag}>
+            {data.object?.scheduleElementId}
+          </div>
         )}
         <article className={styles.textBox}>
-          {data?.processedScript.map((text, index) => (
+          {data?.object?.processedScript.map((text, index) => (
             <HighlightedText key={index} text={text} />
           ))}
         </article>

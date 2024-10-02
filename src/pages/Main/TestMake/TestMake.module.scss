@@ -39,16 +39,31 @@
   display: flex;
   gap: 30px;
   flex-wrap: wrap;
-  @media (min-width: 1200px) {
+  @media (min-width: 1350px) {
     width: 630px;
   }
   @media (min-width: 1600px) {
     width: fit-content;
   }
-  height: 100%;
+  height: 85dvh;
   padding: 30px;
   background-color: $light-bg_F2;
   border-radius: 8px;
+  overflow-y: auto;
+  -ms-overflow-style: auto;
+  scrollbar-width: auto;
+  &::-webkit-scrollbar {
+    display: block;
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: $light-bg_E5;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $light-blue_B3;
+    border-radius: 4px;
+  }
 }
 .scriptWrapper {
   border: 1px solid $white_FF;

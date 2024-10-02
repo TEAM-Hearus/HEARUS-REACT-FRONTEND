@@ -4,17 +4,20 @@ import TestOptionSelector from '../../../components/organisms/TestOptionSelector
 import ScriptItem from '../../../components/molecules/ScriptItem/ScriptItem';
 import useTestSettingsStore from '../../../store/useTestSettingsStore';
 import { useAlert } from '../../../contexts/AlertContext';
-import { getAllScripts, IScriptInList } from '../../../apis/script';
+import { getAllScripts } from '../../../apis/script';
+import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
 import styles from './TestMake.module.scss';
 
 const TestMake = () => {
   const navigate = useNavigate();
   const { addAlert } = useAlert();
 
-  const { data } = useQuery<IScriptInList[], Error>({
+  const { data } = useQuery({
     queryKey: ['allScripts'],
     queryFn: () => getAllScripts(),
   });
+
+  useUnauthorizedRedirect(data);
 
   const {
     lectureId,
@@ -55,9 +58,9 @@ const TestMake = () => {
         </button>
       </div>
       <div className={styles.contentContainer}>
-        {data && data.length > 0 ? (
+        {data && data?.object?.length > 0 ? (
           <section className={styles.scriptsContainer}>
-            {data.map((script) => (
+            {data?.object.map((script) => (
               <div
                 key={script.id}
                 className={`${script.id === lectureId ? styles.selectedScript : styles.scriptWrapper}`}

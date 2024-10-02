@@ -12,13 +12,13 @@ import styles from './MainNav.module.scss';
 
 const MainNav = () => {
   const { userInfo } = useUserInfoStore();
-  const firstLetter = userInfo.userName.charAt(0);
+  const firstLetter = userInfo?.userName.charAt(0);
 
   return (
     <nav className={styles.container}>
       <div className={styles.userProfile}>
         <div className={styles.profileImage}>{firstLetter}</div>
-        <p className={styles.userName}>{userInfo.userName}</p>
+        <p className={styles.userName}>{userInfo?.userName}</p>
       </div>
       <section className={styles.linksContainer}>
         <TabLink

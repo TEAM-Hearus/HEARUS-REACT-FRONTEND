@@ -10,6 +10,7 @@ import ScriptIcon from '../../../assets/images/nav/my-script-inactive.svg?react'
 import TrashCan from '../../../assets/images/orange-trash-can.svg?react';
 import styles from './ScriptToolTip.module.scss';
 import { useUserInfoStore } from '../../../store/useUserInfoStore';
+import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
 
 interface IProps {
   id: number;
@@ -26,6 +27,8 @@ const ScriptToolTip = ({ id, scheduleName }: IProps) => {
     queryKey: ['tooltip', id],
     queryFn: () => getLectureByScheduleElement(id),
   });
+
+  useUnauthorizedRedirect(data);
 
   const deleteMutation = useMutation({
     mutationFn: (id: number) => deleteScheduleElement(id, userInfo.userName),
@@ -68,7 +71,7 @@ const ScriptToolTip = ({ id, scheduleName }: IProps) => {
           <TrashCan />
         </button>
       </div>
-      {data?.map((lecture) => (
+      {data?.object?.map((lecture) => (
         <div
           key={lecture.id}
           className={styles.tooltipItem}
