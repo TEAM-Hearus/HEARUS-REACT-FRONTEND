@@ -107,7 +107,8 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
   };
 
   useEffect(() => {
-    if (isRestructuring) addAlert('생성된 스크립트를 저장중입니다.', 'success');
+    if (isRestructuring)
+      addAlert('인공지능이 중요 단어를 하이라이팅 중입니다', 'success');
   }, [isRestructuring]);
 
   return createPortal(
