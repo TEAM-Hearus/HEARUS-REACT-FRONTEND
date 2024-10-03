@@ -2,7 +2,8 @@ import { API_URL, IApiResponse, getToken } from '.';
 import { IScheduleElement } from '../constants/schedule';
 import { IScheduleElementDTO } from '../constants/schedule';
 
-interface IGetScheduleResponse extends IApiResponse<IGetScheduleObject> {}
+export interface IGetScheduleResponse
+  extends IApiResponse<IGetScheduleObject> {}
 
 interface IGetScheduleObject {
   id: number;
