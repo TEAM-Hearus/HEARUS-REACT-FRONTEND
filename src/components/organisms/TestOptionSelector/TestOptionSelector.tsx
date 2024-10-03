@@ -9,7 +9,11 @@ const TestOptionSelector = () => {
   const handleQuestionCountChange = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    setQuestionCount(parseInt(e.target.value, 10));
+    if (parseInt(e.target.value, 10) > 10) {
+      setQuestionCount(10);
+    } else {
+      setQuestionCount(parseInt(e.target.value, 10));
+    }
   };
 
   const handleTimeLimitChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,6 +42,7 @@ const TestOptionSelector = () => {
           className={styles.numInput}
           type="number"
           min="0"
+          max="10"
           value={questionCount}
           onChange={handleQuestionCountChange}
         />
