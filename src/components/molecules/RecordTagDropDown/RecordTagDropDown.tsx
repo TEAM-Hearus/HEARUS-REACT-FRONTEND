@@ -29,7 +29,7 @@ const RecordTagDropDown = () => {
 
     data?.object?.scheduleElements.forEach((item) => {
       if (!tagObject.hasOwnProperty(item.name)) {
-        tagObject[item.name] = item.scheduleId;
+        tagObject[item.name] = item.id;
       }
     });
 

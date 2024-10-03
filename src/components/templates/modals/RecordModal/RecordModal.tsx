@@ -67,9 +67,18 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
   const TAGS = useMemo(() => {
     if (!data) return [];
 
-    return Array.from(
-      new Set(data?.object?.scheduleElements?.map((item) => item.name)),
-    );
+    const tagObject: { [key: string]: number } = {};
+
+    data?.object?.scheduleElements.forEach((item) => {
+      if (!tagObject.hasOwnProperty(item.name)) {
+        tagObject[item.name] = item.id;
+      }
+    });
+
+    return Object.entries(tagObject).map(([name, id]) => ({
+      name,
+      scheduleId: id,
+    }));
   }, [data]);
 
   const handleClickModalContent = (e: React.MouseEvent) => {
@@ -83,8 +92,12 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
     }
   };
 
-  const handleTagClick = (tag: string) => {
-    setLocalData((prev) => ({ ...prev, tag }));
+  const handleTagClick = (tag: { name: string; scheduleId: number }) => {
+    setLocalData((prev) => ({
+      ...prev,
+      tag: tag.name,
+      scheduleId: tag.scheduleId,
+    }));
   };
 
   const handleClickArrow = () => {
@@ -108,8 +121,15 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
 
   useEffect(() => {
     if (isRestructuring)
-      addAlert('인공지능이 중요 단어를 하이라이팅 중입니다', 'success');
+      addAlert(
+        '인공지능이 중요 단어를 하이라이팅 중입니다\n잠시 기다려주세요.',
+        'success',
+      );
   }, [isRestructuring]);
+
+  useEffect(() => {
+    console.log(localData);
+  }, [localData]);
 
   return createPortal(
     <div className={styles.modalWrapper} onClick={closeModal}>
@@ -151,15 +171,15 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
         </div>
         {isTagClicked && (
           <ul className={styles.tagBtnsUl}>
-            {TAGS.map((name, index) => (
+            {TAGS.map((item, index) => (
               <li
                 className={`${styles.tagLiBtn} ${
-                  localData.tag === name ? styles.active : styles.inactive
+                  localData.tag === item.name ? styles.active : styles.inactive
                 }`}
                 key={index}
-                onClick={() => handleTagClick(name)}
+                onClick={() => handleTagClick(item)}
               >
-                {name}
+                {item.name}
               </li>
             ))}
           </ul>
