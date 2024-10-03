@@ -22,7 +22,7 @@ export const useSocket = (onTransitionResult: (result: string) => void) => {
 
     socketRef.current.on('connect', () => {
       console.log('Socket connected');
-      const lectureId = recordData.scheduleId;
+      const lectureId = recordData.id;
       socketRef.current?.emit('lectureId', lectureId);
     });
 
@@ -31,7 +31,7 @@ export const useSocket = (onTransitionResult: (result: string) => void) => {
     });
 
     socketRef.current.on('transitionResult', onTransitionResult);
-  }, [recordData.scheduleId, onTransitionResult]);
+  }, [recordData.id, onTransitionResult]);
 
   const disconnectSocket = useCallback(() => {
     if (socketRef.current) {
