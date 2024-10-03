@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { SOCKETURL } from '../apis/index';
 import useRecordModalStore from '../store/useRecordModalStore';
@@ -7,7 +7,7 @@ export const useSocket = (onTransitionResult: (result: string) => void) => {
   const socketRef = useRef<Socket | null>(null);
   const { recordData } = useRecordModalStore();
 
-  useEffect(() => {
+  const connectSocket = useCallback(() => {
     socketRef.current = io(SOCKETURL, {
       path: '/socket.io',
       transports: ['websocket'],
@@ -21,17 +21,25 @@ export const useSocket = (onTransitionResult: (result: string) => void) => {
     });
 
     socketRef.current.on('connect', () => {
-      console.log('socket connected');
+      console.log('Socket connected');
       const lectureId = recordData.scheduleId;
       socketRef.current?.emit('lectureId', lectureId);
     });
 
+    socketRef.current.on('disconnect', (reason) => {
+      console.log('Socket disconnected. Reason:', reason);
+    });
+
     socketRef.current.on('transitionResult', onTransitionResult);
+  }, [recordData.scheduleId, onTransitionResult]);
 
-    return () => {
-      socketRef.current?.disconnect();
-    };
-  }, [onTransitionResult]);
+  const disconnectSocket = useCallback(() => {
+    if (socketRef.current) {
+      socketRef.current.disconnect();
+      console.log('Socket disconnected manually');
+      socketRef.current = null;
+    }
+  }, []);
 
-  return socketRef;
+  return { socketRef, connectSocket, disconnectSocket };
 };

@@ -15,7 +15,8 @@ const Record = () => {
     setCurrentCaption(result);
   }, []);
 
-  const socketRef = useSocket(onTransitionResult);
+  const { socketRef, connectSocket, disconnectSocket } =
+    useSocket(onTransitionResult);
 
   const onAudioData = useCallback(
     (data: string) => {
@@ -28,14 +29,16 @@ const Record = () => {
 
   const stopRecordingAndDisconnectSocket = useCallback(() => {
     stopRecording();
-    socketRef.current?.disconnect();
-  }, [stopRecording, socketRef]);
+    disconnectSocket();
+  }, [stopRecording, disconnectSocket]);
 
   useEffect(() => {
     setIsRecording(true);
+    connectSocket();
     return () => {
       setIsRecording(false);
-      stopRecordingAndDisconnectSocket();
+      stopRecording();
+      disconnectSocket();
     };
   }, []);
 
@@ -43,7 +46,7 @@ const Record = () => {
     if (isRecording) {
       startRecording();
     } else {
-      stopRecordingAndDisconnectSocket();
+      stopRecording();
     }
   }, [isRecording]);
 
