@@ -35,7 +35,7 @@ const RecordTagDropDown = () => {
 
     return Object.entries(tagObject).map(([name, id]) => ({
       name,
-      scheduleId: id,
+      id,
     }));
   }, [data]);
 
@@ -44,7 +44,7 @@ const RecordTagDropDown = () => {
   };
 
   const handleLiClick = (item: ITagItem) => {
-    updateRecordData({ tag: item.name, scheduleId: item.scheduleId });
+    updateRecordData({ tag: item.name, id: item.id });
     setIsTagBtnClicked(false);
   };
 

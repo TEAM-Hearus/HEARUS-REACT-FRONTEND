@@ -4,12 +4,12 @@ import { generateRecordingTitle } from '../utils/dateFormatters';
 interface IRecordData {
   title: string;
   tag: string;
-  scheduleId: number | null;
+  id: number | null;
 }
 
 export interface ITagItem {
   name: string;
-  scheduleId: number | null;
+  id: number | null;
 }
 
 interface IRecordModalState {
@@ -24,7 +24,7 @@ interface IRecordModalState {
 const initialRecordData = {
   title: generateRecordingTitle(),
   tag: '',
-  scheduleId: null,
+  id: null,
 };
 
 const useRecordModalStore = create<IRecordModalState>((set) => ({

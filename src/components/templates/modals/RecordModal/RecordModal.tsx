@@ -77,7 +77,7 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
 
     return Object.entries(tagObject).map(([name, id]) => ({
       name,
-      scheduleId: id,
+      id,
     }));
   }, [data]);
 
@@ -92,11 +92,11 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
     }
   };
 
-  const handleTagClick = (tag: { name: string; scheduleId: number }) => {
+  const handleTagClick = (tag: { name: string; id: number }) => {
     setLocalData((prev) => ({
       ...prev,
       tag: tag.name,
-      scheduleId: tag.scheduleId,
+      id: tag.id,
     }));
   };
 
@@ -109,7 +109,7 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
       const body = {
         name: localData.title,
         processedScript: recognitionResult,
-        scheduleElementId: localData.scheduleId,
+        scheduleElementId: localData.id,
         lectureDate: getCurrentKoreanTimeString(),
         problems: [],
       };
@@ -126,10 +126,6 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
         'success',
       );
   }, [isRestructuring]);
-
-  useEffect(() => {
-    console.log(localData);
-  }, [localData]);
 
   return createPortal(
     <div className={styles.modalWrapper} onClick={closeModal}>
