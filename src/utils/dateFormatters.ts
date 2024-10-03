@@ -17,3 +17,10 @@ export const generateRecordingTitle = () => {
   const day = now.getDate().toString().padStart(2, '0');
   return `새로운 녹음-${year}${month}${day}`;
 };
+
+export const getCurrentKoreanTimeString = () => {
+  const now = new Date();
+  // 한국 시간으로 조정 (UTC+9)
+  now.setHours(now.getHours() + 9);
+  return now.toISOString().slice(0, 19);
+};

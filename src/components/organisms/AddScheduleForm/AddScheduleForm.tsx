@@ -6,7 +6,6 @@ import Warning from '../../../assets/images/warning.svg?react';
 import {
   COLORS,
   ColorKey,
-  IScheduleElement,
   IScheduleElementDTO,
   LectureInfo,
   daysOfWeek,
@@ -18,7 +17,10 @@ import {
   hasNewElementConflict,
   transformToScheduleElementDTO,
 } from '../../../utils/schedule';
-import { addScheduleElement } from '../../../apis/schedule';
+import {
+  addScheduleElement,
+  IGetScheduleResponse,
+} from '../../../apis/schedule';
 import styles from './AddScheduleForm.module.scss';
 
 interface IProps {
@@ -115,13 +117,19 @@ const AddScheduleForm = ({ onClose }: IProps) => {
 
   const handleSubmit = () => {
     if (isFormValid) {
-      const existingSchedule = queryClient.getQueryData<IScheduleElement[]>([
+      const existingSchedule = queryClient.getQueryData<IGetScheduleResponse>([
         'schedule',
         userInfo.userName,
       ]);
       const formattedData = transformToScheduleElementDTO(lectureInfo);
-      if (existingSchedule) {
-        if (hasNewElementConflict(formattedData, existingSchedule)) {
+      if (existingSchedule?.object?.scheduleElements) {
+        console.log(formattedData, existingSchedule);
+        if (
+          hasNewElementConflict(
+            formattedData,
+            existingSchedule.object.scheduleElements,
+          )
+        ) {
           addAlert(
             '새로운 강의 시간이 기존 스케줄과 겹칩니다.\n 다른 시간을 선택해주세요.',
             'error',

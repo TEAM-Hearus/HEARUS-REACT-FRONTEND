@@ -29,13 +29,13 @@ const RecordTagDropDown = () => {
 
     data?.object?.scheduleElements.forEach((item) => {
       if (!tagObject.hasOwnProperty(item.name)) {
-        tagObject[item.name] = item.scheduleId;
+        tagObject[item.name] = item.id;
       }
     });
 
     return Object.entries(tagObject).map(([name, id]) => ({
       name,
-      scheduleId: id,
+      id,
     }));
   }, [data]);
 
@@ -44,7 +44,7 @@ const RecordTagDropDown = () => {
   };
 
   const handleLiClick = (item: ITagItem) => {
-    updateRecordData({ tag: item.name, scheduleId: item.scheduleId });
+    updateRecordData({ tag: item.name, id: item.id });
     setIsTagBtnClicked(false);
   };
 

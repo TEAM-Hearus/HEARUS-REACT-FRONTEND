@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { EnQuestionType } from '../utils/test';
 
-type TestSettingsStore = {
+interface TestSettingsStore {
   lectureId: string;
   scheduleElementId: number;
   testName: string;
@@ -16,15 +16,28 @@ type TestSettingsStore = {
   setQuestionCount: (count: number) => void;
   setTimeLimit: (limit: number | null) => void;
   clearSettings: () => void;
-};
+}
 
-const useTestSettingsStore = create<TestSettingsStore>()((set) => ({
+interface IInitialState {
+  lectureId: string;
+  scheduleElementId: number;
+  testName: string;
+  questionTypes: EnQuestionType[];
+  questionCount: number;
+  timeLimit: number | null;
+}
+
+const initialState: IInitialState = {
   lectureId: '',
   scheduleElementId: 0,
   testName: '',
   questionTypes: ['MultipleChoice'],
   questionCount: 0,
   timeLimit: null,
+};
+
+const useTestSettingsStore = create<TestSettingsStore>()((set) => ({
+  ...initialState,
 
   setLectureId: (id) => set({ lectureId: id }),
   setScheduleElementId: (id) => set({ scheduleElementId: id }),
@@ -45,8 +58,7 @@ const useTestSettingsStore = create<TestSettingsStore>()((set) => ({
 
   setTimeLimit: (limit: number | null) => set({ timeLimit: limit }),
 
-  clearSettings: () =>
-    set({ questionTypes: [], questionCount: 0, timeLimit: null }),
+  clearSettings: () => set(initialState),
 }));
 
 export default useTestSettingsStore;

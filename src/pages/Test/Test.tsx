@@ -30,7 +30,7 @@ const Test = () => {
     problem_types: questionTypes.join(','),
   };
 
-  const { data, isSuccess } = useQuery({
+  const { data, isFetching } = useQuery({
     queryKey: ['problem', lectureId],
     queryFn: () => generateProblem(inputData),
     retry: false,
@@ -59,17 +59,20 @@ const Test = () => {
       updateTestData({ totalNum: data.object.length });
       setUserAnswers(Array(data.object.length).fill(''));
     }
-    return () => clearTestData();
+    return () => {
+      clearTestData();
+    };
   }, [data]);
 
   return (
     <div className={styles.container}>
       <TestHeader handleSubmit={handleSubmit} showResults={showResults} />
       <article className={styles.problemsContainer}>
-        {!isSuccess && (
+        {isFetching && (
           <img className={styles.loading} src={Loading} alt="문제 생성중..." />
         )}
         {data != null &&
+          !isFetching &&
           data.object != null &&
           data.object.map((question, index) => (
             <section key={question.direction} className={styles.questionBox}>
