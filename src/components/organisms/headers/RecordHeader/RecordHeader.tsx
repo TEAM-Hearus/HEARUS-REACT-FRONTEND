@@ -9,9 +9,13 @@ import styles from './Recordheader.module.scss';
 
 interface IProps {
   stopRecordingAndDisconnectSocket: () => void;
+  recognitionResult: string[];
 }
 
-const RecordHeader = ({ stopRecordingAndDisconnectSocket }: IProps) => {
+const RecordHeader = ({
+  stopRecordingAndDisconnectSocket,
+  recognitionResult,
+}: IProps) => {
   const [seconds, setSeconds] = useState(0);
   const timerIntervalRef = useRef<number | null>(null);
 
@@ -61,7 +65,12 @@ const RecordHeader = ({ stopRecordingAndDisconnectSocket }: IProps) => {
           종료
         </button>
       </div>
-      {isModalOpen && <RecordModal handleQuit={handleQuit} />}
+      {isModalOpen && (
+        <RecordModal
+          handleQuit={handleQuit}
+          recognitionResult={recognitionResult}
+        />
+      )}
     </header>
   );
 };

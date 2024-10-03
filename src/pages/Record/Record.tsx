@@ -6,12 +6,12 @@ import styles from './Record.module.scss';
 
 const Record = () => {
   const [isRecording, setIsRecording] = useState(false);
-  const [recognitionResult, setRecognitionResult] = useState('');
+  const [recognitionResult, setRecognitionResult] = useState<string[]>([]);
   const [currentCaption, setCurrentCaption] =
     useState('여기에 자막이 표시됩니다.');
 
   const onTransitionResult = useCallback((result: string) => {
-    setRecognitionResult((prev) => prev + ' ' + result);
+    setRecognitionResult((prev) => [...prev, result]);
     setCurrentCaption(result);
   }, []);
 
@@ -54,8 +54,11 @@ const Record = () => {
     <div className={styles.container}>
       <RecordHeader
         stopRecordingAndDisconnectSocket={stopRecordingAndDisconnectSocket}
+        recognitionResult={recognitionResult}
       />
-      <article className={styles.captionContainer}>{recognitionResult}</article>
+      <article className={styles.captionContainer}>
+        {recognitionResult.join(' ')}
+      </article>
       <section className={styles.smallSection}>{currentCaption}</section>
     </div>
   );
