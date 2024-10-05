@@ -1,3 +1,4 @@
+import { useAlert } from '../../../contexts/AlertContext';
 import useTestSettingsStore from '../../../store/useTestSettingsStore';
 import QuestionTypeBtn from '../../atoms/buttons/QuestionTypeBtn/QuestionTypeBtn';
 import styles from './TestOptionSelector.module.scss';
@@ -6,10 +7,13 @@ const TestOptionSelector = () => {
   const { questionCount, timeLimit, setQuestionCount, setTimeLimit } =
     useTestSettingsStore();
 
+  const { addAlert } = useAlert();
+
   const handleQuestionCountChange = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     if (parseInt(e.target.value, 10) > 10) {
+      addAlert('문제는 최대 10개로 설정할 수 있습니다.', 'error');
       setQuestionCount(10);
     } else {
       setQuestionCount(parseInt(e.target.value, 10));
@@ -31,7 +35,7 @@ const TestOptionSelector = () => {
       <div className={styles.selectBox}>
         <p className={styles.selectTitle}>문제 유형</p>
         <div className={styles.selectionBtnsContainer}>
-          {['객관식', '단답형', '빈칸 뚫기', 'OX 퀴즈'].map((type, index) => (
+          {['객관식', 'OX 퀴즈'].map((type, index) => (
             <QuestionTypeBtn key={index}>{type}</QuestionTypeBtn>
           ))}
         </div>
@@ -42,7 +46,6 @@ const TestOptionSelector = () => {
           className={styles.numInput}
           type="number"
           min="0"
-          max="10"
           value={questionCount}
           onChange={handleQuestionCountChange}
         />
@@ -61,7 +64,7 @@ const TestOptionSelector = () => {
             시간 제한
           </label>
         </span>
-        {timeLimit !== null && (
+        {timeLimit != null && (
           <>
             <input
               className={styles.numInput}

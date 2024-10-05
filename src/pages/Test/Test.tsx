@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query';
 import TestHeader from '../../components/organisms/headers/TestHeader/TestHeader';
 import MultipleChoice from '../../components/molecules/questions/MultipleChoice/MultipleChoice';
 import OXChoice from '../../components/molecules/questions/OXChoice/OXChoice';
-import ShortAnswer from '../../components/molecules/questions/ShortAnswer/ShortAnswer';
 import Loading from '../../assets/images/LoadingCircle.gif';
 import { useAlert } from '../../contexts/AlertContext';
 import useTestModalStore from '../../store/useTestModalStore';
@@ -83,16 +82,6 @@ const Test = () => {
                   options={question.options}
                   answer={question.answer as number}
                   userAnswer={userAnswers[index] as number}
-                  onAnswerChange={(answer) => handleAnswerChange(index, answer)}
-                  showResult={showResults}
-                />
-              )}
-              {(question.type === 'ShortAnswer' ||
-                question.type === 'BlackQuestion') && (
-                <ShortAnswer
-                  options={question.options}
-                  answer={question.answer}
-                  userAnswer={userAnswers[index] as string}
                   onAnswerChange={(answer) => handleAnswerChange(index, answer)}
                   showResult={showResults}
                 />
