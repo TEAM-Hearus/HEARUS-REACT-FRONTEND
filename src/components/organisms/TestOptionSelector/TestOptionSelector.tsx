@@ -31,7 +31,7 @@ const TestOptionSelector = () => {
       <div className={styles.selectBox}>
         <p className={styles.selectTitle}>문제 유형</p>
         <div className={styles.selectionBtnsContainer}>
-          {['객관식', '단답형', '빈칸 뚫기', 'OX 퀴즈'].map((type, index) => (
+          {['객관식', 'OX 퀴즈'].map((type, index) => (
             <QuestionTypeBtn key={index}>{type}</QuestionTypeBtn>
           ))}
         </div>
@@ -61,7 +61,7 @@ const TestOptionSelector = () => {
             시간 제한
           </label>
         </span>
-        {timeLimit !== null && (
+        {timeLimit != null && (
           <>
             <input
               className={styles.numInput}

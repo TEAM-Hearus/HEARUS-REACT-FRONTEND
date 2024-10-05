@@ -39,12 +39,6 @@
   display: flex;
   gap: 30px;
   flex-wrap: wrap;
-  @media (min-width: 1350px) {
-    width: 630px;
-  }
-  @media (min-width: 1600px) {
-    width: fit-content;
-  }
   height: 85dvh;
   padding: 30px;
   background-color: $light-bg_F2;

@@ -1,9 +1,10 @@
 import { API_URL, getToken, IApiResponse } from '.';
+import { EnQuestionType } from '../utils/test';
 
 interface IGenerateProblemResponse extends IApiResponse<IQuestion[]> {}
 
 export interface IQuestion {
-  type: string;
+  type: EnQuestionType;
   direction: string;
   options: string[];
   answer: string | number;
