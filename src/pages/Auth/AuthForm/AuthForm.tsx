@@ -5,7 +5,7 @@ import { API_URL } from '../../../apis';
 import { useAlertStore } from '../../../store/useAlertStore';
 import useAuthStore from '../../../store/useAuthStore';
 import useValidation from '../../../components/atoms/useValidation/useValidation';
-import InputField from '../../../components/atoms/inputs/AuthInput/AuthInput';
+import InputField from '../../../components/atoms/inputs/AuthInput/AuthInputField';
 import AlertComponent from '../../../components/molecules/GlobalAlert/GlobalAlert';
 import Google from '../../../assets/images/logo/google.png';
 import Kakao from '../../../assets/images/logo/kakao.png';
@@ -186,11 +186,13 @@ const AuthForm = ({
               value={name}
               ref={nameRef}
               placeholder="사용자 이름 또는 닉네임을 입력하세요"
-              onChange={(e) => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setName(e.target.value);
                 validateName(e.target.value);
               }}
-              onKeyDown={(e) => handleKeyDown(e, emailRef, true)}
+              onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+                handleKeyDown(e, emailRef, true)
+              }
               errorMessage={validationState.nameErrorMessage}
               isValid={validationState.name}
             />
@@ -201,11 +203,11 @@ const AuthForm = ({
             value={email}
             ref={emailRef}
             placeholder="이메일을 입력하세요"
-            onChange={(e) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setEmail(e.target.value);
               validateEmail(e.target.value);
             }}
-            onKeyDown={(e) =>
+            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
               handleKeyDown(e, passwordRef, validationState.email)
             }
             errorMessage={validationState.emailErrorMessage}
@@ -219,7 +221,7 @@ const AuthForm = ({
             ref={passwordRef}
             placeholder="비밀번호를 입력하세요"
             onChange={handlePasswordChange}
-            onKeyDown={(e) =>
+            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
               title === '새 계정'
                 ? handleKeyDown(e, passwordConfirmRef, validationState.password)
                 : handleKeyDownSubmit

@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import On from '../../../../assets/images/showPasswordOn.svg?react';
 import Off from '../../../../assets/images/showPasswordOff.svg?react';
 import Warning from '../../../../assets/images/warning.svg?react';
-import styles from './AuthInput.module.scss';
+import styles from './AuthInputField.module.scss';
 
 interface InputFieldProps {
   label: string;
