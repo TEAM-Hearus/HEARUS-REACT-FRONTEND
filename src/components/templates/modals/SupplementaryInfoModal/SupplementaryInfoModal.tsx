@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
-import { useAlert } from '../../../../contexts/AlertContext';
+import { useAlertStore } from '../../../../store/useAlertStore';
 import Next from '../../../../assets/images/arrow/next-arrow.svg?react';
 import Back from '../../../../assets/images/arrow/back-arrow.svg?react';
 import { updateSupplementaryInfo } from '../../../../apis/user';
@@ -24,7 +24,7 @@ const SupplementaryInfoModal = ({ onSkip, onSave }: IProps) => {
     userGrade: '1',
   });
   const queryClient = useQueryClient();
-  const { addAlert } = useAlert();
+  const addAlert = useAlertStore((state) => state.addAlert);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -65,7 +65,7 @@ const SupplementaryInfoModal = ({ onSkip, onSave }: IProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!info.userSchool && !info.userSchool) {
+    if (!info.userSchool && !info.userMajor) {
       addAlert('추가 정보를 모두 입력해야 합니다.', 'error');
       return;
     }

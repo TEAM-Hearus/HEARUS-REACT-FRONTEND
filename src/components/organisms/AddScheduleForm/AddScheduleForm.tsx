@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useUserInfoStore } from '../../../store/useUserInfoStore';
-import { useAlert } from '../../../contexts/AlertContext';
+import { useAlertStore } from '../../../store/useAlertStore';
 import Warning from '../../../assets/images/warning.svg?react';
 import {
   COLORS,
@@ -38,7 +38,7 @@ const AddScheduleForm = ({ onClose }: IProps) => {
   const startMinuteRef = useRef<HTMLInputElement | null>(null);
   const endHourRef = useRef<HTMLInputElement | null>(null);
   const endMinuteRef = useRef<HTMLInputElement | null>(null);
-  const { addAlert } = useAlert();
+  const addAlert = useAlertStore((state) => state.addAlert);
 
   const { userInfo } = useUserInfoStore();
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import Edit from './ProfileEdit/ProfileEdit';
 import View from './ProfileView/ProfileView';
-import { useAlert } from '../../../contexts/AlertContext';
+import { useAlertStore } from '../../../store/useAlertStore';
 import Preview from '../../../assets/images/preview.png';
 import { updateInfo, IUserUpdateInfo, getUserInfo } from '../../../apis/user';
 import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
@@ -43,7 +43,7 @@ const MyPage = () => {
   const [preview, setPreview] = useState<string>(Preview);
   const [currentMode, setCurrentMode] = useState<'view' | 'edit'>('view');
   const queryClient = useQueryClient();
-  const { addAlert } = useAlert();
+  const addAlert = useAlertStore((state) => state.addAlert);
 
   useEffect(() => {
     setInfo({
@@ -94,12 +94,17 @@ const MyPage = () => {
       setCurrentMode('view');
     },
     onError: (error) => {
+      addAlert(
+        '정보 변경에 오류가 발생했습니다.\n 다시 시도해 주세요.',
+        'error',
+      );
       console.error(error);
     },
   });
 
   const handleSaveClick = () => {
     if (
+      info.userOAuthType === '' &&
       info.userPassword.trim() === '' &&
       info.userPassword !== info.userPasswordConfirm
     ) {
