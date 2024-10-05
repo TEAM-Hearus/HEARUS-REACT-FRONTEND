@@ -173,6 +173,7 @@ const AuthForm = ({
   const handleOAuthClick = (e: string) => {
     window.location.href = `${API_URL}/oauth2/authorization/${e}`;
   };
+
   return (
     <div className={styles.bg}>
       <div className={styles.authContainer}>
