@@ -5,7 +5,7 @@ import {
   deleteScheduleElement,
   getLectureByScheduleElement,
 } from '../../../apis/schedule';
-import { useAlert } from '../../../contexts/AlertContext';
+import { useAlertStore } from '../../../store/useAlertStore';
 import ScriptIcon from '../../../assets/images/nav/my-script-inactive.svg?react';
 import TrashCan from '../../../assets/images/orange-trash-can.svg?react';
 import styles from './ScriptToolTip.module.scss';
@@ -20,7 +20,8 @@ interface IProps {
 const ScriptToolTip = ({ id, scheduleName }: IProps) => {
   const [selectedScriptId, setSelectedScriptId] = useState<string | null>(null);
   const queryClient = useQueryClient();
-  const { addAlert, showConfirm } = useAlert();
+  const addAlert = useAlertStore((state) => state.addAlert);
+  const showConfirm = useAlertStore((state) => state.showConfirm);
   const { userInfo } = useUserInfoStore();
 
   const { data } = useQuery({

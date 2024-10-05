@@ -2,7 +2,8 @@ import React, { useState, useCallback, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { API_URL } from '../../../apis';
-import { useAlert } from '../../../contexts/AlertContext';
+import { useAlertStore } from '../../../store/useAlertStore';
+import AlertComponent from '../../../components/molecules/GlobalAlert/GlobalAlert';
 import Google from '../../../assets/images/logo/google.png';
 import Kakao from '../../../assets/images/logo/kakao.png';
 import Naver from '../../../assets/images/logo/naver.png';
@@ -47,11 +48,12 @@ const AuthForm = ({
   const [isShowPasswordConfirmClick, setIsShowPasswordConfirmClick] =
     useState(false);
   const [name, setName] = useState('');
-  const { addAlert, showConfirm } = useAlert();
   const nameRef = useRef<HTMLInputElement | null>(null);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const passwordConfirmRef = useRef<HTMLInputElement | null>(null);
+  const addAlert = useAlertStore((state) => state.addAlert);
+  const showConfirm = useAlertStore((state) => state.showConfirm);
 
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
@@ -426,6 +428,7 @@ const AuthForm = ({
           </Link>
         </div>
       </div>
+      <AlertComponent />
     </div>
   );
 };

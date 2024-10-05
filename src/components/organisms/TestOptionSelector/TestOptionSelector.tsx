@@ -1,4 +1,4 @@
-import { useAlert } from '../../../contexts/AlertContext';
+import { useAlertStore } from '../../../store/useAlertStore';
 import useTestSettingsStore from '../../../store/useTestSettingsStore';
 import QuestionTypeBtn from '../../atoms/buttons/QuestionTypeBtn/QuestionTypeBtn';
 import styles from './TestOptionSelector.module.scss';
@@ -7,7 +7,7 @@ const TestOptionSelector = () => {
   const { questionCount, timeLimit, setQuestionCount, setTimeLimit } =
     useTestSettingsStore();
 
-  const { addAlert } = useAlert();
+  const addAlert = useAlertStore((state) => state.addAlert);
 
   const handleQuestionCountChange = (
     e: React.ChangeEvent<HTMLInputElement>,

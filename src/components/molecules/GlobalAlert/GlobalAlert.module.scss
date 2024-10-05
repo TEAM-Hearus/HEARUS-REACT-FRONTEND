@@ -1,5 +1,5 @@
-@import '../../../../styles/variables/colors.scss';
-@import '../../../../styles/variables/fonts.scss';
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/variables/fonts.scss';
 
 @keyframes slide-up {
   0% {
@@ -52,7 +52,7 @@
   box-shadow: 0 3px 2px rgba(0, 0, 0, 0.2);
 }
 
-.alert.closing {
+.closing {
   animation: slide-down 0.5s ease;
 }
 
