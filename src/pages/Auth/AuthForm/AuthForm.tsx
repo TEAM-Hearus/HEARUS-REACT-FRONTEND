@@ -3,14 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { API_URL } from '../../../apis';
 import { useAlertStore } from '../../../store/useAlertStore';
+import useAuthStore from '../../../store/useAuthStore';
+import useValidation from '../../../components/atoms/useValidation/useValidation';
+import InputField from '../../../components/atoms/inputs/AuthInput/AuthInput';
 import AlertComponent from '../../../components/molecules/GlobalAlert/GlobalAlert';
 import Google from '../../../assets/images/logo/google.png';
 import Kakao from '../../../assets/images/logo/kakao.png';
 import Naver from '../../../assets/images/logo/naver.png';
 import styles from './AuthForm.module.scss';
-import On from '../../../assets/images/showPasswordOn.svg?react';
-import Off from '../../../assets/images/showPasswordOff.svg?react';
-import Warning from '../../../assets/images/warning.svg?react';
 import { emailLogin, emailSignUp } from '../../../apis/auth';
 
 interface AuthFormProps {
@@ -20,16 +20,6 @@ interface AuthFormProps {
   authGoBoxMessage: string;
   authGoLink: string;
   authGoLinkMessage: string;
-}
-interface ValidationState {
-  name: boolean;
-  nameErrorMessage: string;
-  email: boolean;
-  emailErrorMessage: string;
-  password: boolean;
-  passwordErrorMessage: string;
-  passwordConfirm: boolean;
-  passwordConfirmErrorMessage: string;
 }
 
 const AuthForm = ({
@@ -41,19 +31,32 @@ const AuthForm = ({
   authGoLinkMessage,
 }: AuthFormProps) => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [passwordConfirm, setPasswordConfirm] = useState<string>('');
+  const {
+    name,
+    email,
+    password,
+    passwordConfirm,
+    setName,
+    setEmail,
+    setPassword,
+    setPasswordConfirm,
+  } = useAuthStore();
   const [isShowPasswordClick, setIsShowPasswordClick] = useState(false);
   const [isShowPasswordConfirmClick, setIsShowPasswordConfirmClick] =
     useState(false);
-  const [name, setName] = useState('');
   const nameRef = useRef<HTMLInputElement | null>(null);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const passwordConfirmRef = useRef<HTMLInputElement | null>(null);
   const addAlert = useAlertStore((state) => state.addAlert);
   const showConfirm = useAlertStore((state) => state.showConfirm);
+  const {
+    validationState,
+    validateName,
+    validateEmail,
+    validatePassword,
+    validatePasswordConfirm,
+  } = useValidation();
 
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
@@ -67,102 +70,12 @@ const AuthForm = ({
       }
     }
   };
-
-  const [validationState, setValidationState] = useState<ValidationState>({
-    name: true,
-    nameErrorMessage: '',
-    email: true,
-    emailErrorMessage: '',
-    password: true,
-    passwordErrorMessage: '',
-    passwordConfirm: true,
-    passwordConfirmErrorMessage: '',
-  });
-
-  const updateValidation = useCallback(
-    (
-      field: keyof ValidationState,
-      isValid: boolean,
-      errorMessage: string = '',
-    ) => {
-      setValidationState((prevState) => ({
-        ...prevState,
-        [field]: isValid,
-        [`${field}ErrorMessage`]: errorMessage,
-      }));
-    },
-    [],
-  );
-  const validateName = (value: string) => {
-    if (value.trim() === '') {
-      updateValidation('name', false, '이름을 입력해 주세요.');
-    } else {
-      updateValidation('name', true, '');
+  const handleKeyDownSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSubmit(e as unknown as React.FormEvent<HTMLFormElement>);
     }
   };
-
-  const validateEmail = useCallback(
-    (value: string) => {
-      if (value.trim() === '') {
-        updateValidation('email', false, '이메일은 필수 입력 값입니다.');
-        return;
-      }
-      const regex =
-        /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-      const isValid = regex.test(value);
-
-      if (!isValid) {
-        updateValidation('email', false, '유효하지 않은 이메일입니다.');
-      } else {
-        updateValidation('email', true, '');
-      }
-    },
-    [updateValidation],
-  );
-
-  const validatePassword = useCallback(
-    (value: string) => {
-      if (value.trim() === '') {
-        updateValidation('password', false, '비밀번호는 필수 입력 값입니다.');
-        return;
-      }
-      if (value.length < 8) {
-        updateValidation(
-          'password',
-          false,
-          '비밀번호는 최소 8자 이상이어야 합니다.',
-        );
-        return;
-      }
-      updateValidation('password', true, '');
-    },
-    [updateValidation],
-  );
-
-  const validatePasswordConfirm = useCallback(
-    (value: string, currentPassword: string) => {
-      if (value.trim() === '') {
-        updateValidation(
-          'passwordConfirm',
-          false,
-          '비밀번호 확인은 필수 입력 값입니다.',
-        );
-        return;
-      }
-
-      if (value !== currentPassword) {
-        updateValidation(
-          'passwordConfirm',
-          false,
-          '비밀번호가 일치하지 않습니다.',
-        );
-        return;
-      }
-
-      updateValidation('passwordConfirm', true, '');
-    },
-    [updateValidation],
-  );
 
   const handlePasswordChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -185,12 +98,10 @@ const AuthForm = ({
     [validatePasswordConfirm, password],
   );
 
-  const toggleShowPassword = (e: React.MouseEvent<HTMLSpanElement>) => {
-    e.preventDefault();
+  const toggleShowPassword = () => {
     setIsShowPasswordClick((prev) => !prev);
   };
-  const toggleShowPasswordConfirm = (e: React.MouseEvent<HTMLSpanElement>) => {
-    e.preventDefault();
+  const toggleShowPasswordConfirm = () => {
     setIsShowPasswordConfirmClick((prev) => !prev);
   };
 
@@ -259,145 +170,78 @@ const AuthForm = ({
     }
   };
 
-  const signupValidateEmail = !validationState.email && title === '새 계정';
-  const signupValidatePassword =
-    !validationState.password && title === '새 계정';
-
   const handleOAuthClick = (e: string) => {
     window.location.href = `${API_URL}/oauth2/authorization/${e}`;
   };
-
   return (
     <div className={styles.bg}>
       <div className={styles.authContainer}>
         <form className={styles.authForm} onSubmit={handleSubmit}>
           <h1 className={styles.h1}>{title}</h1>
           {title === '새 계정' && (
-            <div
-              className={`${styles.inputBox} ${
-                !validationState.name ? styles.inputBoxError : ''
-              }`}
-            >
-              <label className={styles.label}>
-                사용자 이름
-                <input
-                  ref={nameRef}
-                  onKeyDown={(e) => handleKeyDown(e, emailRef, true)}
-                  type="text"
-                  placeholder="사용자 이름 또는 닉네임을 입력하세요"
-                  className={`${styles.input} ${
-                    !validationState.name ? styles.inputError : ''
-                  }`}
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                    validateName(e.target.value);
-                  }}
-                />
-              </label>
-              {!validationState.name && (
-                <div className={styles.validMsg}>
-                  <Warning className={styles.warning} />
-                  {validationState.nameErrorMessage}
-                </div>
-              )}
-            </div>
+            <InputField
+              label="사용자 이름"
+              type="text"
+              value={name}
+              ref={nameRef}
+              placeholder="사용자 이름 또는 닉네임을 입력하세요"
+              onChange={(e) => {
+                setName(e.target.value);
+                validateName(e.target.value);
+              }}
+              onKeyDown={(e) => handleKeyDown(e, emailRef, true)}
+              errorMessage={validationState.nameErrorMessage}
+              isValid={validationState.name}
+            />
           )}
-          <div
-            className={`${styles.inputBox} ${
-              signupValidateEmail ? styles.inputBoxError : ''
-            }`}
-          >
-            <label className={styles.label}>
-              이메일
-              <input
-                ref={emailRef}
-                onKeyDown={(e) =>
-                  handleKeyDown(e, passwordRef, validationState.email)
-                }
-                type="text"
-                placeholder="이메일을 입력하세요"
-                className={`${styles.input} ${
-                  signupValidateEmail && styles.inputError
-                }`}
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  validateEmail(e.target.value);
-                }}
-              />
-            </label>
-            {signupValidateEmail && (
-              <div className={styles.validMsg}>
-                <Warning className={styles.warning} />
-                {validationState.emailErrorMessage}
-              </div>
-            )}
-          </div>
+          <InputField
+            label="이메일"
+            type="text"
+            value={email}
+            ref={emailRef}
+            placeholder="이메일을 입력하세요"
+            onChange={(e) => {
+              setEmail(e.target.value);
+              validateEmail(e.target.value);
+            }}
+            onKeyDown={(e) =>
+              handleKeyDown(e, passwordRef, validationState.email)
+            }
+            errorMessage={validationState.emailErrorMessage}
+            isValid={validationState.email}
+          />
 
-          <div
-            className={`${styles.inputBox} ${
-              signupValidatePassword && styles.inputBoxError
-            }`}
-          >
-            <label className={styles.label}>
-              비밀번호
-              <input
-                ref={passwordRef}
-                onKeyDown={(e) =>
-                  handleKeyDown(e, passwordConfirmRef, validationState.password)
-                }
-                type={isShowPasswordClick ? 'text' : 'password'}
-                placeholder="비밀번호를 입력하세요"
-                className={`${styles.input} ${signupValidatePassword && styles.inputError}`}
-                value={password}
-                onChange={handlePasswordChange}
-              />
-              <div className={styles.showBtn} onClick={toggleShowPassword}>
-                {isShowPasswordClick ? <On /> : <Off />}
-              </div>
-            </label>
-            {signupValidatePassword && validationState.passwordErrorMessage && (
-              <div className={styles.validMsg}>
-                <Warning className={styles.warning} />
-                {validationState.passwordErrorMessage}
-              </div>
-            )}
-          </div>
+          <InputField
+            label="비밀번호"
+            type="password"
+            value={password}
+            ref={passwordRef}
+            placeholder="비밀번호를 입력하세요"
+            onChange={handlePasswordChange}
+            onKeyDown={(e) =>
+              title === '새 계정'
+                ? handleKeyDown(e, passwordConfirmRef, validationState.password)
+                : handleKeyDownSubmit
+            }
+            errorMessage={validationState.passwordErrorMessage}
+            isValid={validationState.password}
+            showPassword={isShowPasswordClick}
+            toggleShowPassword={toggleShowPassword}
+          />
           {title === '새 계정' && (
-            <div
-              className={`${styles.inputBox} ${
-                !validationState.passwordConfirm ? styles.inputBoxError : ''
-              }`}
-            >
-              <label className={styles.label}>
-                비밀번호 확인
-                <input
-                  ref={passwordConfirmRef}
-                  onKeyDown={(e) =>
-                    handleKeyDown(e, null, validationState.password)
-                  }
-                  type={isShowPasswordConfirmClick ? 'text' : 'password'}
-                  placeholder="비밀번호를 재입력하세요"
-                  className={`${styles.input} ${!validationState.passwordConfirm ? styles.inputError : ''}`}
-                  value={passwordConfirm}
-                  onChange={handlePasswordConfirmChange}
-                />
-              </label>
-              <div
-                className={styles.showBtn}
-                onClick={toggleShowPasswordConfirm}
-              >
-                {isShowPasswordConfirmClick ? <On /> : <Off />}
-              </div>
-              {!validationState.passwordConfirm &&
-                validationState.passwordConfirmErrorMessage && (
-                  <div className={styles.validMsg}>
-                    <Warning className={styles.warning} />
-                    {validationState.passwordConfirmErrorMessage}
-                  </div>
-                )}
-            </div>
+            <InputField
+              label="비밀번호 확인"
+              type="password"
+              value={passwordConfirm}
+              ref={passwordConfirmRef}
+              placeholder="비밀번호를 재입력하세요"
+              onChange={handlePasswordConfirmChange}
+              onKeyDown={handleKeyDownSubmit}
+              errorMessage={validationState.passwordConfirmErrorMessage}
+              isValid={validationState.passwordConfirm}
+              showPassword={isShowPasswordConfirmClick}
+              toggleShowPassword={toggleShowPasswordConfirm}
+            />
           )}
           <button className={styles.authBtn}>{buttonText}</button>
         </form>
