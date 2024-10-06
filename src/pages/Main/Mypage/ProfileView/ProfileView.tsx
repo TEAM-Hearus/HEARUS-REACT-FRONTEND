@@ -10,7 +10,6 @@ interface UserInfo {
   userSchool: string;
   userGrade: string;
   userMajor: string;
-  userImg: File | string;
   userOAuthType: string;
 }
 interface ProfileViewProps {
