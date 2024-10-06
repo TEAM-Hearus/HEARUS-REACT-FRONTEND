@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import Edit from './ProfileEdit/ProfileEdit';
 import View from './ProfileView/ProfileView';
-import { useAlert } from '../../../contexts/AlertContext';
-import Preview from '../../../assets/images/preview.png';
+import { useAlertStore } from '../../../store/useAlertStore';
 import { updateInfo, IUserUpdateInfo, getUserInfo } from '../../../apis/user';
 import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
 import styles from './Mypage.module.scss';
@@ -15,7 +14,6 @@ interface UserInfo {
   userSchool: string;
   userGrade: string;
   userMajor: string;
-  userImg: File | string;
   userOAuthType: string;
   userPasswordConfirm?: string;
 }
@@ -35,15 +33,13 @@ const MyPage = () => {
     userSchool: '',
     userGrade: '',
     userMajor: '',
-    userImg: '',
     userOAuthType: '',
     userPasswordConfirm: '',
   });
 
-  const [preview, setPreview] = useState<string>(Preview);
   const [currentMode, setCurrentMode] = useState<'view' | 'edit'>('view');
   const queryClient = useQueryClient();
-  const { addAlert } = useAlert();
+  const addAlert = useAlertStore((state) => state.addAlert);
 
   useEffect(() => {
     setInfo({
@@ -53,22 +49,11 @@ const MyPage = () => {
       userSchool: data?.object.userSchool || '',
       userGrade: data?.object.userGrade || '',
       userMajor: data?.object.userMajor || '',
-      userImg: '',
       userOAuthType: data?.object.userOAuthType || '',
       userPasswordConfirm: '',
     });
   }, [data]);
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setInfo({
-        ...info,
-        userImg: file,
-      });
-      setPreview(URL.createObjectURL(file));
-    }
-  };
   const handleEditClick = () => {
     setCurrentMode('edit');
   };
@@ -80,7 +65,6 @@ const MyPage = () => {
       userSchool: data?.object.userSchool || '',
       userGrade: data?.object.userGrade || '',
       userMajor: data?.object.userMajor || '',
-      userImg: '',
       userOAuthType: data?.object.userOAuthType || '',
       userPasswordConfirm: '',
     });
@@ -94,12 +78,17 @@ const MyPage = () => {
       setCurrentMode('view');
     },
     onError: (error) => {
+      addAlert(
+        '정보 변경에 오류가 발생했습니다.\n 다시 시도해 주세요.',
+        'error',
+      );
       console.error(error);
     },
   });
 
   const handleSaveClick = () => {
     if (
+      info.userOAuthType === '' &&
       info.userPassword.trim() === '' &&
       info.userPassword !== info.userPasswordConfirm
     ) {
@@ -125,29 +114,7 @@ const MyPage = () => {
     <div className={styles.wholeContainer}>
       <h1 className={styles.title}>계정 정보</h1>
       <div className={styles.profileContainer}>
-        <div className={styles.profileImgBox}>
-          {currentMode === 'view' ? (
-            <img
-              className={styles.profileImg}
-              src={preview}
-              alt="프로필 이미지"
-            />
-          ) : (
-            <label className={styles.selectBtn}>
-              <img
-                className={styles.profileImg}
-                src={preview}
-                alt="프로필 이미지"
-              />
-              <input
-                className={styles.imgSelectBtn}
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-              />
-            </label>
-          )}
-        </div>
+        <div className={styles.profileImgBox}></div>
         {currentMode === 'view' ? (
           <View info={info} onEditClick={handleEditClick} />
         ) : (
