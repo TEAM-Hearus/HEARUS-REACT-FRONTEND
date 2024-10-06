@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import Edit from './ProfileEdit/ProfileEdit';
 import View from './ProfileView/ProfileView';
 import { useAlertStore } from '../../../store/useAlertStore';
-import Preview from '../../../assets/images/preview.png';
 import { updateInfo, IUserUpdateInfo, getUserInfo } from '../../../apis/user';
 import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
 import styles from './Mypage.module.scss';
