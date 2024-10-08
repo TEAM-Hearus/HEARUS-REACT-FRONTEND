@@ -10,14 +10,16 @@ import useTestSettingsStore from '../../../../store/useTestSettingsStore';
 interface IProps {
   handleSubmit: () => void;
   showResults: boolean;
+  isFetching: boolean;
 }
 
-const TestHeader = ({ handleSubmit, showResults }: IProps) => {
+const TestHeader = ({ handleSubmit, showResults, isFetching }: IProps) => {
   const [seconds, setSeconds] = useState(0);
   const timerIntervalRef = useRef<number | null>(null);
 
   const { testName, timeLimit } = useTestSettingsStore();
-  const { isModalOpen, openModal, clearTestData } = useTestModalStore();
+  const { isModalOpen, openModal, closeModal, clearTestData } =
+    useTestModalStore();
 
   const startTimer = useCallback(() => {
     if (timerIntervalRef.current !== null) return;
@@ -34,12 +36,15 @@ const TestHeader = ({ handleSubmit, showResults }: IProps) => {
   }, []);
 
   const handleClickQuitBtn = useCallback(() => {
-    if (!showResults) openModal();
+    if (!showResults && !isFetching) openModal();
   }, []);
 
   useEffect(() => {
     startTimer();
-    return () => stopTimer();
+    return () => {
+      stopTimer();
+      closeModal();
+    };
   }, []);
 
   useEffect(() => {
@@ -70,7 +75,7 @@ const TestHeader = ({ handleSubmit, showResults }: IProps) => {
           종료
         </button>
       </div>
-      {isModalOpen && (
+      {isModalOpen && !showResults && !isFetching && (
         <TestModal title={testName} handleSubmit={handleSubmit} />
       )}
     </header>
