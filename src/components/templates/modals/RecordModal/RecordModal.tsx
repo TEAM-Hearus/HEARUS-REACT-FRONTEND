@@ -5,6 +5,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import useRecordModalStore from '../../../../store/useRecordModalStore';
 import Up from '../../../../assets/images/arrow/up-arrow.svg?react';
 import Down from '../../../../assets/images/arrow/down-arrow.svg?react';
+import Loading from '../../../../assets/images/LoadingCircle.gif';
 import { getSchedule } from '../../../../apis/schedule';
 import { useUserInfoStore } from '../../../../store/useUserInfoStore';
 import { useUnauthorizedRedirect } from '../../../../hooks/useUnauthorizedRedirect';
@@ -37,6 +38,7 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
     mutationFn: addLecture,
     onSuccess: async (data) => {
       if (data.success) {
+        handleQuit();
         setIsRestructuring(true);
         const restructureResponse = await restructureScript(data.object.id);
         if (restructureResponse.success) {
@@ -44,7 +46,6 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
           addAlert('스크립트가 성공적으로 저장됐습니다.', 'success');
           clearRecordData();
           closeModal();
-          handleQuit();
           navigate('/home');
         } else {
           addAlert('스크립트 저장 중 문제가 발생했습니다.', 'error');
@@ -52,8 +53,9 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
       } else {
         if (data.msg === 'Lecture name already exists') {
           addAlert('같은 이름의 스크립트가 존재합니다.', 'error');
+        } else {
+          addAlert(data.msg, 'error');
         }
-        // 다른 예외처리 추가 예정
       }
     },
     onError: (error) => {
@@ -105,7 +107,7 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
   };
 
   const handleClickSaveBtn = () => {
-    if (recognitionResult.length > 0) {
+    if (recognitionResult.length > 0 && !isRestructuring) {
       const body = {
         name: localData.title,
         processedScript: recognitionResult,
@@ -119,6 +121,10 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
     }
   };
 
+  const handleCloseModal = () => {
+    if (!isRestructuring) closeModal();
+  };
+
   useEffect(() => {
     if (isRestructuring)
       addAlert(
@@ -128,7 +134,7 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
   }, [isRestructuring]);
 
   return createPortal(
-    <div className={styles.modalWrapper} onClick={closeModal}>
+    <div className={styles.modalWrapper} onClick={handleCloseModal}>
       <div className={styles.modalContainer} onClick={handleClickModalContent}>
         <h2 className={styles.modalTitle}>녹음을 이대로 저장하시겠습니까?</h2>
         <div className={styles.inputsContainer}>
@@ -181,7 +187,7 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
           </ul>
         )}
         <div className={styles.modalActions}>
-          <button className={styles.modalClose} onClick={closeModal}>
+          <button className={styles.modalClose} onClick={handleCloseModal}>
             뒤로 돌아가기
           </button>
           <button className={styles.modalSave} onClick={handleClickSaveBtn}>
@@ -189,6 +195,11 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
           </button>
         </div>
       </div>
+      {isRestructuring && (
+        <div className={styles.loading}>
+          <img src={Loading} />
+        </div>
+      )}
     </div>,
     document.body,
   );
