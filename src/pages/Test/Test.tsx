@@ -5,7 +5,7 @@ import TestHeader from '../../components/organisms/headers/TestHeader/TestHeader
 import MultipleChoice from '../../components/molecules/questions/MultipleChoice/MultipleChoice';
 import OXChoice from '../../components/molecules/questions/OXChoice/OXChoice';
 import Loading from '../../assets/images/LoadingCircle.gif';
-import { useAlert } from '../../contexts/AlertContext';
+import { useAlertStore } from '../../store/useAlertStore';
 import useTestModalStore from '../../store/useTestModalStore';
 import useTestSettingsStore from '../../store/useTestSettingsStore';
 import { generateProblem } from '../../apis/test';
@@ -14,9 +14,10 @@ import styles from './Test.module.scss';
 
 const Test = () => {
   const navigate = useNavigate();
+  const addAlert = useAlertStore((state) => state.addAlert);
+
   const [userAnswers, setUserAnswers] = useState<(string | number)[]>([]);
   const [showResults, setShowResults] = useState(false);
-  const { addAlert } = useAlert();
 
   const { updateTestData, clearTestData } = useTestModalStore();
   const { lectureId, scheduleElementId, questionCount, questionTypes } =

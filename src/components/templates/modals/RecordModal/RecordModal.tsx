@@ -11,7 +11,7 @@ import { useUserInfoStore } from '../../../../store/useUserInfoStore';
 import { useUnauthorizedRedirect } from '../../../../hooks/useUnauthorizedRedirect';
 import { addLecture, restructureScript } from '../../../../apis/record';
 import { getCurrentKoreanTimeString } from '../../../../utils/dateFormatters';
-import { useAlert } from '../../../../contexts/AlertContext';
+import { useAlertStore } from '../../../../store/useAlertStore';
 import styles from './RecordModal.module.scss';
 
 interface IProps {
@@ -27,7 +27,7 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
   const [isRestructuring, setIsRestructuring] = useState(false);
 
   const { userInfo } = useUserInfoStore();
-  const { addAlert } = useAlert();
+  const addAlert = useAlertStore((state) => state.addAlert);
 
   const { data } = useQuery({
     queryKey: ['schedule', userInfo.userName],

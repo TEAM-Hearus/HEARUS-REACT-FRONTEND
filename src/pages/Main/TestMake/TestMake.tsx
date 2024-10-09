@@ -3,14 +3,14 @@ import { useQuery } from '@tanstack/react-query';
 import TestOptionSelector from '../../../components/organisms/TestOptionSelector/TestOptionSelector';
 import ScriptItem from '../../../components/molecules/ScriptItem/ScriptItem';
 import useTestSettingsStore from '../../../store/useTestSettingsStore';
-import { useAlert } from '../../../contexts/AlertContext';
+import { useAlertStore } from '../../../store/useAlertStore';
 import { getAllScripts } from '../../../apis/script';
 import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
 import styles from './TestMake.module.scss';
 
 const TestMake = () => {
   const navigate = useNavigate();
-  const { addAlert } = useAlert();
+  const addAlert = useAlertStore((state) => state.addAlert);
 
   const { data } = useQuery({
     queryKey: ['allScripts'],
