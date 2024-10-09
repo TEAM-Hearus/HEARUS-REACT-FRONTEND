@@ -1,9 +1,12 @@
 import { useRef } from 'react';
+import { useAlert } from '../contexts/AlertContext';
 
 export const useRecorder = (onAudioData: (data: string) => void) => {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const intervalRef = useRef<number | null>(null);
+
+  const { addAlert } = useAlert();
 
   const initMediaRecorder = (stream: MediaStream) => {
     const options = { mimeType: 'audio/webm;codecs=opus' };
@@ -45,7 +48,10 @@ export const useRecorder = (onAudioData: (data: string) => void) => {
         initMediaRecorder(stream);
       }, 3000);
     } catch (error) {
-      console.error('Error accessing the microphone', error);
+      addAlert(
+        '마이크를 사용할 수 없습니다. 브라우저 설정을 확인해주세요.',
+        'error',
+      );
     }
   };
 
