@@ -1,12 +1,12 @@
 import { useRef } from 'react';
-import { useAlert } from '../contexts/AlertContext';
+import { useAlertStore } from '../store/useAlertStore';
 
 export const useRecorder = (onAudioData: (data: string) => void) => {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const intervalRef = useRef<number | null>(null);
 
-  const { addAlert } = useAlert();
+  const addAlert = useAlertStore((state) => state.addAlert);
 
   const initMediaRecorder = (stream: MediaStream) => {
     const options = { mimeType: 'audio/webm;codecs=opus' };
