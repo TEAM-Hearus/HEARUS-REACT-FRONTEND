@@ -66,7 +66,11 @@ const Test = () => {
 
   return (
     <div className={styles.container}>
-      <TestHeader handleSubmit={handleSubmit} showResults={showResults} />
+      <TestHeader
+        handleSubmit={handleSubmit}
+        showResults={showResults}
+        isFetching={isFetching}
+      />
       <article className={styles.problemsContainer}>
         {isFetching && (
           <img className={styles.loading} src={Loading} alt="문제 생성중..." />
