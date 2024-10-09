@@ -29,7 +29,7 @@ export const useRecorder = (onAudioData: (data: string) => void) => {
       }
     };
 
-    mediaRecorderRef.current.start(3000);
+    mediaRecorderRef.current.start();
   };
 
   const startRecording = async () => {
@@ -43,7 +43,7 @@ export const useRecorder = (onAudioData: (data: string) => void) => {
           mediaRecorderRef.current.stop();
         }
         initMediaRecorder(stream);
-      }, 5000);
+      }, 3000);
     } catch (error) {
       console.error('Error accessing the microphone', error);
     }
