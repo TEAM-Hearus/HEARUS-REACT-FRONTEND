@@ -10,6 +10,7 @@ import useTestModalStore from '../../store/useTestModalStore';
 import useTestSettingsStore from '../../store/useTestSettingsStore';
 import { generateProblem } from '../../apis/test';
 import { useUnauthorizedRedirect } from '../../hooks/useUnauthorizedRedirect';
+import useServerErrorToast from '../../hooks/useServerErrorToast';
 import styles from './Test.module.scss';
 
 const Test = () => {
@@ -30,13 +31,14 @@ const Test = () => {
     problem_types: questionTypes.join(','),
   };
 
-  const { data, isFetching } = useQuery({
+  const { data, isFetching, isError } = useQuery({
     queryKey: ['problem', lectureId],
     queryFn: () => generateProblem(inputData),
     retry: false,
   });
 
   useUnauthorizedRedirect(data);
+  useServerErrorToast(isError);
 
   const handleAnswerChange = (index: number, answer: string | number) => {
     const newAnswers = [...userAnswers];

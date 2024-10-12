@@ -6,18 +6,20 @@ import useTestSettingsStore from '../../../store/useTestSettingsStore';
 import { useAlertStore } from '../../../store/useAlertStore';
 import { getAllScripts } from '../../../apis/script';
 import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
+import useServerErrorToast from '../../../hooks/useServerErrorToast';
 import styles from './TestMake.module.scss';
 
 const TestMake = () => {
   const navigate = useNavigate();
   const addAlert = useAlertStore((state) => state.addAlert);
 
-  const { data } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ['allScripts'],
     queryFn: () => getAllScripts(),
   });
 
   useUnauthorizedRedirect(data);
+  useServerErrorToast(isError);
 
   const {
     lectureId,

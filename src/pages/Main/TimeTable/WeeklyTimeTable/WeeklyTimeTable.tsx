@@ -4,17 +4,19 @@ import { daysOfWeek, TIMELIST } from '../../../../constants/schedule';
 import { getSchedule } from '../../../../apis/schedule';
 import { useUserInfoStore } from '../../../../store/useUserInfoStore';
 import { useUnauthorizedRedirect } from '../../../../hooks/useUnauthorizedRedirect';
+import useServerErrorToast from '../../../../hooks/useServerErrorToast';
 import styles from './WeeklyTimeTable.module.scss';
 
 const WeeklyTimeTable = () => {
   const { userInfo } = useUserInfoStore();
 
-  const { data } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ['schedule', userInfo.userName],
     queryFn: () => getSchedule(userInfo.userName),
   });
 
   useUnauthorizedRedirect(data);
+  useServerErrorToast(isError);
 
   return (
     <div className={styles.table}>

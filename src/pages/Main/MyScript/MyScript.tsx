@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import ScriptDetailModal from '../../../components/templates/modals/ScriptDetailModal/ScriptDetailModal';
@@ -6,12 +6,13 @@ import ScriptItem from '../../../components/molecules/ScriptItem/ScriptItem';
 import StartingButton from '../../../components/atoms/buttons/StartBtn/StartBtn';
 import { getAllScripts } from '../../../apis/script';
 import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
+import { useAlertStore } from '../../../store/useAlertStore';
 import styles from './MyScript.module.scss';
 
 const MyScript = () => {
   const [selectedScriptId, setSelectedScriptId] = useState<string | null>(null);
-
-  const { data } = useQuery({
+  const { addAlert } = useAlertStore();
+  const { data, isError } = useQuery({
     queryKey: ['allScripts'],
     queryFn: () => getAllScripts(),
   });
@@ -25,6 +26,10 @@ const MyScript = () => {
   const handleCloseModal = () => {
     setSelectedScriptId(null);
   };
+
+  useEffect(() => {
+    if (isError) addAlert('데이터를 불러오는 중 문제가 발생했습니다.', 'error');
+  }, [isError]);
 
   return (
     <div className={styles.wholeContainer}>

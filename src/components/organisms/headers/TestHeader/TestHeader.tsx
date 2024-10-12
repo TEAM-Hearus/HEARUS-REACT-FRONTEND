@@ -40,12 +40,12 @@ const TestHeader = ({ handleSubmit, showResults, isFetching }: IProps) => {
   }, []);
 
   useEffect(() => {
-    startTimer();
+    if (!isFetching) startTimer();
     return () => {
       stopTimer();
       closeModal();
     };
-  }, []);
+  }, [isFetching]);
 
   useEffect(() => {
     if (showResults) stopTimer();

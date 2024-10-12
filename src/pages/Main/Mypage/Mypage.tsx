@@ -5,6 +5,7 @@ import View from './ProfileView/ProfileView';
 import { useAlertStore } from '../../../store/useAlertStore';
 import { updateInfo, IUserUpdateInfo, getUserInfo } from '../../../apis/user';
 import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
+import useServerErrorToast from '../../../hooks/useServerErrorToast';
 import styles from './Mypage.module.scss';
 
 interface UserInfo {
@@ -19,12 +20,13 @@ interface UserInfo {
 }
 
 const MyPage = () => {
-  const { data } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ['user'],
     queryFn: getUserInfo,
   });
 
   useUnauthorizedRedirect(data);
+  useServerErrorToast(isError);
 
   const [info, setInfo] = useState<UserInfo>({
     userName: '',

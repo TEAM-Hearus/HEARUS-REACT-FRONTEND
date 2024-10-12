@@ -6,16 +6,18 @@ import useRecordModalStore, {
 import { getSchedule } from '../../../apis/schedule';
 import { useUserInfoStore } from '../../../store/useUserInfoStore';
 import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
+import useServerErrorToast from '../../../hooks/useServerErrorToast';
 import styles from './RecordTagDropDown.module.scss';
 
 const RecordTagDropDown = () => {
   const { userInfo } = useUserInfoStore();
-  const { data } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ['schedule', userInfo?.userName],
     queryFn: () => getSchedule(userInfo?.userName),
   });
 
   useUnauthorizedRedirect(data);
+  useServerErrorToast(isError);
 
   const [isTagBtnClicked, setIsTagBtnClicked] = useState(false);
 
