@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import RecordModal from '../../../templates/modals/RecordModal/RecordModal';
 import RecordTagDropDown from '../../../molecules/RecordTagDropDown/RecordTagDropDown';
 import useRecordModalStore from '../../../../store/useRecordModalStore';
+import { useAlertStore } from '../../../../store/useAlertStore';
 import Back from '../../../../assets/images/arrow/back.svg?react';
 import { formatTimer } from '../../../../utils/dateFormatters';
 import styles from './Recordheader.module.scss';
@@ -20,6 +21,8 @@ const RecordHeader = ({
   const timerIntervalRef = useRef<number | null>(null);
 
   const { isModalOpen, openModal, recordData } = useRecordModalStore();
+  const showConfirm = useAlertStore((state) => state.showConfirm);
+  const navigate = useNavigate();
 
   const { title } = recordData;
 
@@ -43,6 +46,17 @@ const RecordHeader = ({
     stopRecordingAndDisconnectSocket();
   };
 
+  const backClick = async () => {
+    const confirmed = await showConfirm(
+      '자막 생성 중단',
+      '지금 나가면 스크립트가 저장되지 않습니다.\n 녹음을 중지 하시겠습니까?',
+      '확인',
+    );
+    if (confirmed) {
+      navigate('/home');
+    }
+  };
+
   useEffect(() => {
     startTimer();
     return () => stopTimer();
@@ -51,9 +65,9 @@ const RecordHeader = ({
   return (
     <header className={styles.container}>
       <div className={styles.linkContainer}>
-        <Link to="/home">
+        <button className={styles.backBtn} onClick={backClick}>
           <Back />
-        </Link>
+        </button>
       </div>
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>{title}</h1>

@@ -5,6 +5,7 @@ import View from './ProfileView/ProfileView';
 import { useAlertStore } from '../../../store/useAlertStore';
 import { updateInfo, IUserUpdateInfo, getUserInfo } from '../../../apis/user';
 import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
+import useServerErrorToast from '../../../hooks/useServerErrorToast';
 import styles from './Mypage.module.scss';
 
 interface UserInfo {
@@ -19,12 +20,13 @@ interface UserInfo {
 }
 
 const MyPage = () => {
-  const { data } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ['user'],
     queryFn: getUserInfo,
   });
 
   useUnauthorizedRedirect(data);
+  useServerErrorToast(isError);
 
   const [info, setInfo] = useState<UserInfo>({
     userName: '',
@@ -85,11 +87,14 @@ const MyPage = () => {
       console.error(error);
     },
   });
-
   const handleSaveClick = () => {
+    if (info.userPassword.length < 8) {
+      addAlert('비밀번호는 최소 8자 이상이어야 합니다.', 'error');
+      return;
+    }
     if (
       info.userOAuthType === '' &&
-      info.userPassword.trim() === '' &&
+      info.userPassword.trim() !== '' &&
       info.userPassword !== info.userPasswordConfirm
     ) {
       addAlert('비밀번호와 비밀번호 확인이 일치하지 않습니다.', 'error');
@@ -108,6 +113,17 @@ const MyPage = () => {
       delete updateData.userPassword;
     }
     updateMutation.mutate(updateData);
+
+    setInfo({
+      userName: data?.object.userName || '',
+      userEmail: data?.object.userEmail || '',
+      userPassword: '',
+      userSchool: data?.object.userSchool || '',
+      userGrade: data?.object.userGrade || '',
+      userMajor: data?.object.userMajor || '',
+      userOAuthType: data?.object.userOAuthType || '',
+      userPasswordConfirm: '',
+    });
   };
 
   return (

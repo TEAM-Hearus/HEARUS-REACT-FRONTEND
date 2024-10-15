@@ -8,9 +8,10 @@ import {
 import { useAlertStore } from '../../../store/useAlertStore';
 import ScriptIcon from '../../../assets/images/nav/my-script-inactive.svg?react';
 import TrashCan from '../../../assets/images/orange-trash-can.svg?react';
-import styles from './ScriptToolTip.module.scss';
 import { useUserInfoStore } from '../../../store/useUserInfoStore';
 import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
+import useServerErrorToast from '../../../hooks/useServerErrorToast';
+import styles from './ScriptToolTip.module.scss';
 
 interface IProps {
   id: number;
@@ -24,12 +25,13 @@ const ScriptToolTip = ({ id, scheduleName }: IProps) => {
   const showConfirm = useAlertStore((state) => state.showConfirm);
   const { userInfo } = useUserInfoStore();
 
-  const { data } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ['tooltip', id],
     queryFn: () => getLectureByScheduleElement(id),
   });
 
   useUnauthorizedRedirect(data);
+  useServerErrorToast(isError);
 
   const deleteMutation = useMutation({
     mutationFn: (id: number) => deleteScheduleElement(id, userInfo.userName),

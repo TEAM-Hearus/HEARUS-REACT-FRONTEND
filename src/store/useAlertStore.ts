@@ -5,6 +5,7 @@ interface Alert {
   message: string;
   type: 'success' | 'error';
 }
+
 interface AlertStore {
   alerts: Alert[];
   confirmAlert: {
@@ -13,6 +14,8 @@ interface AlertStore {
     buttonText: string;
     resolve: (value: boolean) => void;
   } | null;
+  closingAlertIds: number[];
+  startClosingAnimation: (id: number) => void;
   addAlert: (message: string, type: 'success' | 'error') => void;
   removeAlert: (id: number) => void;
   showConfirm: (
@@ -26,6 +29,8 @@ interface AlertStore {
 export const useAlertStore = create<AlertStore>((set, get) => ({
   alerts: [],
   confirmAlert: null,
+  closingAlertIds: [],
+
   addAlert: (message, type) => {
     const id = Date.now();
     set((state) => ({
@@ -33,12 +38,23 @@ export const useAlertStore = create<AlertStore>((set, get) => ({
     }));
 
     setTimeout(() => {
-      get().removeAlert(id);
-    }, 4000);
+      get().startClosingAnimation(id);
+      setTimeout(() => {
+        get().removeAlert(id);
+      }, 300);
+    }, 3000);
+  },
+  startClosingAnimation: (id: number) => {
+    set((state) => ({
+      closingAlertIds: [...state.closingAlertIds, id],
+    }));
   },
   removeAlert: (id) => {
     set((state) => ({
       alerts: state.alerts.filter((alert) => alert.id !== id),
+      closingAlertIds: state.closingAlertIds.filter(
+        (alertId) => alertId !== id,
+      ),
     }));
   },
   showConfirm: (title, message, buttonText) => {

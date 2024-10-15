@@ -18,6 +18,11 @@
 .leftContainer {
   width: 200px;
 }
+.backBtn {
+  cursor: pointer;
+  border: 0;
+  background-color: unset;
+}
 .title {
   @include Medium_Body_18;
   color: $dark-font_5A;
@@ -44,4 +49,8 @@
 .timer {
   @include Medium_Sub_14;
   color: $dark-font_5A;
+}
+.timeLimit {
+  @include Medium_Sub_14;
+  color: $brand-point;
 }

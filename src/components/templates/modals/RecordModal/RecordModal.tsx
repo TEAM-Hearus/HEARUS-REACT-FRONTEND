@@ -13,6 +13,7 @@ import { addLecture, restructureScript } from '../../../../apis/record';
 import { getCurrentKoreanTimeString } from '../../../../utils/dateFormatters';
 import { useAlertStore } from '../../../../store/useAlertStore';
 import styles from './RecordModal.module.scss';
+import useServerErrorToast from '../../../../hooks/useServerErrorToast';
 
 interface IProps {
   handleQuit: () => void; // 타이머, 녹음, 소켓 연결 종료
@@ -29,7 +30,7 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
   const { userInfo } = useUserInfoStore();
   const addAlert = useAlertStore((state) => state.addAlert);
 
-  const { data } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ['schedule', userInfo.userName],
     queryFn: () => getSchedule(userInfo.userName),
   });
@@ -65,6 +66,7 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
 
   useUnauthorizedRedirect(data);
   useUnauthorizedRedirect(mutation.data);
+  useServerErrorToast(isError);
 
   const TAGS = useMemo(() => {
     if (!data) return [];

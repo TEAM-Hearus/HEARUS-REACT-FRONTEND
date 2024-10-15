@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import TestHeader from '../../components/organisms/headers/TestHeader/TestHeader';
@@ -10,6 +10,7 @@ import useTestModalStore from '../../store/useTestModalStore';
 import useTestSettingsStore from '../../store/useTestSettingsStore';
 import { generateProblem } from '../../apis/test';
 import { useUnauthorizedRedirect } from '../../hooks/useUnauthorizedRedirect';
+import useServerErrorToast from '../../hooks/useServerErrorToast';
 import styles from './Test.module.scss';
 
 const Test = () => {
@@ -18,6 +19,7 @@ const Test = () => {
 
   const [userAnswers, setUserAnswers] = useState<(string | number)[]>([]);
   const [showResults, setShowResults] = useState(false);
+  const alertShownRef = useRef(false);
 
   const { updateTestData, clearTestData } = useTestModalStore();
   const { lectureId, scheduleElementId, questionCount, questionTypes } =
@@ -30,13 +32,14 @@ const Test = () => {
     problem_types: questionTypes.join(','),
   };
 
-  const { data, isFetching } = useQuery({
+  const { data, isFetching, isError } = useQuery({
     queryKey: ['problem', lectureId],
     queryFn: () => generateProblem(inputData),
     retry: false,
   });
 
   useUnauthorizedRedirect(data);
+  useServerErrorToast(isError);
 
   const handleAnswerChange = (index: number, answer: string | number) => {
     const newAnswers = [...userAnswers];
@@ -51,8 +54,9 @@ const Test = () => {
   };
 
   useEffect(() => {
-    if (data != null && data.success === false) {
+    if (data != null && data.success === false && !alertShownRef.current) {
       addAlert('문제 생성을 실패했습니다. 다시 시도해주세요.', 'error');
+      alertShownRef.current = true;
       navigate('/home/test-make');
     }
     if (data != null && data.object != null) {

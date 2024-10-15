@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getUserInfo } from '../apis/user';
 import { useEffect, useState } from 'react';
 import SupplementaryInfoModal from '../components/templates/modals/SupplementaryInfoModal/SupplementaryInfoModal';
+import useServerErrorToast from '../hooks/useServerErrorToast';
 
 interface IProps {
   element: React.ReactElement;
@@ -22,10 +23,12 @@ const PrivateRoute = ({ element }: IProps) => {
   const { setUserInfo } = useUserInfoStore();
   const [showModal, setShowModal] = useState(false);
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['user'],
     queryFn: getUserInfo,
   });
+
+  useServerErrorToast(isError);
 
   const isUserInfoComplete = (userInfo: UserInfo | null) => {
     if (!userInfo) return false;
