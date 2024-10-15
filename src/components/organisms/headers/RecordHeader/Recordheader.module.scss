@@ -18,6 +18,11 @@
 .linkContainer {
   width: 200px;
 }
+.backBtn {
+  cursor: pointer;
+  border: 0;
+  background-color: unset;
+}
 .titleContainer {
   display: flex;
   justify-content: center;
