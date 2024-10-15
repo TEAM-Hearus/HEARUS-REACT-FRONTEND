@@ -6,23 +6,26 @@ import useTestSettingsStore from '../../../store/useTestSettingsStore';
 import { useAlertStore } from '../../../store/useAlertStore';
 import { getAllScripts } from '../../../apis/script';
 import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
+import useServerErrorToast from '../../../hooks/useServerErrorToast';
 import styles from './TestMake.module.scss';
 
 const TestMake = () => {
   const navigate = useNavigate();
   const addAlert = useAlertStore((state) => state.addAlert);
 
-  const { data } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ['allScripts'],
     queryFn: () => getAllScripts(),
   });
 
   useUnauthorizedRedirect(data);
+  useServerErrorToast(isError);
 
   const {
     lectureId,
     questionCount,
     questionTypes,
+    timeLimit,
     setLectureId,
     setScheduleElementId,
     setTestName,
@@ -39,7 +42,12 @@ const TestMake = () => {
   };
 
   const handleTestStartBtnClick = () => {
-    if (lectureId.length > 0 && questionCount > 0 && questionTypes.length > 0) {
+    if (
+      lectureId.length > 0 &&
+      questionCount > 0 &&
+      questionTypes.length > 0 &&
+      (timeLimit === null || timeLimit > 0)
+    ) {
       navigate('/test');
     } else {
       addAlert('스크립트와 문제 유형, 문제 개수를 모두 선택해주세요.', 'error');

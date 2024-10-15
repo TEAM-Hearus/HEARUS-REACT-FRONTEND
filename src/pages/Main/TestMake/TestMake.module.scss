@@ -33,7 +33,6 @@
   display: flex;
   align-items: flex-start;
   gap: 20px;
-  flex-grow: 1;
 }
 .scriptsContainer {
   display: flex;
@@ -76,7 +75,7 @@
   align-items: center;
   gap: 10px;
   flex-grow: 1;
-  height: 100%;
+  height: 85dvh;
   background-color: $light-bg_F2;
   border-radius: 8px;
 }

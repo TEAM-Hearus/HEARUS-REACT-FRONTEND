@@ -6,6 +6,7 @@ import X from '../../../../assets/images/cancel.svg?react';
 import { getScriptDetail } from '../../../../apis/script';
 import { useUnauthorizedRedirect } from '../../../../hooks/useUnauthorizedRedirect';
 import styles from './ScriptDetailModal.module.scss';
+import useServerErrorToast from '../../../../hooks/useServerErrorToast';
 
 interface IProps {
   scriptId: string;
@@ -13,12 +14,13 @@ interface IProps {
 }
 
 const ScriptDetailModal = ({ scriptId, closeModal }: IProps) => {
-  const { data } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ['scriptDetail', scriptId],
     queryFn: () => getScriptDetail(scriptId),
   });
 
   useUnauthorizedRedirect(data);
+  useServerErrorToast(isError);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';

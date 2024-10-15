@@ -69,7 +69,7 @@ const TestOptionSelector = () => {
             <input
               className={styles.numInput}
               type="number"
-              min="0"
+              min="1"
               value={timeLimit}
               onChange={handleTimeLimitValueChange}
             />
