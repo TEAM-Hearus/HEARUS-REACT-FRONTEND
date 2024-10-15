@@ -3,11 +3,11 @@ import { useAlertStore } from '../../../store/useAlertStore';
 import styles from './GlobalAlert.module.scss';
 
 const AlertComponent = () => {
-  const { alerts, removeAlert } = useAlertStore();
-  const [closingAlertIds, setClosingAlertIds] = useState<number[]>([]);
+  const { alerts, removeAlert, closingAlertIds, startClosingAnimation } =
+    useAlertStore();
 
   const handleClose = (id: number) => {
-    setClosingAlertIds((prev) => [...prev, id]);
+    startClosingAnimation(id);
 
     setTimeout(() => {
       removeAlert(id);
