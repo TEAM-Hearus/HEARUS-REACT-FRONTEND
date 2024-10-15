@@ -11,6 +11,7 @@
   border-radius: 8px;
   @include Medium_Body_16;
   color: $light-gray_81;
+  cursor: pointer;
   &.active {
     color: $dark-orange_E5;
     border: 1px solid $dark-orange_E5;
