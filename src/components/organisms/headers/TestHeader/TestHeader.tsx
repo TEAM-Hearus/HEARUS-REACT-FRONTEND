@@ -52,8 +52,8 @@ const TestHeader = ({ handleSubmit, showResults, isFetching }: IProps) => {
   const backClick = async () => {
     if (!showResults) {
       const confirmed = await showConfirm(
-        '테스트 취소',
-        '지금 나가면 문제를 다시 불러올 수 없습니다. \n 테스트를 취소하시겠습니까?',
+        '테스트 중단',
+        '지금 나가면 문제를 다시 불러올 수 없습니다. \n 테스트를 중단하시겠습니까?',
         '확인',
       );
       if (confirmed) {
