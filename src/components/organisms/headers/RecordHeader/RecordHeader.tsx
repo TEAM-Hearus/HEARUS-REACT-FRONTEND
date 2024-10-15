@@ -48,8 +48,8 @@ const RecordHeader = ({
 
   const backClick = async () => {
     const confirmed = await showConfirm(
-      '녹음 취소',
-      '지금 나가면 스크립트가 저장되지 않습니다.\n 녹음을 취소하시겠습니까?',
+      '자막 생성 중단',
+      '지금 나가면 스크립트가 저장되지 않습니다.\n 녹음을 중지 하시겠습니까?',
       '확인',
     );
     if (confirmed) {
