@@ -111,6 +111,17 @@ const MyPage = () => {
       delete updateData.userPassword;
     }
     updateMutation.mutate(updateData);
+
+    setInfo({
+      userName: data?.object.userName || '',
+      userEmail: data?.object.userEmail || '',
+      userPassword: '',
+      userSchool: data?.object.userSchool || '',
+      userGrade: data?.object.userGrade || '',
+      userMajor: data?.object.userMajor || '',
+      userOAuthType: data?.object.userOAuthType || '',
+      userPasswordConfirm: '',
+    });
   };
 
   return (

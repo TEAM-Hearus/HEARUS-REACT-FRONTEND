@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useAlertStore } from '../../../store/useAlertStore';
 import styles from './GlobalAlert.module.scss';
 
