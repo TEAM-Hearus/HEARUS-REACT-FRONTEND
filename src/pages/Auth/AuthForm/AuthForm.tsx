@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { API_URL } from '../../../apis';
 import { useAlertStore } from '../../../store/useAlertStore';
-import useAuthStore from '../../../store/useAuthStore';
 import useValidation from '../../../components/atoms/useValidation/useValidation';
 import InputField from '../../../components/atoms/inputs/AuthInput/AuthInputField';
 import AlertComponent from '../../../components/molecules/GlobalAlert/GlobalAlert';
@@ -31,16 +30,10 @@ const AuthForm = ({
   authGoLinkMessage,
 }: AuthFormProps) => {
   const navigate = useNavigate();
-  const {
-    name,
-    email,
-    password,
-    passwordConfirm,
-    setName,
-    setEmail,
-    setPassword,
-    setPasswordConfirm,
-  } = useAuthStore();
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [passwordConfirm, setPasswordConfirm] = useState<string>('');
   const [isShowPasswordClick, setIsShowPasswordClick] = useState(false);
   const [isShowPasswordConfirmClick, setIsShowPasswordConfirmClick] =
     useState(false);
@@ -108,12 +101,19 @@ const AuthForm = ({
   const loginMutation = useMutation({
     mutationFn: emailLogin,
     onSuccess: (data) => {
-      localStorage.setItem('token', data.accessToken);
-      navigate('/home');
+      if (data) {
+        localStorage.setItem('token', data.accessToken);
+        navigate('/home');
+      } else {
+        addAlert(
+          '로그인에 실패했습니다.\n 이메일과 비밀번호를 확인해주세요.',
+          'error',
+        );
+      }
     },
     onError: () => {
       addAlert(
-        '로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.',
+        '로그인에 실패했습니다.\n 이메일과 비밀번호를 확인해주세요.',
         'error',
       );
     },
@@ -121,21 +121,39 @@ const AuthForm = ({
 
   const signupMutation = useMutation({
     mutationFn: emailSignUp,
-    onSuccess: async () => {
-      const confirmed = await showConfirm(
-        '회원가입',
-        '회원가입에 성공했습니다!\n 로그인 페이지로 이동하시겠습니까?',
-        '확인',
-      );
-      if (confirmed) {
-        navigate('/login');
-      } else {
-        navigate('/');
+    onSuccess: async (data) => {
+      const state = data.status;
+      switch (state) {
+        case 'CREATED': {
+          const confirmed = await showConfirm(
+            '회원가입',
+            '회원가입에 성공했습니다!\n 로그인 페이지로 이동하시겠습니까?',
+            '확인',
+          );
+          if (confirmed) {
+            navigate('/login');
+          } else {
+            navigate('/');
+          }
+          break;
+        }
+        case 'CONFLICT':
+          addAlert(
+            '이미 가입된 이메일입니다.\n 다른 이메일을 사용해 주세요.',
+            'error',
+          );
+          break;
+        case 'BAD_REQUEST':
+          addAlert('비밀번호가 너무 짧습니다.', 'error');
+          break;
+        default:
+          addAlert('회원가입에 실패했습니다. 다시 시도해주세요.', 'error');
+          break;
       }
     },
     onError: (error) => {
       console.error(errorMessage, error);
-      addAlert('회원가입에 실패했습니다. 다시 시도해주세요.', 'error');
+      addAlert('회원가입 중 오류가 발생했습니다. 다시 시도해주세요.', 'error');
     },
   });
 
