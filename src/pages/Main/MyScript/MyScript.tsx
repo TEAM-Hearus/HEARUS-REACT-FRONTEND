@@ -8,6 +8,7 @@ import { getAllScripts } from '../../../apis/script';
 import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
 import { useAlertStore } from '../../../store/useAlertStore';
 import styles from './MyScript.module.scss';
+import useServerErrorToast from '../../../hooks/useServerErrorToast';
 
 const MyScript = () => {
   const [selectedScriptId, setSelectedScriptId] = useState<string | null>(null);
@@ -18,6 +19,7 @@ const MyScript = () => {
   });
 
   useUnauthorizedRedirect(data);
+  useServerErrorToast(isError);
 
   const handleScriptClick = (id: string) => {
     setSelectedScriptId(id);
