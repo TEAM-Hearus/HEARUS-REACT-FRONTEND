@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import TestModal from '../../../templates/modals/TestModal/TestModal';
 import useTestModalStore from '../../../../store/useTestModalStore';
+import { useAlertStore } from '../../../../store/useAlertStore';
 import Back from '../../../../assets/images/arrow/back.svg?react';
 import { formatTimer } from '../../../../utils/dateFormatters';
 import useTestSettingsStore from '../../../../store/useTestSettingsStore';
@@ -20,6 +21,8 @@ const TestHeader = ({ handleSubmit, showResults, isFetching }: IProps) => {
   const { testName, timeLimit } = useTestSettingsStore();
   const { isModalOpen, openModal, closeModal, clearTestData } =
     useTestModalStore();
+  const showConfirm = useAlertStore((state) => state.showConfirm);
+  const navigate = useNavigate();
 
   const startTimer = useCallback(() => {
     if (timerIntervalRef.current !== null) return;
@@ -36,8 +39,24 @@ const TestHeader = ({ handleSubmit, showResults, isFetching }: IProps) => {
   }, []);
 
   const handleClickQuitBtn = useCallback(() => {
-    if (!showResults && !isFetching) openModal();
-  }, []);
+    if (!showResults && !isFetching) {
+      openModal();
+    }
+    if (showResults) {
+      navigate('/home/test-make');
+    }
+  }, [showResults, isFetching]);
+
+  const backClick = async () => {
+    const confirmed = await showConfirm(
+      '테스트 취소',
+      '테스트를 취소하시겠습니까?',
+      '확인',
+    );
+    if (confirmed) {
+      navigate('/home/test-make');
+    }
+  };
 
   useEffect(() => {
     if (!isFetching) startTimer();
@@ -64,9 +83,9 @@ const TestHeader = ({ handleSubmit, showResults, isFetching }: IProps) => {
   return (
     <header className={styles.container}>
       <div className={styles.leftContainer}>
-        <Link to="/home/test-make">
+        <button className={styles.backBtn} onClick={backClick}>
           <Back />
-        </Link>
+        </button>
       </div>
       <h1 className={styles.title}>{testName}</h1>
       <div className={styles.rightContainer}>
