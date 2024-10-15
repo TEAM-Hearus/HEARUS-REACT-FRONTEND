@@ -25,6 +25,7 @@ const TestMake = () => {
     lectureId,
     questionCount,
     questionTypes,
+    timeLimit,
     setLectureId,
     setScheduleElementId,
     setTestName,
@@ -41,7 +42,12 @@ const TestMake = () => {
   };
 
   const handleTestStartBtnClick = () => {
-    if (lectureId.length > 0 && questionCount > 0 && questionTypes.length > 0) {
+    if (
+      lectureId.length > 0 &&
+      questionCount > 0 &&
+      questionTypes.length > 0 &&
+      (timeLimit === null || timeLimit > 0)
+    ) {
       navigate('/test');
     } else {
       addAlert('스크립트와 문제 유형, 문제 개수를 모두 선택해주세요.', 'error');

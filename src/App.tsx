@@ -21,7 +21,7 @@ function App() {
       <Router />
       <AlertComponent />
       <ConfirmAlert />
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/*<ReactQueryDevtools initialIsOpen={false} />*/}
     </QueryClientProvider>
   );
 }

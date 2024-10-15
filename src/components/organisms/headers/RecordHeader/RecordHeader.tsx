@@ -49,7 +49,7 @@ const RecordHeader = ({
   const backClick = async () => {
     const confirmed = await showConfirm(
       '녹음 취소',
-      '종료를 눌러 저장하지 않으면 녹음이 저장되지 않습니다.\n 녹음을 취소하시겠습니까?',
+      '종료를 눌러 저장하지 않으면 스크립트가 저장되지 않습니다.\n 녹음을 취소하시겠습니까?',
       '확인',
     );
     if (confirmed) {
