@@ -4,8 +4,8 @@ import TestModal from '../../../templates/modals/TestModal/TestModal';
 import useTestModalStore from '../../../../store/useTestModalStore';
 import Back from '../../../../assets/images/arrow/back.svg?react';
 import { formatTimer } from '../../../../utils/dateFormatters';
-import styles from './TestHeader.module.scss';
 import useTestSettingsStore from '../../../../store/useTestSettingsStore';
+import styles from './TestHeader.module.scss';
 
 interface IProps {
   handleSubmit: () => void;
