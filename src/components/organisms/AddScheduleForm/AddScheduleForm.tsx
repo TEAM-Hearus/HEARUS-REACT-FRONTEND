@@ -103,12 +103,18 @@ const AddScheduleForm = ({ onClose }: IProps) => {
   const postMutation = useMutation({
     mutationFn: (data: IScheduleElementDTO) =>
       addScheduleElement(data, userInfo.userName),
-    onSuccess: () => {
-      addAlert('강의 추가에 성공했습니다.', 'success');
-      onClose();
-      queryClient.invalidateQueries({
-        queryKey: ['schedule', userInfo.userName],
-      });
+    onSuccess: (res) => {
+      if (res.success) {
+        addAlert('강의 추가에 성공했습니다.', 'success');
+        onClose();
+        queryClient.invalidateQueries({
+          queryKey: ['schedule', userInfo.userName],
+        });
+      } else {
+        if (res.msg === 'Duplicate ScheduleElement Name') {
+          addAlert('같은 이름의 강의가 존재합니다.', 'error');
+        }
+      }
     },
     onError: () => {
       addAlert('강의 추가를 실패했습니다.', 'error');
