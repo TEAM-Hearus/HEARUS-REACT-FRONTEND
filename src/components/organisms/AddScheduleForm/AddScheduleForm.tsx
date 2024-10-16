@@ -103,12 +103,18 @@ const AddScheduleForm = ({ onClose }: IProps) => {
   const postMutation = useMutation({
     mutationFn: (data: IScheduleElementDTO) =>
       addScheduleElement(data, userInfo.userName),
-    onSuccess: () => {
-      addAlert('강의 추가에 성공했습니다.', 'success');
-      onClose();
-      queryClient.invalidateQueries({
-        queryKey: ['schedule', userInfo.userName],
-      });
+    onSuccess: (res) => {
+      if (res.success) {
+        addAlert('강의 추가에 성공했습니다.', 'success');
+        onClose();
+        queryClient.invalidateQueries({
+          queryKey: ['schedule', userInfo.userName],
+        });
+      } else {
+        if (res.msg === 'Duplicate ScheduleElement Name') {
+          addAlert('같은 이름의 강의가 존재합니다.', 'error');
+        }
+      }
     },
     onError: () => {
       addAlert('강의 추가를 실패했습니다.', 'error');
@@ -163,6 +169,12 @@ const AddScheduleForm = ({ onClose }: IProps) => {
           value={lectureInfo.title}
           onChange={handleChange}
         />
+        <div className={styles.caption}>
+          <p>* 강의 제목은 중복될 수 없습니다.</p>
+          <p className={styles.bottomCaption}>
+            시간이 다른 강의는 '경제학원론-화'와 같이 입력해주세요.
+          </p>
+        </div>
       </div>
       <div className={styles.colorSelectBox}>
         {Object.keys(COLORS).map((bgColor) => (
