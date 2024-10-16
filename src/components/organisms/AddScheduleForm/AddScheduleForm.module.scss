@@ -145,3 +145,13 @@
   @include Regular_Sub_14;
   color: $brand-point;
 }
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  @include Regular_Sub_14;
+  color: $light-font_9E;
+}
+.bottomCaption {
+  padding-left: 10px;
+}

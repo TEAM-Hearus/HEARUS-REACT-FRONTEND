@@ -169,6 +169,12 @@ const AddScheduleForm = ({ onClose }: IProps) => {
           value={lectureInfo.title}
           onChange={handleChange}
         />
+        <div className={styles.caption}>
+          <p>* 강의 제목은 중복될 수 없습니다.</p>
+          <p className={styles.bottomCaption}>
+            시간이 다른 강의는 '경제학원론-화'와 같이 입력해주세요.
+          </p>
+        </div>
       </div>
       <div className={styles.colorSelectBox}>
         {Object.keys(COLORS).map((bgColor) => (
