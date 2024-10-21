@@ -22,6 +22,7 @@ Hearus는 대학교 교내 청각장애 학우 대필지원 도우미 활동에�
 아이디: hearus@naver.com
 비밀번호: hearus@naver.com
 ```
+### [기능명세서](https://github.com/TEAM-Hearus/HEARUS-REACT-FRONTEND/wiki/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EA%B8%B0%EB%8A%A5%EB%AA%85%EC%84%B8%EC%84%9C)
 ## 기술 스택
 | Language | Library | CSS | State Management | Data Fetching | Build | 배포 | CI/CD |
 |--|--|--|--|--|--|--|--|
