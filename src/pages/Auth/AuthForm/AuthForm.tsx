@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { API_URL } from '../../../apis';
 import { useAlertStore } from '../../../store/useAlertStore';
-import useValidation from '../../../components/atoms/useValidation/useValidation';
+import useValidation from '../../../hooks/useValidation';
 import InputField from '../../../components/atoms/inputs/AuthInput/AuthInputField';
 import AlertComponent from '../../../components/molecules/GlobalAlert/GlobalAlert';
 import Google from '../../../assets/images/logo/google.png';
