@@ -5,6 +5,7 @@ import TimeTable from './Main/TimeTable/TimeTable';
 import TestMake from './Main/TestMake/TestMake';
 import MyScript from './Main/MyScript/MyScript';
 import MyPage from './Main/Mypage/Mypage';
+import ProfileEdit from './Main/Mypage/ProfileEdit/ProfileEdit';
 import PrivateRoute from './PrivateRoute';
 import Record from './Record/Record';
 import Test from './Test/Test';
@@ -54,7 +55,13 @@ const router = createBrowserRouter([
       },
       {
         path: 'my-page',
-        element: <MyPage />,
+        children: [
+          {
+            path: '',
+            element: <MyPage />,
+          },
+          { path: 'edit', element: <ProfileEdit /> },
+        ],
       },
     ],
   },

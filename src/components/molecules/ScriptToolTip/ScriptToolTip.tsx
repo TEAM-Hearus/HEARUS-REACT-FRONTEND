@@ -8,7 +8,7 @@ import {
 import { useAlertStore } from '../../../store/useAlertStore';
 import ScriptIcon from '../../../assets/images/nav/my-script-inactive.svg?react';
 import TrashCan from '../../../assets/images/orange-trash-can.svg?react';
-import { useUserInfoStore } from '../../../store/useUserInfoStore';
+import { useNameStore } from '../../../store/useUserNameStore';
 import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
 import useServerErrorToast from '../../../hooks/useServerErrorToast';
 import styles from './ScriptToolTip.module.scss';
@@ -23,7 +23,7 @@ const ScriptToolTip = ({ id, scheduleName }: IProps) => {
   const queryClient = useQueryClient();
   const addAlert = useAlertStore((state) => state.addAlert);
   const showConfirm = useAlertStore((state) => state.showConfirm);
-  const { userInfo } = useUserInfoStore();
+  const { userName } = useNameStore();
 
   const { data, isError } = useQuery({
     queryKey: ['tooltip', id],
@@ -34,10 +34,10 @@ const ScriptToolTip = ({ id, scheduleName }: IProps) => {
   useServerErrorToast(isError);
 
   const deleteMutation = useMutation({
-    mutationFn: (id: number) => deleteScheduleElement(id, userInfo.userName),
+    mutationFn: (id: number) => deleteScheduleElement(id, userName.userName),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['schedule', userInfo.userName],
+        queryKey: ['schedule', userName.userName],
       });
       addAlert(`'${scheduleName}' 수업이 삭제되었습니다.`, 'success');
     },

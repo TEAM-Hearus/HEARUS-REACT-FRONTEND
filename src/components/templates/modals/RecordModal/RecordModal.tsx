@@ -7,7 +7,7 @@ import Up from '../../../../assets/images/arrow/up-arrow.svg?react';
 import Down from '../../../../assets/images/arrow/down-arrow.svg?react';
 import Loading from '../../../../assets/images/LoadingCircle.gif';
 import { getSchedule } from '../../../../apis/schedule';
-import { useUserInfoStore } from '../../../../store/useUserInfoStore';
+import { useNameStore } from '../../../../store/useUserNameStore';
 import { useUnauthorizedRedirect } from '../../../../hooks/useUnauthorizedRedirect';
 import { addLecture, restructureScript } from '../../../../apis/record';
 import { getCurrentKoreanTimeString } from '../../../../utils/dateFormatters';
@@ -27,12 +27,12 @@ const RecordModal = ({ handleQuit, recognitionResult }: IProps) => {
   const [isTagClicked, setIsTagClicked] = useState(false);
   const [isRestructuring, setIsRestructuring] = useState(false);
 
-  const { userInfo } = useUserInfoStore();
+  const { userName } = useNameStore();
   const addAlert = useAlertStore((state) => state.addAlert);
 
   const { data, isError } = useQuery({
-    queryKey: ['schedule', userInfo.userName],
-    queryFn: () => getSchedule(userInfo.userName),
+    queryKey: ['schedule', userName.userName],
+    queryFn: () => getSchedule(userName.userName),
   });
 
   const mutation = useMutation({
