@@ -10,18 +10,6 @@ Hearus는 대학교 교내 청각장애 학우 대필지원 도우미 활동에�
 ## MVP Model
 ![image](https://github.com/user-attachments/assets/6b86e0fc-93fa-4fc4-a77f-1750009f4488)
 
-## 서비스 링크
-<p align="center">
-  <a href="https://hearus.site/" target="_blank">
-    <img src="https://i.ibb.co/CWc1WmJ/logo.png" alt="HEARUS-logo" border="0" width="100"/>
-  </a>
-</p>
-
-### 테스트 아이디, 비밀번호
-```
-아이디: hearus@naver.com
-비밀번호: hearus@naver.com
-```
 ### [기능명세서](https://github.com/TEAM-Hearus/HEARUS-REACT-FRONTEND/wiki/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EA%B8%B0%EB%8A%A5%EB%AA%85%EC%84%B8%EC%84%9C)
 ## 기술 스택
 | Language | Library | CSS | State Management | Data Fetching | Build | 배포 | CI/CD |
@@ -29,10 +17,10 @@ Hearus는 대학교 교내 청각장애 학우 대필지원 도우미 활동에�
 | ![image](https://github.com/user-attachments/assets/e5450c28-4022-4e1e-9c15-d962c8d0fe47) | ![image](https://github.com/user-attachments/assets/95a1b711-18d4-4c17-adff-02045bb2445b) | ![image](https://github.com/user-attachments/assets/62fcad28-4446-4ae5-a9b2-dcbbd8588d4e) | ![image](https://github.com/user-attachments/assets/f4eb48fc-d54b-4ab5-9299-bc27c6ae93da) | ![image](https://github.com/user-attachments/assets/03506e89-883b-4da8-a334-e5cad795b420) | ![image](https://github.com/user-attachments/assets/026f6425-a384-48d0-a3cc-3447e4d9ded8) | ![image](https://github.com/user-attachments/assets/50caa2e1-3f05-4059-90ae-c957a529f6ad) | ![image](https://github.com/user-attachments/assets/ad4e87cf-cdea-43f2-bc2d-d5b73769b53f)|
 | TypeScript | React | Scss module | Zustand | Tanstack React Query | Vite | Firebase hosting | Github Actions |
 
-## 주요 기여자
-| FE | FE | Designer |
-|--|--|--|
-|[김나연](https://github.com/Nangniya) |[고은비](https://github.com/koeunbeee)|장연우|
+## 📂 API Document
+프로젝트의 API 명세는 아래 링크에서 확인하실 수 있습니다.
+</br>
+[HEARUS-REACT-FRONTEND/wiki](https://github.com/TEAM-Hearus/HEARUS-REACT-FRONTEND/wiki)
 
 ## 📄 라이선스
 이 프로젝트는 MIT 라이선스 하에 배포됩니다. 
