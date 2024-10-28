@@ -91,7 +91,7 @@ const MyPage = () => {
                 className={styles.gradeInput}
                 type="text"
                 name="userGrade"
-                value={info.userGrade}
+                value={info.userGrade === '0' ? '' : info.userGrade}
                 disabled
               />
             </label>

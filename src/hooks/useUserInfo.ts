@@ -12,7 +12,7 @@ export const useMypageInfo = () => {
     userEmail: data?.object.userEmail || '',
     userPassword: data?.object.userPassword || '',
     userSchool: data?.object.userSchool || '',
-    userGrade: data?.object.userGrade || '',
+    userGrade: data?.object.userGrade || '0',
     userMajor: data?.object.userMajor || '',
     userOAuthType: data?.object.userOAuthType || '',
     userPasswordConfirm: '',
