@@ -4,16 +4,16 @@ import useRecordModalStore, {
   ITagItem,
 } from '../../../store/useRecordModalStore';
 import { getSchedule } from '../../../apis/schedule';
-import { useUserInfoStore } from '../../../store/useUserInfoStore';
+import { useNameStore } from '../../../store/useUserNameStore';
 import { useUnauthorizedRedirect } from '../../../hooks/useUnauthorizedRedirect';
 import useServerErrorToast from '../../../hooks/useServerErrorToast';
 import styles from './RecordTagDropDown.module.scss';
 
 const RecordTagDropDown = () => {
-  const { userInfo } = useUserInfoStore();
+  const { userName } = useNameStore();
   const { data, isError } = useQuery({
-    queryKey: ['schedule', userInfo?.userName],
-    queryFn: () => getSchedule(userInfo?.userName),
+    queryKey: ['schedule', userName?.userName],
+    queryFn: () => getSchedule(userName?.userName),
   });
 
   useUnauthorizedRedirect(data);

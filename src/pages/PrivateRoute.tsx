@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { checkAuthentication } from '../utils/auth';
-import { useUserInfoStore } from '../store/useUserInfoStore';
+import { useNameStore } from '../store/useUserNameStore';
 import { useQuery } from '@tanstack/react-query';
 import { getUserInfo } from '../apis/user';
 import { useEffect, useState } from 'react';
@@ -20,7 +20,7 @@ interface UserInfo {
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 
 const PrivateRoute = ({ element }: IProps) => {
-  const { setUserInfo } = useUserInfoStore();
+  const { setUserName } = useNameStore();
   const [showModal, setShowModal] = useState(false);
 
   const { data, isLoading, isError } = useQuery({
@@ -38,7 +38,7 @@ const PrivateRoute = ({ element }: IProps) => {
 
   useEffect(() => {
     if (!isLoading && data != null) {
-      setUserInfo(data?.object);
+      setUserName(data?.object);
 
       if (!isUserInfoComplete(data.object)) {
         const lastRequestTime = localStorage.getItem('lastRequestTime');

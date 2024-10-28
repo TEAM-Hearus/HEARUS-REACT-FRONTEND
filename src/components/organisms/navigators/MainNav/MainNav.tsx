@@ -7,18 +7,18 @@ import TestMakeActive from '../../../../assets/images/nav/test-make-active.svg?r
 import TestMakeInactive from '../../../../assets/images/nav/test-make-inactive.svg?react';
 import MyPageActive from '../../../../assets/images/nav/my-page-active.svg?react';
 import MyPageInactive from '../../../../assets/images/nav/my-page-inactive.svg?react';
-import { useUserInfoStore } from '../../../../store/useUserInfoStore';
+import { useNameStore } from '../../../../store/useUserNameStore';
 import styles from './MainNav.module.scss';
 
 const MainNav = () => {
-  const { userInfo } = useUserInfoStore();
-  const firstLetter = userInfo?.userName.charAt(0);
+  const { userName } = useNameStore();
+  const firstLetter = userName?.userName.charAt(0);
 
   return (
     <nav className={styles.container}>
       <div className={styles.userProfile}>
         <div className={styles.profileImage}>{firstLetter}</div>
-        <p className={styles.userName}>{userInfo?.userName}</p>
+        <p className={styles.userName}>{userName?.userName}</p>
       </div>
       <section className={styles.linksContainer}>
         <TabLink

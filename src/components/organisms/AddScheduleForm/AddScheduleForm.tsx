@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useUserInfoStore } from '../../../store/useUserInfoStore';
+import { useNameStore } from '../../../store/useUserNameStore';
 import { useAlertStore } from '../../../store/useAlertStore';
 import Warning from '../../../assets/images/warning.svg?react';
 import {
@@ -40,7 +40,7 @@ const AddScheduleForm = ({ onClose }: IProps) => {
   const endMinuteRef = useRef<HTMLInputElement | null>(null);
   const addAlert = useAlertStore((state) => state.addAlert);
 
-  const { userInfo } = useUserInfoStore();
+  const { userName } = useNameStore();
 
   useEffect(() => {
     const isFormValid = getIsAddScheduleFormValid(lectureInfo);
@@ -102,13 +102,13 @@ const AddScheduleForm = ({ onClose }: IProps) => {
 
   const postMutation = useMutation({
     mutationFn: (data: IScheduleElementDTO) =>
-      addScheduleElement(data, userInfo.userName),
+      addScheduleElement(data, userName.userName),
     onSuccess: (res) => {
       if (res.success) {
         addAlert('강의 추가에 성공했습니다.', 'success');
         onClose();
         queryClient.invalidateQueries({
-          queryKey: ['schedule', userInfo.userName],
+          queryKey: ['schedule', userName.userName],
         });
       } else {
         if (res.msg === 'Duplicate ScheduleElement Name') {
@@ -125,7 +125,7 @@ const AddScheduleForm = ({ onClose }: IProps) => {
     if (isFormValid) {
       const existingSchedule = queryClient.getQueryData<IGetScheduleResponse>([
         'schedule',
-        userInfo.userName,
+        userName.userName,
       ]);
       const formattedData = transformToScheduleElementDTO(lectureInfo);
       if (existingSchedule?.object?.scheduleElements) {

@@ -1,6 +1,6 @@
 import { API_URL, getToken, IApiResponse } from '.';
 
-interface IGetUserInfoResponse extends IApiResponse<IUserInfo> {}
+export interface IGetUserInfoResponse extends IApiResponse<IUserInfo> {}
 interface IUpdateUserInfoResponse extends IApiResponse<IUserUpdateInfo> {}
 interface ISupplementaryUpdateInfoResponse
   extends IApiResponse<IUserSupplementaryUpdateInfo> {}
@@ -19,6 +19,10 @@ export interface IUserInfo {
   userSavedLectures: any; // 임시 타입
   userSchedule: any; // 임시 타입
   userUsePurpose: any; // 임시 타입
+}
+
+export interface IUserName {
+  userName: string;
 }
 
 export interface IUserUpdateInfo {
