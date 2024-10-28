@@ -2,13 +2,13 @@ import { useRef, useState } from 'react';
 import styles from './TimeTable.module.scss';
 import WeeklyTimeTable from './WeeklyTimeTable/WeeklyTimeTable';
 import AddScheduleForm from '../../../components/organisms/AddScheduleForm/AddScheduleForm';
-import { useUserInfoStore } from '../../../store/useUserInfoStore';
+import { useNameStore } from '../../../store/useUserNameStore';
 import { useOutsideClick } from '../../../hooks/useOutsideClick';
 
 const TimeTable = () => {
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
-  const { userInfo } = useUserInfoStore();
+  const { userName } = useNameStore();
 
   const handleOpenModal = () => {
     setIsOpen(!isOpen);
@@ -27,7 +27,7 @@ const TimeTable = () => {
     <div className={styles.wholeWrapper}>
       <div className={styles.headerContainer}>
         <div className={styles.dateBox}>
-          <h3 className={styles.title}>{`${userInfo?.userName}의 시간표`}</h3>
+          <h3 className={styles.title}>{`${userName?.userName}의 시간표`}</h3>
         </div>
         <button className={styles.addScheduleBtn} onClick={handleOpenModal}>
           강의 추가 +
