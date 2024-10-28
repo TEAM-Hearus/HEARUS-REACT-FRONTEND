@@ -29,63 +29,6 @@ Hearus는 대학교 교내 청각장애 학우 대필지원 도우미 활동에�
 | ![image](https://github.com/user-attachments/assets/e5450c28-4022-4e1e-9c15-d962c8d0fe47) | ![image](https://github.com/user-attachments/assets/95a1b711-18d4-4c17-adff-02045bb2445b) | ![image](https://github.com/user-attachments/assets/62fcad28-4446-4ae5-a9b2-dcbbd8588d4e) | ![image](https://github.com/user-attachments/assets/f4eb48fc-d54b-4ab5-9299-bc27c6ae93da) | ![image](https://github.com/user-attachments/assets/03506e89-883b-4da8-a334-e5cad795b420) | ![image](https://github.com/user-attachments/assets/026f6425-a384-48d0-a3cc-3447e4d9ded8) | ![image](https://github.com/user-attachments/assets/50caa2e1-3f05-4059-90ae-c957a529f6ad) | ![image](https://github.com/user-attachments/assets/ad4e87cf-cdea-43f2-bc2d-d5b73769b53f)|
 | TypeScript | React | Scss module | Zustand | Tanstack React Query | Vite | Firebase hosting | Github Actions |
 
-
-## src 폴더구조
-```
-src/
-│
-├── assets/
-│   ├── images/ # svg, gif, png 등 이미지
-│   └── fonts/ # 폰트(Pretendard)
-│
-├── components/ # 아토믹 디자인 시스템 차용
-│   ├── atoms/ 
-|   ├── molecules/
-|   ├── organisms/
-│   └── templates/
-│
-├── hooks/ # 커스텀 훅
-│
-├── pages/ # 라우터로 나뉘는 페이지 컴포넌트
-│
-├── apis/ # API fetch 함수
-│
-├── store/ # 전역 상태관리
-│
-├── styles/
-│   ├── colors.scss # 공통 색상 변수
-│   └── fonts.scss # 공통 폰트 스타일 변수
-│
-├── utils/ # 유틸 함수
-|
-├── constants/ # 상수
-│
-├── App.tsx
-└── main.tsx
-```
-
-
-## 설치 및 실행
-1. 레포지토리 clone
-   ```
-   git clone https://github.com/TEAM-Hearus/HEARUS-REACT-FRONTEND
-   ```
-
-2. 프로젝트 디렉토리로 이동
-   ```
-   cd HEARUS-REACT-FRONTEND
-   ```
-
-3. npm 패키지 다운로드
-   ```
-   npm install
-   ```
-
-4. 애플리케이션 실행
-   ```
-   npm run dev
-   ```
-
 ## 주요 기여자
 | FE | FE | Designer |
 |--|--|--|
@@ -95,20 +38,6 @@ src/
 이 프로젝트는 MIT 라이선스 하에 배포됩니다. 
 </br>
 자세한 내용은 [LICENSE](https://github.com/TEAM-Hearus/HEARUS-REACT-FRONTEND/blob/main/LICENSE) 파일을 참조해주세요.
-
-## 🤝 기여하기
-
-Hearus의 발전에 기여해 주셔서 감사합니다!
-</br>
-우리는 모든 형태의 기여를 환영합니다.
-
-1. Issue 생성: 버그 리포트, 기능 제안, 또는 질문
-2. Pull Request: 코드 개선, 문서화, 또는 새로운 기능 구현
-3. Code Review: 다른 기여자의 PR을 리뷰하고 피드백 제공
-4. Documentation: README, 위키, 또는 코드 주석 개선
-
-자세한 기여 가이드라인은 [CONTRIBUTING.md](https://github.com/TEAM-Hearus/.github/blob/main/CONTRIBUTING.md)를 참조해 주세요.</br>
-또한 프로젝트에 대한 문의사항이 있으시다면 [ISSUE](https://github.com/TEAM-Hearus/.github/tree/main/ISSUE_TEMPLATE)를 생성해 주세요.
 
 ---
 <p align="center">
