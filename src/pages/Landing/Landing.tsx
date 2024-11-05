@@ -155,7 +155,7 @@ const Landing = () => {
             <div className={styles.footerLeftBody}>
               <div className={styles.footerColumn}>
                 <p>대표자 민상연</p>
-                <p>연락처 000-3232-0437</p>
+                <p>연락처 010-3232-0437</p>
               </div>
             </div>
             <Link to="/license" className={styles.license}>

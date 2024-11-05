@@ -336,4 +336,18 @@ SOFTWARE.`,
     ],
     link: 'https://github.com/pd4d10/vite-plugin-svgr/blob/main/LICENSE',
   },
+  {
+    name: 'Pretendard',
+    version: '',
+    license: 'SIL Open Font License, Version 1.1',
+    text: [
+      'Copyright (c) 2021, Kil Hyung-jin (https://github.com/orioncactus/pretendard)',
+      'Copyright 2014-2021 Adobe (http://www.adobe.com/)',
+      'Copyright (c) 2016 The Inter Project Authors (https://github.com/rsms/inter)',
+      'Copyright 2021 The M+ FONTS Project Authors (https://github.com/coz-m/MPLUS_FONTS)',
+      'This Font Software is licensed under the SIL Open Font License, Version 1.1.',
+      'This license is available with a FAQ at: https://scripts.sil.org/OFL',
+    ],
+    link: 'https://github.com/orioncactus/pretendard/blob/main/LICENSE',
+  },
 ];
