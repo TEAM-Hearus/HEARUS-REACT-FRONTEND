@@ -53,7 +53,7 @@ const TestMake = () => {
     //   addAlert('스크립트와 문제 유형, 문제 개수를 모두 선택해주세요.', 'error');
     // }
     // 임시로 이용 불가 조치
-    addAlert('현재 인공지능 기능은 이용 불가합니다.', 'error');
+    addAlert('현재 인공지능 서버는 더 나은 서비스를 위해 유지보수 중입니다', 'error');
   };
 
   return (
