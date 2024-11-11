@@ -43,7 +43,7 @@ const MyScript = () => {
         {/* 임시로 이용 불가 조치 */}
         <div
           onClick={() =>
-            addAlert('현재 인공지능 기능은 이용 불가합니다.', 'error')
+            addAlert('현재 인공지능 서버는 더 나은 서비스를 위해 유지보수 중입니다', 'error')
           }
         >
           <StartingButton>녹음 시작</StartingButton>
