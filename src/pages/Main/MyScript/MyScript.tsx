@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import ScriptDetailModal from '../../../components/templates/modals/ScriptDetailModal/ScriptDetailModal';
 import ScriptItem from '../../../components/molecules/ScriptItem/ScriptItem';
@@ -37,9 +37,17 @@ const MyScript = () => {
     <div className={styles.wholeContainer}>
       <div className={styles.headerContainer}>
         <div className={styles.recentScripts}>최근 스크립트</div>
-        <Link to="/record">
+        {/* <Link to="/record">
           <StartingButton>녹음 시작</StartingButton>
-        </Link>
+        </Link> */}
+        {/* 임시로 이용 불가 조치 */}
+        <div
+          onClick={() =>
+            addAlert('현재 인공지능 기능은 이용 불가합니다.', 'error')
+          }
+        >
+          <StartingButton>녹음 시작</StartingButton>
+        </div>
       </div>
       {!data || data?.object?.length === 0 ? (
         <div className={styles.noneScriptContainer}>
